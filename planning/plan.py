@@ -22,11 +22,11 @@ UPDATED = "2026-11-19"
 DEADLINE = "2026-12-10T23:59:00+01:00"   # PAC proposal deadline, CET
 PAC = ("2027-01-25", "2027-01-29")
 
-# Where things live. The Overleaf project is Dylan's (share it from Overleaf to give access).
+# Where things live. The Overleaf link is the edit link: anyone with it can edit (Dylan, 19 Nov).
 LINKS = dict(
     indico="https://agenda.infn.it/event/50487/",
     call_pdf="https://agenda.infn.it/event/50487/attachments/145501/242083/Text_Call_Jan2027.pdf",
-    overleaf="https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f",
+    overleaf="https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f/share#3b1dc1a8e5de4929271724fe938b4ae15b6237ddac75cf8f",  # edit link (Dylan, 19 Nov)
     beams="https://www.lnl.infn.it/wp-content/uploads/Beams_AN2000_CN.pdf",
 )
 
