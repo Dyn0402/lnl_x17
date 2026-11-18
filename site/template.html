@@ -79,7 +79,7 @@ ul.clean li:last-child { border-bottom: 0; }
 .chip.btn[aria-pressed="true"] { border-color: var(--ink-2); color: var(--ink); background: var(--hover); }
 .st { font-weight: 600; white-space: nowrap; }
 .st-ready, .st-done { color: var(--good); } .st-fix, .st-waiting { color: #a87700; } .st-find { color: var(--serious); }
-.st-decide, .st-blocked { color: var(--critical); } .st-borrow, .st-buy, .st-todo, .st-active { color: var(--ink-2); }
+.st-decide, .st-blocked { color: var(--critical); } .st-borrow, .st-buy, .st-make, .st-todo, .st-active { color: var(--ink-2); }
 :root[data-theme="dark"] .st-fix { color: var(--warning); }
 @media (prefers-color-scheme: dark) { :root:where(:not([data-theme="light"])) .st-fix { color: var(--warning); } }
 .ico { font-size: 11px; }
@@ -167,6 +167,27 @@ select { background: var(--surface); color: var(--ink); border: 1px solid var(--
 .facts dt { color: var(--muted); } .facts dd { margin: 0; }
 .closing { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr); gap: 18px; align-items: center; margin-top: 22px; }
 @media (max-width: 760px) { .closing { grid-template-columns: 1fr; } }
+/* hardware tab */
+.hwgrid { display: grid; grid-template-columns: minmax(0, 1fr) minmax(360px, 1fr); gap: 14px; align-items: start; }
+@media (max-width: 980px) { .hwgrid { grid-template-columns: 1fr; } }
+.hwdet { position: sticky; top: 10px; }
+@media (max-width: 980px) { .hwdet { position: static; } }
+.hwt th.sort { cursor: pointer; user-select: none; white-space: nowrap; }
+.hwt th.sort:hover { color: var(--ink); }
+.hwt th .arr { color: var(--accent); }
+.hwt tbody tr.it { cursor: pointer; }
+.hwt tbody tr.it:hover td { background: var(--hover); }
+.hwt tr.gh td { background: var(--hover); font-weight: 600; font-size: 12.5px; color: var(--ink-2); }
+.hwt td .q { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
+#hw-q { font: inherit; font-size: 13.5px; padding: 4px 9px; border: 1px solid var(--grid); border-radius: 8px; background: var(--surface); color: var(--ink); min-width: 220px; }
+.hwdl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13.5px; margin: 8px 0; }
+.hwdl dt { color: var(--muted); } .hwdl dd { margin: 0; }
+.hwsvg .pl { fill: var(--hover); stroke: var(--axis); stroke-width: 1.2; cursor: pointer; }
+.hwsvg .pl.ln { fill: none; stroke-width: 3; }
+.hwsvg .pl.on { fill: var(--accent); fill-opacity: 0.85; stroke: var(--accent); stroke-width: 2.4; }
+.hwsvg .pl.ln.on { fill: none; stroke-width: 5; }
+.hwsvg text { font-size: 15px; fill: var(--ink-2); pointer-events: none; }
+.hwsvg text.on { fill: var(--ink); font-weight: 700; }
 tr.tier td { background: var(--hover); font-weight: 600; font-size: 13px; }
 .foot { margin-top: 40px; font-size: 12px; color: var(--muted); }
 details summary { cursor: pointer; color: var(--ink-2); }
@@ -278,9 +299,28 @@ details summary { cursor: pointer; color: var(--ink-2); }
           Click a layer for its status.</p></div>
       <div class="card" id="setup-info"></div>
     </div>
-    <h2>Hardware</h2>
-    <div class="controls" id="hw-filter"></div>
-    <div class="tscroll"><table id="hw"></table></div>
+    <p class="small">The full list of parts, lenders and dates is in the <a href="#hardware" data-go="hardware">Hardware</a> tab.</p>
+  </section>
+
+  <!-- HARDWARE -->
+  <section class="pane" id="p-hardware">
+    <p class="small muted" style="margin:0 0 8px">Everything the two-arm run needs: what we own, borrow, buy, fix or make, who it comes from and by
+      when. Click a row (or a part of the drawing) for the full entry and where it goes. Cash comes from the
+      <a href="#budget" data-go="budget">Budget</a> tab's lines.</p>
+    <div class="controls">
+      <input type="search" id="hw-q" placeholder="Search items, lenders, notes" aria-label="Search hardware">
+      <label>Group by <select id="hw-grp">
+        <option value="grp">system</option><option value="org">lender / source</option><option value="who">contact</option>
+        <option value="status">action</option><option value="state">state</option><option value="tier">budget tier</option><option value="">no grouping</option>
+      </select></label>
+      <label><input type="checkbox" id="hw-open"> hide what is in hand</label>
+    </div>
+    <div class="controls" id="hw-act" style="margin-top:-4px"></div>
+    <div class="small" id="hw-sum" style="margin:-4px 0 10px"></div>
+    <div class="hwgrid">
+      <div class="card" style="padding:4px 6px"><div class="tscroll"><table id="hw2" class="hwt"></table></div></div>
+      <div class="card hwdet" id="hw-det"></div>
+    </div>
   </section>
 
   <!-- BEAM & REACH -->
@@ -445,7 +485,7 @@ function tipOn(el, html) {
   return el;
 }
 const css = v => getComputedStyle(document.documentElement).getPropertyValue(v).trim();
-const ST_ICON = { ready: "●", fix: "▲", borrow: "◆", find: "■", buy: "◆", decide: "!", done: "✓", active: "▶", todo: "○", waiting: "…", blocked: "✕" };
+const ST_ICON = { ready: "●", fix: "▲", borrow: "◆", find: "■", buy: "◆", make: "▲", decide: "!", done: "✓", active: "▶", todo: "○", waiting: "…", blocked: "✕" };
 const stChip = s => h("span", { class: "st st-" + s }, h("span", { class: "ico" }, ST_ICON[s] || ""), " " + s);
 
 $("#upd").textContent = fmtY(D.updated);
@@ -461,7 +501,7 @@ $("#themebtn").addEventListener("click", () => {
 });
 
 /* ---------- tabs ---------- */
-const TABS = [["overview", "Overview"], ["timeline", "Timeline"], ["setup", "Set-up"], ["reach", "Beam & reach"],
+const TABS = [["overview", "Overview"], ["timeline", "Timeline"], ["setup", "Set-up"], ["hardware", "Hardware"], ["reach", "Beam & reach"],
   ["tasks", "Tasks"], ["proposal", "Proposal"], ["budget", "Budget"], ["risks", "Risks & questions"], ["slot2", "Slot 2: physics"]];
 const tabs = $("#tabs");
 for (const [id, name] of TABS) tabs.append(h("button", { class: "tab", role: "tab", "data-t": id, type: "button", on: { click: () => go(id) } }, name));
@@ -690,19 +730,152 @@ function setupInfo() {
   const counts = {}; D.hardware.forEach(y => counts[y.status] = (counts[y.status] || 0) + 1);
   b.append(h("h3", {}, "All parts by status"), h("p", { class: "small" }, ...Object.entries(counts).map(([s, n]) => h("span", { style: "margin-right:12px" }, stChip(s), " " + n))));
 }
-let hwFilter = null;
-function hwTable() {
-  const f = $("#hw-filter"); f.innerHTML = "";
-  ["all", "ready", "fix", "borrow", "find", "buy", "decide"].forEach(s => f.append(h("button", { class: "chip btn", type: "button", "aria-pressed": (hwFilter || "all") === s,
-    on: { click: () => { hwFilter = s === "all" ? null : s; hwTable(); } } }, s)));
-  const t = $("#hw"); t.innerHTML = "";
-  t.append(h("tr", {}, h("th", {}, "part"), h("th", {}, "status"), h("th", {}, "who"), h("th", {}, "note")));
-  D.hardware.filter(x => !hwFilter || x.status === hwFilter).forEach(x => {
-    const tr = h("tr", { class: suSel === x.id ? "sel" : "", style: "cursor:pointer", on: { click: () => { suSel = x.id; setupInfo(); setupSvg(); hwTable(); } } },
-      h("td", {}, h("b", {}, x.part)), h("td", {}, stChip(x.status)), h("td", { class: "small" }, x.who), h("td", { class: "small" }, x.note));
-    t.append(tr);
-  });
+
+/* ---------- hardware ---------- */
+// Schematic of the slot-1 set-up seen from above (horizontal pair), not to scale. Each shape has a PLACES key;
+// HARDWARE.place lists the keys an item occupies. [key, kind, geometry, label, label x, label y]
+const PLACES = [
+  ["stand", "rect", [118, 40, 250, 320], "two-arm stand", 124, 378],
+  ["beamline", "line", "M14 200 H190", "AN2000 beam line", 16, 190],
+  ["ls", "rect", [140, 52, 170, 28], "liquid cell (opt.)", 0, 0], ["ls", "rect", [140, 320, 170, 28], "", 0, 0],
+  ["plast", "rect", [165, 86, 120, 20], "plastics + PMTs", 0, 0], ["plast", "rect", [165, 294, 120, 20], "", 0, 0],
+  ["walls", "rect", [140, 112, 170, 20], "SiPM wall", 0, 0], ["walls", "rect", [140, 268, 170, 20], "", 0, 0],
+  ["mmA", "rect", [140, 140, 170, 26], "Micromegas A", 0, 0],
+  ["mmB", "rect", [140, 234, 170, 26], "Micromegas B", 0, 0],
+  ["m1", "rect", [125, 141, 12, 24], "M1", 122, 136], ["m1", "rect", [125, 235, 12, 24], "", 0, 0],
+  ["feu", "rect", [328, 137, 32, 20], "FEU", 330, 131], ["feu", "rect", [328, 243, 32, 20], "", 0, 0],
+  ["target", "path", "M196 186 A14 14 0 0 1 196 214 Z", "Li target in Cu hemisphere", 214, 196],
+  ["cables", "line", "M360 147 C 400 147, 410 200, 444 200 M360 253 C 400 253, 410 200, 444 200", "cables", 396, 228],
+  ["gaslines", "line", "M600 318 H400 V162 H310 M400 238 H310", "gas lines", 404, 336],
+  ["pdu", "rect", [452, 48, 120, 22], "switched PDU", 0, 0],
+  ["nim", "rect", [452, 76, 120, 52], "NIM trigger", 0, 0],
+  ["vme", "rect", [452, 134, 120, 44], "VME digitizers", 0, 0],
+  ["tcm", "rect", [452, 184, 120, 26], "DREAM TCM", 0, 0],
+  ["lv", "rect", [452, 216, 120, 24], "LV 5 V", 0, 0],
+  ["hv", "rect", [452, 246, 120, 26], "HV", 0, 0],
+  ["pc", "rect", [600, 48, 110, 44], "DAQ PC", 0, 0],
+  ["gas", "rect", [600, 290, 110, 60], "gas panel", 0, 0],
+  ["sensors", "circ", [586, 318, 7], "sensors", 556, 306],
+];
+const HWX = D.hardware;
+const HWI = Object.fromEntries(HWX.map(x => [x.id, x]));
+const TIER_L = { need: "critical", low: "low-budget upgrade", high: "high-budget upgrade", loan: "loan (cost if it fails)", "": "no cash" };
+const eur = v => "€" + (v >= 1000 ? (v / 1000).toFixed(v % 1000 ? 1 : 0) + "k" : v);
+let hwSel = store.get("hwsel", "dream"); if (!HWI[hwSel]) hwSel = HWX[0].id;
+let hwSort = store.get("hwsort", ["need", 1]), hwAct = null;
+$("#hw-grp").value = store.get("hwgrp", "grp"); if ($("#hw-grp").selectedIndex < 0) $("#hw-grp").value = "grp";
+$("#hw-q").addEventListener("input", hwTable2);
+$("#hw-grp").addEventListener("change", () => { store.set("hwgrp", $("#hw-grp").value); hwTable2(); });
+$("#hw-open").addEventListener("change", hwTable2);
+function hwSelect(id, scroll) {
+  hwSel = id; store.set("hwsel", id); hwTable2(); hwDetail();
+  if (scroll && innerWidth <= 980) $("#hw-det").scrollIntoView({ behavior: "smooth", block: "start" });
 }
+function hwSvg(keys, small) {
+  const on = new Set(keys || []);
+  const svg = h("svg:svg", { viewBox: "0 0 720 392", width: "100%", class: "hwsvg", role: "img", "aria-label": "Where the parts sit in the set-up" });
+  svg.append(h("svg:rect", { x: 444, y: 40, width: 136, height: 240, rx: 6, fill: "none", stroke: "var(--axis)", "stroke-dasharray": "4 3" }));
+  svg.append(h("svg:text", { x: 446, y: 296 }, "electronics rack"));
+  svg.append(h("svg:text", { x: 216, y: 216 }, "arm A ↑ · arm B ↓"));
+  const lbl = [];
+  for (const [k, kind, g, lab, lx, ly] of PLACES) {
+    const items = HWX.filter(x => (x.place || []).includes(k));
+    let el;
+    if (kind === "rect") el = h("svg:rect", { x: g[0], y: g[1], width: g[2], height: g[3], rx: 3 });
+    else if (kind === "circ") el = h("svg:circle", { cx: g[0], cy: g[1], r: g[2] });
+    else el = h("svg:path", { d: g });
+    el.setAttribute("class", "pl" + (kind === "line" ? " ln" : "") + (on.has(k) ? " on" : ""));
+    if (k === "ls") el.setAttribute("stroke-dasharray", "5 3");
+    if (k === "gaslines") el.setAttribute("stroke-dasharray", "6 4");
+    if (items.length) {
+      tipOn(el, () => `<b>${items.map(x => x.part).join("<br>")}</b>`);
+      el.addEventListener("click", () => {
+        const i = items.findIndex(x => x.id === hwSel);
+        hwSelect(items[(i + 1) % items.length].id, false);
+      });
+    }
+    svg.append(el);
+    if (lab) {
+      const inside = kind === "rect" && !lx;
+      lbl.push(h("svg:text", { x: inside ? g[0] + g[2] / 2 : lx, y: inside ? g[1] + g[3] / 2 + 4 : ly, "text-anchor": inside ? "middle" : "start",
+        class: on.has(k) ? "on" : null, style: on.has(k) && inside && kind === "rect" ? "fill:#fff" : null }, lab));
+    }
+  }
+  lbl.forEach(t => svg.append(t));
+  return svg;
+}
+function hwRows() {
+  const q = $("#hw-q").value.trim().toLowerCase(), open = $("#hw-open").checked;
+  let r = HWX.filter(x => (!hwAct || x.status === hwAct) && (!open || x.state !== "in hand") &&
+    (!q || [x.part, x.src, x.org, x.who, x.note, x.detail, x.grp, x.state].join(" ").toLowerCase().includes(q)));
+  const [k, d] = hwSort;
+  const v = x => k === "cash" ? (x.cash || x.fallback / 1e6) : k === "need" ? (x.need || "9999") : String(x[k] || "").toLowerCase();
+  return r.sort((a, b) => (v(a) > v(b) ? 1 : v(a) < v(b) ? -1 : 0) * d);
+}
+const HWCOLS = [["part", "Item"], ["status", "Action"], ["src", "From · contact"], ["state", "State"], ["need", "Needed by"], ["cash", "Cash", "num"]];
+function hwTable2() {
+  const a = $("#hw-act"); a.innerHTML = "";
+  const n = s => HWX.filter(x => x.status === s).length;
+  ["all", "ready", "fix", "borrow", "find", "buy", "make", "decide"].forEach(s => a.append(h("button", { class: "chip btn", type: "button",
+    "aria-pressed": (hwAct || "all") === s, on: { click: () => { hwAct = s === "all" ? null : s; hwTable2(); } } },
+    s === "all" ? `all ${HWX.length}` : [stChip(s), " " + n(s)])));
+  const rows = hwRows(), t = $("#hw2"); t.innerHTML = "";
+  const head = h("tr");
+  HWCOLS.forEach(([k, lab, cls]) => head.append(h("th", { class: "sort" + (cls ? " " + cls : ""), on: { click: () => {
+    hwSort = [k, hwSort[0] === k ? -hwSort[1] : 1]; store.set("hwsort", hwSort); hwTable2(); } } },
+    lab, hwSort[0] === k ? h("span", { class: "arr" }, hwSort[1] > 0 ? " ▲" : " ▼") : "")));
+  t.append(h("thead", {}, head));
+  const tb = h("tbody"); t.append(tb);
+  const gk = $("#hw-grp").value;
+  const gval = x => gk === "tier" ? TIER_L[x.tier || ""] : (x[gk] || "—");
+  const groups = [];
+  if (gk) { for (const x of rows) { let g = groups.find(g => g.k === gval(x)); if (!g) groups.push(g = { k: gval(x), r: [] }); g.r.push(x); } }
+  else groups.push({ k: null, r: rows });
+  for (const g of groups) {
+    if (g.k !== null) {
+      const c = g.r.reduce((s, x) => s + (x.cash || 0), 0), f = g.r.reduce((s, x) => s + (x.fallback || 0), 0);
+      tb.append(h("tr", { class: "gh" }, h("td", { colspan: HWCOLS.length }, `${g.k} · ${g.r.length}`, c ? ` · ${eur(c)} cash` : "", f ? ` · ${eur(f)} if loans fail` : "")));
+    }
+    for (const x of g.r) tb.append(h("tr", { class: "it" + (x.id === hwSel ? " sel" : ""), on: { click: () => hwSelect(x.id, true) } },
+      h("td", {}, h("b", {}, x.part), x.qty && x.qty !== "1" ? h("span", { class: "q" }, x.qty) : ""),
+      h("td", { style: "white-space:nowrap" }, stChip(x.status)), h("td", { class: "small" }, x.src, h("span", { class: "q" }, x.who)),
+      h("td", { class: "small" }, x.state), h("td", { class: "small", style: "white-space:nowrap" }, x.need ? fmt(x.need, { month: "short", year: "numeric" }) : "—"),
+      h("td", { class: "num small", style: "white-space:nowrap" }, x.cash ? eur(x.cash) : x.fallback ? h("span", { class: "muted" }, `(${eur(x.fallback)})`) : "—",
+        x.tier && x.tier !== "loan" ? h("span", { class: "q" }, TIER_L[x.tier].replace("-budget upgrade", " upgrade")) : x.tier === "loan" ? h("span", { class: "q" }, "if no loan") : "")));
+  }
+  if (!rows.length) tb.append(h("tr", {}, h("td", { colspan: HWCOLS.length, class: "muted" }, "Nothing matches.")));
+  const sum = (tier) => rows.filter(x => x.tier === tier).reduce((s, x) => s + x.cash, 0);
+  const fb = rows.reduce((s, x) => s + (x.fallback || 0), 0);
+  $("#hw-sum").textContent = `${rows.length} of ${HWX.length} items shown · cash: critical ${eur(sum("need"))}, low-budget upgrades ${eur(sum("low"))}, ` +
+    `high-budget ${eur(sum("high"))} · ${eur(fb)} more if the loans fall through (bracketed in the Cash column).`;
+}
+function hwDetail() {
+  const x = HWI[hwSel], b = $("#hw-det"); b.innerHTML = "";
+  if (!x) return;
+  b.append(h("div", { class: "muted small" }, x.grp), h("h3", { style: "margin:2px 0 6px" }, x.part),
+    h("p", { style: "margin:0" }, stChip(x.status), "  ", h("span", { class: "chip" }, x.state), " ", x.tier ? h("span", { class: "chip" }, TIER_L[x.tier]) : ""));
+  const dl = h("dl", { class: "hwdl" });
+  const row = (k, v) => { if (v) dl.append(h("dt", {}, k), h("dd", {}, v)); };
+  row("Quantity", x.qty); row("From", x.src); row("Contact", x.who);
+  if (x.need) { const dd = Math.round((parse(x.need) - TODAY) / DAY); row("Needed by", `${fmtY(x.need)} (${dd > 0 ? dd + " days from now" : "past"})`); }
+  if (x.cash) row("Cash", `${eur(x.cash)} (${eur(x.lo)}–${eur(x.hi)}); ${x.basis}`);
+  if (x.fallback) row("If the loan fails", `${eur(x.fallback)} to buy; ${x.basis}`);
+  if (!x.cash && !x.fallback) row("Cash", "none (owned, lent or our own work)");
+  b.append(dl, h("p", { style: "margin:6px 0" }, x.note));
+  if (x.detail) b.append(h("p", { class: "small", style: "margin:6px 0", }, x.detail));
+  const tk = (x.tasks || []).map(id => D.tasks.find(t => t.id === id)).filter(Boolean);
+  if (tk.length) {
+    b.append(h("div", { class: "muted small", style: "margin-top:8px" }, "Tasks"));
+    const ul = h("ul", { class: "clean small" });
+    tk.forEach(t => ul.append(h("li", {}, h("a", { href: "#tasks", "data-go": "tasks" }, t.id), ` · ${fmt(t.due)} · ${t.who}: ${t.t}`)));
+    b.append(ul);
+  }
+  b.append(h("div", { class: "muted small", style: "margin-top:8px" }, (x.place || []).length ? "Where it goes (highlighted; click a part to switch)" : "Not part of the drawing; the set-up for reference"));
+  b.append(hwSvg(x.place));
+  if (["mmA", "mmB", "walls", "plast", "ls"].includes(x.id)) b.append(h("p", { class: "small", style: "margin:4px 0 0" },
+    h("a", { href: "#setup", on: { click: e => { e.preventDefault(); suSel = x.id; go("setup"); } } }, "Show in the Set-up view (along the beam) →")));
+}
+function hwPage() { hwTable2(); hwDetail(); }
 
 /* ---------- beam & reach ---------- */
 const ECOL = { "1.10 MeV": "var(--s1)", "0.441 MeV": "var(--s2)", "—": "var(--axis)" };
@@ -912,7 +1085,8 @@ function redraw() {
   const on = (location.hash.slice(1) || "overview");
   overview();
   if (on === "timeline") { legend(); gantt(); cal(); }
-  if (on === "setup") { setupSvg(); setupInfo(); hwTable(); }
+  if (on === "setup") { setupSvg(); setupInfo(); }
+  if (on === "hardware") { hwPage(); }
   if (on === "reach") { days(); reach(); }
   if (on === "tasks") tasks();
   if (on === "proposal") proposal();

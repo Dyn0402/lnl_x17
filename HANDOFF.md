@@ -1,5 +1,17 @@
 # Handoff
 
+## Hardware tab — updated 2026-11-19 (dylan-MS-7C84)
+
+**Done**
+- `planning/plan.py` HARDWARE rewritten: 30 items, each with lender (`org`, `src`), contact, state, needed-by date, diagram place,
+  tasks. Cash comes from its BUDGET line (`b`), merged in `hardware_rows()`, which asserts every budget line belongs to one item.
+- New **Hardware** tab: search, group by system / lender / contact / action / state / tier, action filters, sortable columns,
+  totals; a row opens the full entry with its tasks and a schematic of the set-up (from above) with the item highlighted.
+  The Set-up tab's old table is gone (it points to the new tab).
+
+**Gotchas**
+- Lenders, states and dates are my first fill from the plan and the n_TOF notes; most are "to ask". Correct them in `plan.py`.
+
 ## Budget windows, overview, Cu hemisphere — updated 2026-11-19 (dylan-MS-7C84)
 
 **Done**
