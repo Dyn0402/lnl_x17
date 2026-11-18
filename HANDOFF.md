@@ -1,6 +1,6 @@
 # Handoff
 
-## Repo started: plan, proposal draft, page — 2026-11-18 (dylan-MS-7C84)
+## LNL PAC feasibility proposal — updated 2026-11-18 (dylan-MS-7C84)
 
 **Resume:** proposal draft v0 and the planning page are up; next: send Pierfrancesco the outline and questions (P1), get the
 INFN-AAI account (P3), run the two-arm re-reduction (R1).
