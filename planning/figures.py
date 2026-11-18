@@ -21,11 +21,11 @@ import two_arm_estimates as E  # noqa: E402
 FIG = HERE.parent / "proposal" / "latex" / "figures"
 FIG.mkdir(parents=True, exist_ok=True)
 
-# Cu ogive rows (the last three of FOUR_ARM): the Cu hemisphere is already built, the likely target (Dylan, 19 Nov); slot colours = dataviz reference, fixed order.
+# Cu hemisphere rows (the first three of FOUR_ARM): the Cu hemisphere is already built, the likely target (Dylan, 19 Nov); slot colours = dataviz reference, fixed order.
 ROWS = [(E.FOUR_ARM[i], lab, col) for i, lab, col in [
-    (3, "SiPM wall + small plastics", "#2a78d6"),
-    (4, "+ liquid cells as at n_TOF", "#eb6834"),
-    (5, "+ liquid cells repaired", "#1baf7a"),
+    (0, "SiPM wall + small plastics", "#2a78d6"),
+    (1, "+ liquid cells as at n_TOF", "#eb6834"),
+    (2, "+ liquid cells repaired", "#1baf7a"),
 ]]
 
 

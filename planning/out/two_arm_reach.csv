@@ -1,7 +1,7 @@
 target,energy_stack,four_arm_days,four_arm_range,two_arm_days,two_arm_range,z_in_5d,z_in_5d_range,r90_5d,r90_over_atomki,r90_over_megii,source
-Al ogive + Cu liner,SiPM wall + small plastics (no liquid),30.5,28-33,61.0,48-82,0.86,0.74-0.97,8.65e-06,1.49,0.72,§19.3 'liquid off'
-Al ogive + Cu liner,+ liquid as at n_TOF,8.5,7-10,17.0,12-25,1.63,1.34-1.94,4.57e-06,0.79,0.38,§19.3
-Al ogive + Cu liner,+ liquid repaired,4.5,3.6-5.5,9.0,6-14,2.24,1.81-2.71,3.32e-06,0.57,0.28,§19.3
-Cu ogive,SiPM wall + small plastics (no liquid),45,40-50,90.0,68-125,0.71,0.60-0.81,1.05e-05,1.81,0.88,§19.3 'liquid off'
-Cu ogive,+ liquid as at n_TOF,11,9-14,22.0,15-35,1.43,1.13-1.71,5.20e-06,0.9,0.43,§19.3
-Cu ogive,+ liquid repaired,6,5-8,12.0,8-20,1.94,1.50-2.30,3.84e-06,0.66,0.32,§19.3
+Cu hemisphere (built),SiPM wall + small plastics (no liquid),45,40-50,90.0,68-125,0.71,0.60-0.81,1.05e-05,1.81,0.88,"§19.3 'Cu ogive', 'liquid off'"
+Cu hemisphere (built),+ liquid as at n_TOF,11,9-14,22.0,15-35,1.43,1.13-1.71,5.20e-06,0.9,0.43,§19.3 'Cu ogive'
+Cu hemisphere (built),+ liquid repaired,6,5-8,12.0,8-20,1.94,1.50-2.30,3.84e-06,0.66,0.32,§19.3 'Cu ogive'
+Al ogive + Cu liner (lighter),SiPM wall + small plastics (no liquid),30.5,28-33,61.0,48-82,0.86,0.74-0.97,8.65e-06,1.49,0.72,§19.3 'liquid off'
+Al ogive + Cu liner (lighter),+ liquid as at n_TOF,8.5,7-10,17.0,12-25,1.63,1.34-1.94,4.57e-06,0.79,0.38,§19.3
+Al ogive + Cu liner (lighter),+ liquid repaired,4.5,3.6-5.5,9.0,6-14,2.24,1.81-2.71,3.32e-06,0.57,0.28,§19.3

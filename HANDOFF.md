@@ -9,6 +9,8 @@
   link is gone, the machine sheet is a small link in the box.
 - Target (Dylan): the Cu hemisphere is already built, so it is the baseline: the "Cu ogive" rows of §19.3. Figure, overview reach
   (1.81 × R(ATOMKI), 0.90 × with liquid cells) and proposal sensitivity (0.9–1.8 ×) switched to it.
+  Named "Cu hemisphere (built)" in `two_arm_estimates.py` and listed first, so the Beam & reach tab defaults to it.
+- Risk "B not repaired" lowered to low: likely just an electrical connection on the drift (Dylan).
 - Overleaf updated. Its `figures/limit_vs_days.pdf` is now a *linked file* from
   `https://dylan-neff.web.cern.ch/facilities/lnl/limit_vs_days.pdf` (the upload dialog wouldn't open): after `figures.py`, copy the
   PDF there, deploy, and press Refresh on the file in Overleaf.

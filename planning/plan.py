@@ -180,7 +180,7 @@ HARDWARE = [
     dict(id="mmA", part="Micromegas A (det3)", status="ready", who="Dylan / CEA", sys="mm",
          note="Best chamber: 92.9 % within 5 mm on the bench. Runs as is; a new aluminised-mylar window is a low-budget upgrade. Clean CERN M1 cards."),
     dict(id="mmB", part="Micromegas B (det2)", status="fix", who="Stephan (CEA)", sys="mm",
-         note="91.3 % on the bench; drift window needs a repair (easy, needed for the test); a new window is a low-budget upgrade. Its M1 cards were the noisy Italian ones."),
+         note="91.3 % on the bench; drift window needs a repair (likely just an electrical connection; needed for the test); a new window is a low-budget upgrade. Its M1 cards were the noisy Italian ones."),
     dict(id="mmCD", part="Micromegas C, D (spares)", status="decide", who="CEA", sys="mm",
          note="Spark-limited (57.8 %, 43.1 %); re-bulk needed. Not required for slot 1. C re-bulked would be the spare."),
     dict(id="m1", part="M1 multiplex cards (8)", status="ready", who="CERN", sys="mm",
@@ -260,8 +260,8 @@ QUESTIONS = [
 ]
 
 RISKS = [
-    dict(r="Micromegas B not repaired in time", l="med", i="high",
-         m="A is ready now; C re-bulk as the spare; one-arm-plus-scintillator fallback still gives the 441 keV and background programme."),
+    dict(r="Micromegas B not repaired in time", l="low", i="high",
+         m="Likely just an electrical connection on the drift (Dylan, 19 Nov). A is ready now; C re-bulk as the spare; one-arm-plus-scintillator fallback still gives the 441 keV and background programme."),
     dict(r="DREAM not available in H2 2027 (CEA's own use)", l="med", i="high",
          m="Ask now (M2); 4 FEUs is half the system; fix dates with CEA before the PAC talk."),
     dict(r="Too few digitizer channels", l="low", i="med",

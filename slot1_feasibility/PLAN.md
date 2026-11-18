@@ -82,10 +82,10 @@ Pierfrancesco can find, plus a few.
 
 | target | energy stack | 4 arms, d to 3σ | 2 arms, d to 3σ | Z at R(ATOMKI) in 5 d | expected 90 % limit / R(ATOMKI) | / MEG II |
 |---|---|---|---|---|---|---|
-| Al ogive + Cu liner | SiPM + small plastics | 30.5 | 61 (48–82) | 0.86 | 1.49 | 0.72 |
+| Al ogive + Cu liner (lighter) | SiPM + small plastics | 30.5 | 61 (48–82) | 0.86 | 1.49 | 0.72 |
 | | + liquid as at n_TOF | 8.5 | 17 (12–25) | 1.63 | 0.79 | 0.38 |
 | | + liquid repaired | 4.5 | 9 (6–14) | 2.24 | 0.57 | 0.28 |
-| Cu ogive | SiPM + small plastics | 45 | 90 (68–125) | 0.71 | 1.81 | 0.88 |
+| Cu hemisphere (built; "Cu ogive" in §19.3) | SiPM + small plastics | 45 | 90 (68–125) | 0.71 | 1.81 | 0.88 |
 | | + liquid as at n_TOF | 11 | 22 (15–35) | 1.43 | 0.90 | 0.43 |
 | | + liquid repaired | 6 | 12 (8–20) | 1.94 | 0.66 | 0.32 |
 

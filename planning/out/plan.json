@@ -586,7 +586,7 @@
    "status": "fix",
    "who": "Stephan (CEA)",
    "sys": "mm",
-   "note": "91.3 % on the bench; drift window needs a repair (easy, needed for the test); a new window is a low-budget upgrade. Its M1 cards were the noisy Italian ones."
+   "note": "91.3 % on the bench; drift window needs a repair (likely just an electrical connection; needed for the test); a new window is a low-budget upgrade. Its M1 cards were the noisy Italian ones."
   },
   {
    "id": "mmCD",
@@ -876,9 +876,9 @@
  "risks": [
   {
    "r": "Micromegas B not repaired in time",
-   "l": "med",
+   "l": "low",
    "i": "high",
-   "m": "A is ready now; C re-bulk as the spare; one-arm-plus-scintillator fallback still gives the 441 keV and background programme."
+   "m": "Likely just an electrical connection on the drift (Dylan, 19 Nov). A is ready now; C re-bulk as the spare; one-arm-plus-scintillator fallback still gives the 441 keV and background programme."
   },
   {
    "r": "DREAM not available in H2 2027 (CEA's own use)",
@@ -1005,7 +1005,49 @@
  },
  "reach": [
   {
-   "target": "Al ogive + Cu liner",
+   "target": "Cu hemisphere (built)",
+   "energy_stack": "SiPM wall + small plastics (no liquid)",
+   "four_arm_days": "45",
+   "four_arm_range": "40-50",
+   "two_arm_days": "90.0",
+   "two_arm_range": "68-125",
+   "z_in_5d": "0.71",
+   "z_in_5d_range": "0.60-0.81",
+   "r90_5d": "1.05e-05",
+   "r90_over_atomki": "1.81",
+   "r90_over_megii": "0.88",
+   "source": "§19.3 'Cu ogive', 'liquid off'"
+  },
+  {
+   "target": "Cu hemisphere (built)",
+   "energy_stack": "+ liquid as at n_TOF",
+   "four_arm_days": "11",
+   "four_arm_range": "9-14",
+   "two_arm_days": "22.0",
+   "two_arm_range": "15-35",
+   "z_in_5d": "1.43",
+   "z_in_5d_range": "1.13-1.71",
+   "r90_5d": "5.20e-06",
+   "r90_over_atomki": "0.9",
+   "r90_over_megii": "0.43",
+   "source": "§19.3 'Cu ogive'"
+  },
+  {
+   "target": "Cu hemisphere (built)",
+   "energy_stack": "+ liquid repaired",
+   "four_arm_days": "6",
+   "four_arm_range": "5-8",
+   "two_arm_days": "12.0",
+   "two_arm_range": "8-20",
+   "z_in_5d": "1.94",
+   "z_in_5d_range": "1.50-2.30",
+   "r90_5d": "3.84e-06",
+   "r90_over_atomki": "0.66",
+   "r90_over_megii": "0.32",
+   "source": "§19.3 'Cu ogive'"
+  },
+  {
+   "target": "Al ogive + Cu liner (lighter)",
    "energy_stack": "SiPM wall + small plastics (no liquid)",
    "four_arm_days": "30.5",
    "four_arm_range": "28-33",
@@ -1019,7 +1061,7 @@
    "source": "§19.3 'liquid off'"
   },
   {
-   "target": "Al ogive + Cu liner",
+   "target": "Al ogive + Cu liner (lighter)",
    "energy_stack": "+ liquid as at n_TOF",
    "four_arm_days": "8.5",
    "four_arm_range": "7-10",
@@ -1033,7 +1075,7 @@
    "source": "§19.3"
   },
   {
-   "target": "Al ogive + Cu liner",
+   "target": "Al ogive + Cu liner (lighter)",
    "energy_stack": "+ liquid repaired",
    "four_arm_days": "4.5",
    "four_arm_range": "3.6-5.5",
@@ -1044,48 +1086,6 @@
    "r90_5d": "3.32e-06",
    "r90_over_atomki": "0.57",
    "r90_over_megii": "0.28",
-   "source": "§19.3"
-  },
-  {
-   "target": "Cu ogive",
-   "energy_stack": "SiPM wall + small plastics (no liquid)",
-   "four_arm_days": "45",
-   "four_arm_range": "40-50",
-   "two_arm_days": "90.0",
-   "two_arm_range": "68-125",
-   "z_in_5d": "0.71",
-   "z_in_5d_range": "0.60-0.81",
-   "r90_5d": "1.05e-05",
-   "r90_over_atomki": "1.81",
-   "r90_over_megii": "0.88",
-   "source": "§19.3 'liquid off'"
-  },
-  {
-   "target": "Cu ogive",
-   "energy_stack": "+ liquid as at n_TOF",
-   "four_arm_days": "11",
-   "four_arm_range": "9-14",
-   "two_arm_days": "22.0",
-   "two_arm_range": "15-35",
-   "z_in_5d": "1.43",
-   "z_in_5d_range": "1.13-1.71",
-   "r90_5d": "5.20e-06",
-   "r90_over_atomki": "0.9",
-   "r90_over_megii": "0.43",
-   "source": "§19.3"
-  },
-  {
-   "target": "Cu ogive",
-   "energy_stack": "+ liquid repaired",
-   "four_arm_days": "6",
-   "four_arm_range": "5-8",
-   "two_arm_days": "12.0",
-   "two_arm_range": "8-20",
-   "z_in_5d": "1.94",
-   "z_in_5d_range": "1.50-2.30",
-   "r90_5d": "3.84e-06",
-   "r90_over_atomki": "0.66",
-   "r90_over_megii": "0.32",
    "source": "§19.3"
   }
  ],
@@ -1155,46 +1155,46 @@
   ],
   "four_arm": [
    {
-    "target": "Al ogive + Cu liner",
-    "stack": "SiPM wall + small plastics (no liquid)",
-    "c": 30.5,
-    "lo": 28,
-    "hi": 33
-   },
-   {
-    "target": "Al ogive + Cu liner",
-    "stack": "+ liquid as at n_TOF",
-    "c": 8.5,
-    "lo": 7,
-    "hi": 10
-   },
-   {
-    "target": "Al ogive + Cu liner",
-    "stack": "+ liquid repaired",
-    "c": 4.5,
-    "lo": 3.6,
-    "hi": 5.5
-   },
-   {
-    "target": "Cu ogive",
+    "target": "Cu hemisphere (built)",
     "stack": "SiPM wall + small plastics (no liquid)",
     "c": 45,
     "lo": 40,
     "hi": 50
    },
    {
-    "target": "Cu ogive",
+    "target": "Cu hemisphere (built)",
     "stack": "+ liquid as at n_TOF",
     "c": 11,
     "lo": 9,
     "hi": 14
    },
    {
-    "target": "Cu ogive",
+    "target": "Cu hemisphere (built)",
     "stack": "+ liquid repaired",
     "c": 6,
     "lo": 5,
     "hi": 8
+   },
+   {
+    "target": "Al ogive + Cu liner (lighter)",
+    "stack": "SiPM wall + small plastics (no liquid)",
+    "c": 30.5,
+    "lo": 28,
+    "hi": 33
+   },
+   {
+    "target": "Al ogive + Cu liner (lighter)",
+    "stack": "+ liquid as at n_TOF",
+    "c": 8.5,
+    "lo": 7,
+    "hi": 10
+   },
+   {
+    "target": "Al ogive + Cu liner (lighter)",
+    "stack": "+ liquid repaired",
+    "c": 4.5,
+    "lo": 3.6,
+    "hi": 5.5
    }
   ],
   "days_on_res": 5.0

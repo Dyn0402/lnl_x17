@@ -32,12 +32,13 @@ F_LO, F_C, F_HI = 1.7, 2.0, 2.5   # two-arm / four-arm days
 # Four-arm days to 3 sigma at R(ATOMKI), FEASIBILITY_SIM.md §19.3 (central, low, high).
 FOUR_ARM = [
     # (target, energy stack, central, low, high, note)
-    ("Al ogive + Cu liner", "SiPM wall + small plastics (no liquid)", 30.5, 28, 33, "§19.3 'liquid off'"),
-    ("Al ogive + Cu liner", "  + liquid as at n_TOF", 8.5, 7, 10, "§19.3"),
-    ("Al ogive + Cu liner", "  + liquid repaired", 4.5, 3.6, 5.5, "§19.3"),
-    ("Cu ogive", "SiPM wall + small plastics (no liquid)", 45, 40, 50, "§19.3 'liquid off'"),
-    ("Cu ogive", "  + liquid as at n_TOF", 11, 9, 14, "§19.3"),
-    ("Cu ogive", "  + liquid repaired", 6, 5, 8, "§19.3"),
+    # The Cu hemisphere is already built, so it is the baseline (Dylan, 19 Nov); §19.3 calls it the "Cu ogive".
+    ("Cu hemisphere (built)", "SiPM wall + small plastics (no liquid)", 45, 40, 50, "§19.3 'Cu ogive', 'liquid off'"),
+    ("Cu hemisphere (built)", "  + liquid as at n_TOF", 11, 9, 14, "§19.3 'Cu ogive'"),
+    ("Cu hemisphere (built)", "  + liquid repaired", 6, 5, 8, "§19.3 'Cu ogive'"),
+    ("Al ogive + Cu liner (lighter)", "SiPM wall + small plastics (no liquid)", 30.5, 28, 33, "§19.3 'liquid off'"),
+    ("Al ogive + Cu liner (lighter)", "  + liquid as at n_TOF", 8.5, 7, 10, "§19.3"),
+    ("Al ogive + Cu liner (lighter)", "  + liquid repaired", 4.5, 3.6, 5.5, "§19.3"),
 ]
 
 # The 8-day request (Pierfrancesco, 18 Nov 2026: "8 days are due and feasible").
