@@ -1,5 +1,26 @@
 # Handoff
 
+## LNL proposal page: template, Overleaf, budget tiers — updated 2026-11-18 (dylan-MS-7C84)
+
+**Resume:** the draft is in the official LNL template and on Overleaf; the page's overview leads with Indico and closes with
+Overleaf; budget split into tiers. Next steps unchanged (P1, P3, R1).
+
+**Done**
+- Templates from Indico 50487 (Chrome, the bot check passes in a real browser) → `proposal/lnl_template/`. Draft moved into them:
+  `proposal/latex/abstract.tex` (1 page), `body.tex` (3¼ of **4** pages: the template's limit, stricter than the web page's 5),
+  `macros.tex`. `make` → abstract.pdf, body.pdf, proposal.pdf. Old `main.tex` removed (in git history).
+- Overleaf project <https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f> (from the zip; compiles). Switch Menu → Main
+  document between abstract.tex and body.tex. Not shared yet: Pierfrancesco needs an invite.
+- Budget tiers (Dylan): critical €10.4k (B fix + windows, gas supply, splitters/LEMO/adapters, shipping); low-budget upgrade
+  +€3.2k (low-permeation lines, sensors, switched PDU); high-budget upgrade +€8k (4 CERN M1 cards for B; B runs its Italian M1s
+  for the test). Not for the proposal, for planning.
+- Overview rewritten for a first-time reader: a start-here block plus Indico, the call PDF and the beam sheet; countdown, a request at a
+  glance, stepper, next up, decisions; closes with Overleaf + PDF. The "what the run proves" cards moved to the Proposal tab.
+
+**Gotchas**
+- revtex4 is not in the desktop's TeX Live; it was extracted from Ubuntu's texlive-publishers into `~/texmf/tex/latex/`.
+- Overleaf and `proposal/latex/` can now drift. Decide which is the master before editing in both.
+
 ## LNL PAC feasibility proposal — updated 2026-11-18 (dylan-MS-7C84)
 
 **Resume:** proposal draft v0 and the planning page are up; next: send Pierfrancesco the outline and questions (P1), get the

@@ -1,0 +1,19 @@
+% Shared by abstract.tex and body.tex (additions to the LNL template).
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{xcolor}
+\usepackage{tikz}
+\usepackage{siunitx}
+\usepackage{enumitem}
+\usepackage[hidelinks]{hyperref}
+\setlist{nosep,leftmargin=1.2em}
+\sisetup{range-phrase=--,range-units=single}
+% Draft markers: \todo{...} shows in red; change \drafttrue to \draftfalse to hide them.
+\newif\ifdraft \drafttrue
+\newcommand{\todo}[1]{\ifdraft\textcolor{red}{[#1]}\fi}
+\newcommand{\Be}{\ensuremath{^{8}\mathrm{Be}}}
+\newcommand{\Li}{\ensuremath{^{7}\mathrm{Li}}}
+\newcommand{\pee}{\ensuremath{(p,e^+e^-)}}
+\newcommand{\Xs}{X17}

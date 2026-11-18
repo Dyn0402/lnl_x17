@@ -22,6 +22,14 @@ UPDATED = "2026-11-18"
 DEADLINE = "2026-12-10T23:59:00+01:00"   # PAC proposal deadline, CET
 PAC = ("2027-01-25", "2027-01-29")
 
+# Where things live. The Overleaf project is Dylan's (share it from Overleaf to give access).
+LINKS = dict(
+    indico="https://agenda.infn.it/event/50487/",
+    call_pdf="https://agenda.infn.it/event/50487/attachments/145501/242083/Text_Call_Jan2027.pdf",
+    overleaf="https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f",
+    beams="https://www.lnl.infn.it/wp-content/uploads/Beams_AN2000_CN.pdf",
+)
+
 # ----------------------------------------------------------------------------------------------
 # Workstreams. Order is fixed: it is also the categorical colour order on the page.
 WORKSTREAMS = [
@@ -92,11 +100,13 @@ TASKS = [
     dict(id="P2", ws="prop", due="2026-11-20", who="Pierfrancesco", status="todo",
          t="Informal contact with Anna Selva / the Accelerator Division: AN2000 vs CN, 0.441 + 1.10 MeV at 1 µA, line and floor space, H2 2027"),
     dict(id="P3", ws="prop", due="2026-11-23", who="Dylan", status="todo",
-         t="Get the INFN-AAI account + 'Risorse IT' (needed to submit on Indico); download the LNL LaTeX template from the Indico page"),
+         t="Get the INFN-AAI account + 'Risorse IT' (needed to submit on Indico)"),
+    dict(id="P3b", ws="prop", due="2026-11-18", who="Dylan", status="done",
+         t="Download the LNL LaTeX template from Indico; move the draft into it; upload to Overleaf"),
     dict(id="P4", ws="prop", due="2026-11-24", who="Dylan", status="todo",
          t="Ask the co-proponents (Massimi, Mengoni, Gervino, Gustavino, Cosentino) to join; collect names + affiliations"),
     dict(id="P5", ws="prop", due="2026-11-27", who="Dylan", status="todo", dep=["R1"],
-         t="Draft v1 in Overleaf: abstract page + 5-page body (12 pt, figures and references included)"),
+         t="Draft v1 in Overleaf: abstract page + body of at most 4 pages (LNL template, 12 pt, figures and references included)"),
     dict(id="P6", ws="prop", due="2026-11-30", who="Dylan", status="todo", dep=["P5"],
          t="Draft to Pierfrancesco; agree the beam-day table and the machine"),
     dict(id="P7", ws="prop", due="2026-12-03", who="Dylan", status="todo", dep=["P6"],
@@ -123,10 +133,10 @@ TASKS = [
          t="Ask Stephan / CEA: fix B's drift, new aluminised-mylar windows for A and B; dates"),
     dict(id="M2", ws="mm", due="2027-01-15", who="Dylan", status="todo",
          t="Ask CEA for the DREAM loan for H2 2027: 4 FEUs + TCM + 32 cables + LV; solder the TCM busy LEMO"),
-    dict(id="M3", ws="mm", due="2027-02-15", who="Dylan", status="todo",
-         t="M1 cards for B: replace the noisy Italian M1s with 4 CERN-design cards (A keeps its clean set)"),
+    dict(id="M3", ws="mm", due="2027-04-30", who="Dylan", status="todo",
+         t="Optional (high-budget upgrade): 4 CERN-design M1 cards for B. Slot 1 runs B with its existing Italian M1s"),
     dict(id="M4", ws="mm", due="2027-06-15", who="Dylan", status="todo",
-         t="Cosmic bench, 2 MM + DREAM: efficiency, segment angle (μ ≲ 3°), noise with the new M1s"),
+         t="Cosmic bench, 2 MM + DREAM: efficiency, segment angle (μ ≲ 3°), noise with B's existing M1s"),
     # --- scint / trigger
     dict(id="S1", ws="scint", due="2027-01-31", who="Pierfrancesco", status="todo",
          t="Find PMTs for the 4 small plastics (+2 for liquid cells if taken)"),
@@ -173,8 +183,8 @@ HARDWARE = [
          note="91.3 % on the bench; drift needs fixing (easy) + new window. Its M1 cards were the noisy Italian ones."),
     dict(id="mmCD", part="Micromegas C, D (spares)", status="decide", who="CEA", sys="mm",
          note="Spark-limited (57.8 %, 43.1 %); re-bulk needed. Not required for slot 1. C re-bulked would be the spare."),
-    dict(id="m1", part="M1 multiplex cards (8)", status="buy", who="CERN", sys="mm",
-         note="4 clean ones on A; 4 new CERN-design cards for B (~€2k each, budget item m1 scaled)."),
+    dict(id="m1", part="M1 multiplex cards (8)", status="ready", who="CERN", sys="mm",
+         note="Clean CERN cards on A; B keeps its noisier Italian cards for slot 1. 4 new CERN-design cards for B are a high-budget upgrade toward slot 2 (~€2k each)."),
     dict(id="dream", part="DREAM: 4 FEUs + TCM + 32 cables", status="borrow", who="CEA", sys="mm",
          note="Half the n_TOF system. Solder a LEMO on the TCM busy output before the run (daq_trigger/PLAN.md §4.2)."),
     dict(id="lv", part="LV 5 V / ~25 A; MM HV", status="borrow", who="LNL / CERN pool", sys="mm",
@@ -190,34 +200,42 @@ HARDWARE = [
     dict(id="trig", part="Trigger: 2–3 N1081B, timer, FIFOs, NIM bin", status="borrow", who="LNL pool / CAEN", sys="scint",
          note="n_TOF logic for two arms: PAIR never prescaled, SINGLE ÷P, 1 Hz clock, trigger word, scalers, busy veto."),
     dict(id="gas", part="Gas: Ar/iC₄H₁₀ 95/5 premix + panel", status="buy", who="Dylan / LNL", sys="site",
-         note="No mixer comes from n_TOF. Flammable-gas rules at LNL: ask. Low-permeation lines (Synflex type)."),
-    dict(id="slow", part="Slow control Tier 1", status="buy", who="Dylan", sys="site",
-         note="T/p/RH, SHT85 cells on the gas line, logger (slow_control/SENSOR_OPTIONS.md §6)."),
+         note="No mixer comes from n_TOF. Flammable-gas rules at LNL: ask. Low-permeation lines (Synflex type) are a low-budget upgrade; slot 1 can run on standard lines."),
+    dict(id="slow", part="Slow control Tier 1", status="decide", who="Dylan", sys="site",
+         note="Low-budget upgrade: T/p/RH, SHT85 cells on the gas line, logger (slow_control/SENSOR_OPTIONS.md §6)."),
     dict(id="tgt", part="Li target + holder", status="decide", who="Pierfrancesco (CN Li lab)", sys="target",
          note="LNL rolls Li to 10–20 µm in an Ar glovebox and presses it onto Cu. 10–12 µm recommended (LiOH). Holder: flat Al end cap at 45° (proposed) or the Cu ogive."),
     dict(id="stand", part="Two-arm stand + beam-line end", status="decide", who="LNL mechanics", sys="target",
          note="Two opposite arms, faces at ±204 mm from the beam axis; the line must end in ~1.5 × 1.5 m of open floor."),
     dict(id="pc", part="DAQ PC, network, remote power", status="borrow", who="Dylan", sys="site",
-         note="Run control from n_TOF; switched PDU on the NIM bin for remote power cycles."),
+         note="Run control from n_TOF. A switched PDU on the NIM bin (remote power cycles) is a low-budget upgrade."),
 ]
 
 # ----------------------------------------------------------------------------------------------
-# Slot-1 cash budget: what has to be bought even when everything else is borrowed.
+# Slot-1 cash budget, for our planning (not needed in the proposal). Tiers (Dylan, 18 Nov):
+#   need = critical for the test; low = low-budget upgrade; high = high-budget upgrade, toward the final
+#   measurement; loan = only if that loan falls through.
 # (central EUR, low, high, basis). Scaled from x17_facility_search/budget/items.py (2026-11-17).
+TIERS = [
+    dict(id="need", name="Critical for the test"),
+    dict(id="low", name="Low-budget upgrade"),
+    dict(id="high", name="High-budget upgrade (toward the final measurement)"),
+    dict(id="loan", name="Only if a loan falls through"),
+]
 BUDGET = [
-    dict(item="4 CERN M1 cards for B", c=8000, lo=6000, hi=10000, basis="items.py m1: 12 cards €24k → €2k/card", must=True),
-    dict(item="Fix B's drift + 2 new windows", c=1600, lo=600, hi=3000, basis="driftfix €0.3k + windows €2.5k/4 × 2", must=True),
-    dict(item="Gas: premix bottles, regulators, panel", c=3000, lo=2000, hi=4500, basis="items.py gas", must=True),
-    dict(item="Low-permeation gas lines", c=400, lo=250, hi=700, basis="items.py gaslines", must=True),
-    dict(item="Slow control Tier 1 + gas fixes", c=2500, lo=2000, hi=3200, basis="items.py slowctl", must=True),
-    dict(item="Splitters, LEMO cables, adapters (2 arms)", c=3800, lo=2500, hi=5000, basis="items.py splitters €7.6k for 4 arms, halved", must=True),
-    dict(item="Switched PDU", c=290, lo=290, hi=400, basis="items.py pdu", must=True),
-    dict(item="Shipping CEA/CERN → LNL and back", c=2000, lo=1000, hi=4000, basis="guess", must=True),
-    dict(item="If no digitizer loan: V1742 (32 ch)", c=9500, lo=9500, hi=9500, basis="CAEN offer 26OFC.01101", must=False),
-    dict(item="If no N1081B loan: 2 × N1081B", c=13960, lo=13960, hi=13960, basis="CAEN offer, €6,980 each", must=False),
-    dict(item="If no VME crate: VME8004B + A4818", c=4760, lo=4760, hi=4760, basis="CAEN offer", must=False),
-    dict(item="If no dual timer: N93B", c=2720, lo=2720, hi=2720, basis="CAEN offer", must=False),
-    dict(item="If the PMTs must be bought: 4–6 fast 2″ PMTs + bases", c=12000, lo=6000, hi=24000, basis="guess; Hamamatsu Italia scale", must=False),
+    dict(item="Fix B's drift + 2 new windows", c=1600, lo=600, hi=3000, basis="driftfix €0.3k + windows €2.5k/4 × 2", tier="need"),
+    dict(item="Gas: premix bottles, regulators, panel", c=3000, lo=2000, hi=4500, basis="items.py gas", tier="need"),
+    dict(item="Splitters, LEMO cables, adapters (2 arms)", c=3800, lo=2500, hi=5000, basis="items.py splitters €7.6k for 4 arms, halved", tier="need"),
+    dict(item="Shipping CEA/CERN → LNL and back", c=2000, lo=1000, hi=4000, basis="guess", tier="need"),
+    dict(item="Low-permeation gas lines", c=400, lo=250, hi=700, basis="items.py gaslines", tier="low"),
+    dict(item="Gas and environment sensors (slow control Tier 1)", c=2500, lo=2000, hi=3200, basis="items.py slowctl", tier="low"),
+    dict(item="Switched PDU (remote power switch)", c=290, lo=290, hi=400, basis="items.py pdu", tier="low"),
+    dict(item="4 CERN M1 cards for B (B runs its Italian M1s for the test)", c=8000, lo=6000, hi=10000, basis="items.py m1: 12 cards €24k → €2k/card", tier="high"),
+    dict(item="If no digitizer loan: V1742 (32 ch)", c=9500, lo=9500, hi=9500, basis="CAEN offer 26OFC.01101", tier="loan"),
+    dict(item="If no N1081B loan: 2 × N1081B", c=13960, lo=13960, hi=13960, basis="CAEN offer, €6,980 each", tier="loan"),
+    dict(item="If no VME crate: VME8004B + A4818", c=4760, lo=4760, hi=4760, basis="CAEN offer", tier="loan"),
+    dict(item="If no dual timer: N93B", c=2720, lo=2720, hi=2720, basis="CAEN offer", tier="loan"),
+    dict(item="If the PMTs must be bought: 4–6 fast 2″ PMTs + bases", c=12000, lo=6000, hi=24000, basis="guess; Hamamatsu Italia scale", tier="loan"),
 ]
 
 # ----------------------------------------------------------------------------------------------
@@ -261,9 +279,9 @@ RISKS = [
 # The proposal itself: structure, from https://www.lnl.infn.it/en/details-for-submissions/ (read 2026-11-18).
 PROPOSAL = dict(
     rules=[
-        "Abstract: one page maximum (not counted in the body)",
+        "Use the LNL templates (abstract + body, LaTeX or Word); submit PDF only. Abstract: one page (not counted in the body)",
         "Abstract fields: title, accelerator, set-up, spokesperson(s), GLIMOS, all authors + affiliations, short summary",
-        "Body: max 5 pages, 12 pt, tables + figures + references included",
+        "Body: max 4 pages per the official template (the LNL web page says 5), 12 pt, tables + figures + references included",
         "Body must contain: scientific motivation; technical details (instrumentation, quantities measured, precision); beam days from count-rate estimates",
         "Online: Beam Time Request, then the Targets Request Form; keep the confirmation e-mail (password)",
         "Needs an active INFN-AAI account with 'Risorse IT'",
@@ -272,12 +290,12 @@ PROPOSAL = dict(
     ],
     sections=[
         dict(id="abs", name="Abstract page", status="draft", pages=1, owner="Dylan"),
-        dict(id="mot", name="1. Scientific motivation", status="draft", pages=1.1, owner="Dylan"),
-        dict(id="app", name="2. MX17 and the two-arm set-up", status="draft", pages=1.0, owner="Dylan"),
-        dict(id="meas", name="3. Measurements and precision", status="draft", pages=1.0, owner="Dylan"),
-        dict(id="beam", name="4. Beam request and count rates", status="draft", pages=0.9, owner="Dylan"),
-        dict(id="next", name="5. From feasibility to the full experiment", status="draft", pages=0.5, owner="Dylan"),
-        dict(id="ref", name="References", status="draft", pages=0.5, owner="Dylan"),
+        dict(id="mot", name="1. Scientific motivation", status="draft", pages=0.9, owner="Dylan"),
+        dict(id="app", name="2. MX17 and the two-arm set-up", status="draft", pages=0.9, owner="Dylan"),
+        dict(id="meas", name="3. Measurements and precision", status="draft", pages=0.9, owner="Dylan"),
+        dict(id="beam", name="4. Beam request and count rates", status="draft", pages=0.6, owner="Dylan"),
+        dict(id="next", name="5. From feasibility to the full experiment", status="draft", pages=0.4, owner="Dylan"),
+        dict(id="ref", name="References", status="draft", pages=0.3, owner="Dylan"),
     ],
 )
 
@@ -320,7 +338,7 @@ def main() -> None:
     import two_arm_estimates as E  # noqa: E402  (same directory)
     E.main()
     data = dict(
-        updated=UPDATED, deadline=DEADLINE, pac=PAC, workstreams=WORKSTREAMS, phases=PHASES,
+        updated=UPDATED, deadline=DEADLINE, pac=PAC, links=LINKS, tiers=TIERS, workstreams=WORKSTREAMS, phases=PHASES,
         milestones=MILESTONES, tasks=TASKS, hardware=HARDWARE, budget=BUDGET, questions=QUESTIONS,
         risks=RISKS, proposal=PROPOSAL, slot2=SLOT2, reach=reach_rows(), beam=beam_rows(),
         reach_model=dict(r_atomki=E.R_ATOMKI, r_megii=E.R_MEG2_90, f=[E.F_LO, E.F_C, E.F_HI],
@@ -331,8 +349,9 @@ def main() -> None:
     today = date.today().isoformat()
     due = [t for t in TASKS if t["status"] != "done" and t["due"] <= "2026-12-10"]
     print(f"\nplan.json written ({len(TASKS)} tasks, {len(PHASES)} phases). Before the deadline: {len(due)} open tasks.")
-    must = sum(b["c"] for b in BUDGET if b["must"])
-    print(f"Slot-1 cash (all borrowed): €{must/1e3:.1f}k; contingencies +€{sum(b['c'] for b in BUDGET if not b['must'])/1e3:.1f}k")
+    tot = {t["id"]: sum(b["c"] for b in BUDGET if b["tier"] == t["id"]) for t in TIERS}
+    print("Slot-1 cash: critical €{need:.1f}k, + low upgrade €{low:.1f}k, + high upgrade €{high:.1f}k; "
+          "if loans fail +€{loan:.1f}k".format(**{k: v / 1e3 for k, v in tot.items()}))
     late = [t["id"] for t in TASKS if t["status"] not in ("done",) and t["due"] < today]
     if late:
         print("Overdue:", ", ".join(late))

@@ -1,0 +1,88 @@
+\documentclass[a4paper,12pt,tightenlines]{revtex4} 
+\usepackage{epsfig}
+\usepackage{graphicx}
+\setlength{\textheight}{25.5cm}
+\setlength{\textwidth}{16.5cm}
+%\usepackage[none]{hyphenat} % THIS PACKAGE TO AVOID HYPHENATION, COMMENT IT IF YOU DON'T WANT TO
+\usepackage{pslatex}
+
+
+\begin{document}
+\begin{center}
+\begin{large}
+{\bf Title of the Proposal}\\ 
+\vspace{.2cm}
+{\bf Experimental Setup}\\
+\end{large}
+\end{center}
+\vspace{.4cm}
+\begin{flushleft}
+{\bf Spokesperson(s): Your Name}
+\end{flushleft}
+\thispagestyle{empty} 
+\pagestyle{empty} 
+
+%HERE YOU CAN START TO WRITE THE BODY OF THE PROPOSAL
+\section{Scientific Motivation}
+
+Template for the body of the experiment proposal. This is a proposal for an experiment 
+to be performed with the TANDEM--ALPI--PIAVE ACCELERATOR of the National Laboratories 
+of Legnaro. The length of the proposal~\cite{ref1} should not exceed 4 pages. 
+
+You can use this template in a simple way by directly replacing this text with your text 
+in any section (Titles, Sections, Captions, etc.). Figure~\ref{label_fig1} is an example 
+of how to insert images. Put the figure caption below the corresponding figure.
+
+\begin{figure}[h]
+\begin{center}
+%\includegraphics[width=\columnwidth]{fig1.eps}
+\includegraphics[width=8cm]{fig1.jpg}
+\end{center}
+\caption{Insert here the caption of the figure. This is a long dummy text to check the editor.}
+\label{label_fig1}
+\end{figure}
+
+\section{Proposed Experiment}
+
+Insert here the description of the proposed experiment~\cite{ref2}. Specify which experimental setup will be used, special requirements, additional detectors. 
+
+\begin{table}[h]
+\caption{Insert your caption here. This is a long dummy text to check the editor.}
+\begin{center}
+\begin{tabular}{|c|c|c|c|}
+\hline
+\ E$_{c.m.}$ (MeV)  & ~$\sigma_{ER}$ (mb)  & E$_{c.m.}$ (MeV)  & ~$\sigma_{ER}$ (mb) \ \\ 
+\hline
+\ 85.36     &      0.0011$\pm$0.00079      & 95.97    &     116.2$\pm$1.8  \ \\
+\ 85.84     &      0.0022$\pm$0.0010      & 96.93     &     132.2$\pm$2.9   \ \\
+\hline
+\end{tabular}
+\label{table1}
+\end{center}
+\end{table}
+
+You can also insert tables as shown in the above example (see table~\ref{table1}). Tables 
+can be created directly (see table \ref{table1}) or inserted as an image. It is essential 
+that the table content be easily 
+readable: the character size must be adequate. The table caption has to be placed on top 
+of the table. 
+
+\section{Rate Estimates and Beam Time Request}
+
+Estimates of the expected rates are required. The beam time request should specify: 
+\begin{itemize}
+\item beam: ion, intensity, energy, pulsed or continuous
+\item target: isotope, thickness, backing
+\item experimental setup:
+\item beam time: xxx days
+\end{itemize}
+
+\begin{thebibliography}{999} 
+\bibitem{ref1} A. First et al., Phys. Rev., C11 (2000) 1111.
+\bibitem{ref2} B. Second et al., Nucl. Instr. and Meth., A111 (2000) 222.
+\bibitem{ref3} C. Third et al., Eur. Phys. J., A222 (2000) 123.
+\end{thebibliography}
+
+
+\end{document}
+

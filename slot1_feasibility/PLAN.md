@@ -13,7 +13,7 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
   the X17 experiment rather than a detector test, 8 days, measurement in H2 2027. He handles the informal contact with LNL.
 - **Set-up:** the two best Micromegas (A ready; B needs a drift fix and a window, by Stephan at CEA), two SiPM walls, the
   four small 20 × 30 × 2 cm plastics with PMTs we have to find, ~24 digitizer channels, half the DREAM system from CEA.
-  Everything is owned or borrowed. Cash needed: **~€22k** (€15–30k), plus up to €43k of contingencies if loans fall through.
+  Everything is owned or borrowed. Cash critical for the test: **~€10k**; +€3k low-budget upgrade, +€8k high-budget upgrade; up to €43k more if loans fall through (§7).
 - **What it proves:**
   1. the apparatus works on a proton beam: rates, live time, Micromegas occupancy, Li target;
   2. a **calibration at the 441 keV resonance** (17.64 MeV M1 pairs, no anomaly expected): 12–24k selected pairs in 2 days;
@@ -43,7 +43,7 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 | part | status | note |
 |---|---|---|
 | Micromegas A (det3) | ready | 92.9 % within 5 mm on the bench; new aluminised-mylar window only |
-| Micromegas B (det2) | fix | 91.3 %; drift fix + window (Stephan, CEA); 4 new CERN M1 cards to replace the noisy Italian ones |
+| Micromegas B (det2) | fix | 91.3 %; drift fix + window (Stephan, CEA); runs with its existing Italian M1 cards (new CERN cards: high-budget upgrade) |
 | DREAM | borrow | 4 FEUs + TCM + 32 cables from CEA; solder the TCM busy LEMO |
 | SiPM walls × 2 | ready | ganged as at n_TOF: 8 channels per wall, 16 of 20 bars |
 | plastics 20 × 30 × 2 cm × 4 | find PMTs | scintillators owned; PMTs went back to the lender |
@@ -121,8 +121,14 @@ outline to Pierfrancesco (20 Nov), INFN-AAI account (23 Nov), co-proponents (24 
 
 ## 7. Budget
 
-Cash with everything borrowed: **€21.6k central** (`plan.py` `BUDGET`): 4 M1 cards €8k, B fix + windows €1.6k, gas €3.4k,
-slow control €2.5k, splitters and cables €3.8k, PDU, shipping €2k. Contingencies if loans fall through: a V1742 €9.5k,
+For our planning, not the proposal. Tiers (Dylan, 18 Nov 2026; `plan.py` `TIERS`, `BUDGET`), central values:
+- **Critical for the test, €10.4k**: B drift fix + windows €1.6k, gas premix + regulators + panel €3k, splitters / LEMO / adapters
+  €3.8k, shipping €2k. B runs with its existing (noisier) Italian M1 cards.
+- **Low-budget upgrade, +€3.2k**: low-permeation gas lines €0.4k, gas and environment sensors (slow control Tier 1) €2.5k, switched
+  PDU (remote power switch) €0.3k.
+- **High-budget upgrade, +€8k** (toward the final measurement): 4 CERN M1 cards for B.
+
+Only if a loan falls through: a V1742 €9.5k,
 2 N1081B €14k, a VME crate €4.8k, an N93B €2.7k, PMTs €6–24k. Prices from the CAEN offer 26OFC.01101 and
 `x17_facility_search/budget/items.py`.
 

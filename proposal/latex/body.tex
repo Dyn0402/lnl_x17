@@ -1,91 +1,29 @@
-% LNL PAC proposal, Jan 2027 call -- MX17 two-arm X17 feasibility study.
-% Rules (lnl.infn.it/en/details-for-submissions): abstract <= 1 page (not counted);
-% body <= 5 pages, 12 pt, figures/tables/references included.
-% When the official LNL template is downloaded from Indico (event 50487), move the
-% text below into it; the section structure already follows the rules.
-\documentclass[12pt,a4paper]{article}
-\usepackage[margin=2.0cm]{geometry}
-\usepackage[T1]{fontenc}
-\usepackage[utf8]{inputenc}
-\usepackage{lmodern}
-\usepackage{amsmath,amssymb}
+% Official LNL PAC template (Indico event 50487, TemplateProposalBody.tex), January 2027 call.
+\documentclass[a4paper,12pt,tightenlines]{revtex4}
+\usepackage{epsfig}
 \usepackage{graphicx}
-\usepackage{booktabs}
-\usepackage{xcolor}
-\usepackage{tikz}
-\usepackage{siunitx}
-\usepackage[hidelinks]{hyperref}
-\usepackage{enumitem}
-\usepackage{caption}
-\captionsetup{font=small,labelfont=bf}
-\setlist{nosep,leftmargin=1.2em}
-\sisetup{range-phrase=--,range-units=single}
-
-% Draft markers: \todo{...} shows in red; set \drafttrue to \draftfalse to hide them.
-\newif\ifdraft \drafttrue
-\newcommand{\todo}[1]{\ifdraft\textcolor{red}{[#1]}\fi}
-\newcommand{\Be}{\ensuremath{^{8}\mathrm{Be}}}
-\newcommand{\Li}{\ensuremath{^{7}\mathrm{Li}}}
-\newcommand{\pee}{\ensuremath{(p,e^+e^-)}}
-\newcommand{\Xs}{X17}
+\setlength{\textheight}{25.5cm}
+\setlength{\textwidth}{16.5cm}
+%\usepackage[none]{hyphenat} % THIS PACKAGE TO AVOID HYPHENATION, COMMENT IT IF YOU DON'T WANT TO
+\usepackage{pslatex}
+\input{macros}
 
 \begin{document}
-
-%======================================================================================
-% ABSTRACT PAGE (one page, not counted)
-%======================================================================================
-\thispagestyle{empty}
 \begin{center}
-{\Large\bfseries Feasibility study of an X17 search in \Li\pee\Be\\[2pt] with the MX17 Micromegas-TPC spectrometer}\\[10pt]
-{\large Proposal to the LNL PAC, January 2027}
+\begin{large}
+{\bf Feasibility study of an X17 search in \Li\pee\Be{}\\ with the MX17 Micromegas-TPC spectrometer}\\
+\vspace{.2cm}
+{\bf Experimental Setup: MX17, two-arm configuration}\\
+\end{large}
 \end{center}
-\vspace{4pt}
-\begin{tabular}{@{}p{0.28\textwidth}p{0.68\textwidth}@{}}
-\textbf{Accelerator} & AN2000 (alternative: CN) \\
-\textbf{Experimental set-up} & MX17, two-arm configuration (Micromegas TPC + SiPM scintillator wall + plastic scintillators per arm), around a \Li{} target at the end of a beam line \\
-\textbf{Beam} & protons, $E_p = 0.441$ and $1.10$~MeV, up to 1~\si{\micro\ampere}, continuous \\
-\textbf{Beam time} & 8 days, second half of 2027 \\
-\textbf{Spokesperson(s)} & \todo{to decide: D.~Neff / P.~Mastinu} \\
-\textbf{GLIMOS} & \todo{local, to decide} \\
-\end{tabular}
+\vspace{.4cm}
+\begin{flushleft}
+{\bf Spokesperson(s): \todo{to decide: D.~Neff / P.~Mastinu}}
+\end{flushleft}
+\thispagestyle{empty}
+\pagestyle{empty}
 
-\vspace{6pt}
-\noindent\textbf{Authors.}
-D.~Neff\textsuperscript{1}, P.~Mastinu\textsuperscript{2},
-\todo{C.~Massimi, A.~Mengoni, G.~Gervino, C.~Gustavino, L.~Cosentino, \dots: names and affiliations to confirm}
-
-\vspace{2pt}
-{\small
-\textsuperscript{1}\todo{affiliation}\quad
-\textsuperscript{2}INFN, Laboratori Nazionali di Legnaro, Legnaro (PD), Italy\quad
-\todo{others}}
-
-\vspace{8pt}
-\noindent\textbf{Summary.}
-The anomaly reported by ATOMKI in the opening-angle distribution of $e^+e^-$ pairs from the 18.15~MeV
-$1^+$ state of \Be{}, interpreted as a new boson of about 17~MeV (\Xs), has been neither confirmed nor
-excluded: a two-arm spectrometer in Hanoi reported a similar excess, MEG~II found none, and a 2026
-study showed that cosmic rays alone can produce a bump near $140^\circ$ in ATOMKI-type spectrometers.
-The MX17 apparatus, built for and operated in 2026 at CERN n\_TOF, tracks each lepton in a large
-Micromegas time projection chamber in front of a scintillator wall and plastic scintillators. It
-measures the pair opening angle from the hit positions, rejects cosmic rays by their straight,
-collinear tracks, and covers about 40\,\% of the solid angle for the \Xs{} pairs with four arms, against
-a few per cent for scintillator telescopes.
-
-We propose an 8-day feasibility study with two opposite arms of the apparatus around a thin metallic
-\Li{} target on AN2000: (i)~rates, live time and detector occupancy on a proton beam; (ii)~a calibration
-of acceptance, angular resolution and energy scale on the 17.64~MeV M1 transition at the 441~keV
-resonance, where no anomaly is expected; (iii)~a measurement of the cosmic-ray and beam-induced
-backgrounds with and without the tracking veto; and (iv)~a first look at the 18.15~MeV region at
-$E_p = 1.10$~MeV, with an expected sensitivity at the level of the ATOMKI signal and of the MEG~II limit.
-The results will fix the design and the beam request of the full four-arm experiment.
-
-\newpage
-\setcounter{page}{1}
-
-%======================================================================================
-% BODY (max 5 pages incl. figures, tables, references)
-%======================================================================================
+% Body limit: the template says "should not exceed 4 pages" (the LNL web page says 5). Keep to 4.
 \section{Scientific motivation}
 
 In 2016 the ATOMKI group observed an excess of $e^+e^-$ pairs at large opening angles
@@ -247,7 +185,7 @@ checked) at $\sim$1~L/h with exhaust; \todo{LNL rules}. HV: Micromegas $\le 600$
 from standard supplies. Target: metallic lithium handled in the CN target laboratory. Equipment is
 owned by the collaboration or lent (CEA, INFN); installation \todo{weeks} before the beam days.
 
-\begin{thebibliography}{9}\small
+\begin{thebibliography}{999}\small
 \setlength{\itemsep}{0pt}
 \bibitem{Kra16} A.J.~Krasznahorkay \emph{et al.}, Phys.\ Rev.\ Lett.\ \textbf{116}, 042501 (2016).
 \bibitem{Kra21} A.J.~Krasznahorkay \emph{et al.}, Phys.\ Rev.\ C \textbf{104}, 044003 (2021); review: arXiv:2409.16300 (2024).
@@ -258,5 +196,6 @@ owned by the collaboration or lent (CEA, INFN); installation \todo{weeks} before
 \bibitem{GS25} B.~Góngora-Servín \emph{et al.}, Acta Phys.\ Pol.\ B Proc.\ Suppl.\ \textbf{18}, 2-A13 (2025).
 \bibitem{Gus20} C.~Gustavino \emph{et al.}, \Xs{} at n\_TOF proposal \todo{CERN-INTC reference}.
 \end{thebibliography}
+
 
 \end{document}

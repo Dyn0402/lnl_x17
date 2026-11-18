@@ -5,7 +5,7 @@
 1. runs planning/plan.py (which reruns two_arm_estimates.py) -> planning/out/plan.json;
 2. writes site/out/lnl-feasibility.html (template + data);
 3. if the site checkout exists: copies it to pages/facilities/lnl-feasibility.html and the proposal
-   PDF + LaTeX zip to facilities/lnl/ (served next to the page; the Overleaf link imports the zip).
+   PDF + LaTeX zip to facilities/lnl/ (served next to the page; the Overleaf project is linked from plan.py LINKS).
 
 Then, in the site repo: python3 scripts/build.py && scripts/deploy-eos.sh (or rsync the three files).
 """
@@ -41,7 +41,7 @@ def main() -> None:
     (site / "pages" / "facilities" / "lnl-feasibility.html").write_text(html, encoding="utf-8")
     dst = site / "facilities" / "lnl"
     dst.mkdir(parents=True, exist_ok=True)
-    pdf = ROOT / "proposal" / "latex" / "main.pdf"
+    pdf = ROOT / "proposal" / "latex" / "proposal.pdf"
     zp = ROOT / "proposal" / "out" / "lnl_x17_pac_proposal.zip"
     for src, name in [(pdf, "lnl_x17_pac_proposal.pdf"), (zp, "lnl_x17_pac_proposal.zip")]:
         if src.exists():

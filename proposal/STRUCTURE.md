@@ -1,8 +1,10 @@
 # How an LNL PAC proposal is built
 
 Researched 2026-11-18 from the LNL pages (sources at the bottom). The official LaTeX / Word templates are attached to
-the Indico event (`agenda.infn.it/event/50487/`), which sits behind a bot check that scripts cannot pass. **Download them
-in a browser** and move our text into them. The draft in `latex/` follows the published rules, so the move is mechanical.
+the Indico event (`agenda.infn.it/event/50487/`, behind a bot check: open it in a browser). Downloaded 2026-11-18 into
+`lnl_template/` (`TemplateProposalAbstract.tex`, `TemplateProposalBody.tex`: revtex4, 12 pt, A4); the draft now lives in them
+(`latex/abstract.tex`, `latex/body.tex`, shared `latex/macros.tex`). The call text adds only: "use the templates and submit only
+pdf files".
 
 ## 1. The call (Jan 2027 PAC)
 
@@ -23,13 +25,14 @@ in a browser** and move our text into them. The draft in `latex/` follows the pu
 6. all authors and affiliations;
 7. a short summary.
 
-**Body: at most 5 pages in 12 pt, tables, figures and references included.** It must contain:
+**Body: at most 4 pages in 12 pt, tables, figures and references included.** The body template says "should not exceed 4
+pages"; the LNL web page says 5. We keep to 4. It must contain:
 - the scientific motivation;
 - the technical details of the measurement: the instrumentation, the quantities to be measured and their precision;
 - the number of beam days requested, **justified by count-rate estimates**;
 - (continuation experiments only) the status of earlier activities. Not us this time; slot 2 will be one.
 
-Our section plan (`latex/main.tex`), with a page budget:
+Our section plan (`latex/body.tex`), with the page budget planned before the move (now 3¼ pages in the template):
 
 | § | section | pages |
 |---|---|---|
@@ -70,11 +73,13 @@ Our section plan (`latex/main.tex`), with a page budget:
 
 ## 6. Overleaf
 
-`latex/` compiles as is (`make`, pdflatex). `make zip` writes `out/lnl_x17_pac_proposal.zip`. Two ways in:
-- Overleaf → New project → Upload project → the zip.
-- One click: `https://www.overleaf.com/docs?snip_uri=https://dylan-neff.web.cern.ch/facilities/lnl/lnl_x17_pac_proposal.zip`
-  (the zip is published next to the page).
-To keep the repo and Overleaf in sync later, use Overleaf's Git integration (the project's git URL) and add it as a remote.
+Project: <https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f> ("lnl_x17_pac_proposal", Dylan's account, uploaded
+2026-11-18 from `out/lnl_x17_pac_proposal.zip`; it compiles). Overleaf compiles one main document: switch Menu → Main document
+between `abstract.tex` and `body.tex`. Share it from Overleaf to give co-proponents access.
+
+`latex/` compiles locally with `make` (abstract.pdf, body.pdf, proposal.pdf merged; needs revtex4, which is in
+`~/texmf/tex/latex/` on the desktop, from Ubuntu's texlive-publishers). `make zip` rebuilds the upload zip. From now on Overleaf
+and the repo can drift: pick one as the master (Overleaf's Git integration can be added as a remote here).
 
 ## Sources
 

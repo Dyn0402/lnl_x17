@@ -151,6 +151,23 @@ select { background: var(--surface); color: var(--ink); border: 1px solid var(--
 .pbar { display: flex; height: 26px; border-radius: 6px; overflow: hidden; border: 1px solid var(--grid); }
 .pbar > div { display: flex; align-items: center; justify-content: center; font-size: 11px; color: #fff; border-right: 2px solid var(--surface); white-space: nowrap; overflow: hidden; }
 .legend { display: flex; flex-wrap: wrap; gap: 6px; margin: 6px 0; }
+/* overview: orientation block and big links */
+.intro { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr); gap: 18px; align-items: start; }
+@media (max-width: 760px) { .intro { grid-template-columns: 1fr; } }
+.intro .lead { font-size: 16px; line-height: 1.55; margin: 2px 0 10px; }
+.intro ul { margin: 0; padding-left: 18px; font-size: 14px; color: var(--ink-2); }
+.intro li { margin: 3px 0; }
+.links { display: flex; flex-direction: column; gap: 8px; }
+.bigbtn { display: block; text-decoration: none; border: 1px solid var(--grid); border-radius: 10px; padding: 10px 14px; color: var(--ink); background: var(--panel); font-weight: 600; }
+.bigbtn:hover { border-color: var(--accent); }
+.bigbtn span { display: block; font-weight: 400; font-size: 12.5px; color: var(--ink-2); margin-top: 1px; }
+.bigbtn.primary { background: var(--accent); border-color: var(--accent); color: #fff; }
+.bigbtn.primary span { color: rgba(255,255,255,0.85); }
+.facts { display: grid; grid-template-columns: auto 1fr; gap: 3px 12px; font-size: 14px; margin: 4px 0 0; }
+.facts dt { color: var(--muted); } .facts dd { margin: 0; }
+.closing { display: grid; grid-template-columns: minmax(0, 1.7fr) minmax(240px, 1fr); gap: 18px; align-items: center; margin-top: 22px; }
+@media (max-width: 760px) { .closing { grid-template-columns: 1fr; } }
+tr.tier td { background: var(--hover); font-weight: 600; font-size: 13px; }
 .foot { margin-top: 40px; font-size: 12px; color: var(--muted); }
 details summary { cursor: pointer; color: var(--ink-2); }
 .kbd { font-family: var(--f-mono); font-size: 12px; background: var(--hover); padding: 1px 5px; border-radius: 4px; }
@@ -172,21 +189,39 @@ details summary { cursor: pointer; color: var(--ink-2); }
 
   <!-- OVERVIEW -->
   <section class="pane" id="p-overview">
-    <div class="grid2">
+    <div class="card intro">
+      <div>
+        <div class="muted small">Start here</div>
+        <p class="lead">We are proposing to the <b>LNL PAC</b> an <b>8-day X17 feasibility study</b> on the <b>AN2000</b> accelerator in the
+          second half of 2027. <b>Two opposite arms</b> of the MX17 apparatus, which ran at CERN n_TOF in 2026 (a Micromegas TPC, a SiPM
+          scintillator wall and plastic scintillators per arm), sit around a thin Li target and record ⁷Li(p,e⁺e⁻)⁸Be pairs.</p>
+        <ul>
+          <li><b>Why tracking.</b> It measures the pair opening angle from hit positions and rejects cosmic rays by their straight tracks:
+            the two points at issue in the ATOMKI result (MEG II, 2026).</li>
+          <li><b>What 8 days deliver.</b> Rates and backgrounds on beam, a calibration on the 441 keV resonance (no anomaly there), and a
+            first look at 18.15 MeV near the ATOMKI level. The results set the design of the full four-arm experiment (slot 2).</li>
+          <li><b>This page</b> organises the proposal and the run: the timeline, set-up, beam plan and reach, tasks, budget, risks and open
+            questions are in the tabs above.</li>
+        </ul>
+      </div>
+      <div class="links">
+        <a class="bigbtn primary" data-link="indico" href="#">LNL PAC call on Indico ↗<span>Event 50487: call, templates, submission</span></a>
+        <a class="bigbtn" data-link="call_pdf" href="#">Call text, Jan 2027 PAC ↗<span>PAC meets 25–29 Jan 2027</span></a>
+        <a class="bigbtn" data-link="beams" href="#">CN and AN2000 beams ↗<span>LNL machine sheet</span></a>
+      </div>
+    </div>
+    <div class="grid2" style="margin-top:14px">
       <div class="card">
         <div class="muted small">PAC proposal deadline · Indico, 10 Dec 2026, 23:59 CET</div>
         <div class="countdown"><span class="big" id="cd-days">–</span><span id="cd-rest" class="muted"></span></div>
         <div class="small" id="cd-sub"></div>
       </div>
       <div class="card">
-        <div class="muted small">What we ask for</div>
-        <p style="margin:4px 0 0">An <b>X17 feasibility study</b> (Pierfrancesco, 18 Nov: not "detector tests"): <b>~8 beam days</b>, protons at
-          0.441 and 1.10 MeV, ≤ 1 µA, on <b>AN2000</b>, with <b>two opposite arms</b> of the n_TOF apparatus around a thin metallic Li target.
-          A positive answer starts the 2-branch full detector, and the results back the INFN commission request.</p>
+        <div class="muted small">The request at a glance</div>
+        <dl class="facts" id="facts"></dl>
       </div>
     </div>
     <div class="stepper" id="stepper"></div>
-    <div class="tiles" id="tiles"></div>
     <div class="grid2" style="margin-top:14px">
       <div class="card">
         <h3 style="margin-top:0">Next up</h3>
@@ -198,16 +233,16 @@ details summary { cursor: pointer; color: var(--ink-2); }
         <ul class="clean" id="decisions"></ul>
       </div>
     </div>
-    <h2>What the feasibility run proves</h2>
-    <div class="grid2">
-      <div class="card"><b>1 · The apparatus on a proton beam.</b> Trigger and singles rates vs current, DREAM live time, Micromegas occupancy,
-        the Li target's behaviour. Everything the Geant4 reach assumes, measured.</div>
-      <div class="card"><b>2 · A calibration at 441 keV.</b> The 17.64 MeV M1 pairs, where ATOMKI saw no anomaly: angular resolution,
-        acceptance and energy scale against Geant4. 12–24k selected pairs in two days with two arms.</div>
-      <div class="card"><b>3 · The backgrounds.</b> Beam-off cosmics with and without the track veto (MEG II's 2026 point about ATOMKI-type
-        spectrometers), accidentals, external pairs.</div>
-      <div class="card"><b>4 · A first look at 18.15 MeV.</b> Five days at 1.10 MeV: an expected 90 % CL limit of 1.5–1.8 × R(ATOMKI) with
-        walls and plastics alone, ~0.8 × with two liquid cells. Scaling estimate; see <a href="#reach" data-go="reach">Beam &amp; reach</a>.</div>
+    <div class="card closing">
+      <div>
+        <div class="muted small">The proposal document</div>
+        <p style="margin:4px 0 0">Draft v0 in the official LNL template: a one-page abstract and a body of at most 4 pages (now about 3¼).
+          Red brackets mark open items. Details and the page plan are in the <a href="#proposal" data-go="proposal">Proposal</a> tab.</p>
+      </div>
+      <div class="links">
+        <a class="bigbtn primary" data-link="overleaf" href="#">Proposal on Overleaf ↗<span>abstract.tex + body.tex; ask Dylan for access</span></a>
+        <a class="bigbtn" href="lnl/lnl_x17_pac_proposal.pdf">Current draft (PDF)<span>abstract + body, as it would be uploaded</span></a>
+      </div>
     </div>
   </section>
 
@@ -283,13 +318,14 @@ details summary { cursor: pointer; color: var(--ink-2); }
     <div class="grid2">
       <div class="card">
         <h3 style="margin-top:0">The draft</h3>
-        <p class="small">LaTeX, compiles as is. The official LNL template is on the Indico event (behind a bot check: download it in a browser).
-          The draft follows the published rules, so moving the text over is mechanical.</p>
-        <p><a class="chip btn" href="lnl/lnl_x17_pac_proposal.pdf">PDF draft</a>
+        <p class="small">In the official LNL templates from Indico (revtex4, 12 pt): <span class="kbd">abstract.tex</span> (one page) and
+          <span class="kbd">body.tex</span> (at most 4 pages, the template's limit; the LNL web page says 5). Compile each separately and upload
+          the PDFs. On Overleaf, switch Menu → Main document to see the other file.</p>
+        <p><a class="chip btn" data-link="overleaf" href="#">Overleaf project ↗</a>
+           <a class="chip btn" href="lnl/lnl_x17_pac_proposal.pdf">PDF draft</a>
            <a class="chip btn" href="lnl/lnl_x17_pac_proposal.zip">LaTeX zip</a>
-           <a class="chip btn" id="ovl" href="#">Open in Overleaf ↗</a>
-           <a class="chip btn" href="https://agenda.infn.it/event/50487/">Indico 50487 ↗</a></p>
-        <h3>Page budget (body ≤ 5 pages, 12 pt, all included)</h3>
+           <a class="chip btn" data-link="indico" href="#">Indico 50487 ↗</a></p>
+        <h3>Page budget (body ≤ 4 pages, 12 pt, all included)</h3>
         <div class="pbar" id="pbar"></div>
         <div class="small muted" id="pbar-t" style="margin-top:4px"></div>
       </div>
@@ -297,6 +333,17 @@ details summary { cursor: pointer; color: var(--ink-2); }
         <h3 style="margin-top:0">The rules</h3>
         <ul class="clean small" id="rules"></ul>
       </div>
+    </div>
+    <h2>What the feasibility run proves</h2>
+    <div class="grid2">
+      <div class="card"><b>1 · The apparatus on a proton beam.</b> Trigger and singles rates vs current, DREAM live time, Micromegas occupancy,
+        the Li target's behaviour. Everything the Geant4 reach assumes, measured.</div>
+      <div class="card"><b>2 · A calibration at 441 keV.</b> The 17.64 MeV M1 pairs, where ATOMKI saw no anomaly: angular resolution,
+        acceptance and energy scale against Geant4. 12–24k selected pairs in two days with two arms.</div>
+      <div class="card"><b>3 · The backgrounds.</b> Beam-off cosmics with and without the track veto (MEG II's 2026 point about ATOMKI-type
+        spectrometers), accidentals, external pairs.</div>
+      <div class="card"><b>4 · A first look at 18.15 MeV.</b> Five days at 1.10 MeV: an expected 90 % CL limit of 1.5–1.8 × R(ATOMKI) with
+        walls and plastics alone, ~0.8 × with two liquid cells. Scaling estimate; see <a href="#reach" data-go="reach">Beam &amp; reach</a>.</div>
     </div>
     <h2>Submission and after</h2>
     <div class="grid2">
@@ -317,8 +364,10 @@ details summary { cursor: pointer; color: var(--ink-2); }
   <section class="pane" id="p-budget">
     <div class="tiles" id="b-tiles"></div>
     <div class="tscroll"><table id="b-table"></table></div>
-    <p class="note">Cash only: the Micromegas, walls, plastics, DREAM and most electronics are owned or borrowed. Prices scaled from the MX17 budget
-      (<a href="budget.html?preset=lean">Lean preset</a>) and CAEN offer 26OFC.01101. Tick a contingency if that loan falls through.</p>
+    <p class="note">For our planning; the proposal does not need it. Cash only: the Micromegas, walls, plastics, DREAM and most electronics
+      are owned or borrowed. <b>Critical</b> items are what the test cannot run without (B runs with its existing Italian M1 cards).
+      <b>Low-budget upgrades</b> make the run easier to operate; <b>high-budget upgrades</b> look toward the final measurement. Tick items to add
+      them to the selected total. Prices scaled from the MX17 budget (<a href="budget.html?preset=lean">Lean preset</a>) and CAEN offer 26OFC.01101.</p>
   </section>
 
   <!-- RISKS & QUESTIONS -->
@@ -427,6 +476,9 @@ function go(id) {
 document.addEventListener("click", e => { const a = e.target.closest("[data-go]"); if (a) { e.preventDefault(); go(a.dataset.go); scrollTo(0, 0); } });
 addEventListener("hashchange", () => go(location.hash.slice(1)));
 
+/* external links (planning/plan.py LINKS) */
+$$("[data-link]").forEach(a => { const u = D.links[a.dataset.link]; if (u) { a.href = u; a.target = "_blank"; a.rel = "noopener"; } });
+
 /* ---------- overview ---------- */
 function countdown() {
   const ms = parse(D.deadline) - new Date();
@@ -447,16 +499,14 @@ function overview() {
   }
   const rm = D.reach.find(r => r.target.startsWith("Al") && r.energy_stack.startsWith("SiPM"));
   const rl = D.reach.find(r => r.target.startsWith("Al") && r.energy_stack.includes("as at"));
-  const must = D.budget.filter(b => b.must).reduce((s, b) => s + b.c, 0);
-  const tl = $("#tiles"); tl.innerHTML = "";
-  const tiles = [
-    ["Beam days", "8", "1 setup · 2 at 441 keV · 5 at 1.10 MeV"],
-    ["Arms", "2 of 4", "A (ready) + B (drift fix)"],
-    ["Scint. channels", "~24", "16 wall + 4–6 PMT + trigger word"],
-    ["Cash needed", "€" + (must / 1e3).toFixed(1) + "k", "if every loan comes through"],
-    ["Expected limit", rm ? rm.r90_over_atomki + "×" : "–", `R(ATOMKI), 5 d; ${rl ? rl.r90_over_atomki + "×" : ""} with liquid cells`],
-  ];
-  for (const [k, v, s] of tiles) tl.append(h("div", { class: "tile" }, h("div", { class: "k" }, k), h("div", { class: "v" }, v), h("div", { class: "s" }, s)));
+  const fx = $("#facts"); fx.innerHTML = "";
+  [["Machine", "AN2000, 0.2–2.0 MV (CN as fallback, no 441 keV)"],
+   ["Beam", "protons, 0.441 and 1.10 MeV, ≤ 1 µA, continuous"],
+   ["Beam days", "8: 1 set-up · 2 at 441 keV · 5 at 1.10 MeV"],
+   ["Set-up", "2 of the 4 MX17 arms (A ready, B after a drift fix), ~24 scintillator channels"],
+   ["When", "second half of 2027 (our plan, not an allocation)"],
+   ["Expected reach", (rm ? rm.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL in 5 days" + (rl ? `; ${rl.r90_over_atomki} × with liquid cells` : "") + " (scaling estimate)"],
+  ].forEach(([k, v]) => fx.append(h("dt", {}, k), h("dd", {}, v)));
   const nx = $("#nextup"); nx.innerHTML = "";
   D.tasks.filter(t => t.status !== "done" && !ticked(t.id)).sort((a, b) => a.due.localeCompare(b.due)).slice(0, 6).forEach(t => {
     nx.append(h("li", {}, h("span", { class: "chip" }, h("span", { class: "dot", style: `background:${WS[t.ws].col}` }), fmt(t.due)), " ",
@@ -785,35 +835,38 @@ function proposal() {
   const pb = $("#pbar"); pb.innerHTML = "";
   const body = D.proposal.sections.filter(s => s.id !== "abs");
   const tot = body.reduce((s, x) => s + x.pages, 0);
-  body.forEach((s, i) => { const d = h("div", { style: `width:${s.pages / 5 * 100}%;background:var(--s${i + 1})` }, s.name.replace(/^\d\. /, "").split(" ")[0]); tipOn(d, `<b>${s.name}</b><br>${s.pages} pages · ${s.status}`); pb.append(d); });
-  if (tot < 5) pb.append(h("div", { style: `width:${(5 - tot) / 5 * 100}%;background:transparent;color:var(--muted)` }, "spare"));
-  $("#pbar-t").textContent = `planned ${tot.toFixed(1)} of 5 pages · the current draft compiles to the abstract page + 4 body pages`;
-  const zip = new URL("lnl/lnl_x17_pac_proposal.zip", location.href).href;
-  $("#ovl").href = "https://www.overleaf.com/docs?snip_uri=" + encodeURIComponent(zip);
+  body.forEach((s, i) => { const d = h("div", { style: `width:${s.pages / 4 * 100}%;background:var(--s${i + 1})` }, s.name.replace(/^\d\. /, "").split(" ")[0]); tipOn(d, `<b>${s.name}</b><br>${s.pages} pages · ${s.status}`); pb.append(d); });
+  if (tot < 4) pb.append(h("div", { style: `width:${(4 - tot) / 4 * 100}%;background:transparent;color:var(--muted)` }, "spare"));
+  $("#pbar-t").textContent = `planned ${tot.toFixed(1)} of 4 pages · the current draft: abstract page + about 3¼ body pages`;
+
 }
 
 /* ---------- budget ---------- */
-let bOpt = store.get("bopt", {});
+let bOpt = store.get("bopt2", {});
+const sumT = ids => D.budget.filter(b => ids.includes(b.tier)).reduce((s, b) => s + b.c, 0);
 function budget() {
   const t = $("#b-table"); t.innerHTML = "";
   const max = Math.max(...D.budget.map(b => b.c));
   t.append(h("tr", {}, h("th", {}, ""), h("th", {}, "item"), h("th", { class: "num" }, "central"), h("th", { class: "num" }, "range"), h("th", {}, ""), h("th", {}, "basis")));
   let c = 0, lo = 0, hi = 0;
-  D.budget.forEach((b, i) => {
-    const on = b.must || bOpt[i];
-    if (on) { c += b.c; lo += b.lo; hi += b.hi; }
-    const ctl = b.must ? h("span", { class: "muted small" }, "need") : h("input", { type: "checkbox", class: "switch", checked: !!bOpt[i], "aria-label": "include " + b.item,
-      on: { change: e => { bOpt[i] = e.target.checked; store.set("bopt", bOpt); budget(); } } });
-    t.append(h("tr", { style: on ? "" : "opacity:.6" }, h("td", {}, ctl), h("td", {}, b.item), h("td", { class: "num" }, "€" + (b.c / 1e3).toFixed(1) + "k"),
-      h("td", { class: "num small muted" }, b.lo === b.hi ? "quoted" : `${(b.lo / 1e3).toFixed(1)}–${(b.hi / 1e3).toFixed(1)}k`),
-      h("td", { style: "width:22%" }, h("span", { class: "bbar" + (b.must ? "" : " opt"), style: `width:${b.c / max * 100}%` })), h("td", { class: "small muted" }, b.basis)));
-  });
-  const must = D.budget.filter(b => b.must).reduce((s, b) => s + b.c, 0), all = D.budget.reduce((s, b) => s + b.c, 0);
+  for (const tier of D.tiers) {
+    const items = D.budget.map((b, i) => [b, i]).filter(([b]) => b.tier === tier.id);
+    t.append(h("tr", { class: "tier" }, h("td", { colspan: 2 }, tier.name), h("td", { class: "num" }, "€" + (sumT([tier.id]) / 1e3).toFixed(1) + "k"), h("td", { colspan: 3 }, "")));
+    for (const [b, i] of items) {
+      const need = b.tier === "need", on = need || bOpt[i];
+      if (on) { c += b.c; lo += b.lo; hi += b.hi; }
+      const ctl = need ? h("span", { class: "muted small" }, "need") : h("input", { type: "checkbox", class: "switch", checked: !!bOpt[i], "aria-label": "include " + b.item,
+        on: { change: e => { bOpt[i] = e.target.checked; store.set("bopt2", bOpt); budget(); } } });
+      t.append(h("tr", { style: on ? "" : "opacity:.6" }, h("td", {}, ctl), h("td", {}, b.item), h("td", { class: "num" }, "€" + (b.c / 1e3).toFixed(1) + "k"),
+        h("td", { class: "num small muted" }, b.lo === b.hi ? "quoted" : `${(b.lo / 1e3).toFixed(1)}–${(b.hi / 1e3).toFixed(1)}k`),
+        h("td", { style: "width:22%" }, h("span", { class: "bbar" + (need ? "" : " opt"), style: `width:${b.c / max * 100}%` })), h("td", { class: "small muted" }, b.basis)));
+    }
+  }
   const tl = $("#b-tiles"); tl.innerHTML = "";
-  [["Selected total", "€" + (c / 1e3).toFixed(1) + "k", `range €${(lo / 1e3).toFixed(0)}–${(hi / 1e3).toFixed(0)}k`],
-   ["Every loan comes through", "€" + (must / 1e3).toFixed(1) + "k", "cash we must find"],
-   ["No loans at all", "€" + (all / 1e3).toFixed(1) + "k", "all contingencies"],
-   ["Slot 2 for scale", "€223k", "Self-sufficient preset"]].forEach(([k, v, s]) => tl.append(h("div", { class: "tile" }, h("div", { class: "k" }, k), h("div", { class: "v" }, v), h("div", { class: "s" }, s))));
+  [["Critical for the test", "€" + (sumT(["need"]) / 1e3).toFixed(1) + "k", "if every loan comes through"],
+   ["+ low-budget upgrade", "€" + (sumT(["need", "low"]) / 1e3).toFixed(1) + "k", "gas lines, sensors, remote power switch"],
+   ["+ high-budget upgrade", "€" + (sumT(["need", "low", "high"]) / 1e3).toFixed(1) + "k", "adds 4 CERN M1 cards for B"],
+   ["Selected total", "€" + (c / 1e3).toFixed(1) + "k", `range €${(lo / 1e3).toFixed(0)}–${(hi / 1e3).toFixed(0)}k`]].forEach(([k, v, s]) => tl.append(h("div", { class: "tile" }, h("div", { class: "k" }, k), h("div", { class: "v" }, v), h("div", { class: "s" }, s))));
 }
 
 /* ---------- risks & questions ---------- */
