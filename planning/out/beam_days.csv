@@ -1,0 +1,10 @@
+day,E_p,what,beam
+1,1.10 MeV,"Beam on target at low current; target conditioning; current scan 0.05 → 1 µA: trigger rates, DREAM live time, Micromegas occupancy, SiPM/plastic singles",on
+2,0.441 MeV,"Locate the 441 keV resonance on the γ yield (17.64 MeV, M1); IPC calibration run",on
+3,0.441 MeV,"IPC calibration run: opening-angle resolution, acceptance, energy scale against Geant4",on
+4,1.10 MeV,"18.15 MeV region: IPC spectrum, X17 window",on
+5,1.10 MeV,18.15 MeV region (cont.),on
+6,1.10 MeV,18.15 MeV region (cont.),on
+7,1.10 MeV,18.15 MeV region (cont.); end-of-run target check (γ yield vs day 4),on
+8,1.10 MeV,"18.15 MeV region (cont.), or 0.80 MeV off-resonance if the target allows; contingency",on
+nights/weekend,—,"Beam-off cosmic runs with the full trigger: the cosmic background model, measured",off
