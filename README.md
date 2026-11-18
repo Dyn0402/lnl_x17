@@ -30,7 +30,7 @@ and the page; it does not duplicate those studies.
 | `slot1_feasibility/PLAN.md` | the feasibility study: set-up, beam days, reach, timeline, budget, risks |
 | `slot2_physics/PLAN.md` | the full experiment, outline and hand-over |
 | `proposal/STRUCTURE.md` | how an LNL PAC proposal is built (rules, submission, review) |
-| `proposal/latex/` | the draft in the LNL template: `abstract.tex`, `body.tex` (`make`, `make zip`); on [Overleaf](https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f) |
+| `proposal/latex/` | the draft in the LNL template: `main.tex` (both parts), text in `abstract_content.tex` + `body_content.tex` (`make`, `make zip`); on [Overleaf](https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f) |
 | `proposal/lnl_template/` | the official LNL templates from Indico 50487 |
 | `planning/plan.py` | **single source** of tasks, phases, milestones, hardware, budget, questions, risks → `planning/out/plan.json` |
 | `planning/two_arm_estimates.py` | two-arm reach scaling → `planning/out/two_arm_reach.csv`, `beam_days.csv` |

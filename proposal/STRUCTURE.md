@@ -74,12 +74,18 @@ Our section plan (`latex/body.tex`), with the page budget planned before the mov
 ## 6. Overleaf
 
 Project: <https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f> ("lnl_x17_pac_proposal", Dylan's account, uploaded
-2026-11-18 from `out/lnl_x17_pac_proposal.zip`; it compiles). Overleaf compiles one main document: switch Menu → Main document
-between `abstract.tex` and `body.tex`. Share it from Overleaf to give co-proponents access.
+2026-11-18 from `out/lnl_x17_pac_proposal.zip`). Since 2026-11-19 its main document is `main.tex`, which shows the abstract
+page and the body as one 5-page PDF (until then it was `abstract.tex`, so Overleaf showed only the abstract). The text lives
+in `abstract_content.tex` and `body_content.tex`; `abstract.tex` and `body.tex` wrap each alone for the two Indico uploads,
+`preamble.tex` holds the template preamble. Share the project from Overleaf to give co-proponents access.
 
-`latex/` compiles locally with `make` (abstract.pdf, body.pdf, proposal.pdf merged; needs revtex4, which is in
-`~/texmf/tex/latex/` on the desktop, from Ubuntu's texlive-publishers). `make zip` rebuilds the upload zip. From now on Overleaf
-and the repo can drift: pick one as the master (Overleaf's Git integration can be added as a remote here).
+Overleaf's TeX Live is newer than the desktop's (2023): revtex4 (2001) breaks there on `p{}` and `@{}` tabular columns
+("Extra \or"), so tables use `l` columns with `\parbox` cells.
+
+`latex/` compiles locally with `make` (abstract.pdf, body.pdf, proposal.pdf merged, main.pdf; needs revtex4, which is in
+`~/texmf/tex/latex/` on the desktop, from Ubuntu's texlive-publishers). `make zip` rebuilds the upload zip. Overleaf and the
+repo were identical on 2026-11-19 (no edits had been made on Overleaf). From now on they can drift: pick one as the master
+(Overleaf's Git integration can be added as a remote here).
 
 ## Sources
 

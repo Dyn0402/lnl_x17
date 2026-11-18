@@ -1,5 +1,19 @@
 # Handoff
 
+## Overleaf shows the full draft — updated 2026-11-19 (dylan-MS-7C84)
+
+**Resume:** Overleaf's main document is now `main.tex` (abstract + body, 5 pages, compiles there). Next steps unchanged (P1, P3, R1).
+
+**Done**
+- Cause: Overleaf compiles one main document and it was `abstract.tex`, so only the abstract showed. The body had also
+  never compiled on Overleaf (see gotcha).
+- Split `proposal/latex/`: text in `abstract_content.tex`, `body_content.tex`; `preamble.tex`; thin wrappers `abstract.tex`,
+  `body.tex` (Indico) and `main.tex` (both). Uploaded to Overleaf through its own upload endpoint, main document set to `main.tex`.
+  Overleaf history showed no edits there before the upload.
+
+**Gotchas**
+- revtex4 + Overleaf's newer TeX Live: `p{}`/`@{}` columns give "Extra \or". The beam-day table uses `l` columns + `\daycell`.
+
 ## LNL proposal page: template, Overleaf, budget tiers — updated 2026-11-18 (dylan-MS-7C84)
 
 **Resume:** the draft is in the official LNL template and on Overleaf; the page's overview leads with Indico and closes with
