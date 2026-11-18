@@ -11,9 +11,9 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 - **What we ask for:** ~8 beam days on AN2000 (CN as fallback) in the second half of 2027, for an *X17 feasibility study*
   with two arms of the n_TOF MX17 apparatus around a ⁷Li target. Pierfrancesco's framing, 18 Nov: a feasibility study of
   the X17 experiment rather than a detector test, 8 days, measurement in H2 2027. He handles the informal contact with LNL.
-- **Set-up:** the two best Micromegas (A ready; B needs a drift fix and a window, by Stephan at CEA), two SiPM walls, the
+- **Set-up:** the two best Micromegas (A ready; B needs a drift-window repair, by Stephan at CEA; new windows are optional), two SiPM walls, the
   four small 20 × 30 × 2 cm plastics with PMTs we have to find, ~24 digitizer channels, half the DREAM system from CEA.
-  Everything is owned or borrowed. Cash critical for the test: **~€10k**; +€3k low-budget upgrade, +€8k high-budget upgrade; up to €43k more if loans fall through (§7).
+  Everything is owned or borrowed. Cash critical for the test: **~€9k**; +€4.4k low-budget upgrade, +€8k high-budget upgrade; up to €43k more if loans fall through (§7).
 - **What it proves:**
   1. the apparatus works on a proton beam: rates, live time, Micromegas occupancy, Li target;
   2. a **calibration at the 441 keV resonance** (17.64 MeV M1 pairs, no anomaly expected): 12–24k selected pairs in 2 days;
@@ -42,8 +42,8 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 
 | part | status | note |
 |---|---|---|
-| Micromegas A (det3) | ready | 92.9 % within 5 mm on the bench; new aluminised-mylar window only |
-| Micromegas B (det2) | fix | 91.3 %; drift fix + window (Stephan, CEA); runs with its existing Italian M1 cards (new CERN cards: high-budget upgrade) |
+| Micromegas A (det3) | ready | 92.9 % within 5 mm on the bench; runs as is; a new aluminised-mylar window is optional (low-budget upgrade) |
+| Micromegas B (det2) | fix | 91.3 %; drift-window repair (Stephan, CEA), new window optional; runs with its existing Italian M1 cards (new CERN cards: high-budget upgrade) |
 | DREAM | borrow | 4 FEUs + TCM + 32 cables from CEA; solder the TCM busy LEMO |
 | SiPM walls × 2 | ready | ganged as at n_TOF: 8 channels per wall, 16 of 20 bars |
 | plastics 20 × 30 × 2 cm × 4 | find PMTs | scintillators owned; PMTs went back to the lender |
@@ -51,7 +51,7 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 | digitizers ~24 ch | find | 16 wall + 4 PMT (+2 LS) + trigger word; one V1742 (32 ch) covers it |
 | trigger | borrow | n_TOF logic for two arms: 2–3 N1081B, a dual timer, FIFOs, NIM bin |
 | gas | buy | Ar/iC₄H₁₀ 95/5 premix and panel; flammable-gas rules at LNL (ask) |
-| target | decide | LNL's pressed Li on Cu, 10–12 µm; holder: flat Al end cap at 45° (proposed 11 Nov) or the Cu ogive |
+| target | decide | LNL's pressed Li on Cu, 10–12 µm; holder: most likely the Cu hemisphere, already built (the 'Cu ogive' rows in §4; Dylan, 19 Nov); flat Al end cap at 45° the lighter alternative |
 
 **Geometry.** The two arms face each other across the beam (opposite arms of the pinwheel, faces at ±204 mm). The X17
 pairs at ~135–140° and the large-angle IPC are seen through opposite arms; adjacent arms see 25–92° pairs and no X17.
@@ -103,7 +103,7 @@ Caveats:
 | 18 Nov – 9 Dec 2026 | proposal (§6); submit 9 Dec |
 | ~18 Jan 2027 | technical-review feedback |
 | 25–29 Jan 2027 | PAC (12 + 8 min talk) |
-| Feb – Apr 2027 | B fixed, windows; DREAM loan agreed; PMTs, digitizers, trigger modules found; target holder designed |
+| Feb – Apr 2027 | B repaired (new windows if funded); DREAM loan agreed; PMTs, digitizers, trigger modules found; target holder designed |
 | Mar – Jun 2027 | bench tests (trigger T1, T2, T4; MM + DREAM on cosmics; walls + plastics on cosmics) |
 | **15 Jun 2027** | **go/no-go: both arms work on cosmics** |
 | Jun – Jul 2027 | full chain, two arms, on cosmics; Li film conversion test on the line |
@@ -121,10 +121,10 @@ outline to Pierfrancesco (20 Nov), INFN-AAI account (23 Nov), co-proponents (24 
 
 ## 7. Budget
 
-For our planning, not the proposal. Tiers (Dylan, 18 Nov 2026; `plan.py` `TIERS`, `BUDGET`), central values:
-- **Critical for the test, €10.4k**: B drift fix + windows €1.6k, gas premix + regulators + panel €3k, splitters / LEMO / adapters
+For our planning, not the proposal. Tiers (Dylan, 18 Nov 2026; new drift windows moved to the low tier 19 Nov; `plan.py` `TIERS`, `BUDGET`), central values:
+- **Critical for the test, €9.1k**: repair of B's drift window €0.3k, gas premix + regulators + panel €3k, splitters / LEMO / adapters
   €3.8k, shipping €2k. B runs with its existing (noisier) Italian M1 cards.
-- **Low-budget upgrade, +€3.2k**: low-permeation gas lines €0.4k, gas and environment sensors (slow control Tier 1) €2.5k, switched
+- **Low-budget upgrade, +€4.4k**: new aluminised-mylar drift windows for A and B €1.25k, low-permeation gas lines €0.4k, gas and environment sensors (slow control Tier 1) €2.5k, switched
   PDU (remote power switch) €0.3k.
 - **High-budget upgrade, +€8k** (toward the final measurement): 4 CERN M1 cards for B.
 

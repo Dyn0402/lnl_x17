@@ -82,6 +82,9 @@ in `abstract_content.tex` and `body_content.tex`; `abstract.tex` and `body.tex` 
 Overleaf's TeX Live is newer than the desktop's (2023): revtex4 (2001) breaks there on `p{}` and `@{}` tabular columns
 ("Extra \or"), so tables use `l` columns with `\parbox` cells.
 
+On Overleaf `figures/limit_vs_days.pdf` is a linked file from `https://dylan-neff.web.cern.ch/facilities/lnl/limit_vs_days.pdf`
+(copy the new PDF to the site's `facilities/lnl/`, deploy, then Refresh it in Overleaf).
+
 `latex/` compiles locally with `make` (abstract.pdf, body.pdf, proposal.pdf merged, main.pdf; needs revtex4, which is in
 `~/texmf/tex/latex/` on the desktop, from Ubuntu's texlive-publishers). `make zip` rebuilds the upload zip. Overleaf and the
 repo were identical on 2026-11-19 (no edits had been made on Overleaf). From now on they can drift: pick one as the master

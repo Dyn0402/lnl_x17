@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-18",
+ "updated": "2026-11-19",
  "deadline": "2026-12-10T23:59:00+01:00",
  "pac": [
   "2027-01-25",
@@ -112,7 +112,7 @@
   },
   {
    "ws": "mm",
-   "name": "Fix B's drift, new windows A+B (CEA)",
+   "name": "Repair B's drift window (CEA); new windows optional",
    "start": "2027-02-01",
    "end": "2027-04-30",
    "est": true
@@ -424,7 +424,7 @@
    "due": "2027-01-15",
    "who": "Dylan",
    "status": "todo",
-   "t": "Ask Stephan / CEA: fix B's drift, new aluminised-mylar windows for A and B; dates"
+   "t": "Ask Stephan / CEA: repair B's drift window (needed); new aluminised-mylar windows for A and B (low-budget upgrade); dates"
   },
   {
    "id": "M2",
@@ -496,7 +496,7 @@
    "due": "2026-12-01",
    "who": "Pierfrancesco",
    "status": "todo",
-   "t": "Target for the proposal: pressed Li on Cu (CN group), 10–12 µm; holder design (flat Al end cap at 45° or his Cu ogive)"
+   "t": "Target for the proposal: pressed Li on Cu (CN group), 10–12 µm; holder: the Cu hemisphere (already built, most likely; the 'Cu ogive' of the simulation); flat Al end cap at 45° only if it pays"
   },
   {
    "id": "T2",
@@ -578,7 +578,7 @@
    "status": "ready",
    "who": "Dylan / CEA",
    "sys": "mm",
-   "note": "Best chamber: 92.9 % within 5 mm on the bench. Needs only the new aluminised-mylar window. Clean CERN M1 cards."
+   "note": "Best chamber: 92.9 % within 5 mm on the bench. Runs as is; a new aluminised-mylar window is a low-budget upgrade. Clean CERN M1 cards."
   },
   {
    "id": "mmB",
@@ -586,7 +586,7 @@
    "status": "fix",
    "who": "Stephan (CEA)",
    "sys": "mm",
-   "note": "91.3 % on the bench; drift needs fixing (easy) + new window. Its M1 cards were the noisy Italian ones."
+   "note": "91.3 % on the bench; drift window needs a repair (easy, needed for the test); a new window is a low-budget upgrade. Its M1 cards were the noisy Italian ones."
   },
   {
    "id": "mmCD",
@@ -682,7 +682,7 @@
    "status": "decide",
    "who": "Pierfrancesco (CN Li lab)",
    "sys": "target",
-   "note": "LNL rolls Li to 10–20 µm in an Ar glovebox and presses it onto Cu. 10–12 µm recommended (LiOH). Holder: flat Al end cap at 45° (proposed) or the Cu ogive."
+   "note": "LNL rolls Li to 10–20 µm in an Ar glovebox and presses it onto Cu. 10–12 µm recommended (LiOH). Holder: most likely the Cu hemisphere, already built (Dylan, 19 Nov); a flat Al end cap at 45° is the lighter alternative."
   },
   {
    "id": "stand",
@@ -703,11 +703,11 @@
  ],
  "budget": [
   {
-   "item": "Fix B's drift + 2 new windows",
-   "c": 1600,
-   "lo": 600,
-   "hi": 3000,
-   "basis": "driftfix €0.3k + windows €2.5k/4 × 2",
+   "item": "Repair B's drift window",
+   "c": 300,
+   "lo": 0,
+   "hi": 1000,
+   "basis": "items.py driftfix (guess)",
    "tier": "need"
   },
   {
@@ -733,6 +733,14 @@
    "hi": 4000,
    "basis": "guess",
    "tier": "need"
+  },
+  {
+   "item": "New aluminised-mylar drift windows, A and B",
+   "c": 1250,
+   "lo": 500,
+   "hi": 2500,
+   "basis": "items.py windows €2.5k for 4, × 2/4",
+   "tier": "low"
   },
   {
    "item": "Low-permeation gas lines",
@@ -818,7 +826,7 @@
   },
   {
    "who": "Pierfrancesco",
-   "q": "Which target and holder for the proposal (pressed Li on Cu; flat Al end cap at 45° or the Cu ogive)?"
+   "q": "Target for the proposal: pressed Li on Cu in the existing Cu hemisphere: confirm it fits the AN2000 line end?"
   },
   {
    "who": "Pierfrancesco",
@@ -850,7 +858,7 @@
   },
   {
    "who": "CEA (Stephan, DREAM)",
-   "q": "Fix B's drift + 2 windows by April 2027? Lend 4 FEUs + TCM for Jun–Oct 2027?"
+   "q": "Repair B's drift window by April 2027 (and 2 new windows, if cheap)? Lend 4 FEUs + TCM for Jun–Oct 2027?"
   },
   {
    "who": "CAEN",
@@ -867,7 +875,7 @@
  ],
  "risks": [
   {
-   "r": "Micromegas B or the windows not ready",
+   "r": "Micromegas B not repaired in time",
    "l": "med",
    "i": "high",
    "m": "A is ready now; C re-bulk as the spare; one-arm-plus-scintillator fallback still gives the 441 keV and background programme."

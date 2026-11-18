@@ -21,11 +21,11 @@ import two_arm_estimates as E  # noqa: E402
 FIG = HERE.parent / "proposal" / "latex" / "figures"
 FIG.mkdir(parents=True, exist_ok=True)
 
-# Al ogive + Cu liner rows (the first three of FOUR_ARM); slot colours = dataviz reference, fixed order.
+# Cu ogive rows (the last three of FOUR_ARM): the Cu hemisphere is already built, the likely target (Dylan, 19 Nov); slot colours = dataviz reference, fixed order.
 ROWS = [(E.FOUR_ARM[i], lab, col) for i, lab, col in [
-    (0, "SiPM wall + small plastics", "#2a78d6"),
-    (1, "+ liquid cells as at n_TOF", "#eb6834"),
-    (2, "+ liquid cells repaired", "#1baf7a"),
+    (3, "SiPM wall + small plastics", "#2a78d6"),
+    (4, "+ liquid cells as at n_TOF", "#eb6834"),
+    (5, "+ liquid cells repaired", "#1baf7a"),
 ]]
 
 
@@ -55,7 +55,7 @@ def main() -> None:
     ax.set_xlim(0.5, 10)
     ax.set_xlabel("days at E$_p$ = 1.10 MeV, 1 µA")
     ax.set_ylabel("expected 90 % CL limit on R  (×10⁻⁶)")
-    ax.set_title("Two opposite MX17 arms, Al ogive + Cu liner target (×2 scaling of 4-arm Geant4)", fontsize=9)
+    ax.set_title("Two opposite MX17 arms, Cu hemisphere target (×2 scaling of 4-arm Geant4)", fontsize=9)
     for s in ("top", "right"):
         ax.spines[s].set_visible(False)
     ax.grid(axis="y", which="both", color="#e1e0d9", lw=0.6)

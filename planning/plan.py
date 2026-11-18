@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 OUT.mkdir(exist_ok=True)
 
-UPDATED = "2026-11-18"
+UPDATED = "2026-11-19"
 DEADLINE = "2026-12-10T23:59:00+01:00"   # PAC proposal deadline, CET
 PAC = ("2027-01-25", "2027-01-29")
 
@@ -56,7 +56,7 @@ PHASES = [
     dict(ws="sim", name="Two-arm Geant4 config + run plan sim", start="2027-02-01", end="2027-04-30", est=True),
     dict(ws="sim", name="Online analysis + calibration chain", start="2027-04-01", end="2027-08-31", est=True),
     # MM
-    dict(ws="mm", name="Fix B's drift, new windows A+B (CEA)", start="2027-02-01", end="2027-04-30", est=True),
+    dict(ws="mm", name="Repair B's drift window (CEA); new windows optional", start="2027-02-01", end="2027-04-30", est=True),
     dict(ws="mm", name="DREAM loan: 4 FEUs + TCM, busy LEMO", start="2027-03-01", end="2027-05-31", est=True),
     dict(ws="mm", name="Cosmic bench: 2 MM + DREAM", start="2027-05-01", end="2027-06-15", est=True),
     # scint
@@ -130,7 +130,7 @@ TASKS = [
          t="Timing on cosmics: transit-corrected SiPM-wall/plastic resolution, arm-to-arm lag (decides TOF cut)"),
     # --- MM
     dict(id="M1", ws="mm", due="2027-01-15", who="Dylan", status="todo",
-         t="Ask Stephan / CEA: fix B's drift, new aluminised-mylar windows for A and B; dates"),
+         t="Ask Stephan / CEA: repair B's drift window (needed); new aluminised-mylar windows for A and B (low-budget upgrade); dates"),
     dict(id="M2", ws="mm", due="2027-01-15", who="Dylan", status="todo",
          t="Ask CEA for the DREAM loan for H2 2027: 4 FEUs + TCM + 32 cables + LV; solder the TCM busy LEMO"),
     dict(id="M3", ws="mm", due="2027-04-30", who="Dylan", status="todo",
@@ -150,7 +150,7 @@ TASKS = [
          t="Decide: bring 2 liquid cells? (×3.6 in reach at no cost if they work at LNL rates)"),
     # --- target
     dict(id="T1", ws="target", due="2026-12-01", who="Pierfrancesco", status="todo",
-         t="Target for the proposal: pressed Li on Cu (CN group), 10–12 µm; holder design (flat Al end cap at 45° or his Cu ogive)"),
+         t="Target for the proposal: pressed Li on Cu (CN group), 10–12 µm; holder: the Cu hemisphere (already built, most likely; the 'Cu ogive' of the simulation); flat Al end cap at 45° only if it pays"),
     dict(id="T2", ws="target", due="2027-06-30", who="Pierfrancesco", status="todo",
          t="Build the holder; make films; a week of LiOH-conversion test on the line"),
     # --- site
@@ -178,9 +178,9 @@ TASKS = [
 # Hardware for slot 1 (two arms). x/y place each part on the page's top-view schematic.
 HARDWARE = [
     dict(id="mmA", part="Micromegas A (det3)", status="ready", who="Dylan / CEA", sys="mm",
-         note="Best chamber: 92.9 % within 5 mm on the bench. Needs only the new aluminised-mylar window. Clean CERN M1 cards."),
+         note="Best chamber: 92.9 % within 5 mm on the bench. Runs as is; a new aluminised-mylar window is a low-budget upgrade. Clean CERN M1 cards."),
     dict(id="mmB", part="Micromegas B (det2)", status="fix", who="Stephan (CEA)", sys="mm",
-         note="91.3 % on the bench; drift needs fixing (easy) + new window. Its M1 cards were the noisy Italian ones."),
+         note="91.3 % on the bench; drift window needs a repair (easy, needed for the test); a new window is a low-budget upgrade. Its M1 cards were the noisy Italian ones."),
     dict(id="mmCD", part="Micromegas C, D (spares)", status="decide", who="CEA", sys="mm",
          note="Spark-limited (57.8 %, 43.1 %); re-bulk needed. Not required for slot 1. C re-bulked would be the spare."),
     dict(id="m1", part="M1 multiplex cards (8)", status="ready", who="CERN", sys="mm",
@@ -204,7 +204,7 @@ HARDWARE = [
     dict(id="slow", part="Slow control Tier 1", status="decide", who="Dylan", sys="site",
          note="Low-budget upgrade: T/p/RH, SHT85 cells on the gas line, logger (slow_control/SENSOR_OPTIONS.md §6)."),
     dict(id="tgt", part="Li target + holder", status="decide", who="Pierfrancesco (CN Li lab)", sys="target",
-         note="LNL rolls Li to 10–20 µm in an Ar glovebox and presses it onto Cu. 10–12 µm recommended (LiOH). Holder: flat Al end cap at 45° (proposed) or the Cu ogive."),
+         note="LNL rolls Li to 10–20 µm in an Ar glovebox and presses it onto Cu. 10–12 µm recommended (LiOH). Holder: most likely the Cu hemisphere, already built (Dylan, 19 Nov); a flat Al end cap at 45° is the lighter alternative."),
     dict(id="stand", part="Two-arm stand + beam-line end", status="decide", who="LNL mechanics", sys="target",
          note="Two opposite arms, faces at ±204 mm from the beam axis; the line must end in ~1.5 × 1.5 m of open floor."),
     dict(id="pc", part="DAQ PC, network, remote power", status="borrow", who="Dylan", sys="site",
@@ -214,7 +214,8 @@ HARDWARE = [
 # ----------------------------------------------------------------------------------------------
 # Slot-1 cash budget, for our planning (not needed in the proposal). Tiers (Dylan, 18 Nov):
 #   need = critical for the test; low = low-budget upgrade; high = high-budget upgrade, toward the final
-#   measurement; loan = only if that loan falls through.
+#   measurement; loan = only if that loan falls through. 19 Nov (Dylan): new drift windows are a low-budget
+#   upgrade, the repair of B's drift window stays critical.
 # (central EUR, low, high, basis). Scaled from x17_facility_search/budget/items.py (2026-11-17).
 TIERS = [
     dict(id="need", name="Critical for the test"),
@@ -223,10 +224,11 @@ TIERS = [
     dict(id="loan", name="Only if a loan falls through"),
 ]
 BUDGET = [
-    dict(item="Fix B's drift + 2 new windows", c=1600, lo=600, hi=3000, basis="driftfix €0.3k + windows €2.5k/4 × 2", tier="need"),
+    dict(item="Repair B's drift window", c=300, lo=0, hi=1000, basis="items.py driftfix (guess)", tier="need"),
     dict(item="Gas: premix bottles, regulators, panel", c=3000, lo=2000, hi=4500, basis="items.py gas", tier="need"),
     dict(item="Splitters, LEMO cables, adapters (2 arms)", c=3800, lo=2500, hi=5000, basis="items.py splitters €7.6k for 4 arms, halved", tier="need"),
     dict(item="Shipping CEA/CERN → LNL and back", c=2000, lo=1000, hi=4000, basis="guess", tier="need"),
+    dict(item="New aluminised-mylar drift windows, A and B", c=1250, lo=500, hi=2500, basis="items.py windows €2.5k for 4, × 2/4", tier="low"),
     dict(item="Low-permeation gas lines", c=400, lo=250, hi=700, basis="items.py gaslines", tier="low"),
     dict(item="Gas and environment sensors (slow control Tier 1)", c=2500, lo=2000, hi=3200, basis="items.py slowctl", tier="low"),
     dict(item="Switched PDU (remote power switch)", c=290, lo=290, hi=400, basis="items.py pdu", tier="low"),
@@ -243,7 +245,7 @@ BUDGET = [
 QUESTIONS = [
     dict(who="Pierfrancesco", q="Spokesperson(s) and GLIMOS for the abstract page? (GLIMOS is normally local.)"),
     dict(who="Pierfrancesco", q="AN2000 or CN? The CN starts at 0.8 MV, so no 441 keV calibration there; AN2000 runs 0.2–2.0 MV self-service."),
-    dict(who="Pierfrancesco", q="Which target and holder for the proposal (pressed Li on Cu; flat Al end cap at 45° or the Cu ogive)?"),
+    dict(who="Pierfrancesco", q="Target for the proposal: pressed Li on Cu in the existing Cu hemisphere: confirm it fits the AN2000 line end?"),
     dict(who="Pierfrancesco", q="Arm orientation: a horizontal pair (cosmics suppressed by geometry, best reach) or a vertical pair (the hard test of the veto)? Can the stand rotate between runs?"),
     dict(who="Pierfrancesco", q="'Commission II': which INFN commission, and when must the request be in? Results before that date?"),
     dict(who="Pierfrancesco", q="Is the H2-2027 window flexible to June–July, so that results exist before the funding requests?"),
@@ -251,14 +253,14 @@ QUESTIONS = [
     dict(who="LNL Accelerator Division", q="A line on AN2000 (or CN) ending in ~1.5 × 1.5 m of free floor; beam height; 1 µA at 0.441 and 1.10 MeV on that line?"),
     dict(who="LNL Accelerator Division", q="Is a PAC 'day' 24 h? Night and weekend running with self-service AN2000?"),
     dict(who="LNL Accelerator Division", q="Flammable premix (Ar/iC₄H₁₀ 95/5) in the hall: rules, storage, exhaust."),
-    dict(who="CEA (Stephan, DREAM)", q="Fix B's drift + 2 windows by April 2027? Lend 4 FEUs + TCM for Jun–Oct 2027?"),
+    dict(who="CEA (Stephan, DREAM)", q="Repair B's drift window by April 2027 (and 2 new windows, if cheap)? Lend 4 FEUs + TCM for Jun–Oct 2027?"),
     dict(who="CAEN", q="A test loan of a V1742 or 2 × V1730 + 2 N1081B for the run (Pierfrancesco's suggestion)?"),
     dict(who="LNL ⁸Be group (Marchi)", q="Status of their 2023–24 AN2000 data; is a joint or complementary run welcome; is the AN2000 room free?"),
     dict(who="Plastics lender", q="Can we borrow the 4 small plastics' PMTs again (or which PMTs fit them)?"),
 ]
 
 RISKS = [
-    dict(r="Micromegas B or the windows not ready", l="med", i="high",
+    dict(r="Micromegas B not repaired in time", l="med", i="high",
          m="A is ready now; C re-bulk as the spare; one-arm-plus-scintillator fallback still gives the 441 keV and background programme."),
     dict(r="DREAM not available in H2 2027 (CEA's own use)", l="med", i="high",
          m="Ask now (M2); 4 FEUs is half the system; fix dates with CEA before the PAC talk."),

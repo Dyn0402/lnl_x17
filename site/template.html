@@ -191,23 +191,13 @@ details summary { cursor: pointer; color: var(--ink-2); }
   <section class="pane" id="p-overview">
     <div class="card intro">
       <div>
-        <div class="muted small">Start here</div>
-        <p class="lead">We are proposing to the <b>LNL PAC</b> an <b>8-day X17 feasibility study</b> on the <b>AN2000</b> accelerator in the
-          second half of 2027. <b>Two opposite arms</b> of the MX17 apparatus, which ran at CERN n_TOF in 2026 (a Micromegas TPC, a SiPM
-          scintillator wall and plastic scintillators per arm), sit around a thin Li target and record ⁷Li(p,e⁺e⁻)⁸Be pairs.</p>
-        <ul>
-          <li><b>Why tracking.</b> It measures the pair opening angle from hit positions and rejects cosmic rays by their straight tracks:
-            the two points at issue in the ATOMKI result (MEG II, 2026).</li>
-          <li><b>What 8 days deliver.</b> Rates and backgrounds on beam, a calibration on the 441 keV resonance (no anomaly there), and a
-            first look at 18.15 MeV near the ATOMKI level. The results set the design of the full four-arm experiment (slot 2).</li>
-          <li><b>This page</b> organises the proposal and the run: the timeline, set-up, beam plan and reach, tasks, budget, risks and open
-            questions are in the tabs above.</li>
-        </ul>
+        <p class="lead">An <b>8-day X17 feasibility study</b> with <b>two MX17 arms</b> on AN2000 at LNL, H2 2027.
+          Proposal due <b>10 Dec 2026</b>.</p>
+        <p class="small muted" style="margin:0">Background, the plan in a paragraph and the LNL call: <a href="#ov-details">at the bottom</a>.</p>
       </div>
       <div class="links">
-        <a class="bigbtn primary" data-link="indico" href="#">LNL PAC call on Indico ↗<span>Event 50487: call, templates, submission</span></a>
-        <a class="bigbtn" data-link="call_pdf" href="#">Call text, Jan 2027 PAC ↗<span>PAC meets 25–29 Jan 2027</span></a>
-        <a class="bigbtn" data-link="beams" href="#">CN and AN2000 beams ↗<span>LNL machine sheet</span></a>
+        <a class="bigbtn primary" data-link="overleaf" href="#">Proposal on Overleaf ↗<span>the draft we edit; ask Dylan for access</span></a>
+        <a class="bigbtn" href="lnl/lnl_x17_pac_proposal.pdf">Current draft (PDF)<span>abstract + body, as it would be uploaded</span></a>
       </div>
     </div>
     <div class="grid2" style="margin-top:14px">
@@ -233,15 +223,24 @@ details summary { cursor: pointer; color: var(--ink-2); }
         <ul class="clean" id="decisions"></ul>
       </div>
     </div>
-    <div class="card closing">
+    <div class="card closing" id="ov-details">
       <div>
-        <div class="muted small">The proposal document</div>
-        <p style="margin:4px 0 0">Draft v0 in the official LNL template: a one-page abstract and a body of at most 4 pages (now about 3¼).
-          Red brackets mark open items. Details and the page plan are in the <a href="#proposal" data-go="proposal">Proposal</a> tab.</p>
+        <div class="muted small">Details</div>
+        <p style="margin:4px 0 6px">Two opposite arms of the MX17 apparatus, which ran at CERN n_TOF in 2026 (a Micromegas TPC, a SiPM
+          scintillator wall and plastic scintillators per arm), sit around a thin Li target and record ⁷Li(p,e⁺e⁻)⁸Be pairs.</p>
+        <ul class="small" style="margin:0;padding-left:18px">
+          <li><b>Why tracking.</b> The opening angle comes from hit positions and cosmic rays are rejected by their straight tracks: the
+            two points at issue in the ATOMKI result (MEG II, 2026).</li>
+          <li><b>What 8 days deliver.</b> Rates and backgrounds on beam, a calibration on the 441 keV resonance (no anomaly there), and a
+            first look at 18.15 MeV near the ATOMKI level. The results set the design of the four-arm experiment (slot 2).</li>
+          <li><b>The document.</b> Official LNL template: a one-page abstract and a body of at most 4 pages. Red brackets mark open
+            items; the page plan is in the <a href="#proposal" data-go="proposal">Proposal</a> tab.</li>
+          <li><b>This page.</b> Timeline, set-up, beam plan and reach, tasks, budget, risks and questions are in the tabs above.
+            Machine sheet: <a data-link="beams" href="#">CN and AN2000 beams ↗</a>.</li>
+        </ul>
       </div>
       <div class="links">
-        <a class="bigbtn primary" data-link="overleaf" href="#">Proposal on Overleaf ↗<span>abstract.tex + body.tex; ask Dylan for access</span></a>
-        <a class="bigbtn" href="lnl/lnl_x17_pac_proposal.pdf">Current draft (PDF)<span>abstract + body, as it would be uploaded</span></a>
+        <a class="bigbtn" data-link="indico" href="#">LNL PAC call on Indico ↗<span>Event 50487: call, templates, submission</span></a>
       </div>
     </div>
   </section>
@@ -318,9 +317,9 @@ details summary { cursor: pointer; color: var(--ink-2); }
     <div class="grid2">
       <div class="card">
         <h3 style="margin-top:0">The draft</h3>
-        <p class="small">In the official LNL templates from Indico (revtex4, 12 pt): <span class="kbd">abstract.tex</span> (one page) and
-          <span class="kbd">body.tex</span> (at most 4 pages, the template's limit; the LNL web page says 5). Compile each separately and upload
-          the PDFs. On Overleaf, switch Menu → Main document to see the other file.</p>
+        <p class="small">In the official LNL templates from Indico (revtex4, 12 pt): <span class="kbd">abstract_content.tex</span> (one page) and
+          <span class="kbd">body_content.tex</span> (at most 4 pages, the template's limit; the LNL web page says 5). Overleaf shows both
+          through <span class="kbd">main.tex</span>; <span class="kbd">abstract.tex</span> and <span class="kbd">body.tex</span> build the two PDFs for Indico.</p>
         <p><a class="chip btn" data-link="overleaf" href="#">Overleaf project ↗</a>
            <a class="chip btn" href="lnl/lnl_x17_pac_proposal.pdf">PDF draft</a>
            <a class="chip btn" href="lnl/lnl_x17_pac_proposal.zip">LaTeX zip</a>
@@ -497,13 +496,13 @@ function overview() {
     const cls = TODAY > parse(b) ? "done" : TODAY >= parse(a) ? "now" : "";
     st.append(h("div", { class: "step " + cls }, n, h("span", { class: "d" }, `${fmt(a, { month: "short", year: "2-digit" })}`)));
   }
-  const rm = D.reach.find(r => r.target.startsWith("Al") && r.energy_stack.startsWith("SiPM"));
-  const rl = D.reach.find(r => r.target.startsWith("Al") && r.energy_stack.includes("as at"));
+  const rm = D.reach.find(r => r.target.startsWith("Cu") && r.energy_stack.startsWith("SiPM"));
+  const rl = D.reach.find(r => r.target.startsWith("Cu") && r.energy_stack.includes("as at"));
   const fx = $("#facts"); fx.innerHTML = "";
   [["Machine", "AN2000, 0.2–2.0 MV (CN as fallback, no 441 keV)"],
    ["Beam", "protons, 0.441 and 1.10 MeV, ≤ 1 µA, continuous"],
    ["Beam days", "8: 1 set-up · 2 at 441 keV · 5 at 1.10 MeV"],
-   ["Set-up", "2 of the 4 MX17 arms (A ready, B after a drift fix), ~24 scintillator channels"],
+   ["Set-up", "2 of the 4 MX17 arms (A ready, B after a drift-window repair), ~24 scintillator channels"],
    ["When", "second half of 2027 (our plan, not an allocation)"],
    ["Expected reach", (rm ? rm.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL in 5 days" + (rl ? `; ${rl.r90_over_atomki} × with liquid cells` : "") + " (scaling estimate)"],
   ].forEach(([k, v]) => fx.append(h("dt", {}, k), h("dd", {}, v)));
@@ -516,7 +515,7 @@ function overview() {
   const DEC = [
     ["Machine", "AN2000 (441 keV calibration possible) or CN (≥ 0.8 MV, no 441)."],
     ["Spokesperson & GLIMOS", "Needed on the abstract page."],
-    ["Target & holder", "Pressed Li on Cu, 10–12 µm; flat Al end cap at 45° or the Cu ogive."],
+    ["Target & holder", "Pressed Li on Cu, 10–12 µm, in the Cu hemisphere (already built: most likely). Confirm with Pierfrancesco."],
     ["Liquid cells", "Two 45 × 45 cm cells behind the plastics: ×3.6 in reach, if they work at LNL rates."],
     ["Arm orientation", "Horizontal pair (geometry suppresses cosmics) or vertical (the hard test of the veto)."],
     ["Author list", "Massimi, Mengoni, Gervino, Gustavino, Cosentino + who else."],

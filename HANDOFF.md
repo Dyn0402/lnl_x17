@@ -1,5 +1,18 @@
 # Handoff
 
+## Budget windows, overview, Cu hemisphere — updated 2026-11-19 (dylan-MS-7C84)
+
+**Done**
+- Budget (Dylan): new aluminised-mylar drift windows for A and B moved to the low-budget tier (€1.25k); the repair of B's drift
+  window stays critical (€0.3k). Critical €9.1k, low +€4.4k, high +€8k. `plan.py`, `slot1_feasibility/PLAN.md` §7, proposal §2.
+- Overview: one-line lead with Overleaf + PDF at the top; details and the single Indico link in a box at the bottom; the call-PDF
+  link is gone, the machine sheet is a small link in the box.
+- Target (Dylan): the Cu hemisphere is already built, so it is the baseline: the "Cu ogive" rows of §19.3. Figure, overview reach
+  (1.81 × R(ATOMKI), 0.90 × with liquid cells) and proposal sensitivity (0.9–1.8 ×) switched to it.
+- Overleaf updated. Its `figures/limit_vs_days.pdf` is now a *linked file* from
+  `https://dylan-neff.web.cern.ch/facilities/lnl/limit_vs_days.pdf` (the upload dialog wouldn't open): after `figures.py`, copy the
+  PDF there, deploy, and press Refresh on the file in Overleaf.
+
 ## Overleaf shows the full draft — updated 2026-11-19 (dylan-MS-7C84)
 
 **Resume:** Overleaf's main document is now `main.tex` (abstract + body, 5 pages, compiles there). Next steps unchanged (P1, P3, R1).
