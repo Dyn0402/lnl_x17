@@ -9,6 +9,9 @@
   totals; a row opens the full entry with its tasks and a schematic of the set-up (from above) with the item highlighted.
   The Set-up tab's old table is gone (it points to the new tab).
 
+- Linked to the new central inventory (`x17_facility_search/inventory/`): items carry `inv=[ids]`, the detail panel shows
+  owner, location and condition. DAQ PC now borrowed from CEA (Stephan); the network switch is Dylan's, a separate item.
+
 **Gotchas**
 - Lenders, states and dates are my first fill from the plan and the n_TOF notes; most are "to ask". Correct them in `plan.py`.
 

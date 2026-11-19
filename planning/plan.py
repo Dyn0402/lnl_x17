@@ -183,56 +183,57 @@ TASKS = [
 #   need    date it must be in hand (the cosmic bench starts May 2027, installation Aug 2027)
 #   b       the BUDGET line that prices it (cash, tier and the cost if a loan falls through come from there)
 #   place   where it sits on the Hardware tab's diagram (keys of PLACES in site/template.html)
+#   inv     ids in the central inventory (x17_facility_search/inventory/inventory.py): owner, location, condition
 #   tasks   task ids; ids mmA, mmB, mmCD, walls, plast, ls are also the layers of the Set-up view.
 HARDWARE = [
     # --- Micromegas & DREAM
     dict(id="mmA", part="Micromegas A (det3)", qty="1", grp="Micromegas & DREAM", status="ready", org="MX17 collaboration", src="MX17 collaboration",
-         who="Dylan", state="in hand", need="2027-05-01", place=["mmA"], tasks=["M4"],
+         who="Dylan", state="in hand", need="2027-05-01", inv=["mmA"], place=["mmA"], tasks=["M4"],
          note="Best chamber: 92.9 % within 5 mm on the bench. Runs as is; a new aluminised-mylar window is a low-budget upgrade. Clean CERN M1 cards.",
          detail="40 × 36 cm active, 30 mm drift, Ar/iC₄H₁₀ 95/5, bulked at CEA in June 2026. Ran at n_TOF in 2026."),
     dict(id="mmB", part="Micromegas B (det2)", qty="1", grp="Micromegas & DREAM", status="fix", org="CEA Saclay", src="CEA Saclay",
-         who="Stephan (CEA)", state="to ask", need="2027-04-30", b="Repair B's drift window", place=["mmB"], tasks=["M1", "M4"],
+         who="Stephan (CEA)", state="to ask", need="2027-04-30", b="Repair B's drift window", inv=["mmB"], place=["mmB"], tasks=["M1", "M4"],
          note="91.3 % on the bench; drift window needs a repair (likely just an electrical connection; needed for the test); a new window is a low-budget upgrade. Its M1 cards were the noisy Italian ones.",
          detail="Amplification is good. The repair is critical for the test; the risk that it is not done in time is low."),
     dict(id="win", part="New aluminised-mylar drift windows", qty="2 (A, B)", grp="Micromegas & DREAM", status="buy", org="CEA Saclay", src="CEA Saclay",
-         who="Stephan (CEA)", state="to ask", need="2027-04-30", b="New aluminised-mylar drift windows, A and B", place=["mmA", "mmB"], tasks=["M1"],
+         who="Stephan (CEA)", state="to ask", need="2027-04-30", b="New aluminised-mylar drift windows, A and B", inv=["mmA", "mmB"], place=["mmA", "mmB"], tasks=["M1"],
          note="Low-budget upgrade: aluminised mylar only (the aluminium is the cathode), dropping the 9 µm Cu that triples the material per crossing.",
          detail="x17_facility_search budget item 'windows': ~€2.5k for four (frames, glue, labour), so ~€1.25k for two. Not needed for the test."),
     dict(id="mmCD", part="Micromegas C, D (spares)", qty="2", grp="Micromegas & DREAM", status="decide", org="CEA Saclay", src="CEA Saclay",
-         who="CEA", state="to decide", need="", place=[], tasks=[],
+         who="CEA", state="to decide", need="", inv=["mmC", "mmD"], place=[], tasks=[],
          note="Spark-limited (57.8 %, 43.1 %); re-bulk needed. Not required for slot 1. C re-bulked would be the spare.",
          detail="Needed for slot 2 (four arms)."),
     dict(id="m1", part="M1 multiplex cards", qty="8 (4 per chamber)", grp="Micromegas & DREAM", status="ready", org="MX17 collaboration", src="MX17 collaboration (CERN + Italian cards)",
-         who="Dylan", state="in hand", need="2027-05-01", place=["m1"], tasks=["M4"],
+         who="Dylan", state="in hand", need="2027-05-01", inv=["m1cern", "m1ital"], place=["m1"], tasks=["M4"],
          note="Clean CERN cards on A; B keeps its noisier Italian cards for slot 1.",
          detail="The noise on B's cards was seen at n_TOF; the cosmic bench (M4) measures it with the LNL set-up."),
     dict(id="m1new", part="CERN-design M1 cards for B", qty="4", grp="Micromegas & DREAM", status="buy", org="purchase", src="CERN design, produced to order",
-         who="Dylan", state="to decide", need="2027-04-30", b="4 CERN M1 cards for B (B runs its Italian M1s for the test)", place=["m1"], tasks=["M3"],
+         who="Dylan", state="to decide", need="2027-04-30", b="4 CERN M1 cards for B (B runs its Italian M1s for the test)", inv=["m1ital"], place=["m1"], tasks=["M3"],
          note="High-budget upgrade toward slot 2 (~€2k each). Slot 1 runs B with its existing Italian cards.",
          detail="x17_facility_search budget item 'm1': 12 cards €24k."),
     dict(id="dream", part="DREAM: FEUs + TCM + cables", qty="4 FEUs, 1 TCM, 32 cables", grp="Micromegas & DREAM", status="borrow", org="CEA Saclay", src="CEA Saclay",
-         who="Stephan (CEA)", state="to ask", need="2027-05-01", place=["feu", "tcm"], tasks=["M2"],
+         who="Stephan (CEA)", state="to ask", need="2027-05-01", inv=["dream", "dreamcab"], place=["feu", "tcm"], tasks=["M2"],
          note="Half the n_TOF system. Solder a LEMO on the TCM busy output before the run (daq_trigger/PLAN.md §4.2).",
          detail="A loan with a liability (the full 8-FEU system was valued at €72k in the budget). At LNL rates DREAM is > 95 % live."),
     dict(id="busy", part="LEMO on the TCM busy output", qty="1", grp="Micromegas & DREAM", status="make", org="our own work", src="our own work",
-         who="Dylan", state="to make", need="2027-05-31", place=["tcm"], tasks=["M2", "S4"],
+         who="Dylan", state="to make", need="2027-05-31", inv=["dream"], place=["tcm"], tasks=["M2", "S4"],
          note="The TCM has a busy output but its LEMO is not fitted. It vetoes the trigger so both systems keep one event list.",
          detail="Check level, polarity and assertion delay on the bench (test T2, daq_trigger/PLAN.md §4.2)."),
     # --- Scintillators
     dict(id="walls", part="SiPM walls + summing boards", qty="2", grp="Scintillators", status="ready", org="INFN / LNL", src="INFN (n_TOF set-up)",
-         who="Pierfrancesco", state="agreed", need="2027-05-01", place=["walls"], tasks=["R4"],
+         who="Pierfrancesco", state="agreed", need="2027-05-01", inv=["walls"], place=["walls"], tasks=["R4"],
          note="16 of 20 bars read, ganged as at n_TOF on the summing boards: 8 channels per wall. Bias ~54 V, ~0.2 mA per wall.",
          detail="EJ-212 bars, 3 × 26 × 500 mm. Pierfrancesco confirmed they can be used (18 Nov 2026)."),
     dict(id="plast", part="Small plastic scintillators 20 × 30 × 2 cm", qty="4 (2 per arm)", grp="Scintillators", status="ready", org="INFN / LNL", src="INFN",
-         who="Pierfrancesco", state="agreed", need="2027-05-01", place=["plast"], tasks=["S1"],
+         who="Pierfrancesco", state="agreed", need="2027-05-01", inv=["plast_small"], place=["plast"], tasks=["S1"],
          note="The scintillators are available; their PMTs went back to the lender (next line).",
          detail="Behind the SiPM wall; trigger and energy."),
     dict(id="pmt", part="PMTs + bases for the plastics", qty="4 (+2 for liquid cells)", grp="Scintillators", status="find", org="INFN / LNL", src="lender to find (INFN / LNL pool)",
-         who="Pierfrancesco", state="to find", need="2027-05-01", b="If the PMTs must be bought: 4–6 fast 2″ PMTs + bases", place=["plast"], tasks=["S1"],
+         who="Pierfrancesco", state="to find", need="2027-05-01", b="If the PMTs must be bought: 4–6 fast 2″ PMTs + bases", inv=["pmt_small"], place=["plast"], tasks=["S1"],
          note="The n_TOF PMTs went back to their lender. Borrow again or find others that fit; buying is the expensive fallback.",
          detail="Fast 2″ tubes. Ask whether the original lender can lend them again (question for Pierfrancesco)."),
     dict(id="ls", part="Liquid cells 45 × 45 cm (optional)", qty="2", grp="Scintillators", status="decide", org="MX17 collaboration", src="MX17 collaboration (n_TOF set-up)",
-         who="Dylan / Pierfrancesco", state="to decide", need="2027-05-01", place=["ls"], tasks=["S5"],
+         who="Dylan / Pierfrancesco", state="to decide", need="2027-05-01", inv=["ls"], place=["ls"], tasks=["S5"],
          note="67–76 % pile-up at n_TOF (γ-flash), so left out of the budget. LNL rates are far lower. With them the reach is ×3.6 better.",
          detail="Need 2 more PMTs and 2 digitizer channels if taken."),
     # --- Trigger & DAQ
@@ -244,11 +245,11 @@ HARDWARE = [
          who="Pierfrancesco", state="to ask", need="2027-05-01", b="If no VME crate: VME8004B + A4818", place=["vme"], tasks=["S2"],
          note="Holds the digitizers; the A4818 links them to the DAQ PC over optical fibre.", detail="Price if bought: CAEN offer."),
     dict(id="n1081", part="N1081B programmable logic units", qty="2", grp="Trigger & DAQ", status="borrow", org="INFN / LNL", src="LNL pool, else a CAEN loan",
-         who="Pierfrancesco / CAEN", state="to ask", need="2027-05-01", b="If no N1081B loan: 2 × N1081B", place=["nim"], tasks=["S3", "S4"],
+         who="Pierfrancesco / CAEN", state="to ask", need="2027-05-01", b="If no N1081B loan: 2 × N1081B", inv=["n1081b_cern"], place=["nim"], tasks=["S3", "S4"],
          note="The n_TOF trigger for two arms: legs per arm in 20 ns coincidence, PAIR never prescaled, SINGLE ÷P, 1 Hz clock, trigger word, scalers.",
          detail="Pierfrancesco suggested a CAEN test loan. Our n_TOF tooling (trigger_mode.py, poll_modules) runs on N1081Bs, the reason to stay with them."),
     dict(id="timer", part="Dual timer", qty="1 (N93B)", grp="Trigger & DAQ", status="borrow", org="INFN / LNL", src="LNL pool",
-         who="Pierfrancesco", state="to ask", need="2027-05-01", b="If no dual timer: N93B", place=["nim"], tasks=["S3"],
+         who="Pierfrancesco", state="to ask", need="2027-05-01", b="If no dual timer: N93B", inv=["n93b_cern"], place=["nim"], tasks=["S3"],
          note="Hold gate after each trigger, ORed with DREAM's busy.", detail="Price if bought: CAEN offer."),
     dict(id="nimbin", part="NIM bin", qty="1–2", grp="Trigger & DAQ", status="borrow", org="INFN / LNL", src="LNL pool",
          who="Pierfrancesco", state="to ask", need="2027-05-01", place=["nim"], tasks=["S3"],
@@ -257,9 +258,13 @@ HARDWARE = [
          who="Dylan", state="to order", need="2027-05-01", b="Splitters, LEMO cables, adapters (2 arms)", place=["cables"], tasks=["S3"],
          note="Every scintillator signal is split actively: one copy to the digitizer, one to the trigger. A passive split halved the plastic amplitude at n_TOF.",
          detail="x17_facility_search budget item 'splitters' (€7.6k for 4 arms), halved."),
-    dict(id="pc", part="DAQ PC, network switch", qty="1", grp="Trigger & DAQ", status="ready", org="MX17 collaboration", src="MX17 collaboration (n_TOF)",
-         who="Dylan", state="in hand", need="2027-05-01", place=["pc"], tasks=["I1"],
-         note="Run control from n_TOF: DREAM + digitizers on one event list.", detail="Network at LNL: ask (task L3)."),
+    dict(id="pc", part="DAQ PC (DREAM + run control)", qty="1", grp="Trigger & DAQ", status="borrow", org="CEA Saclay", src="CEA Saclay",
+         who="Stephan (CEA)", state="to ask", need="2027-05-01", inv=["daqpc"], place=["pc"], tasks=["M2", "I1"],
+         note="Not Dylan's: borrow it from CEA with the DREAM loan (Dylan, 19 Nov 2026). Run control from n_TOF: DREAM + digitizers on one event list.",
+         detail="Network at LNL: ask (task L3)."),
+    dict(id="switch", part="Network switch", qty="1", grp="Trigger & DAQ", status="ready", org="MX17 collaboration", src="Dylan's own",
+         who="Dylan", state="in hand", need="2027-05-01", inv=["switch"], place=["pc"], tasks=[],
+         note="Dylan's (19 Nov 2026).", detail=""),
     dict(id="pdu", part="Switched PDU (remote power cycles)", qty="1", grp="Trigger & DAQ", status="buy", org="purchase", src="to order",
          who="Dylan", state="to order", need="2027-05-31", b="Switched PDU (remote power switch)", place=["pdu"], tasks=[],
          note="Low-budget upgrade. N1081B daemons wedge after dirty disconnects; at n_TOF there was no remote reboot.",
@@ -287,7 +292,7 @@ HARDWARE = [
          note="LNL rolls Li to 10–20 µm in an Ar glovebox and presses it onto Cu. 10–12 µm recommended (LiOH). Boron-free.",
          detail="A week of LiOH-conversion test on the line before the run (T2)."),
     dict(id="holder", part="Cu hemisphere target holder", qty="1", grp="Target & beam line", status="ready", org="INFN / LNL", src="LNL (already built)",
-         who="Pierfrancesco", state="in hand", need="2027-08-31", place=["target"], tasks=["T1"],
+         who="Pierfrancesco", state="in hand", need="2027-08-31", inv=["cu_hemi"], place=["target"], tasks=["T1"],
          note="Already built, so the baseline (Dylan, 19 Nov). The 'Cu ogive' of the simulation. A flat Al end cap at 45° would be lighter (~30 % less beam time).",
          detail="Confirm it fits the AN2000 line end (question for Pierfrancesco)."),
     dict(id="line", part="AN2000 beam line end + floor space", qty="~1.5 × 1.5 m", grp="Target & beam line", status="borrow", org="INFN / LNL", src="LNL Accelerator Division",
@@ -428,15 +433,34 @@ def beam_rows():
         return list(csv.DictReader(f))
 
 
+def inventory() -> dict[str, dict]:
+    """The central MX17 inventory (x17_facility_search/inventory/inventory.py), by id; {} if that repo is missing."""
+    d = Path.home() / "PycharmProjects" / "x17_facility_search" / "inventory"
+    if not (d / "inventory.py").exists():
+        print("warning: x17_facility_search/inventory not found; the page shows no owner/location")
+        return {}
+    import importlib.util
+    spec = importlib.util.spec_from_file_location("mx17_inventory", d / "inventory.py")
+    m = importlib.util.module_from_spec(spec); spec.loader.exec_module(m)
+    return {k: dict(v, avail_l=m.AVAIL[v["avail"]]) for k, v in m.by_id().items()}
+
+
 def hardware_rows() -> list[dict]:
     """HARDWARE with its BUDGET line merged in: cash (central EUR), lo/hi, tier; for tier 'loan' the cash is 0 and
     'fallback' is the cost if the loan falls through. Every BUDGET line must belong to exactly one item."""
     byname = {b["item"]: b for b in BUDGET}
     used = [x["b"] for x in HARDWARE if x.get("b")]
     assert sorted(used) == sorted(byname), (set(byname) ^ set(used))
+    inv = inventory()
     rows = []
     for x in HARDWARE:
         r = dict(x, cash=0, fallback=0, tier="")
+        if inv:
+            missing = [i for i in x.get("inv", []) if i not in inv]
+            assert not missing, (x["id"], missing)
+            r["inv"] = [{k: inv[i][k] for k in ("id", "name", "qty", "owner", "where", "cond", "avail_l", "note")} for i in x.get("inv", [])]
+        else:
+            r["inv"] = []
         if x.get("b"):
             bl = byname[x["b"]]
             r.update(tier=bl["tier"], lo=bl["lo"], hi=bl["hi"], basis=bl["basis"])

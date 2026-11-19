@@ -583,6 +583,18 @@
    "who": "Dylan",
    "state": "in hand",
    "need": "2027-05-01",
+   "inv": [
+    {
+     "id": "mmA",
+     "name": "Micromegas A (det3)",
+     "qty": "1",
+     "owner": "MX17 collaboration",
+     "where": "(ask)",
+     "cond": "good",
+     "avail_l": "ours to take",
+     "note": "Best chamber: 92.9 % within 5 mm on the cosmic bench. Bulked by Stephan (CEA), 15 Jun 2026."
+    }
+   ],
    "place": [
     "mmA"
    ],
@@ -607,6 +619,18 @@
    "state": "to ask",
    "need": "2027-04-30",
    "b": "Repair B's drift window",
+   "inv": [
+    {
+     "id": "mmB",
+     "name": "Micromegas B (det2)",
+     "qty": "1",
+     "owner": "MX17 collaboration",
+     "where": "(ask)",
+     "cond": "fix",
+     "avail_l": "ours to take",
+     "note": "91.3 % on the bench. Drift needs a repair, likely just an electrical connection (Dylan, 19 Nov 2026)."
+    }
+   ],
    "place": [
     "mmB"
    ],
@@ -635,6 +659,28 @@
    "state": "to ask",
    "need": "2027-04-30",
    "b": "New aluminised-mylar drift windows, A and B",
+   "inv": [
+    {
+     "id": "mmA",
+     "name": "Micromegas A (det3)",
+     "qty": "1",
+     "owner": "MX17 collaboration",
+     "where": "(ask)",
+     "cond": "good",
+     "avail_l": "ours to take",
+     "note": "Best chamber: 92.9 % within 5 mm on the cosmic bench. Bulked by Stephan (CEA), 15 Jun 2026."
+    },
+    {
+     "id": "mmB",
+     "name": "Micromegas B (det2)",
+     "qty": "1",
+     "owner": "MX17 collaboration",
+     "where": "(ask)",
+     "cond": "fix",
+     "avail_l": "ours to take",
+     "note": "91.3 % on the bench. Drift needs a repair, likely just an electrical connection (Dylan, 19 Nov 2026)."
+    }
+   ],
    "place": [
     "mmA",
     "mmB"
@@ -662,6 +708,28 @@
    "who": "CEA",
    "state": "to decide",
    "need": "",
+   "inv": [
+    {
+     "id": "mmC",
+     "name": "Micromegas C (det6)",
+     "qty": "1",
+     "owner": "MX17 collaboration",
+     "where": "(ask)",
+     "cond": "rebulk",
+     "avail_l": "ours to take",
+     "note": "57.8 % within 5 mm, spark-limited; needs re-bulking at CEA."
+    },
+    {
+     "id": "mmD",
+     "name": "Micromegas D (det7)",
+     "qty": "1",
+     "owner": "MX17 collaboration",
+     "where": "(ask)",
+     "cond": "rebulk",
+     "avail_l": "ours to take",
+     "note": "43.1 % within 5 mm; ~130 of 512 X channels dead. Needs re-bulking."
+    }
+   ],
    "place": [],
    "tasks": [],
    "note": "Spark-limited (57.8 %, 43.1 %); re-bulk needed. Not required for slot 1. C re-bulked would be the spare.",
@@ -681,6 +749,28 @@
    "who": "Dylan",
    "state": "in hand",
    "need": "2027-05-01",
+   "inv": [
+    {
+     "id": "m1cern",
+     "name": "M1 multiplex cards, CERN design",
+     "qty": "4",
+     "owner": "MX17 collaboration (ask)",
+     "where": "on Micromegas A",
+     "cond": "good",
+     "avail_l": "ours to take",
+     "note": "The clean cards; ran on A at n_TOF."
+    },
+    {
+     "id": "m1ital",
+     "name": "M1 multiplex cards, Italian",
+     "qty": "12",
+     "owner": "MX17 collaboration (ask)",
+     "where": "on Micromegas B, C, D",
+     "cond": "partial",
+     "avail_l": "ours to take",
+     "note": "Noisy at n_TOF; replacing them is budget item m1."
+    }
+   ],
    "place": [
     "m1"
    ],
@@ -705,6 +795,18 @@
    "state": "to decide",
    "need": "2027-04-30",
    "b": "4 CERN M1 cards for B (B runs its Italian M1s for the test)",
+   "inv": [
+    {
+     "id": "m1ital",
+     "name": "M1 multiplex cards, Italian",
+     "qty": "12",
+     "owner": "MX17 collaboration (ask)",
+     "where": "on Micromegas B, C, D",
+     "cond": "partial",
+     "avail_l": "ours to take",
+     "note": "Noisy at n_TOF; replacing them is budget item m1."
+    }
+   ],
    "place": [
     "m1"
    ],
@@ -731,6 +833,28 @@
    "who": "Stephan (CEA)",
    "state": "to ask",
    "need": "2027-05-01",
+   "inv": [
+    {
+     "id": "dream",
+     "name": "DREAM DAQ: FEUs + trigger/clock unit (TCM)",
+     "qty": "8 FEUs, 1 TCM",
+     "owner": "CEA Saclay",
+     "where": "(ask)",
+     "cond": "good",
+     "avail_l": "lent on request",
+     "note": "Lent for n_TOF 2026, liability ~€72k for the full system. The TCM busy output has no LEMO fitted yet (daq_trigger/PLAN.md §4.2)."
+    },
+    {
+     "id": "dreamcab",
+     "name": "FEU ↔ M1 cables, 2 m",
+     "qty": "64",
+     "owner": "CEA Saclay (ask)",
+     "where": "(ask)",
+     "cond": "good",
+     "avail_l": "lent on request",
+     "note": "Come with the DREAM loan (ask)."
+    }
+   ],
    "place": [
     "feu",
     "tcm"
@@ -755,6 +879,18 @@
    "who": "Dylan",
    "state": "to make",
    "need": "2027-05-31",
+   "inv": [
+    {
+     "id": "dream",
+     "name": "DREAM DAQ: FEUs + trigger/clock unit (TCM)",
+     "qty": "8 FEUs, 1 TCM",
+     "owner": "CEA Saclay",
+     "where": "(ask)",
+     "cond": "good",
+     "avail_l": "lent on request",
+     "note": "Lent for n_TOF 2026, liability ~€72k for the full system. The TCM busy output has no LEMO fitted yet (daq_trigger/PLAN.md §4.2)."
+    }
+   ],
    "place": [
     "tcm"
    ],
@@ -779,6 +915,18 @@
    "who": "Pierfrancesco",
    "state": "agreed",
    "need": "2027-05-01",
+   "inv": [
+    {
+     "id": "walls",
+     "name": "SiPM walls, 20 EJ-212 bars each, + summing boards",
+     "qty": "4",
+     "owner": "INFN (bars bought by INFN Torino)",
+     "where": "(ask)",
+     "cond": "partial",
+     "avail_l": "lent on request",
+     "note": "16 of 20 bars read per wall (ganged LEMO outputs). Pierfrancesco: usable for the LNL run (18 Nov 2026)."
+    }
+   ],
    "place": [
     "walls"
    ],
@@ -802,6 +950,18 @@
    "who": "Pierfrancesco",
    "state": "agreed",
    "need": "2027-05-01",
+   "inv": [
+    {
+     "id": "plast_small",
+     "name": "Plastic scintillators 20 × 30 × 2 cm",
+     "qty": "8",
+     "owner": "(ask) lender",
+     "where": "(ask)",
+     "cond": "good",
+     "avail_l": "lent on request",
+     "note": "Two per arm at n_TOF. Available again for LNL (Pierfrancesco)."
+    }
+   ],
    "place": [
     "plast"
    ],
@@ -826,6 +986,18 @@
    "state": "to find",
    "need": "2027-05-01",
    "b": "If the PMTs must be bought: 4–6 fast 2″ PMTs + bases",
+   "inv": [
+    {
+     "id": "pmt_small",
+     "name": "PMTs for the small plastics",
+     "qty": "8",
+     "owner": "(ask) lender",
+     "where": "back with the lender",
+     "cond": "good",
+     "avail_l": "returned, ask again",
+     "note": "Went back after n_TOF; must be found again."
+    }
+   ],
    "place": [
     "plast"
    ],
@@ -852,6 +1024,18 @@
    "who": "Dylan / Pierfrancesco",
    "state": "to decide",
    "need": "2027-05-01",
+   "inv": [
+    {
+     "id": "ls",
+     "name": "Liquid scintillator cells 45 × 45 cm",
+     "qty": "4",
+     "owner": "(ask)",
+     "where": "(ask)",
+     "cond": "unknown",
+     "avail_l": "ours to take",
+     "note": "Unusable at n_TOF from pile-up (γ-flash); untested at low rates."
+    }
+   ],
    "place": [
     "ls"
    ],
@@ -887,6 +1071,7 @@
    "cash": 0,
    "fallback": 9500,
    "tier": "loan",
+   "inv": [],
    "lo": 9500,
    "hi": 9500,
    "basis": "CAEN offer 26OFC.01101"
@@ -914,6 +1099,7 @@
    "cash": 0,
    "fallback": 4760,
    "tier": "loan",
+   "inv": [],
    "lo": 4760,
    "hi": 4760,
    "basis": "CAEN offer"
@@ -930,6 +1116,18 @@
    "state": "to ask",
    "need": "2027-05-01",
    "b": "If no N1081B loan: 2 × N1081B",
+   "inv": [
+    {
+     "id": "n1081b_cern",
+     "name": "CAEN N1081B programmable logic",
+     "qty": "6",
+     "owner": "CERN electronics pool",
+     "where": "CERN pool",
+     "cond": "good",
+     "avail_l": "returned, ask again",
+     "note": "Rented for n_TOF; none comes with us."
+    }
+   ],
    "place": [
     "nim"
    ],
@@ -958,6 +1156,18 @@
    "state": "to ask",
    "need": "2027-05-01",
    "b": "If no dual timer: N93B",
+   "inv": [
+    {
+     "id": "n93b_cern",
+     "name": "CAEN N93B dual timer",
+     "qty": "1",
+     "owner": "CERN electronics pool",
+     "where": "CERN pool",
+     "cond": "good",
+     "avail_l": "returned, ask again",
+     "note": "Rented for n_TOF."
+    }
+   ],
    "place": [
     "nim"
    ],
@@ -994,7 +1204,8 @@
    "detail": "Standard pool item (ask).",
    "cash": 0,
    "fallback": 0,
-   "tier": ""
+   "tier": "",
+   "inv": []
   },
   {
    "id": "split",
@@ -1019,29 +1230,76 @@
    "cash": 3800,
    "fallback": 0,
    "tier": "need",
+   "inv": [],
    "lo": 2500,
    "hi": 5000,
    "basis": "items.py splitters €7.6k for 4 arms, halved"
   },
   {
    "id": "pc",
-   "part": "DAQ PC, network switch",
+   "part": "DAQ PC (DREAM + run control)",
    "qty": "1",
    "grp": "Trigger & DAQ",
-   "status": "ready",
-   "org": "MX17 collaboration",
-   "src": "MX17 collaboration (n_TOF)",
-   "who": "Dylan",
-   "state": "in hand",
+   "status": "borrow",
+   "org": "CEA Saclay",
+   "src": "CEA Saclay",
+   "who": "Stephan (CEA)",
+   "state": "to ask",
    "need": "2027-05-01",
+   "inv": [
+    {
+     "id": "daqpc",
+     "name": "DAQ PC (DREAM + run control)",
+     "qty": "1",
+     "owner": "CEA Saclay",
+     "where": "(ask)",
+     "cond": "good",
+     "avail_l": "lent on request",
+     "note": "Not Dylan's: borrow it from CEA for each run (Dylan, 19 Nov 2026)."
+    }
+   ],
    "place": [
     "pc"
    ],
    "tasks": [
+    "M2",
     "I1"
    ],
-   "note": "Run control from n_TOF: DREAM + digitizers on one event list.",
+   "note": "Not Dylan's: borrow it from CEA with the DREAM loan (Dylan, 19 Nov 2026). Run control from n_TOF: DREAM + digitizers on one event list.",
    "detail": "Network at LNL: ask (task L3).",
+   "cash": 0,
+   "fallback": 0,
+   "tier": ""
+  },
+  {
+   "id": "switch",
+   "part": "Network switch",
+   "qty": "1",
+   "grp": "Trigger & DAQ",
+   "status": "ready",
+   "org": "MX17 collaboration",
+   "src": "Dylan's own",
+   "who": "Dylan",
+   "state": "in hand",
+   "need": "2027-05-01",
+   "inv": [
+    {
+     "id": "switch",
+     "name": "Network switch",
+     "qty": "1",
+     "owner": "Dylan",
+     "where": "with Dylan",
+     "cond": "good",
+     "avail_l": "ours to take",
+     "note": "Dylan's own (19 Nov 2026)."
+    }
+   ],
+   "place": [
+    "pc"
+   ],
+   "tasks": [],
+   "note": "Dylan's (19 Nov 2026).",
+   "detail": "",
    "cash": 0,
    "fallback": 0,
    "tier": ""
@@ -1067,6 +1325,7 @@
    "cash": 290,
    "fallback": 0,
    "tier": "low",
+   "inv": [],
    "lo": 290,
    "hi": 400,
    "basis": "items.py pdu"
@@ -1092,7 +1351,8 @@
    "detail": "Ask CEA whether the LV comes with the DREAM loan.",
    "cash": 0,
    "fallback": 0,
-   "tier": ""
+   "tier": "",
+   "inv": []
   },
   {
    "id": "hv",
@@ -1113,7 +1373,8 @@
    "detail": "SiPM bias from the walls' own supplies.",
    "cash": 0,
    "fallback": 0,
-   "tier": ""
+   "tier": "",
+   "inv": []
   },
   {
    "id": "gas",
@@ -1138,6 +1399,7 @@
    "cash": 3000,
    "fallback": 0,
    "tier": "need",
+   "inv": [],
    "lo": 2000,
    "hi": 4500,
    "basis": "items.py gas"
@@ -1163,6 +1425,7 @@
    "cash": 400,
    "fallback": 0,
    "tier": "low",
+   "inv": [],
    "lo": 250,
    "hi": 700,
    "basis": "items.py gaslines"
@@ -1190,6 +1453,7 @@
    "cash": 2500,
    "fallback": 0,
    "tier": "low",
+   "inv": [],
    "lo": 2000,
    "hi": 3200,
    "basis": "items.py slowctl"
@@ -1216,7 +1480,8 @@
    "detail": "A week of LiOH-conversion test on the line before the run (T2).",
    "cash": 0,
    "fallback": 0,
-   "tier": ""
+   "tier": "",
+   "inv": []
   },
   {
    "id": "holder",
@@ -1229,6 +1494,18 @@
    "who": "Pierfrancesco",
    "state": "in hand",
    "need": "2027-08-31",
+   "inv": [
+    {
+     "id": "cu_hemi",
+     "name": "Cu hemisphere target holder (beam-line end)",
+     "qty": "1",
+     "owner": "INFN LNL",
+     "where": "LNL",
+     "cond": "good",
+     "avail_l": "lent on request",
+     "note": "Already built (Dylan, 19 Nov 2026); the 'Cu ogive' of the Geant4 study (lnl/FEASIBILITY_SIM.md §19.3)."
+    }
+   ],
    "place": [
     "target"
    ],
@@ -1263,7 +1540,8 @@
    "detail": "AN2000 is self-service; one energy change per day.",
    "cash": 0,
    "fallback": 0,
-   "tier": ""
+   "tier": "",
+   "inv": []
   },
   {
    "id": "stand",
@@ -1287,7 +1565,8 @@
    "detail": "Its material goes into the Geant4 geometry (R3).",
    "cash": 0,
    "fallback": 0,
-   "tier": ""
+   "tier": "",
+   "inv": []
   },
   {
    "id": "ship",
@@ -1310,6 +1589,7 @@
    "cash": 2000,
    "fallback": 0,
    "tier": "need",
+   "inv": [],
    "lo": 1000,
    "hi": 4000,
    "basis": "guess"

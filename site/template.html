@@ -178,7 +178,7 @@ select { background: var(--surface); color: var(--ink); border: 1px solid var(--
 .hwt tbody tr.it { cursor: pointer; }
 .hwt tbody tr.it:hover td { background: var(--hover); }
 .hwt tr.gh td { background: var(--hover); font-weight: 600; font-size: 12.5px; color: var(--ink-2); }
-.hwt td .q { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
+.hwt td .q, .hwdet .q { display: block; color: var(--muted); font-size: 12px; font-weight: 400; }
 #hw-q { font: inherit; font-size: 13.5px; padding: 4px 9px; border: 1px solid var(--grid); border-radius: 8px; background: var(--surface); color: var(--ink); min-width: 220px; }
 .hwdl { display: grid; grid-template-columns: auto 1fr; gap: 4px 12px; font-size: 13.5px; margin: 8px 0; }
 .hwdl dt { color: var(--muted); } .hwdl dd { margin: 0; }
@@ -807,7 +807,7 @@ function hwSvg(keys, small) {
 function hwRows() {
   const q = $("#hw-q").value.trim().toLowerCase(), open = $("#hw-open").checked;
   let r = HWX.filter(x => (!hwAct || x.status === hwAct) && (!open || x.state !== "in hand") &&
-    (!q || [x.part, x.src, x.org, x.who, x.note, x.detail, x.grp, x.state].join(" ").toLowerCase().includes(q)));
+    (!q || [x.part, x.src, x.org, x.who, x.note, x.detail, x.grp, x.state, ...(x.inv || []).map(a => a.owner + " " + a.where)].join(" ").toLowerCase().includes(q)));
   const [k, d] = hwSort;
   const v = x => k === "cash" ? (x.cash || x.fallback / 1e6) : k === "need" ? (x.need || "9999") : String(x[k] || "").toLowerCase();
   return r.sort((a, b) => (v(a) > v(b) ? 1 : v(a) < v(b) ? -1 : 0) * d);
@@ -863,6 +863,13 @@ function hwDetail() {
   if (!x.cash && !x.fallback) row("Cash", "none (owned, lent or our own work)");
   b.append(dl, h("p", { style: "margin:6px 0" }, x.note));
   if (x.detail) b.append(h("p", { class: "small", style: "margin:6px 0", }, x.detail));
+  if ((x.inv || []).length) {
+    b.append(h("div", { class: "muted small", style: "margin-top:8px" }, "In the MX17 inventory (x17_facility_search/inventory)"));
+    const ul = h("ul", { class: "clean small" });
+    x.inv.forEach(a => ul.append(h("li", {}, h("b", {}, a.name), ` (${a.qty}) · owner ${a.owner} · at ${a.where} · ${a.cond} · ${a.avail_l}`,
+      a.note ? h("span", { class: "q" }, a.note) : "")));
+    b.append(ul);
+  }
   const tk = (x.tasks || []).map(id => D.tasks.find(t => t.id === id)).filter(Boolean);
   if (tk.length) {
     b.append(h("div", { class: "muted small", style: "margin-top:8px" }, "Tasks"));
