@@ -1,48 +1,44 @@
 # Handoff
 
-## Hardware tab — updated 2026-11-19 (dylan-MS-7C84)
+## LNL page + proposal: Overleaf, budget, Cu hemisphere, Hardware tab, inventory — updated 2026-11-19 (dylan-MS-7C84)
 
-**Done**
-- `planning/plan.py` HARDWARE rewritten: 30 items, each with lender (`org`, `src`), contact, state, needed-by date, diagram place,
-  tasks. Cash comes from its BUDGET line (`b`), merged in `hardware_rows()`, which asserts every budget line belongs to one item.
-- New **Hardware** tab: search, group by system / lender / contact / action / state / tier, action filters, sortable columns,
-  totals; a row opens the full entry with its tasks and a schematic of the set-up (from above) with the item highlighted.
-  The Set-up tab's old table is gone (it points to the new tab).
+**Resume:** page and Overleaf draft current; next: P1 (outline + questions to Pierfrancesco), P3 (INFN-AAI), R1 (two-arm re-reduction).
 
-- Linked to the new central inventory (`x17_facility_search/inventory/`): items carry `inv=[ids]`, the detail panel shows
-  owner, location and condition. DAQ PC now borrowed from CEA (Stephan); the network switch is Dylan's, a separate item.
+**Goal:** get the PAC proposal (due 10 Dec 2026) and the planning page into shape for Pierfrancesco and the co-proponents.
 
-**Gotchas**
-- Lenders, states and dates are my first fill from the plan and the n_TOF notes; most are "to ask". Correct them in `plan.py`.
+**Done (19 Nov)**
+- **Overleaf** shows the full draft: main document `main.tex` (abstract + body, 5 pages). Text in `proposal/latex/abstract_content.tex`
+  and `body_content.tex`; `abstract.tex`/`body.tex` build the two Indico PDFs; `preamble.tex`. Before, only `abstract.tex`
+  compiled there. The page links Overleaf's edit link (anyone with it can edit; it is public in the repos, Dylan's choice).
+- **Budget** (Dylan): new drift windows A+B → low-budget tier (€1.25k); B's drift-window repair stays critical (€0.3k).
+  Critical €9.1k, low +€4.4k, high +€8k, +€42.9k if loans fail.
+- **Overview**: one-line lead + Overleaf/PDF buttons on top; details and the Indico call in a box at the bottom.
+- **Target** (Dylan): the Cu hemisphere is built, so it is the baseline ("Cu ogive" of FEASIBILITY_SIM §19.3). Reach now 1.81 ×
+  R(ATOMKI) in 5 d, 0.90 × with liquid cells; proposal says (0.9–1.8) ×. Default target in the Beam & reach tab.
+- **Risk** "B not repaired" → low (likely just an electrical connection).
+- **Hardware tab**: `plan.py` HARDWARE = 31 items (lender `org`/`src`, contact, state, need-by, diagram `place`, `tasks`, budget
+  line `b` → cash/tier via `hardware_rows()`, which asserts every BUDGET line belongs to one item). Search, group, filter, sort,
+  totals; detail panel with tasks, inventory entries and a schematic with the item highlighted.
+- **Central inventory** started in `x17_facility_search/inventory/` (21 assets: owner, location, condition, availability);
+  HARDWARE items point at it with `inv=[ids]`. DAQ PC is CEA's (borrow); the network switch is Dylan's.
 
-## Budget windows, overview, Cu hemisphere — updated 2026-11-19 (dylan-MS-7C84)
-
-**Done**
-- Budget (Dylan): new aluminised-mylar drift windows for A and B moved to the low-budget tier (€1.25k); the repair of B's drift
-  window stays critical (€0.3k). Critical €9.1k, low +€4.4k, high +€8k. `plan.py`, `slot1_feasibility/PLAN.md` §7, proposal §2.
-- Overview: one-line lead with Overleaf + PDF at the top; details and the single Indico link in a box at the bottom; the call-PDF
-  link is gone, the machine sheet is a small link in the box.
-- Target (Dylan): the Cu hemisphere is already built, so it is the baseline: the "Cu ogive" rows of §19.3. Figure, overview reach
-  (1.81 × R(ATOMKI), 0.90 × with liquid cells) and proposal sensitivity (0.9–1.8 ×) switched to it.
-  Named "Cu hemisphere (built)" in `two_arm_estimates.py` and listed first, so the Beam & reach tab defaults to it.
-- Risk "B not repaired" lowered to low: likely just an electrical connection on the drift (Dylan).
-- Overleaf updated. Its `figures/limit_vs_days.pdf` is now a *linked file* from
-  `https://dylan-neff.web.cern.ch/facilities/lnl/limit_vs_days.pdf` (the upload dialog wouldn't open): after `figures.py`, copy the
-  PDF there, deploy, and press Refresh on the file in Overleaf.
-
-## Overleaf shows the full draft — updated 2026-11-19 (dylan-MS-7C84)
-
-**Resume:** Overleaf's main document is now `main.tex` (abstract + body, 5 pages, compiles there). Next steps unchanged (P1, P3, R1).
-
-**Done**
-- Cause: Overleaf compiles one main document and it was `abstract.tex`, so only the abstract showed. The body had also
-  never compiled on Overleaf (see gotcha).
-- Split `proposal/latex/`: text in `abstract_content.tex`, `body_content.tex`; `preamble.tex`; thin wrappers `abstract.tex`,
-  `body.tex` (Indico) and `main.tex` (both). Uploaded to Overleaf through its own upload endpoint, main document set to `main.tex`.
-  Overleaf history showed no edits there before the upload.
+**Next steps**
+1. P1: send Pierfrancesco the outline, the two-arm numbers and the questions (spokesperson, GLIMOS, machine, holder fit, authors).
+2. P3: INFN-AAI account; R1: two-arm re-reduction of L10–L13 on lxplus, then `two_arm_estimates.py` + figure.
+3. Fill the (ask) lenders/locations: `plan.py` HARDWARE (my first fill, mostly "to ask") and `x17_facility_search/inventory/inventory.py`.
+4. Draft v1 by 27 Nov.
 
 **Gotchas**
-- revtex4 + Overleaf's newer TeX Live: `p{}`/`@{}` columns give "Extra \or". The beam-day table uses `l` columns + `\daycell`.
+- revtex4 + Overleaf's newer TeX Live: `p{}`/`@{}` tabular columns give "Extra \or"; tables use `l` columns + `\daycell`.
+- Overleaf's `figures/limit_vs_days.pdf` is a *linked file* from `https://dylan-neff.web.cern.ch/facilities/lnl/limit_vs_days.pdf`:
+  after `planning/figures.py`, copy the PDF to the site's `facilities/lnl/`, deploy, then Refresh it in Overleaf. Text files were
+  pushed with Overleaf's own upload endpoint from the page (JS fetch, root folder id 6afdf0e9d237ac71ebb14b7d); check Overleaf
+  history for edits there first. Overleaf and the repo were identical on 19 Nov evening.
+- The site repo's branch is `master`, not `main`.
+
+**Key files & commands**
+- `planning/plan.py` → `python3 site/build_page.py`; then in `~/PycharmProjects/dylan-cern-site`: `python3 scripts/build.py && scripts/deploy-eos.sh`.
+- `proposal/latex/`: `make`, `make zip`. `site/template.html`: the page (Hardware tab: PLACES, hwTable2, hwDetail).
 
 ## LNL proposal page: template, Overleaf, budget tiers — updated 2026-11-18 (dylan-MS-7C84)
 
