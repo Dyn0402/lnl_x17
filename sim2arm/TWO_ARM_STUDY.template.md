@@ -70,7 +70,7 @@ reference only.
 | `LNL calibrated, LS off` | **no liquid**: E_sum = SiPM bar + 2 cm plastic |
 | `trigger` | no cosmic veto beyond the E_sum window |
 | `MM 15° point, μ 3°` | each segment points back to the spot (15° electron segments; the muon segments 3°, as on the bench) + 20° collinearity veto |
-| `MM 15° + TOF` | the FEASIBILITY_SIM reference: pointing + a 0.3 ns arm-to-arm time of flight (**assumed, never measured**) |
+| `MM 15° + TOF` | the FEASIBILITY_SIM reference: pointing + a 0.6 ns per-arm time of flight (**measured** on n_TOF beam-off cosmics, 0.52–0.64 ns: nTof_x17 `ntof_cosmics/results/ac_tof/report.html`; read by `lnl_geant.TOF_SIGMA_NS`) |
 
 <!-- SECTIONS 2-3: reach and rates (filled from pass 2) -->
 
@@ -150,7 +150,7 @@ the Cu hemisphere smears below 120°). What they see well:
 - **Thin Monte Carlo** is still the main limitation of the as-built Cu-hemisphere numbers: the two estimators differ by up
   to ×2 in a few rows (the range quoted). The EPC (external conversions in the 200 µm Cu wall) rests on a few hundred MC
   events in the opposite pairs; vertical and horizontal pairs differ by ×2–3 in EPC in the window, which is MC noise.
-- **TOF σ_t = 0.3 ns** (the reference level) is assumed. The "pointing only" rows do not need it; the vertical-pair cosmic
+- **TOF σ_t = 0.6 ns per arm** (the reference level) is measured with the n_TOF readout (0.52–0.64 ns); the LNL digitisers are still to check (R4). The "pointing only" rows do not need it; the vertical-pair cosmic
   nights measure it.
 - **The muon segment resolution** (3° in the "pointing" level, the bench value) is not in the Geant4 smearing itself; it
   is applied to the cosmic sample only.

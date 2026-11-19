@@ -2,7 +2,7 @@
 """
 summarize.py -- tables and figures from the two-arm reach and spectra (two_arm_nd.py) for TWO_ARM_STUDY.md.
 
-    python3 sim2arm/summarize.py [--tag _pass2]
+    python3 sim2arm/summarize.py [--tag _pass3]
 
 Inputs:  sim2arm/out/two_arm_reach<tag>.csv (or two_arm_nd<tag>.csv), two_arm_spectra<tag>.csv
 Outputs: sim2arm/out/summary_reach<tag>.csv, summary_rates<tag>.csv, figures/*.png
@@ -29,7 +29,7 @@ PAIR_LABEL = {'vert': 'vertical pair (top + bottom)', 'horiz': 'horizontal pair 
 RESP_LABEL = {'LNL calibrated': 'liquid working', 'n_TOF as is': 'liquid as at n_TOF',
               'LNL calibrated, LS off': 'no liquid'}
 LEVEL_LABEL = {'trigger': 'no cosmic veto', 'MM 15°': 'MM pointing 15°', 'MM 15° point, μ 3°': 'MM pointing (μ 3°)',
-               'MM 15° point, μ 3° + TOF 1 ns': 'pointing + 1 ns TOF', 'MM 15° + TOF': 'MM 15° + 0.3 ns TOF (ref.)',
+               'MM 15° point, μ 3° + TOF 1 ns': 'pointing + 1 ns TOF', 'MM 15° + TOF': 'MM 15° + 0.6 ns TOF (ref.)',
                'MM 3°': 'MM 3° segments'}
 COL = ['#2a78d6', '#eb6834', '#1baf7a', '#eda100', '#e87ba4']      # dataviz reference categorical order
 
@@ -96,7 +96,7 @@ def fig_days(rs, tag):
     ax.set_yscale('log')
     ax.set_xticks(range(len(pairs)), [PAIR_LABEL[p].replace(' (', '\n(') for p in pairs], fontsize=8)
     ax.set_ylabel('days to 3σ at R(ATOMKI), 1 µA')
-    ax.set_title('Cu hemisphere, as built, reference fit, MM 15° + 0.3 ns TOF', fontsize=9)
+    ax.set_title('Cu hemisphere, as built, reference fit, MM 15° + 0.6 ns TOF', fontsize=9)
     ax.legend(frameon=False, fontsize=8)
     for s in ('top', 'right'):
         ax.spines[s].set_visible(False)

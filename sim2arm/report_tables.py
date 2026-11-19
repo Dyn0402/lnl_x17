@@ -2,7 +2,7 @@
 """
 report_tables.py -- the Markdown tables of TWO_ARM_STUDY.md §2, §3, §6 from the summary CSVs (no number typed by hand).
 
-    python3 sim2arm/report_tables.py [--tag _pass2] > sim2arm/out/tables_pass2.md
+    python3 sim2arm/report_tables.py [--tag _pass3] > sim2arm/out/tables_pass2.md
 """
 from __future__ import annotations
 
@@ -16,7 +16,7 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / 'out'
 Z90, MEG_A = 1.2816, 1.2e-5 / 5.8e-6
 REF, PNT, PNT1, TRG = 'MM 15° + TOF', 'MM 15° point, μ 3°', 'MM 15° point, μ 3° + TOF 1 ns', 'trigger'
-LEV = [(TRG, 'no veto'), (PNT, 'pointing'), (PNT1, 'pointing + 1 ns TOF'), (REF, 'pointing + 0.3 ns TOF')]
+LEV = [(TRG, 'no veto'), (PNT, 'pointing'), (PNT1, 'pointing + 1 ns TOF'), (REF, 'pointing + 0.6 ns TOF')]
 RESP = [('LNL calibrated', 'liquid working'), ('n_TOF as is', 'liquid as at n_TOF'), ('LNL calibrated, LS off', 'no liquid')]
 PAIRS = [('horiz', 'horizontal'), ('vert', 'vertical'), ('adj', 'adjacent'), ('all', 'four arms')]
 
@@ -60,7 +60,7 @@ def limit_table(dfs):
     P = lambda x: 0.5 * (1 + math.erf(x / math.sqrt(2)))   # noqa: E731
     for film, df in dfs:
         for r, rl in RESP:
-            for lv, ll in ((REF, 'pointing + 0.3 ns TOF'), (PNT, 'pointing')):
+            for lv, ll in ((REF, 'pointing + 0.6 ns TOF'), (PNT, 'pointing')):
                 x = g(df, 'horiz', r, lv)
                 if x is None:
                     continue
@@ -90,7 +90,7 @@ def spectra_table(tag):
     rt = pd.read_csv(f)
     cols = ['25-90', '90-125', '125-160', '160-180']
     for ep, lab in ((1100.0, '1.10 MeV'), (441.0, '0.441 MeV')):
-        print(f'\n**{lab}, pairs per day by opening angle** (pointing + 0.3 ns TOF, liquid working, E_sum window; '
+        print(f'\n**{lab}, pairs per day by opening angle** (pointing + 0.6 ns TOF, liquid working, E_sum window; '
               f'in brackets: no E_sum cut)\n')
         print('| pair | component | ' + ' | '.join(c + '°' for c in cols) + ' | all |')
         print('|---|---|' + '---|' * (len(cols) + 1))
@@ -110,7 +110,7 @@ def spectra_table(tag):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--tag', default='_pass2')
+    ap.add_argument('--tag', default='_pass3')
     a = ap.parse_args()
     d20 = pd.read_csv(OUT / f'summary_reach{a.tag}.csv')
     f11 = OUT / f'summary_reach{a.tag}li11.csv'

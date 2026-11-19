@@ -7,7 +7,7 @@ The Al ogive + Cu liner has no two-arm simulation: its two-arm days are the four
 four-arm ratio simulated for the Cu hemisphere (an estimate, marked so).
 
 Rows: target x energy stack (liquid working / as at n_TOF / none) x geometry (horizontal / vertical pair) x cosmic
-veto (MM pointing + 0.3 ns TOF, the reference; pointing only).
+veto (MM pointing + 0.6 ns TOF, the reference; pointing only).
 
 Outputs planning/out/two_arm_reach.csv and planning/out/beam_days.csv.
 """
@@ -21,7 +21,7 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 OUT.mkdir(exist_ok=True)
 SIM = HERE.parent / "sim2arm" / "out"
-SIM_TAG = "_pass2"
+SIM_TAG = "_pass3"
 #: (label, suffix of the summary table): the simulated 20 µm film and the review's 10–12 µm (yields of 11 µm)
 FILMS = [("11 µm Li (recommended)", "li11"), ("20 µm Li (as simulated)", "")]
 
@@ -38,7 +38,7 @@ STACKS = [  # (label, sim response, four-arm §19.3 key)
     ("+ liquid working", "LNL calibrated", "fix"),
 ]
 GEOMS = [("horizontal pair", "horiz"), ("vertical pair", "vert")]
-VETOES = [("MM pointing + 0.3 ns TOF", "MM 15° + TOF"), ("MM pointing only", "MM 15° point, μ 3°")]
+VETOES = [("MM pointing + 0.6 ns TOF", "MM 15° + TOF"), ("MM pointing only", "MM 15° point, μ 3°")]
 
 # Four-arm days to 3 sigma at R(ATOMKI), FEASIBILITY_SIM.md §19.3 (central, low, high), MM 15° + TOF.
 FOUR_ARM = {

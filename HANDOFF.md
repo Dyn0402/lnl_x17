@@ -1,27 +1,52 @@
 # Handoff
 
-## Two-arm: shape systematics, the 441 keV geometry, σ_t from n_TOF — updated 2026-11-19 (dylan-MS-7C84)
+## Two-arm: measured σ_t plugged in (pass 3), shape systematics, 441 keV — updated 2026-11-19 (dylan-MS-7C84)
+
+**Resume:** pass 3 (σ_t 0.6 ns) runs detached on the desktop; when `after_pass _pass3 done` is in its log, check, deploy, commit.
+
+**Goal:** every LNL number uses the measured arm-to-arm σ_t (0.6 ns per arm) instead of the assumed 0.3, and the IPC
+shape systematics of the two-arm fit are understood.
 
 **Done**
-- `sim2arm/geom_syst.py`: linearised fake X17 from a *specific* mismodelling (origin or one arm off by 2 mm, a dead 10 mm
-  Micromegas band), reference fit, 5 days (`out/geom_syst_{horiz,vert}.csv`). 2 mm offsets: |r| ≤ 0.01 R(ATOMKI) horizontal,
-  ≤ 0.11 vertical (≤ 0.2σ). Dead band in arm 0: −0.18 R (−0.4σ), the largest; σ_r(5 d) ≈ 0.43 R. θ only moves (selection
-  not redone), signal template nominal.
-- `sim2arm/struct_scan.py`: days to 3σ against the unknown-structure nuisance: horizontal 17.6 (none) → 17.9 (reference)
-  → 18.9 d (S_θy 5 %, ℓ/2); vertical 16.7 → 18.3 (`out/struct_scan_two_arm.csv`).
-- 441 keV stays opposite arms: the adjacent pair has 39 M1 pairs/day in 125–160° against 358 (§2 tables).
-- n_TOF cosmics, first look (`sim2arm/ntof_timing_firstlook/`): wall A–C σ_t ≲ 1.9 ns per arm (upper bound). Muon MM
-  angle measured 1–3° (bench, n_TOF), 3–8° at |tan| > 0.45, 5–16 % tails. Electron "MM 15°" is the old reconstruction:
-  is2_v2 misses the axis by 17–26 mm (Geant4 floor 15–16 mm).
-- **σ_t measured** (nTof_x17 `ntof_cosmics/ac_tof_beamoff.py`, report `ntof_cosmics/results/ac_tof/report.html`): beam-off
-  run_149 A–C wall coincidences (2,579), t_A − t_C shows the muon's ±2.5 ns TOF as two clean peaks; σ(A−C) 0.90 ± 0.01 ns
-  from the two-peak fit (toy closes), direction-tagged peak cores 0.73: **0.52–0.64 ns per arm** (walls), 0.95 (plastics),
-  n_TOF readout. Beam-run muons give ~6 ns (pulse-fit floor under beam), so beam data can't measure it.
-- `sim2arm/tof_scan.py` (`out/tof_scan_two_arm.csv`): horizontal days 17.4 (no TOF) → 17.7 at any σ_t (cosmics 3–13/day
-  at 0.5–0.7 ns against ~600 beam); vertical 21.7 (no TOF) → 17.1 / 17.9 / 18.7 d at 0.3 / 0.6 / 0.7 ns.
-- plan.py R4 and the cosmic-veto risk updated; page redeployed (site 4c24d25+). FEASIBILITY_SIM §0/§4 updated.
+- **σ_t measured** (nTof_x17 `ntof_cosmics/ac_tof_beamoff.py`, report `ntof_cosmics/results/ac_tof/report.html`,
+  machine-readable `results/ac_tof/timing.json`): beam-off A–C wall muons (2,579) show the muon's ±2.5 ns TOF as two
+  peaks; **0.52–0.64 ns per arm (walls), 0.95 (plastics)**, n_TOF readout. Beam-run muons give ~6 ns (pulse fit under beam).
+  The first look moved to nTof_x17 `ntof_cosmics/results/ac_tof/firstlook/`.
+- x17_facility_search `lnl_geant.TOF_SIGMA_NS` now reads it (0.60; `LNL_TOF_SIGMA_NS=0.3` reproduces pass 2); helper
+  `sipm_wall/measured_timing.py` for ILL / trigger_scint / sipm_wall (code defaults switched, their tables not re-run).
+- Labels here say "pointing + 0.6 ns TOF"; `SIM_TAG` and the `--tag` defaults are `_pass3`; template/page text updated.
+- `sim2arm/tof_scan.py`: horizontal 17.4 d (no TOF) → 17.7 at any σ_t; vertical 17.1 / 17.9 / 18.7 d at 0.3 / 0.6 / 0.7 ns
+  (pointing 3° for muons). First pass-3 rows: vertical `MM 15° + TOF` (15° for muons too) at 0.6 ns is 23.3 d with
+  494 cosmics/day (was ~17 d, 0.4/day at 0.3): the reference level leans on TOF, so the vertical pair suffers.
+- `sim2arm/geom_syst.py`: fake X17 from 2 mm misplacements ≤ 0.01 R(ATOMKI) horizontal, ≤ 0.11 vertical; a dead 10 mm
+  MM band −0.18 R (−0.4σ, 5 d). `sim2arm/struct_scan.py`: harsher unknown structure costs ≤ +1.5 d.
+- 441 keV stays on opposite arms (adjacent: 39 M1 pairs/day in 125–160° against 358).
 
-**Next**: R4 with the LNL readout (V1742/CFD); the four-arm fit per pair, not summed.
+**In progress**
+- `run_pass.sh _pass3 6 && after_pass.sh _pass3`, started 12:25 detached (setsid), log
+  `/media/ucla/work/claude-jobs/lnl_pass3.log`, parts `sim2arm/out/parts/*_pass3*` (resumable). ~3 h. If it died, rerun
+  the same command (`WORK_DATA=/media/ucla/work setsid nohup bash -c 'bash sim2arm/run_pass.sh _pass3 6 && bash
+  sim2arm/after_pass.sh _pass3' > /media/ucla/work/claude-jobs/lnl_pass3.log 2>&1 &`): finished tasks are skipped.
+- Until then `TWO_ARM_STUDY.md`, the proposal, `planning/out/` and the page still show the pass-2 (0.3 ns) numbers, and
+  `planning/two_arm_estimates.py` fails (no `summary_reach_pass3*.csv` yet).
+
+**Next steps**
+1. When the log says done: read `sim2arm/TWO_ARM_STUDY.md` §0 (regenerated) — the reach rows and the vertical vs horizontal
+   comparison change; fix any hand-written sentence in `build_study_md.py`/the template that the numbers contradict
+   (e.g. "vertical and horizontal equal within the MC").
+2. Update the hand-written numbers in `proposal/latex/body_content.tex` (R90 0.93/1.19 × R(ATOMKI), Z, days) and `plan.py`
+   texts from `planning/out/two_arm_reach.csv`; `make -C proposal/latex`, `python3 site/build_page.py`, deploy (README),
+   republish the slide note (`sim2arm/out/lnl-two-arm-run.html`, publish-note skill), commit + push; Overleaf (R5).
+3. x17_facility_search: four-arm LNL tables and ILL/trigger_scint/sipm_wall outputs are still at the old σ_t (noted in
+   their docs); re-run when they matter. The four-arm fit should fit each arm pair separately (it sums them now).
+4. R4: σ_t with the LNL digitisers (V1742 / CFD).
+
+**Gotchas**
+- `pkill -f <pattern>` kills the calling Bash tool's own shell when its command line contains the pattern: use `[x]yz`.
+- The data for the passes is now on the desktop too: `$WORK_DATA/x17_facility_search/lnl_sel` (L11, L13 ogCu200 asb) and
+  `sel_l15` (L15 chunks 0–3, the ones the fits use).
+
+**Key files**: `sim2arm/run_pass.sh`, `sim2arm/after_pass.sh`, `sim2arm/tof_scan.py`, `sim2arm/geom_syst.py`, `sim2arm/struct_scan.py`.
 
 ## Two-arm Geant4 study (R1) and the 8-day plan — updated 2026-11-19 (dylan-Yoga, overnight)
 

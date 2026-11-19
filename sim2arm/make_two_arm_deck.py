@@ -2,7 +2,7 @@
 """
 make_two_arm_deck.py -- the slide note of the two-arm LNL study (TWO_ARM_STUDY.md), from the sim2arm/out CSVs.
 
-    python3 sim2arm/make_two_arm_deck.py [--tag _pass2] [--out sim2arm/out/lnl-two-arm-run.html]
+    python3 sim2arm/make_two_arm_deck.py [--tag _pass3] [--out sim2arm/out/lnl-two-arm-run.html]
     python3 ~/PycharmProjects/dylan-cern-site/scripts/add-note.py sim2arm/out/lnl-two-arm-run.html --slug lnl-two-arm-run --force --deploy
 """
 from __future__ import annotations
@@ -27,7 +27,7 @@ REF, PNT, PNT1, TRG = 'MM 15° + TOF', 'MM 15° point, μ 3°', 'MM 15° point, 
 RESP = [('LNL calibrated', 'liquid working', sd.BLUE), ('n_TOF as is', 'liquid as at n_TOF', sd.ORANGE),
         ('LNL calibrated, LS off', 'no liquid', sd.GREY)]
 GEOM = [('horiz', 'horizontal'), ('vert', 'vertical')]
-LEVLAB = {TRG: 'no veto', PNT: 'pointing', PNT1: 'pointing + 1 ns TOF', REF: 'pointing + 0.3 ns TOF'}
+LEVLAB = {TRG: 'no veto', PNT: 'pointing', PNT1: 'pointing + 1 ns TOF', REF: 'pointing + 0.6 ns TOF'}
 
 
 def zf(d3, T=T_RES):
@@ -72,7 +72,7 @@ def geom_svg(kind, w=360, h=330):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument('--tag', default='_pass2')
+    ap.add_argument('--tag', default='_pass3')
     ap.add_argument('--out', default=str(OUT / 'lnl-two-arm-run.html'))
     a = ap.parse_args()
     rs = pd.read_csv(OUT / f'summary_reach{a.tag}.csv')
@@ -146,7 +146,7 @@ The turned-in geometry is a new Geant4 run (L16, MX17_Full_Geant branch lnl_twoa
                 P.line(xs, ys, col, w=3, r=4, tips=tips)
             panels.append(P.svg(nm))
         body = (sd.title('Opposite arms hold the X17 window; adjacent arms see the small angles at 6× the rate',
-                         '1.10 MeV, 1 µA, 20 µm Li, liquid working, E_sum window, pointing + 0.3 ns TOF')
+                         '1.10 MeV, 1 µA, 20 µm Li, liquid working, E_sum window, pointing + 0.6 ns TOF')
                 + sd.row(*panels, gap=44) + sd.legend([(lab, col) for _, lab, col in comps]))
         D.slide('spectra', body, '''Rates per day of the two-arm set-up, from the reference event tables (the Cu hemisphere's own
 X17 and IPC Monte Carlo, weighted with its film yields at E_p = 1.10 MeV). "M1 IPC + conversions" includes the external
@@ -186,7 +186,7 @@ The vertical pair looks the same as the horizontal one for beam pairs (not shown
                          'Reference fit, Cu hemisphere as built, 1 µA, 1.10 MeV; bar = central, line = the two MC-safe estimators')
                 + P.svg('days to 3 sigma')
                 + sd.legend([(rl, col, 'box') for _, rl, col in RESP]
-                            + [('solid: pointing + 0.3 ns TOF', sd.INK, 'line'), ('pale: pointing only', sd.GREY, 'line')]))
+                            + [('solid: pointing + 0.6 ns TOF', sd.INK, 'line'), ('pale: pointing only', sd.GREY, 'line')]))
         D.slide('reach', body, '''Days to 3σ at R(ATOMKI) = 5.8×10⁻⁶, from the FEASIBILITY_SIM §19 reference fit (θ × |y| × E_sum,
 background shape floating) on one pair of arms. Central value: geometric mean of the "direct + one-event floor" and
 "transplant" estimators; the black line spans them. 11 µm: the yields of an 11 µm film (target review), the Geant4
@@ -209,7 +209,7 @@ events of the 20 µm run. Table: sim2arm/out/summary_reach*.csv.''', short='Reac
                tip=f'{rl}: days to 3σ {x["days3"]:.1f}')
     P.vline(T_RES, label='the plan')
     body = (sd.title('Five days: a limit near the ATOMKI ratio with the liquid cells, below MEG II’s without',
-                     f'Horizontal pair, {film}, pointing + 0.3 ns TOF; band = the two estimators')
+                     f'Horizontal pair, {film}, pointing + 0.6 ns TOF; band = the two estimators')
             + sd.row(P.svg('limit vs days'),
                      sd.col(sd.legend([(rl, col) for _, rl, col in RESP]),
                             sd.callout('An ATOMKI-size signal would show at 1–2σ: a hint, not an observation.', sd.RED),
@@ -276,7 +276,7 @@ geometry, all four arms, cut to pairs. The vertical pair's coincidences pile up 
                             w=440), gap=40))
     D.slide('veto', body, '''Levels: no veto = the E_sum window only; pointing = both Micromegas segments point back to the spot
 within D (90 % of X17 segments) with the muons' segments at the bench's 3°, plus a 20° collinearity veto; + TOF = arm-to-arm
-time of flight at σ_t 1 ns or 0.3 ns (assumed; never measured). Counts with 0–2 MC events are single events in ~5 live days
+time of flight at σ_t 1 ns or 0.6 ns (measured on n_TOF beam-off cosmics: 0.52–0.64 ns per arm). Counts with 0–2 MC events are single events in ~5 live days
 of L15.''', short='Vetoes')
 
     # ---- 8 rotated arms
@@ -320,7 +320,7 @@ region. The 15.1 MeV IPC and conversions were not simulated rotated.''', short='
                      'Two opposite arms; the roll between vertical and horizontal is the only reconfiguration')
             + sd.flow(steps, size=26)
             + sd.row(sd.card(sd.p('Bring the liquid cells', 28, weight=600) + sd.p('×3 in days; even as at n_TOF they beat none.', 24, sd.MUT)),
-                     sd.card(sd.p('Measure σ_t before the run', 28, weight=600) + sd.p('the 0.3 ns TOF is the reference level’s assumption.', 24, sd.MUT)),
+                     sd.card(sd.p('σ_t with the LNL readout', 28, weight=600) + sd.p('0.6 ns per arm measured with the n_TOF readout; check it with the LNL digitisers.', 24, sd.MUT)),
                      sd.card(sd.p('Thin film, daily yield', 28, weight=600) + sd.p('10–12 µm Li against LiOH; a γ monitor (ask LNL).', 24, sd.MUT)), gap=32))
     D.slide('plan', body, '''Why horizontal for the beam days: with working vetoes the two opposite pairs are equal (±10 %); if the
 vetoes disappoint, the horizontal pair sees ~10× fewer cosmics. Why vertical before the beam: cosmics need no beam, and the
@@ -335,7 +335,7 @@ thousand per day.''', short='Plan')
            + sd.p('The numbers are as good as the as-built Monte Carlo of the Cu hemisphere', 52, sd.DINK, 600)
            + sd.row(sd.col(sd.p('Not covered', 30, sd.DINK, 600),
                            sd.p('· the IPC shape beyond the fit’s floating 2 % + 1 %<br>· the conversions (few hundred MC events)<br>'
-                                '· a 0.3 ns time of flight nobody has measured<br>· air showers (several particles at once)', 26, sd.DMUT)),
+                                '· σ_t with the LNL digitisers (0.6 ns with n_TOF’s)<br>· air showers (several particles at once)', 26, sd.DMUT)),
                     sd.col(sd.p('Open decisions', 30, sd.DINK, 600),
                            sd.p('· bring the two liquid cells (S5)<br>· a stand that rolls 90° about the beam<br>'
                                 '· AN2000 for the 441 keV day<br>· a γ-yield monitor from LNL', 26, sd.DMUT)), gap=80))

@@ -1,7 +1,7 @@
 """Proposal figure: expected 90 % CL limit on R vs days at 1.10 MeV, two opposite arms (Geant4, sim2arm).
 
 Reads planning/out/two_arm_reach.csv (two_arm_estimates.py, run it first): Cu hemisphere, horizontal pair, MM pointing +
-0.3 ns TOF, the three energy stacks; solid = 11 µm Li (recommended), thin dashed = 20 µm (as simulated).
+0.6 ns TOF (measured, n_TOF beam-off cosmics), the three energy stacks; solid = 11 µm Li (recommended), thin dashed = 20 µm (as simulated).
 Writes proposal/latex/figures/limit_vs_days.{pdf,png} and the .csv beside them.
 """
 from __future__ import annotations
