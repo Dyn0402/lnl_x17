@@ -12,16 +12,20 @@ and the page; it does not duplicate those studies.
 
 **Live page (unlisted):** <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>
 
-## Read this first (2026-11-18)
+## Read this first (2026-11-18, reach updated 2026-11-19)
 
 - Pierfrancesco (18 Nov): ask for an **X17 feasibility study**, ~8 days, measure in H2 2027; he does the informal contact;
   co-proponents Massimi, Mengoni, Gervino, Gustavino, Cosentino (`correspondence/2026-11-18_mastinu_pac.md`).
 - Set-up: Micromegas A (ready) + B (drift fix by Stephan), 2 SiPM walls, 4 small plastics (PMTs to find), ~24 digitizer channels,
   half of DREAM. Cash ~€10k critical for the test (+€3k low-, +€8k high-budget upgrades) if every loan comes through.
-- **Scaling estimate** (`planning/two_arm_estimates.py`): 5 days at 1.10 MeV give an expected 90 % CL limit of 1.5–1.8 × R(ATOMKI)
-  with walls + plastics, near MEG II's limit; **0.8–0.9 × with two liquid cells**. Replace with the two-arm re-reduction (task R1).
+- **Geant4 two-arm study (19 Nov, `sim2arm/TWO_ARM_STUDY.md`, note
+  <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>):** 5 days at 1.10 MeV, 11 µm Li, horizontal pair: expected 90 %
+  limit **0.93 × R(ATOMKI)** with the liquid cells working, **1.19 ×** as at n_TOF, **1.78 ×** without them (MEG II: 2.07 ×). An
+  ATOMKI-size signal would show at 0.7–1.4σ: a limit, not a 3σ test. Plan: cosmic nights with the arms **vertical** before the
+  beam (the veto test), **horizontal** for the beam days, opposite arms (turning them in costs time), 441 keV for one day
+  (~600 pairs/day, not 6–12k), ½ day adjacent for external conversions. Bring the liquid cells (×2–4 in days).
 - AN2000, not CN: the CN starts at 0.8 MV, so no 441 keV calibration there.
-- Next: P1 (outline + questions to Pierfrancesco), P3 (INFN-AAI account), R1, draft v1 by 27 Nov.
+- Next: P1 (outline + questions to Pierfrancesco), P3 (INFN-AAI account), R5 (proposal text from sim2arm, Overleaf), draft v1 by 27 Nov.
 
 ## Map
 
@@ -33,7 +37,8 @@ and the page; it does not duplicate those studies.
 | `proposal/latex/` | the draft in the LNL template: `main.tex` (both parts), text in `abstract_content.tex` + `body_content.tex` (`make`, `make zip`); on [Overleaf](https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f) |
 | `proposal/lnl_template/` | the official LNL templates from Indico 50487 |
 | `planning/plan.py` | **single source** of tasks, phases, milestones, hardware, budget, questions, risks → `planning/out/plan.json` |
-| `planning/two_arm_estimates.py` | two-arm reach scaling → `planning/out/two_arm_reach.csv`, `beam_days.csv` |
+| `sim2arm/` | the Geant4 two-arm study: `TWO_ARM_STUDY.md`, the fit cut to one arm pair, L15/L16 condor jobs, the slide note |
+| `planning/two_arm_estimates.py` | the two-arm reach rows from `sim2arm/out/summary_reach_pass2*.csv` → `planning/out/two_arm_reach.csv`, `beam_days.csv` |
 | `planning/figures.py` | the proposal figure (`proposal/latex/figures/limit_vs_days.*`) |
 | `site/template.html`, `site/build_page.py` | the page: build, copy into dylan-cern-site |
 | `correspondence/` | short summaries of the e-mails that set decisions |

@@ -1,5 +1,46 @@
 # Handoff
 
+## Two-arm Geant4 study (R1) and the 8-day plan — updated 2026-11-19 (dylan-Yoga, overnight)
+
+**Resume:** read `sim2arm/TWO_ARM_STUDY.md` §0 (or the note <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>);
+next: upload the new `proposal/latex/body_content.tex` to Overleaf (R5), then P1 with the new numbers.
+
+**Goal (Dylan, 18 Nov night):** careful analysis and simulation of a bare-bones two-Micromegas LNL run (~8 days): can we see
+something, should we go for a measurement, which geometry (vertical, horizontal, perpendicular), and a hedged run plan that
+prepares the physics run and gives results for funding proposals. Liquid cells evaluated both ways; arms may be moved.
+
+**Done**
+- `sim2arm/two_arm_nd.py`: the FEASIBILITY_SIM §19 reference fit (shapes_nd) with every table cut to one arm pair; Cu
+  hemisphere, L11 + L13 (incl. the L13 E1 18.15 table, never merged before: reduced + merged tonight, on EOS now).
+  Grid: 4 pairs × 3 liquid states × 4 vetoes × 2 estimators × 2 films (20 µm simulated, 11 µm yields) + spectra.
+- **Run L15** (1630 condor jobs, 10.0 live days): new `--cosmic-disk` generator (muons start on a disk normal to the track).
+  **L4 had missed every muon steeper than ~45°**: horizontal pair 110 → 6,254 coincidences/day; vertical unchanged (162k).
+- **Run L16**: new `--arms`/`--arm-phi` (rotated arms): Δφ 160° ×1.1, 140° ×2–2.5 in days. Keep the arms opposite.
+- MX17_Full_Geant branch `lnl_twoarm` (3 commits, pushed; worktree `/afs/.../x17_lnl/MX17_Full_Geant_twoarm`, binary
+  `bin/mx17_full_sim_twoarm_be1c1bb`). Fixed on the way: rotated placements need the frame rotation P0·Rφ⁻¹.
+- Results (11 µm, horizontal, 5 d): R90 = 0.93 / 1.19 / 1.78 × R(ATOMKI) (liquid working / as at n_TOF / none); Z = 1.4 /
+  1.1 / 0.7σ. Two arms = ×2.2 the four-arm days; 11 µm = ×1.3 against 20 µm. Horizontal = vertical with 0.3 ns TOF; with
+  pointing only the horizontal pair holds (23 d) and the vertical drops (34 d). 1 ns TOF barely helps.
+- Plan (`sim2arm/TWO_ARM_STUDY.md` §7): vertical cosmic nights before the beam (σ_t, μ segments, gains, the MEG II 140° peak),
+  roll to horizontal; day 1 current scan; day 2 441 keV (~600 pairs/day above 90°); days 3–7 X17; day 8 ½ day adjacent.
+- Propagated: `planning/two_arm_estimates.py` (simulation, films, geometry, veto), `figures.py`, `plan.py` (R1 done, R5, R6,
+  γ monitor, stand roll, risks, questions), page reach tab (film/geometry/veto selectors) and texts, proposal body text +
+  beam table + figure (`make` OK, body 4 pages), `slot1_feasibility/PLAN.md` §0, §2–4. Page + note deployed (site 28d9c61).
+
+**Gotchas**
+- `planning/two_arm_estimates.py` reads `sim2arm/out/summary_reach_pass2*.csv` (`SIM_TAG`); rerun `sim2arm/run_pass.sh`
+  (~2.5 h on the laptop, 4 workers: more get OOM-killed and `multiprocessing.Pool` then hangs) and `build_study_md.py`.
+- The fits used L15 chunks 0–3 (2.45 live days); the tables in §4 use all 10. Cosmic tables: `$WORK_DATA/x17_facility_search/sel_l15/`.
+- Overleaf is NOT updated (needs the browser): upload `body_content.tex`, Refresh the linked `limit_vs_days.pdf`.
+- The laptop's dylan-cern-site checkout is 42 commits behind and has another session's uncommitted files; I built and
+  deployed from a clean worktree at origin/master instead and left that checkout alone.
+- revtex4 and enumitem were missing on the laptop: unpacked from the Ubuntu debs into `~/texmf/tex/latex/`.
+
+**Next steps**
+1. R5: Overleaf upload; send Pierfrancesco the outline with these numbers (P1); the question on a rolling stand and a γ monitor.
+2. S5: decide the liquid cells (the biggest lever). R4: σ_t on the cosmic bench.
+3. R6: more as-built Cu-hemisphere MC (EPC, IPC at large angle) before the PAC talk.
+
 ## LNL page + proposal: Overleaf, budget, Cu hemisphere, Hardware tab, inventory — updated 2026-11-19 (dylan-MS-7C84)
 
 **Resume:** page and Overleaf draft current; next: P1 (outline + questions to Pierfrancesco), P3 (INFN-AAI), R1 (two-arm re-reduction).

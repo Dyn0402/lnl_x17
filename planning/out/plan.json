@@ -1584,7 +1584,8 @@
    "detail": "Opposite arms are best (turning them toward 140° costs ×1.1–2.5 in days, run L16). Its material goes into the Geant4 geometry (R3).",
    "cash": 0,
    "fallback": 0,
-   "tier": ""
+   "tier": "",
+   "inv": []
   },
   {
    "id": "gmon",
