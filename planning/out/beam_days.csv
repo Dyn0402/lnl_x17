@@ -1,10 +1,11 @@
 day,E_p,what,beam
-1,1.10 MeV,"Beam on target at low current; target conditioning; current scan 0.05 → 1 µA: trigger rates, DREAM live time, Micromegas occupancy, SiPM/plastic singles",on
-2,0.441 MeV,"Locate the 441 keV resonance on the γ yield (17.64 MeV, M1); IPC calibration run",on
-3,0.441 MeV,"IPC calibration run: opening-angle resolution, acceptance, energy scale against Geant4",on
-4,1.10 MeV,"18.15 MeV region: IPC spectrum, X17 window",on
+before,—,"Installation week, VERTICAL pair: ≥ 3 nights of cosmics with the full trigger. Measures the arm-to-arm time of flight (σ_t), each arm's MIP gain and the rejection of every cosmic veto, in the worst geometry",off
+1,1.10 MeV,"Roll to the HORIZONTAL pair. Beam on target at low current; target conditioning; current scan 0.05 → 1 µA: trigger rates, DREAM live time, Micromegas occupancy, SiPM/plastic singles; γ-yield reference",on
+2,0.441 MeV,"Locate the 441 keV resonance (singles rate); 17.64 MeV M1 IPC: absolute rate, opening-angle shape and energy scale against Geant4 (~600 pairs/day above 90° in the E_sum window)",on
+3,1.10 MeV,"18.15 MeV region: IPC spectrum, X17 window",on
+4,1.10 MeV,18.15 MeV region (cont.),on
 5,1.10 MeV,18.15 MeV region (cont.),on
 6,1.10 MeV,18.15 MeV region (cont.),on
-7,1.10 MeV,18.15 MeV region (cont.); end-of-run target check (γ yield vs day 4),on
-8,1.10 MeV,"18.15 MeV region (cont.), or 0.80 MeV off-resonance if the target allows; contingency",on
-nights/weekend,—,"Beam-off cosmic runs with the full trigger: the cosmic background model, measured",off
+7,1.10 MeV,18.15 MeV region (cont.); end-of-run target check (γ yield vs day 1),on
+8,1.10 MeV,"Half a day with the arms ADJACENT (90°): small-angle IPC and external conversions at 6× the opposite-pair rate; then back to opposite, or contingency",on
+nights,—,Any beam-off time: cosmics with the full trigger in the physics geometry,off

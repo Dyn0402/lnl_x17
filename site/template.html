@@ -333,15 +333,17 @@ details summary { cursor: pointer; color: var(--ink-2); }
       <label>Target <select id="r-tgt"></select></label>
       <label>Energy stack <select id="r-stack"></select></label>
       <span class="seg" id="r-arms"><button type="button" data-a="2" aria-pressed="true">2 arms</button><button type="button" data-a="4" aria-pressed="false">4 arms</button></span>
-      <label>Cosmic veto <select id="r-veto"><option value="1">MM 15° + 0.3 ns TOF (reference)</option><option value="1.75">track pointing only (×1.75 days)</option></select></label>
+      <label>Li film <select id="r-film"></select></label>
+      <label>Geometry <select id="r-geom"></select></label>
+      <label>Cosmic veto <select id="r-veto"></select></label>
       <label>Days at 1.10 MeV <input type="range" id="r-days" min="1" max="15" step="0.5" value="5"> <b id="r-days-v">5</b></label>
     </div>
     <div class="tiles" id="r-tiles"></div>
     <div class="card" style="padding:10px 8px"><div id="r-chart"></div></div>
-    <p class="note">A <b>scaling estimate, not a simulation</b>: the four-arm Geant4 reach of <span class="kbd">FEASIBILITY_SIM.md §19.3</span>
-      (reference fit, background shape floating) ×2 in days for two opposite arms (band ×1.7–2.5). Expected limit = 1.28 / Z(ATOMKI) × R(ATOMKI).
-      The 0.3 ns arm-to-arm time of flight is unmeasured; "pointing only" uses §19.4's ratio. A two-arm re-reduction of the L10–L13 tables (task R1)
-      replaces this before the proposal is final. A horizontal pair of arms sees far fewer cosmics than this assumes.</p>
+    <p class="note"><b>Geant4, two arms</b> (2026-11-19, <span class="kbd">lnl_x17/sim2arm/TWO_ARM_STUDY.md</span>): the FEASIBILITY_SIM §19 reference fit
+      (θ × |y| × E_sum, background shape floating) run on one pair of arms of the Cu-hemisphere tables (L11 + L13), with cosmics from every zenith angle (run L15).
+      Range: the two MC-safe estimators. Expected limit = 1.28 / Z(ATOMKI) × R(ATOMKI). The 0.3 ns arm-to-arm time of flight is unmeasured.
+      The Al ogive has no two-arm simulation: its rows are the four-arm §19.3 days × the Cu hemisphere's simulated two-arm / four-arm ratio.</p>
     <div class="tscroll"><table id="r-table"></table></div>
   </section>
 
@@ -378,11 +380,11 @@ details summary { cursor: pointer; color: var(--ink-2); }
       <div class="card"><b>1 · The apparatus on a proton beam.</b> Trigger and singles rates vs current, DREAM live time, Micromegas occupancy,
         the Li target's behaviour. Everything the Geant4 reach assumes, measured.</div>
       <div class="card"><b>2 · A calibration at 441 keV.</b> The 17.64 MeV M1 pairs, where ATOMKI saw no anomaly: angular resolution,
-        acceptance and energy scale against Geant4. 12–24k selected pairs in two days with two arms.</div>
-      <div class="card"><b>3 · The backgrounds.</b> Beam-off cosmics with and without the track veto (MEG II's 2026 point about ATOMKI-type
-        spectrometers), accidentals, external pairs.</div>
-      <div class="card"><b>4 · A first look at 18.15 MeV.</b> Five days at 1.10 MeV: an expected 90 % CL limit of ~1.8 × R(ATOMKI) with
-        walls and plastics alone, ~0.9 × with two liquid cells (Cu hemisphere target). Scaling estimate; see <a href="#reach" data-go="reach">Beam &amp; reach</a>.</div>
+        acceptance and energy scale against Geant4. ~600 selected pairs a day above 90° with two arms: one day is enough.</div>
+      <div class="card"><b>3 · The backgrounds.</b> Cosmic nights with the arms vertical before the beam: the 140° cosmic peak MEG II pointed at,
+        measured with and without each veto, and the arm-to-arm time of flight. Accidentals and external pairs with beam.</div>
+      <div class="card"><b>4 · A first look at 18.15 MeV.</b> Five days at 1.10 MeV, two opposite arms: an expected 90 % CL limit near the ATOMKI ratio
+        with the liquid cells, ~1.5–2 × without them; MEG II's limit is 2.07 ×. Geant4 (two arms, Cu hemisphere); see <a href="#reach" data-go="reach">Beam &amp; reach</a>.</div>
     </div>
     <h2>Submission and after</h2>
     <div class="grid2">
@@ -541,10 +543,10 @@ function overview() {
   const fx = $("#facts"); fx.innerHTML = "";
   [["Machine", "AN2000, 0.2–2.0 MV (CN as fallback, no 441 keV)"],
    ["Beam", "protons, 0.441 and 1.10 MeV, ≤ 1 µA, continuous"],
-   ["Beam days", "8: 1 set-up · 2 at 441 keV · 5 at 1.10 MeV"],
+   ["Beam days", "8: 1 set-up · 1 at 441 keV · 5 at 1.10 MeV · ½ adjacent + contingency; cosmic nights before the beam"],
    ["Set-up", "2 of the 4 MX17 arms (A ready, B after a drift-window repair), ~24 scintillator channels"],
    ["When", "second half of 2027 (our plan, not an allocation)"],
-   ["Expected reach", (rm ? rm.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL in 5 days" + (rl ? `; ${rl.r90_over_atomki} × with liquid cells` : "") + " (scaling estimate)"],
+   ["Expected reach", (rl ? rl.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL in 5 days with the liquid cells as at n_TOF" + (rm ? `, ${rm.r90_over_atomki} × without them` : "") + " (Geant4, two arms, horizontal pair, " + (rl ? rl.film.replace(/ \(.*\)/, "") : "") + "). An ATOMKI-size signal would show at 1–2σ"],
   ].forEach(([k, v]) => fx.append(h("dt", {}, k), h("dd", {}, v)));
   const nx = $("#nextup"); nx.innerHTML = "";
   D.tasks.filter(t => t.status !== "done" && !ticked(t.id)).sort((a, b) => a.due.localeCompare(b.due)).slice(0, 6).forEach(t => {
@@ -556,8 +558,8 @@ function overview() {
     ["Machine", "AN2000 (441 keV calibration possible) or CN (≥ 0.8 MV, no 441)."],
     ["Spokesperson & GLIMOS", "Needed on the abstract page."],
     ["Target & holder", "Pressed Li on Cu, 10–12 µm, in the Cu hemisphere (already built: most likely). Confirm with Pierfrancesco."],
-    ["Liquid cells", "Two 45 × 45 cm cells behind the plastics: ×3.6 in reach, if they work at LNL rates."],
-    ["Arm orientation", "Horizontal pair (geometry suppresses cosmics) or vertical (the hard test of the veto)."],
+    ["Liquid cells", "Two 45 × 45 cm cells behind the plastics: without them the days to 3σ go up ×2–4 (Geant4). Even as at n_TOF they beat none."],
+    ["Arm orientation", "Opposite arms. Vertical for the cosmic nights before the beam (the veto test), horizontal for the beam days (robust if the veto disappoints). Needs a stand that rolls 90°."],
     ["Author list", "Massimi, Mengoni, Gervino, Gustavino, Cosentino + who else."],
   ];
   for (const [k, v] of DEC) dc.append(h("li", {}, h("b", {}, k + ". "), v));
@@ -719,8 +721,8 @@ function setupSvg() {
     svg.append(h("svg:text", { x: S - 14, y: S - 16, "text-anchor": "end", "font-size": 15, style: "fill:var(--muted)" }, "cosmic μ, mostly vertical"));
   }
   box.append(svg);
-  const msg = suMode === "h" ? "Horizontal pair: a muon must be near-horizontal to cross both arms, so two-arm cosmics are suppressed by geometry (cos² zenith). Best for the reach."
-    : suMode === "v" ? "Vertical pair: every vertical muon through the target region crosses both arms. Worst case for cosmics, the hard test of the track veto."
+  const msg = suMode === "h" ? "Horizontal pair: a muon must be near-horizontal to cross both arms: ~6,000 two-arm cosmic coincidences a day (L15, every zenith angle) against ~160,000 for a vertical pair, ~10× fewer in the X17 window after pointing. The beam days' geometry."
+    : suMode === "v" ? "Vertical pair: every vertical muon through the target region crosses both arms, half of them at 125–160° (the MEG II 140° peak). The cosmic nights' geometry: the hard test of the veto, before the beam."
     : "Slot 2: all four arms, re-bulked C and D; big plastics behind the walls in the full experiment.";
   box.append(h("p", { class: "small", style: "margin:6px 0 0" }, msg));
 }
@@ -901,18 +903,22 @@ function days() {
   $("#dayinfo").append(h("b", {}, (d.day.includes("night") ? "Nights / weekend" : "Day " + d.day) + " · " + (d.E_p === "—" ? "beam off" : "E_p = " + d.E_p)), h("p", { style: "margin:4px 0 0" }, d.what));
 }
 const M = D.reach_model;
-const tgts = [...new Set(M.four_arm.map(r => r.target))];
-const stacks = [...new Set(M.four_arm.map(r => r.stack))];
-$("#r-tgt").append(...tgts.map(t => h("option", { value: t }, t)));
-$("#r-stack").append(...stacks.map(s => h("option", { value: s }, s.replace(/^\+ /, "walls + plastics + "))));
+const uniq = k => [...new Set(D.reach.map(r => r[k]))];
+$("#r-tgt").append(...uniq("target").map(t => h("option", { value: t }, t)));
+$("#r-stack").append(...uniq("energy_stack").map(s => h("option", { value: s }, s.replace(/^\+ /, "walls + plastics + "))));
+$("#r-geom").append(...uniq("geometry").map(s => h("option", { value: s }, s)));
+$("#r-film").append(...uniq("film").map(s => h("option", { value: s }, s)));
+$("#r-veto").append(...uniq("veto").map(s => h("option", { value: s }, s + (s.includes("TOF") ? " (reference)" : ""))));
+$("#r-stack").value = uniq("energy_stack").find(s => s.includes("as at")) || uniq("energy_stack")[0];
 let rArms = 2;
 $$("#r-arms button").forEach(b => b.onclick = () => { rArms = +b.dataset.a; $$("#r-arms button").forEach(x => x.setAttribute("aria-pressed", x === b)); reach(); });
-["r-tgt", "r-stack", "r-veto", "r-days"].forEach(id => $("#" + id).addEventListener("input", reach));
+["r-tgt", "r-film", "r-stack", "r-geom", "r-veto", "r-days"].forEach(id => $("#" + id).addEventListener("input", reach));
 function reachCfg() {
-  const row = M.four_arm.find(r => r.target === $("#r-tgt").value && r.stack === $("#r-stack").value);
-  const veto = +$("#r-veto").value;
-  const f = rArms === 2 ? M.f : [1, 1, 1];
-  return { row, d3: [row.lo * f[0] * veto, row.c * f[1] * veto, row.hi * f[2] * veto] };
+  const sel = r => r.target === $("#r-tgt").value && r.film === $("#r-film").value && r.energy_stack === $("#r-stack").value;
+  const row = D.reach.find(r => sel(r) && r.geometry === $("#r-geom").value && r.veto === $("#r-veto").value)
+    || D.reach.find(r => sel(r));
+  const n = k => +row[k];
+  return { row, d3: rArms === 2 ? [n("d2_lo"), n("d2_c"), n("d2_hi")] : [n("d4_lo"), n("d4_c"), n("d4_hi")] };
 }
 const Z = (d3, d) => 3 * Math.sqrt(d / d3);
 const R90 = (d3, d) => 1.2816 / Z(d3, d) * M.r_atomki;
@@ -929,10 +935,11 @@ function reach() {
     tl.append(h("div", { class: "tile" }, h("div", { class: "k" }, k), h("div", { class: "v" }, v), h("div", { class: "s" }, s))));
   reachChart(d3, days);
   const t = $("#r-table"); t.innerHTML = "";
-  t.append(h("tr", {}, ...["target", "energy stack", "4 arms: d to 3σ", "2 arms: d to 3σ", "Z in 5 d", "limit / ATOMKI", "limit / MEG II"].map((x, i) => h("th", { class: i > 1 ? "num" : "" }, x))));
-  const selStack = $("#r-stack").value.replace(/^\+ /, "");
-  D.reach.forEach(x => t.append(h("tr", { class: x.target === $("#r-tgt").value && x.energy_stack.replace(/^\+ /, "") === selStack ? "sel" : "" },
-    h("td", {}, x.target), h("td", {}, x.energy_stack), h("td", { class: "num" }, `${x.four_arm_days} (${x.four_arm_range})`), h("td", { class: "num" }, `${x.two_arm_days} (${x.two_arm_range})`),
+  t.append(h("tr", {}, ...["target", "energy stack", "geometry", "cosmic veto", "4 arms: d to 3σ", "2 arms: d to 3σ", "Z in 5 d", "limit / ATOMKI", "limit / MEG II"].map((x, i) => h("th", { class: i > 3 ? "num" : "" }, x))));
+  const { row: cur } = reachCfg();
+  D.reach.filter(x => x.target === $("#r-tgt").value && x.film === $("#r-film").value).forEach(x => t.append(h("tr", { class: x === cur ? "sel" : "", title: x.source },
+    h("td", {}, x.target), h("td", {}, x.energy_stack), h("td", {}, x.geometry), h("td", {}, x.veto),
+    h("td", { class: "num" }, `${x.four_arm_days} (${x.four_arm_range})`), h("td", { class: "num" }, `${x.two_arm_days} (${x.two_arm_range})`),
     h("td", { class: "num" }, x.z_in_5d), h("td", { class: "num" }, x.r90_over_atomki), h("td", { class: "num" }, x.r90_over_megii))));
 }
 function reachChart(d3, dsel) {

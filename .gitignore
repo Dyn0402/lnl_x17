@@ -8,3 +8,7 @@ site/out/
 proposal/latex/abstract.pdf
 proposal/latex/body.pdf
 proposal/latex/main.pdf
+sim2arm/out/parts/
+sim2arm/out/*.log
+sim2arm/out/test_deck.html
+sim2arm/__pycache__/

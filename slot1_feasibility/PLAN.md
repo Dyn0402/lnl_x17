@@ -6,7 +6,7 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 
 ---
 
-## 0. Bottom line (2026-11-18)
+## 0. Bottom line (2026-11-18; reach and plan updated 2026-11-19 from the Geant4 two-arm study)
 
 - **What we ask for:** ~8 beam days on AN2000 (CN as fallback) in the second half of 2027, for an *X17 feasibility study*
   with two arms of the n_TOF MX17 apparatus around a ⁷Li target. Pierfrancesco's framing, 18 Nov: a feasibility study of
@@ -16,12 +16,14 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
   Everything is owned or borrowed. Cash critical for the test: **~€9k**; +€4.4k low-budget upgrade, +€8k high-budget upgrade; up to €43k more if loans fall through (§7).
 - **What it proves:**
   1. the apparatus works on a proton beam: rates, live time, Micromegas occupancy, Li target;
-  2. a **calibration at the 441 keV resonance** (17.64 MeV M1 pairs, no anomaly expected): 12–24k selected pairs in 2 days;
-  3. the **backgrounds measured**: cosmics with beam off, with and without the track-based veto (the MEG II 2026 point
-     about ATOMKI-type spectrometers), beam-induced singles and accidentals;
-  4. a first look at the 18.15 MeV pairs. **Scaling estimate (not simulated):** 5 days at 1.10 MeV give an expected 90 % CL
-     limit of 1.5–1.8 × R(ATOMKI) with the SiPM walls and small plastics alone, already near MEG II's 1.2×10⁻⁵. With two
-     liquid cells, even as they ran at n_TOF, it is 0.8–0.9 × R(ATOMKI): the feasibility run could test the ATOMKI claim.
+  2. a **calibration at the 441 keV resonance** (17.64 MeV M1 pairs, no anomaly expected): ~600 selected pairs per day
+     above 90° with two arms (Geant4; not the 6–12k of the first estimate), so one day;
+  3. the **backgrounds measured**: cosmic nights with the arms **vertical** before the beam (the MEG II 2026 140° peak at
+     full strength, every veto, the arm-to-arm time of flight), beam-induced singles, accidentals, external conversions;
+  4. a first look at the 18.15 MeV pairs. **Geant4, two arms (`../sim2arm/TWO_ARM_STUDY.md`):** 5 days at 1.10 MeV,
+     11 µm Li, horizontal pair: expected 90 % CL limit **0.93 × R(ATOMKI)** with the liquid cells working, **1.19 ×** as they
+     ran at n_TOF, **1.78 ×** without them; MEG II's limit is 2.07 ×. An ATOMKI-size signal would show at 0.7–1.4σ: a limit,
+     not a test of the claim at 3σ.
 - **Why it matters:** a positive PAC answer lets us build the 2-branch full detector; results back the INFN commission
   request and the full-experiment proposal (slot 2).
 - **The decisions now:** machine (AN2000 for 441 keV); target and holder; bring two liquid cells or not; spokesperson and
@@ -53,9 +55,12 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 | gas | buy | Ar/iC₄H₁₀ 95/5 premix and panel; flammable-gas rules at LNL (ask) |
 | target | decide | LNL's pressed Li on Cu, 10–12 µm; holder: most likely the Cu hemisphere, already built (the 'Cu ogive' rows in §4; Dylan, 19 Nov); flat Al end cap at 45° the lighter alternative |
 
-**Geometry.** The two arms face each other across the beam (opposite arms of the pinwheel, faces at ±204 mm). The X17
-pairs at ~135–140° and the large-angle IPC are seen through opposite arms; adjacent arms see 25–92° pairs and no X17.
-So two opposite arms keep the X17 physics, at about half the rate.
+**Geometry (Geant4, 19 Nov, `../sim2arm/TWO_ARM_STUDY.md`).** The two arms face each other across the beam (faces at
+±204 mm). Opposite arms keep 38 % of the four-arm X17 pairs per pair; adjacent arms see 25–120° and no X17; turning the
+arms toward 140° costs ×1.1–2.5 in days. **Vertical** (top + bottom) for the cosmic nights before the beam: ~1.6 × 10⁵
+cosmic coincidences a day, the hard test of the veto. **Horizontal** for the beam days: ~26× fewer cosmic coincidences,
+and the reach holds with track pointing alone (the vertical pair needs a ≤ 0.4 ns time of flight to match it). The stand
+should roll 90° about the beam.
 
 **Channels.** 16 SiPM-wall + 4 plastic PMT (+2 liquid) + 2–3 trigger word + spares ≈ 24. This is the "10–20 channels"
 Pierfrancesco can find, plus a few.
@@ -64,37 +69,57 @@ Pierfrancesco can find, plus a few.
 
 | day | E_p | what |
 |---|---|---|
-| 1 | 1.10 MeV | target conditioning; current scan 0.05 → 1 µA (rates, live time, occupancy) |
-| 2–3 | 0.441 MeV | locate the resonance on the γ yield; 17.64 MeV IPC calibration (resolution, acceptance, energy scale) |
-| 4–8 | 1.10 MeV | 18.15 MeV region; daily γ-yield check of the target; day 8 = contingency or 0.80 MeV |
-| nights / weekend | — | beam-off cosmics with the full trigger |
+| before | — | installation nights, arms vertical: cosmic veto test, time of flight, MIP gains (≥ 3 nights) |
+| 1 | 1.10 MeV | roll to horizontal; target conditioning; current scan 0.05 → 1 µA (rates, live time, occupancy) |
+| 2 | 0.441 MeV | locate the resonance; 17.64 MeV IPC calibration (~600 pairs/day above 90°: rate, θ shape, energy scale) |
+| 3–7 | 1.10 MeV | 18.15 MeV region (the X17 data); daily γ-yield check of the target |
+| 8 | 1.10 MeV | ½ day with the arms adjacent (external conversions, small-angle IPC); contingency |
+| beam off | — | cosmics in the physics geometry |
 
 - AN2000 "self-service": one energy change per day, which fits the plan (three energies).
 - 1 µA is the documented proton current at 0.8–2 MeV on both machines (and on AN2000 except the 0° line).
-- **The CN cannot do day 2–3:** its range starts at 0.8 MV. On the CN the plan becomes 1.03/1.10 MeV only, and the
+- **The CN cannot do day 2:** its range starts at 0.8 MV. On the CN the plan becomes 1.03/1.10 MeV only, and the
   calibration moves to the γ₁/γ₀ ratio and cosmics.
 
-## 4. What 8 days can show (scaling estimate, 2026-11-18)
+## 4. What 8 days can show (Geant4 two-arm study, 2026-11-19)
 
-`../planning/two_arm_estimates.py` → `../planning/out/two_arm_reach.csv`. The four-arm Geant4 reach of
-`x17_facility_search/lnl/FEASIBILITY_SIM.md` §19.3 (reference fit, 3σ at R(ATOMKI), 1 µA, 1.10 MeV, MM 15° + 0.3 ns TOF)
-×2 in days for two arms (range ×1.7–2.5). Five days at 1.10 MeV:
+`../sim2arm/TWO_ARM_STUDY.md` (method, all geometries and vetoes) → `../planning/two_arm_estimates.py` →
+`../planning/out/two_arm_reach.csv`. The FEASIBILITY_SIM §19 reference fit (θ × |y| × E_sum, background shape floating)
+on one pair of arms of the Cu-hemisphere Geant4 tables (L11 + L13), cosmics from every zenith angle (L15, 10 live days),
+1 µA, 1.10 MeV. Range: the two MC-safe estimators. The Al ogive has no two-arm simulation: its rows are §19.3 × the Cu
+hemisphere's simulated ratio (estimate). Horizontal pair:
 
-| target | energy stack | 4 arms, d to 3σ | 2 arms, d to 3σ | Z at R(ATOMKI) in 5 d | expected 90 % limit / R(ATOMKI) | / MEG II |
-|---|---|---|---|---|---|---|
-| Al ogive + Cu liner (lighter) | SiPM + small plastics | 30.5 | 61 (48–82) | 0.86 | 1.49 | 0.72 |
-| | + liquid as at n_TOF | 8.5 | 17 (12–25) | 1.63 | 0.79 | 0.38 |
-| | + liquid repaired | 4.5 | 9 (6–14) | 2.24 | 0.57 | 0.28 |
-| Cu hemisphere (built; "Cu ogive" in §19.3) | SiPM + small plastics | 45 | 90 (68–125) | 0.71 | 1.81 | 0.88 |
-| | + liquid as at n_TOF | 11 | 22 (15–35) | 1.43 | 0.90 | 0.43 |
-| | + liquid repaired | 6 | 12 (8–20) | 1.94 | 0.66 | 0.32 |
+| film | target | energy stack | cosmic veto | 4 arms, d to 3σ | 2 arms, d to 3σ | Z at R(ATOMKI) in 5 d | 90 % limit / R(ATOMKI) | / MEG II |
+|---|---|---|---|---|---|---|---|---|
+| 11 µm Li | Cu hemisphere (built) | SiPM wall + small plastics (no liquid) | MM pointing + 0.3 ns TOF | 58.7 | 86.9 (54-139) | 0.72 | 1.78 | 0.86 |
+| 11 µm Li | Cu hemisphere (built) | SiPM wall + small plastics (no liquid) | MM pointing only | 67.5 | 92.3 (60-143) | 0.7 | 1.84 | 0.89 |
+| 11 µm Li | Cu hemisphere (built) | + liquid as at n_TOF | MM pointing + 0.3 ns TOF | 19.3 | 38.9 (28-54) | 1.08 | 1.19 | 0.58 |
+| 11 µm Li | Cu hemisphere (built) | + liquid as at n_TOF | MM pointing only | 23.3 | 38.2 (30-49) | 1.09 | 1.18 | 0.57 |
+| 11 µm Li | Cu hemisphere (built) | + liquid working | MM pointing + 0.3 ns TOF | 10.6 | 23.6 (23-24) | 1.38 | 0.93 | 0.45 |
+| 11 µm Li | Cu hemisphere (built) | + liquid working | MM pointing only | 13.5 | 22.9 (22-24) | 1.4 | 0.91 | 0.44 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing + 0.3 ns TOF | 41.4 | 61.3 (35-106) | 0.86 | 1.5 | 0.72 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing only | 41.4 | 65.1 (39-109) | 0.83 | 1.54 | 0.74 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing + 0.3 ns TOF | 11.2 | 22.6 (14-37) | 1.41 | 0.91 | 0.44 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing only | 11.2 | 22.2 (14-34) | 1.42 | 0.9 | 0.43 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing + 0.3 ns TOF | 5.8 | 12.8 (10-16) | 1.87 | 0.68 | 0.33 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing only | 5.8 | 12.5 (10-16) | 1.9 | 0.67 | 0.33 |
+| 20 µm Li | Cu hemisphere (built) | SiPM wall + small plastics (no liquid) | MM pointing + 0.3 ns TOF | 43.2 | 70.1 (42-118) | 0.8 | 1.6 | 0.77 |
+| 20 µm Li | Cu hemisphere (built) | SiPM wall + small plastics (no liquid) | MM pointing only | 48.1 | 65.5 (43-100) | 0.83 | 1.55 | 0.75 |
+| 20 µm Li | Cu hemisphere (built) | + liquid as at n_TOF | MM pointing + 0.3 ns TOF | 14.6 | 29.9 (22-42) | 1.23 | 1.05 | 0.51 |
+| 20 µm Li | Cu hemisphere (built) | + liquid as at n_TOF | MM pointing only | 16.1 | 27.9 (22-36) | 1.27 | 1.01 | 0.49 |
+| 20 µm Li | Cu hemisphere (built) | + liquid working | MM pointing + 0.3 ns TOF | 8.3 | 17.9 (18-18) | 1.59 | 0.81 | 0.39 |
+| 20 µm Li | Cu hemisphere (built) | + liquid working | MM pointing only | 9.8 | 16.9 (16-17) | 1.63 | 0.79 | 0.38 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing + 0.3 ns TOF | 30.5 | 49.4 (27-90) | 0.95 | 1.34 | 0.65 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing only | 30.5 | 46.2 (28-76) | 0.99 | 1.3 | 0.63 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing + 0.3 ns TOF | 8.5 | 17.4 (10-28) | 1.61 | 0.8 | 0.39 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing only | 8.5 | 16.2 (10-25) | 1.67 | 0.77 | 0.37 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing + 0.3 ns TOF | 4.5 | 9.7 (8-12) | 2.15 | 0.6 | 0.29 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing only | 4.5 | 9.2 (7-12) | 2.21 | 0.58 | 0.28 |
 
-Caveats:
-- Statistics plus the fitted background-shape freedom of the reference fit, nothing more. The 0.3 ns arm-to-arm TOF is not
-  measured; with track pointing alone the days are ×1.5–2 (§19.4 there).
-- The ×2 is geometry reasoning. Task R1 replaces it with a two-arm re-reduction of the L10–L13 tables (no new Geant4).
-- Not a discovery run, and the proposal must not read like one. The limit column is what we quote as "sensitivity".
-- 441 keV: 6–12k selected pairs per day at 1 µA with two arms (half of §19.5's four-arm 12–24k).
+- Not a discovery run: an ATOMKI-size signal shows at 1–1.5σ with the liquid cells. Quote the limit column as "sensitivity".
+- The liquid cells are the biggest lever (×2–4 in days). The 10–12 µm film (LiOH) costs ×1.3 against 20 µm.
+- The 0.3 ns arm-to-arm TOF is not measured; the horizontal pair does not need it (pointing only gives the same days).
+- 441 keV: ~600 selected pairs per day above 90° (two arms, E_sum window), ~3,000 without the E_sum cut.
 
 ## 5. Timeline
 
