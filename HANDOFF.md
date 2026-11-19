@@ -1,5 +1,21 @@
 # Handoff
 
+## Two-arm: shape systematics, the 441 keV geometry, σ_t from n_TOF — updated 2026-11-19 (dylan-MS-7C84)
+
+**Done**
+- `sim2arm/geom_syst.py`: linearised fake X17 from a *specific* mismodelling (origin or one arm off by 2 mm, a dead 10 mm
+  Micromegas band), reference fit, 5 days (`out/geom_syst_{horiz,vert}.csv`). 2 mm offsets: |r| ≤ 0.01 R(ATOMKI) horizontal,
+  ≤ 0.11 vertical (≤ 0.2σ). Dead band in arm 0: −0.18 R (−0.4σ), the largest; σ_r(5 d) ≈ 0.43 R. θ only moves (selection
+  not redone), signal template nominal.
+- `sim2arm/struct_scan.py`: days to 3σ against the unknown-structure nuisance: horizontal 17.6 (none) → 17.9 (reference)
+  → 18.9 d (S_θy 5 %, ℓ/2); vertical 16.7 → 18.3 (`out/struct_scan_two_arm.csv`).
+- 441 keV stays opposite arms: the adjacent pair has 39 M1 pairs/day in 125–160° against 358 (§2 tables).
+- n_TOF cosmics, first look (`sim2arm/ntof_timing_firstlook/`): wall A–C σ_t ≲ 1.9 ns per arm (upper bound). Muon MM
+  angle measured 1–3° (bench, n_TOF), 3–8° at |tan| > 0.45, 5–16 % tails. Electron "MM 15°" is the old reconstruction:
+  is2_v2 misses the axis by 17–26 mm (Geant4 floor 15–16 mm).
+
+**Next**: the σ_t measurement on A–C through-goers (plan in the README there); the four-arm fit per pair, not summed.
+
 ## Two-arm Geant4 study (R1) and the 8-day plan — updated 2026-11-19 (dylan-Yoga, overnight)
 
 **Resume:** read `sim2arm/TWO_ARM_STUDY.md` §0 (or the note <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>);
