@@ -31,6 +31,7 @@ prepares the physics run and gives results for funding proposals. Liquid cells e
 - `planning/two_arm_estimates.py` reads `sim2arm/out/summary_reach_pass2*.csv` (`SIM_TAG`); rerun `sim2arm/run_pass.sh`
   (~2.5 h on the laptop, 4 workers: more get OOM-killed and `multiprocessing.Pool` then hangs) and `build_study_md.py`.
 - The fits used L15 chunks 0–3 (2.45 live days); the tables in §4 use all 10. Cosmic tables: `$WORK_DATA/x17_facility_search/sel_l15/`.
+- lxplus scripts (L15/L16 submit, run, merge) live in `/afs/cern.ch/work/d/dneff/git/x17_lnl/analysis/l15/`; copies in `sim2arm/lxplus/` (all synced 19 Nov). Laptop `WORK_DATA` is unset: the scripts default to `/media/dylan/data/work`.
 - Overleaf is NOT updated (needs the browser): upload `body_content.tex`, Refresh the linked `limit_vs_days.pdf`.
 - The laptop's dylan-cern-site checkout is 42 commits behind and has another session's uncommitted files; I built and
   deployed from a clean worktree at origin/master instead and left that checkout alone.

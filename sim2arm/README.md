@@ -7,7 +7,7 @@ what to measure. Write-up: [`TWO_ARM_STUDY.md`](TWO_ARM_STUDY.md).
 |---|---|
 | `two_arm_nd.py` | the FEASIBILITY_SIM §19 reference fit (x17_facility_search `lnl/target/shapes/shapes_nd.py`) cut to one arm pair; tasks `reach`, `spectra` |
 | `summarize.py` | tables (`out/summary_*.csv`) and figures (`out/figures/`) |
-| `lxplus/` | the condor jobs of runs L15 (cosmics, disk generator) and L16 (arms rotated about the beam), the Geant4 patch notes |
+| `lxplus/` | copies of lxplus `/afs/cern.ch/work/d/dneff/git/x17_lnl/analysis/l15/`: the condor jobs of runs L15 (`submit_l15.sh` + `run_l15.sh`, cosmics, disk generator) and L16 (`submit_ta.sh`, arms rotated about the beam), the merge scripts, the Geant4 patch notes; `TWOARM_BIN` names the binary (MX17_Full_Geant branch `lnl_twoarm`) |
 | `out/` | CSVs and figures |
 
 Data: the merged tables are on EOS (`/eos/experiment/ntof/data/x17/lnl/target/sel_l1{1,3}`, `sel_v3`, `L15/`, `L16/`); the
