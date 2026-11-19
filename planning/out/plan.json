@@ -416,7 +416,7 @@
    "due": "2027-06-30",
    "who": "Dylan",
    "status": "todo",
-   "t": "Timing on cosmics: transit-corrected SiPM-wall/plastic resolution, arm-to-arm lag (decides TOF cut)"
+   "t": "Timing on cosmics with the LNL readout (V1742/CFD): n_TOF beam-off muons give σ_t 0.52–0.64 ns per arm (walls), 0.95 (plastics) with the n_TOF readout (nTof_x17 ac_tof_beamoff, 19 Nov); decides the TOF cut"
   },
   {
    "id": "R5",
@@ -1849,7 +1849,7 @@
    "r": "Cosmic veto weaker than simulated (σ_t > 0.4 ns, segments worse than 3°)",
    "l": "med",
    "i": "med",
-   "m": "Horizontal pair for the beam days (10× fewer cosmics); measure σ_t on the bench (R4) and in the vertical cosmic nights."
+   "m": "n_TOF beam-off muons: σ_t 0.52–0.64 ns per arm (19 Nov). Horizontal pair for the beam days: its days barely depend on σ_t (17.4 d with no TOF, 17.7 at any σ_t; sim2arm tof_scan); the vertical pair goes 17.1 → 18.7 d from 0.3 to 0.7 ns. R4 with the LNL readout."
   },
   {
    "r": "Li film degrades (LiOH) under beam",

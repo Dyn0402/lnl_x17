@@ -13,8 +13,15 @@
 - n_TOF cosmics, first look (`sim2arm/ntof_timing_firstlook/`): wall A–C σ_t ≲ 1.9 ns per arm (upper bound). Muon MM
   angle measured 1–3° (bench, n_TOF), 3–8° at |tan| > 0.45, 5–16 % tails. Electron "MM 15°" is the old reconstruction:
   is2_v2 misses the axis by 17–26 mm (Geant4 floor 15–16 mm).
+- **σ_t measured** (nTof_x17 `ntof_cosmics/ac_tof_beamoff.py`, report `ntof_cosmics/results/ac_tof/report.html`): beam-off
+  run_149 A–C wall coincidences (2,579), t_A − t_C shows the muon's ±2.5 ns TOF as two clean peaks; σ(A−C) 0.90 ± 0.01 ns
+  from the two-peak fit (toy closes), direction-tagged peak cores 0.73: **0.52–0.64 ns per arm** (walls), 0.95 (plastics),
+  n_TOF readout. Beam-run muons give ~6 ns (pulse-fit floor under beam), so beam data can't measure it.
+- `sim2arm/tof_scan.py` (`out/tof_scan_two_arm.csv`): horizontal days 17.4 (no TOF) → 17.7 at any σ_t (cosmics 3–13/day
+  at 0.5–0.7 ns against ~600 beam); vertical 21.7 (no TOF) → 17.1 / 17.9 / 18.7 d at 0.3 / 0.6 / 0.7 ns.
+- plan.py R4 and the cosmic-veto risk updated; page redeployed (site 4c24d25+). FEASIBILITY_SIM §0/§4 updated.
 
-**Next**: the σ_t measurement on A–C through-goers (plan in the README there); the four-arm fit per pair, not summed.
+**Next**: R4 with the LNL readout (V1742/CFD); the four-arm fit per pair, not summed.
 
 ## Two-arm Geant4 study (R1) and the 8-day plan — updated 2026-11-19 (dylan-Yoga, overnight)
 
