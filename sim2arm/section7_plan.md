@@ -4,7 +4,8 @@
 
 Everything that makes the feasibility case (rates, calibration, backgrounds, the veto) is front-loaded and takes
 three days at most; the X17 data fill the rest. If the apparatus misbehaves, the run is still a full feasibility study;
-if it works, the last five days give a limit near the ATOMKI ratio. Nothing in the plan depends on a lucky signal.
+if it works, the last five days give a first limit: with the built Cu hemisphere ~2.4 × R(ATOMKI) at best, about MEG II's
+level; with a lighter Al end piece ~0.6–0.8 × (estimate, §0). Nothing in the plan depends on a lucky signal.
 
 ### 7.2 Before the beam: the cosmic veto test, vertical pair (installation week, ≥ 3 nights)
 
@@ -38,8 +39,8 @@ stacked vertically.
 | day | E_p | what | the number it delivers |
 |---|---|---|---|
 | 1 | 1.10 MeV | target conditioning; current scan 0.05 → 1 µA; γ-yield reference | singles and two-arm rates vs current, DREAM live time, MM occupancy; accidentals (≲ 0.02/day in the window at 2τ = 20 ns) |
-| 2 | 0.441 MeV | locate the 441 keV resonance on the arm singles; 17.64 MeV M1 IPC | ~600 pairs/day above 90° in the E_sum window (~3,000 with no E_sum cut): the absolute IPC rate, the θ shape and the E_sum peak against Geant4 to ~5 % |
-| 3–7 | 1.10 MeV | the 18.15 MeV region; 30 min yield check each day | the X17 data (§3): expected limit 0.7–1.1 × R(ATOMKI) with the liquid cells |
+| 2 | 0.441 MeV | locate the 441 keV resonance on the arm singles; 17.64 MeV M1 IPC | ~140 pairs/day above 90° in the E_sum window with the built Cu hemisphere (~1,600 with no E_sum cut; the ogive gave ~600): the absolute IPC rate to ~8 % in a day, the θ shape and the E_sum peak against Geant4 |
+| 3–7 | 1.10 MeV | the 18.15 MeV region; 30 min yield check each day | the X17 data (§3): expected limit 2.4 / 3.1 × R(ATOMKI) with the liquid working / as at n_TOF (built Cu hemisphere); 0.6–0.8 × with a lighter Al end piece (estimate) |
 | 8 | 1.10 MeV | ½ day with the arms adjacent (90°), then contingency | external conversions and small-angle IPC at 25–90°, several × 10³/day (§6) |
 | beam off | — | cosmics in the physics geometry (horizontal) | the beam-off background template in the geometry of the data |
 
@@ -71,4 +72,5 @@ day 8) is optional and comes last.
 - The apparatus on a proton beam: rates, live time, occupancy, measured against Geant4.
 - The 17.64 MeV IPC (no anomaly expected): the measured opening-angle distribution against Geant4.
 - The cosmic background in the X17 window with each veto, in the worst geometry: the answer to the MEG II critique.
-- A first X17 limit at 18.15 MeV, expected at or below the ATOMKI ratio with the liquid cells (and below MEG II's).
+- A first X17 limit at 18.15 MeV: with the built Cu hemisphere about MEG II's (2.4 × R(ATOMKI), liquid working); below the
+  ATOMKI ratio only with a lighter Al end piece (estimate).

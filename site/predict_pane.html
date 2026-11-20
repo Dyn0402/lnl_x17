@@ -39,6 +39,7 @@
             <button type="button" data-v="iso" aria-pressed="true">3D</button>
             <button type="button" data-v="beam" aria-pressed="false">along the beam</button>
             <button type="button" data-v="top" aria-pressed="false">from above</button>
+            <button type="button" data-v="target" aria-pressed="false">target</button>
           </span>
           <label><input type="checkbox" id="ev-sec" checked> secondaries</label>
           <label><input type="checkbox" id="ev-gam" checked> photons</label>
@@ -55,8 +56,8 @@
       <div class="card" id="ev-info"><p class="small muted">Loading the 3D view…</p></div>
     </div>
     <div class="evpick" id="ev-pick"></div>
-    <p class="prcap">Every line is a Geant4 step list (run L17, MX17_Full_Geant <span class="kbd">lnl_twoarm</span> with <span class="kbd">--trajdump</span>):
-      the slot-1 geometry with only arms 0 + 1 built (horizontal; arms 2 + 3 for the vertical cosmic nights), the Cu hemisphere with its Li film,
+    <p class="prcap">Every line is a Geant4 step list (run L17d, MX17_Full_Geant <span class="kbd">lnl_twoarm</span> with <span class="kbd">--trajdump</span>):
+      the slot-1 geometry with only arms 0 + 1 built (horizontal; arms 2 + 3 for the vertical cosmic nights), the built Cu hemisphere (R 11 mm, 300 µm wall, Cu rim, on the grey flange and tube of the photographed line) with its Li film,
       the beam line, the as-built stacks (Micromegas, SiPM wall, two plastics, liquid cell). The layer extents are read from the same step points.
       Events were kept when the analysis would see them (pairs: a leg and a Micromegas track in both arms; γ: a leg in one arm; muons: legs in
       both) and the drawn ones chosen as typical, not at random: the pairs and muons nearest 140°. Tracks are thinned (e± below 0.1 MeV and
@@ -64,7 +65,7 @@
 
     <h2>2. The predictions, in the order the run produces them</h2>
     <div class="card" style="padding:4px 6px"><div class="tscroll"><table class="prt" id="pr-table"></table></div></div>
-    <p class="prcap">Two-arm set-up, Cu hemisphere, 11 µm Li, 1 µA, liquid cells working (“LNL calibrated” response). “× ε” folds in the bench
+    <p class="prcap">Two-arm set-up, the built Cu hemisphere (R 11 mm, 300 µm), 11 µm Li, 1 µA, liquid cells working (“LNL calibrated” response). “× ε” folds in the bench
       efficiency of each chamber (ε = <span id="pr-eps"></span>); the simulation's chambers are 100 % efficient. MC = number of simulated events
       behind a number. Rates of 10-hour cosmic nights.</p>
 

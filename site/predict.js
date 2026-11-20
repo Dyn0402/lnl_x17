@@ -165,7 +165,7 @@ function prTable() {
     ["D1", "Two-arm events with both tracks (any θ, any E)", "1 µA", `${nf(sum(b4.trigger, BEAM, "per_day"))} / day`, `+ ${nf(b4.trigger.cos.per_day)} cosmics/day`, ""],
     ["D2", "Selected pairs, θ > 90°, E_sum window", "pointing + TOF", `${nf(sum(b4.ref, ["M1", "E1", "g1", "epc"], "per_day_win_gt90"))} / day`,
       `M1 IPC ${nf(b4.ref.M1.per_day_win_gt90)}, conversions ${nf(b4.ref.epc.per_day_win_gt90)}, 14.6/15.1 IPC ${nf(b4.ref.g1.per_day_win_gt90)}; cosmics ${nf(b4.ref.cos.per_day_win_gt90)}`, `MC ${nf(b4.ref.M1.n_mc_win_gt90)} (M1)`],
-    ["D3", "Selected pairs per beam leg", "441 keV", `${nf(P.ratio_pairs_per_leg_441 * 1e5, 3)}×10⁻⁵`, "independent of the film's Li content", ""],
+    ["D3", "Selected pairs per beam leg", "441 keV", `${(P.ratio_pairs_per_leg_441 * 1e6).toFixed(1)}×10⁻⁶`, "independent of the film's Li content", ""],
     ["D4", "Opening-angle shape, E_sum peak, |y|", "441 keV", "§5 plots", "angular response and energy scale on a transition with no anomaly", ""],
     ["Pairs at 1.10 MeV (days 3–7)"],
     ["E1", "Selected background pairs", "pointing + TOF", `${nf(sum(b11.ref, ["M1", "E1", "g1", "epc", "cos"], "per_day_win_gt90"))} / day`,
@@ -206,7 +206,7 @@ function prCharts() {
     xlab: "beam current (µA)", ylab: "legs per second, one arm" });
   prLegend("ps-F-l", [["441 keV", "var(--s2)", 1], ["1.10 MeV", "var(--s1)", 1]]);
   prLine("ps-F", { x: I, series: [{ name: "441 keV", col: "var(--s2)", y: s["441"].scan.map(r => r.track_frac * P.eps_mm) }, { name: "1.10 MeV", col: "var(--s1)", y: s["1100"].scan.map(r => r.track_frac * P.eps_mm) }],
-    xlab: "beam current (µA)", ylab: "legs with a track (× ε)", ymin: 0.3, ymax: 0.6, fmt: v => pct(v) });
+    xlab: "beam current (µA)", ylab: "legs with a track (× ε)", ymin: 0.3, ymax: 0.8, fmt: v => pct(v) });
   const ce = P.singles.cos_E_hist_leg_track;
   prLegend("ps-E-l", [["beam, 441 keV", "var(--s2)", 1], ["beam, 1.10 MeV", "var(--s1)", 1], ["cosmics", "var(--s5)", 1]]);
   prHist("ps-E", { edges: s["1100"].E_hist.leg_track.edges, series: [{ name: "441 keV", col: "var(--s2)", y: s["441"].E_hist.leg_track.y }, { name: "1.10 MeV", col: "var(--s1)", y: s["1100"].E_hist.leg_track.y }, { name: "cosmics", col: "var(--s5)", y: ce ? ce.y : [] }],
@@ -250,11 +250,13 @@ function prCaveats() {
   const b = $("#pr-cav"); b.innerHTML = "";
   const go = P.gam_origin || (EVD.gam_origin || null);
   const items = [
+    ["Target.", ` ${P.target_name || "Cu hemisphere"} (Geant4 ${P.target || ""}: runs L10 + L18 for the pairs and γ, L17d for the drawn events). The first version of this tab and of the 19 Nov two-arm study used the Cu ogive of the 27 Oct sketch, which is not built; corrected 20 Nov. The L15 muons were simulated with the ogive in place, which does not matter for muons crossing the arms.`],
     ["The n_TOF check of the cosmic simulation (2026, beam off, arms A + C).", " The zenith-angle shape of A–C muon pairs matched the expectation (median 73.6° measured, 74.4° predicted); the rate did not at first (0.063 Hz against 0.161 Hz). The factor 2.5 is the reconstruction's track gate, tuned on capsule tracks: 57 % of clean A–C muons fail it in at least one arm. Without the gate the rate is 0.11–0.17 Hz, consistent. Still open: the A–C wall coincidences without chambers, 0.84 Hz measured against 0.34 Hz predicted (nTof_x17 ntof_cosmics/ac_cosmic_rate.py; to understand before quoting absolute cosmic rates)."],
     ["Cosmic flux.", " The L15 generator is 1 μ/cm²/min at sea level, open sky, cos²θ; the LNL hall roof lowers it a little (not modelled)."],
     ["Chamber efficiency.", ` ε = ${P.eps_mm} from the bench (91–93 % within 5 mm) applied per chamber where marked; the track definition is the simulation's (dominant segment, ≥ 3 steps, centroid in the active area), so a reconstruction gate like n_TOF's would cut further.`],
     ["Beam backgrounds not simulated.", " Room background, beam-line activation, target contaminants (¹⁹F, ¹¹B, ¹³C), neutrons (none expected below the ⁷Li(p,n) threshold at 1.88 MeV). The singles prediction is the 8Be γ part: measure beam-on minus beam-off, and anything above the prediction is these."],
-    ["Thin Monte Carlo.", ` The external conversions at 441 keV rest on ${P.pairs["441"].ref.epc.n_mc_win_gt90} simulated events after the selection (the hover shows the count per bin): good to a factor ~2, and ~25 % of the selected 441 keV sample, so D2 is uncertain by about ±20 % (task R6). The spike in |y| is one of those events.`],
+    ["Thin Monte Carlo.", (() => { const r = P.pairs["441"].ref, sel = ["M1", "E1", "g1", "epc"].reduce((a, k) => a + r[k].per_day_win_gt90, 0);
+      return ` The external conversions after the selection rest on ${r.epc.n_mc_win_gt90} simulated events at 441 keV (${pct(r.epc.per_day_win_gt90 / sel)} of the selected sample) and ${P.pairs["1100"].ref.epc.n_mc_win_gt90} at 1.10 MeV (the hover shows the count per bin): good to a factor ~2. Before the selection they are dense (${nf(r.epc.n_mc)} events).`; })()],
     ["Energies.", " The single-arm spectra are raw Geant4 deposits (no light yield, quenching or resolution); the pair E_sum and |y| plots include the LNL-calibrated response."],
     ["Yields.", " 11 µm Li in the Cu hemisphere, the x17_facility_search film yields; a 20 µm film or LiOH conversion changes C1 and D1–E2 by the same factor."],
   ];

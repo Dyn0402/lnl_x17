@@ -1,7 +1,7 @@
 day,E_p,what,beam
 before,—,"Installation week, VERTICAL pair: ≥ 3 nights of cosmics with the full trigger. Measures the arm-to-arm time of flight (σ_t), each arm's MIP gain and the rejection of every cosmic veto, in the worst geometry",off
 1,1.10 MeV,"Roll to the HORIZONTAL pair. Beam on target at low current; target conditioning; current scan 0.05 → 1 µA: trigger rates, DREAM live time, Micromegas occupancy, SiPM/plastic singles; γ-yield reference",on
-2,0.441 MeV,"Locate the 441 keV resonance (singles rate); 17.64 MeV M1 IPC: absolute rate, opening-angle shape and energy scale against Geant4 (~600 pairs/day above 90° in the E_sum window)",on
+2,0.441 MeV,"Locate the 441 keV resonance (singles rate); 17.64 MeV M1 IPC: absolute rate, opening-angle shape and energy scale against Geant4 (~140 pairs/day above 90° in the E_sum window, built Cu hemisphere)",on
 3,1.10 MeV,"18.15 MeV region: IPC spectrum, X17 window",on
 4,1.10 MeV,18.15 MeV region (cont.),on
 5,1.10 MeV,18.15 MeV region (cont.),on

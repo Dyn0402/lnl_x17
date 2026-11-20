@@ -93,9 +93,9 @@ def main():
 
     # ---- 1 cover
     p3 = 1 - pnorm(3 - z_nt)
-    cover = (sd.kicker('LNL slot 1 · two Micromegas arms · Geant4, 19 Nov 2026')
-             + sd.p(f'Two arms in 8 days: a limit near the ATOMKI ratio, not a discovery', 64, sd.DINK, 600)
-             + sd.p('Opposite arms, horizontal; liquid cells in; the cosmic veto tested in a vertical pair before the beam.', 30, sd.DMUT)
+    cover = (sd.kicker('LNL slot 1 · two Micromegas arms · the built Cu hemisphere · Geant4, 20 Nov 2026')
+             + sd.p(f'Two arms in 8 days with the built Cu hemisphere: about MEG II’s limit, a feasibility test first', 60, sd.DINK, 600)
+             + sd.p('Its 300 µm wall costs ×6 in days against the Cu ogive simulated on 19 Nov by mistake; a lighter Al end piece would recover it (estimate). Opposite arms, horizontal; liquid cells in; the veto tested vertical before the beam.', 28, sd.DMUT)
              + sd.row(sd.bignum(f'{min(mid, best):.1f}–{max(mid, best):.1f}×', 'expected 90 % limit / R(ATOMKI)', sd.DBLUE,
                                 f'5 days at 1.10 MeV, {film}, liquid as at n_TOF … working. MEG II: 2.07×',
                                 tip='R90 = 1.28 / Z × R(ATOMKI); Z = 3 √(5 d / d₃σ) from the reference fit'),
@@ -208,11 +208,11 @@ events of the 20 µm run. Table: sim2arm/out/summary_reach*.csv.''', short='Reac
         P.line(ds, [r90(x['days3'], d) for d in ds], col, markers=False,
                tip=f'{rl}: days to 3σ {x["days3"]:.1f}')
     P.vline(T_RES, label='the plan')
-    body = (sd.title('Five days: a limit near the ATOMKI ratio with the liquid cells, below MEG II’s without',
+    body = (sd.title('Five days with the built Cu hemisphere: about MEG II’s limit with the liquid cells, above it without',
                      f'Horizontal pair, {film}, pointing + 0.6 ns TOF; band = the two estimators')
             + sd.row(P.svg('limit vs days'),
                      sd.col(sd.legend([(rl, col) for _, rl, col in RESP]),
-                            sd.callout('An ATOMKI-size signal would show at 1–2σ: a hint, not an observation.', sd.RED),
+                            sd.callout(f'An ATOMKI-size signal would show at {z_nt:.1f}–{z_fix:.1f}σ: no physics result. A lighter Al end piece: ~0.6–0.8 × R(ATOMKI) (estimate).', sd.RED),
                             sd.callout('Every result below the purple line is a better limit than MEG II’s.', sd.PURPLE),
                             w=520), gap=44))
     D.slide('limit', body, '''Expected 90 % CL upper limit with no signal: R90 = 1.2816 / Z(T) × R(ATOMKI), with Z linear in R
@@ -322,11 +322,12 @@ region. The 15.1 MeV IPC and conversions were not simulated rotated.''', short='
             + sd.row(sd.card(sd.p('Bring the liquid cells', 28, weight=600) + sd.p('×3 in days; even as at n_TOF they beat none.', 24, sd.MUT)),
                      sd.card(sd.p('σ_t with the LNL readout', 28, weight=600) + sd.p('0.6 ns per arm measured with the n_TOF readout; check it with the LNL digitisers.', 24, sd.MUT)),
                      sd.card(sd.p('Thin film, daily yield', 28, weight=600) + sd.p('10–12 µm Li against LiOH; a γ monitor (ask LNL).', 24, sd.MUT)), gap=32))
-    D.slide('plan', body, '''Why horizontal for the beam days: with working vetoes the two opposite pairs are equal (±10 %); if the
-vetoes disappoint, the horizontal pair sees ~10× fewer cosmics. Why vertical before the beam: cosmics need no beam, and the
+    D.slide('plan', body, '''Why horizontal for the beam days: with the built Cu hemisphere the horizontal pair needs ×1.6 fewer days than
+the vertical one even with working vetoes (cosmics are a large share of its background), and if the vetoes disappoint it sees
+~10× fewer cosmics. Why vertical before the beam: cosmics need no beam, and the
 vertical pair records them at full strength, including the 140° peak MEG II pointed at; a few nights measure the arm-to-arm
-time of flight with ~10⁵ crossing muons per day. Why 441 keV for one day: ~500 M1 pairs above 90° per day in the opposite
-pair, a 5 % check of the absolute IPC rate and angular shape against Geant4 with no anomaly expected. Why adjacent at the
+time of flight with ~10⁵ crossing muons per day. Why 441 keV for one day: ~140 selected pairs above 90° per day in the opposite
+pair with the hemisphere, an ~8 % check of the absolute IPC rate and the angular shape against Geant4, no anomaly expected. Why adjacent at the
 end: the external conversions in the Cu wall are the least-known background; adjacent arms see them at 25–90° at several
 thousand per day.''', short='Plan')
 
@@ -334,10 +335,10 @@ thousand per day.''', short='Plan')
     end = (sd.kicker('What this does not rule out')
            + sd.p('The numbers are as good as the as-built Monte Carlo of the Cu hemisphere', 52, sd.DINK, 600)
            + sd.row(sd.col(sd.p('Not covered', 30, sd.DINK, 600),
-                           sd.p('· the IPC shape beyond the fit’s floating 2 % + 1 %<br>· the conversions (few hundred MC events)<br>'
+                           sd.p('· the IPC shape beyond the fit’s floating 2 % + 1 %<br>· a two-arm simulation of the lighter Al end piece<br>'
                                 '· σ_t with the LNL digitisers (0.6 ns with n_TOF’s)<br>· air showers (several particles at once)', 26, sd.DMUT)),
                     sd.col(sd.p('Open decisions', 30, sd.DINK, 600),
-                           sd.p('· bring the two liquid cells (S5)<br>· a stand that rolls 90° about the beam<br>'
+                           sd.p('· a lighter Al end piece for slot 1 (T1, R10)<br>· bring the two liquid cells (S5)<br>· a stand that rolls 90° about the beam<br>'
                                 '· AN2000 for the 441 keV day<br>· a γ-yield monitor from LNL', 26, sd.DMUT)), gap=80))
     D.slide('end', end, '', dark=True, short='Limits')
     D.write(a.out, note_meta=dict(title='LNL two-arm run: what 8 days can show',

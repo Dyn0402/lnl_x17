@@ -41,8 +41,8 @@ took data in 2026~\cite{Gus20}. Its arms combine a Micromegas TPC, which measure
 low-energy proton beam, it addresses exactly the requirements above: the opening angle is reconstructed
 from tracked hits, cosmic muons are recognised by their straight tracks crossing two arms, and four arms
 cover $\sim$40\,\% of the solid angle for the \Xs{} pairs. A full Geant4 simulation of the apparatus around
-a \Li{} target predicts a $3\sigma$ test of the ATOMKI ratio in one to two weeks at 1~\si{\micro\ampere}
-with the apparatus as built, and in about a day with larger plastic scintillators.
+a \Li{} target in a light (aluminium) holder predicts a $3\sigma$ test of the ATOMKI ratio in one to two weeks at
+1~\si{\micro\ampere} with the apparatus as built, and in about a day with larger plastic scintillators.
 Before proposing that measurement, we want to verify the simulation's inputs on the beam: rates,
 backgrounds and response. That is the aim of this proposal.
 
@@ -100,8 +100,11 @@ $P = 10$--50 to monitor gains; a 1~Hz clock; DREAM's busy vetoes the trigger so 
 event list. At LNL rates DREAM is $>95$\,\% live.
 
 \paragraph{Target.} A thin metallic lithium film (10--12~\si{\micro\metre}, rolled and pressed onto a
-backing in the argon glovebox of the LNL CN target laboratory) at the end of the beam line, in the existing copper hemisphere that closes the line.
-\todo{confirm the Cu hemisphere with P.~Mastinu; a thinner Al end cap would gain $\sim$30\,\% in time.}
+backing in the argon glovebox of the LNL CN target laboratory) at the end of the beam line, in the existing copper
+hemisphere that closes the line ($R = 11$~mm, 300~\si{\micro\metre} wall). Its wall costs most of the sensitivity: every
+lepton crosses 2\,\% $X_0$ of copper or its rim, losing $\sim$1~MeV and scattering by $\sim$10$^\circ$. A lighter aluminium end
+piece (an Al ogive with a thin Cu liner, or a flat Al end cap at 45$^\circ$) would cut the running time needed by about an
+order of magnitude in simulation. \todo{decide with P.~Mastinu whether one can be made for this run.}
 A 10--12~\si{\micro\metre} film keeps the 1.10~MeV beam above the 441~keV resonance even after partial
 conversion to LiOH. Boron-free lithium is required ($^{11}$B$(p,\gamma)$ gives 16--17~MeV $\gamma$ rays).
 
@@ -113,32 +116,33 @@ single-arm and two-arm trigger rates, DREAM live time, Micromegas occupancy and 
 beam-induced singles in the scintillators. Precision: scalers on every leg, $<1\,\%$ statistical in minutes.
 \item \textbf{Calibration on the 17.64~MeV M1 transition} ($E_p = 441$~keV, $\Gamma_\mathrm{lab} = 12$~keV,
 $\sigma \approx 5.9$~mb). Here ATOMKI saw no anomaly, so the IPC distribution is a calibration:
-the Geant4 simulation of the two-arm set-up gives $\sim$600 selected pairs per day above $90^\circ$ at
-1~\si{\micro\ampere} ($\sim$3000 without the energy-sum cut): in one day the absolute pair rate and the
-opening-angle distribution to a few per cent against Geant4, and the energy scale from the summed energy.
+the Geant4 simulation of the two-arm set-up with the Cu hemisphere gives $\sim$140 selected pairs per day above $90^\circ$
+at 1~\si{\micro\ampere} ($\sim$1600 without the energy-sum cut): in one day the absolute pair rate to $\sim$8\,\% and the
+opening-angle distribution against Geant4, and the energy scale from the summed energy.
 \item \textbf{Backgrounds.} Before the beam, with the two arms stacked vertically, a few nights of cosmic
 rays reproduce at full strength the $140^\circ$ structure at the core of the 2026 critique of ATOMKI-type
 spectrometers~\cite{MEG26} ($\sim1.6\times10^5$ two-arm coincidences per day in simulation, half of them
 at 125--$160^\circ$). They measure its rejection by each veto (track pointing, arm-to-arm time of flight)
 and the time-of-flight resolution itself. The beam days use the arms horizontally, where the simulation gives
-$\sim$26 times fewer cosmic coincidences. Beam-on runs measure accidentals and external pair conversions;
+$\sim$25 times fewer cosmic coincidences. Beam-on runs measure accidentals and external pair conversions;
 half a day with the arms at $90^\circ$ measures the latter at 25--$90^\circ$ at several thousand per day.
 \item \textbf{The 18.15~MeV region} ($E_p = 1.10$~MeV, five days). Rates: $\sim2\times10^3$ ground-state $\gamma$/s and
 $\sim7$ IPC pairs/s into $4\pi$ per \si{\micro\ampere} for a 300~\si{\micro\gram\per\centi\metre\squared} Li$_2$O film (ATOMKI conditions); a 10--12~\si{\micro\metre} metallic film gives about 4--5 times more.
 We fit the opening angle, the energy sharing and the energy sum together, with the background shape
-free within the calibration. The full Geant4 simulation of the two-arm set-up (Cu holder, 10--12~\si{\micro\metre}
-Li) gives an expected 90\,\% CL sensitivity in five days of $R \lesssim (0.9$--$1.2)\times R_\mathrm{ATOMKI}$ with
-liquid scintillator cells behind the plastics, and $\approx1.8\times R_\mathrm{ATOMKI}$ with the SiPM walls and plastics
-alone (Fig.~\ref{fig:reach}); MEG~II's limit is $2.1\times R_\mathrm{ATOMKI}$. A signal of the ATOMKI strength would
-appear at 1--1.5$\sigma$: this run tests the method and sets a first limit; the full experiment (four arms, large
-plastics) is designed for the discovery-level test.
+free within the calibration. The full Geant4 simulation of the two-arm set-up with the Cu hemisphere
+(10--12~\si{\micro\metre} Li) gives an expected 90\,\% CL sensitivity in five days of $R \lesssim 2.4\times R_\mathrm{ATOMKI}$
+with liquid scintillator cells behind the plastics (3.1$\times$ with the liquid as it ran at n\_TOF), and $4.3\times R_\mathrm{ATOMKI}$
+with the SiPM walls and plastics alone (Fig.~\ref{fig:reach}); MEG~II's limit is $2.1\times R_\mathrm{ATOMKI}$. With a
+lighter aluminium end piece the same five days would give $\sim$0.6--0.8$\times R_\mathrm{ATOMKI}$ (estimate from the
+four-arm simulation). This run tests the method and the backgrounds and sets a first limit; the full experiment
+(four arms, light holder, large plastics) is designed for the discovery-level test.
 \end{enumerate}
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.82\textwidth]{figures/limit_vs_days.pdf}
 \caption{Expected 90\,\% CL upper limit on $R=\Gamma_X/\Gamma_\gamma$ against days at $E_p=1.10$~MeV and
-1~\si{\micro\ampere}, two opposite arms (horizontal), Cu holder, 11~\si{\micro\metre} Li (dashed: 20~\si{\micro\metre}),
+1~\si{\micro\ampere}, two opposite arms (horizontal), the existing Cu hemisphere, 11~\si{\micro\metre} Li (dashed: 20~\si{\micro\metre}),
 for three energy configurations. Geant4 with cosmic rays; fit with the background shape floating; bands: two
 estimators of the finite Monte Carlo statistics.}
 \label{fig:reach}
@@ -156,7 +160,7 @@ day & $E_p$ & measurement \\
 \midrule
 before & -- & \daycell{installation nights, arms vertical: cosmic-ray rejection and time of flight} \\
 1 & 1.10 MeV & \daycell{arms horizontal; target conditioning; current scan 0.05--1~\si{\micro\ampere}: rates, live time, occupancy} \\
-2 & 0.441 MeV & \daycell{resonance located; 17.64~MeV IPC calibration, $\sim$600 pairs above $90^\circ$} \\
+2 & 0.441 MeV & \daycell{resonance located; 17.64~MeV IPC calibration, $\sim$140 pairs above $90^\circ$} \\
 3--7 & 1.10 MeV & \daycell{18.15~MeV region; daily $\gamma$-yield check of the target} \\
 8 & 1.10 MeV & \daycell{half a day with the arms at $90^\circ$ (external conversions); contingency} \\
 \bottomrule

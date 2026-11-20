@@ -1,8 +1,14 @@
 # The two-arm LNL run, simulated: what 8 days can show, and how to spend them
 
-Written 2026-11-19 (overnight study). Set-up: the slot-1 feasibility run of `../slot1_feasibility/PLAN.md`: two Micromegas
-(A, B), two SiPM walls, four small 20 × 30 × 2 cm plastics, optionally two liquid cells, the Cu hemisphere target holder
-(the "Cu ogive" of the simulation; Geant4 with 20 µm Li, yields also for the recommended 10–12 µm), AN2000 at 1 µA.
+Written 2026-11-19 (overnight study); **target corrected 2026-11-20**. Set-up: the slot-1 feasibility run of
+`../slot1_feasibility/PLAN.md`: two Micromegas (A, B), two SiPM walls, four small 20 × 30 × 2 cm plastics, optionally two
+liquid cells, **the built Cu hemisphere** (R 11 mm, 300 µm wall, Cu rim 4 × 5 mm, on the photographed grey flange and tube;
+Geant4 config `dome300`; 20 µm Li, yields also for the recommended 10–12 µm), AN2000 at 1 µA.
+
+> **Correction, 2026-11-20.** The 19 Nov version of this study (passes 1–3) simulated the **Cu ogive** of Pierfrancesco's
+> 27 Oct CAD sketch (Ø50 × 63 mm, 200 µm; config `ogCu200`, runs L11 + L13) and called it "the Cu hemisphere". The ogive
+> is not built. This version uses the built hemisphere (`dome300`, runs L10 + **L18**, a new ×30 as-built run, §1.1).
+> The pass-3 ogive tables stay in `out/*_pass3*` for reference (they scale the Al-ogive rows of the planning).
 Slide note: <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>. This replaces the ×2 scaling of
 `../planning/two_arm_estimates.py` (task R1).
 
@@ -17,7 +23,9 @@ Slide note: <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>. This re
 - **Re-used (no new physics):** the FEASIBILITY_SIM §19 reference fit (`x17_facility_search/lnl/target/shapes/shapes_nd.py`):
   θ × |y| × E_sum, background shape floating (S_θ 2 % + S_θy 1 %), free acceptance cubic, per-arm gains, the
   n_TOF-anchored calorimeter response, the yields of the Cu hemisphere's film at E_p, live 0.95. The Cu-hemisphere Geant4
-  tables of L11 and the ×30 as-built background run L13 (both on EOS, `target/sel_l11`, `sel_l13`).
+  tables of L10 (`dome300`, 27 Oct) and the new ×30 as-built background run **L18** (20 Nov: M1/E1 IPC at 18.15 and
+  15.1 MeV, 150 × 10⁵ pairs each; 8Be γ lines, 150 × 2 × 10⁶; X17, 30 × 10⁵; binary `mx17_full_sim_twoarm_10229eb`, the
+  same hemisphere geometry as L10 line by line; on EOS `target/sel_l18`, chunks of 30–50 jobs).
 - **New, `two_arm_nd.py`:** every table the fit loads passes through one function (`lnl_geant._combine`); the wrapper keeps
   only events whose selected pair is the requested pair of arms. Normalisations stay per generated event, so every rate is
   per day of the two-arm set-up. Events with three or more good arms: 0 in the beam samples, 0.2 % of cosmics, so
@@ -27,7 +35,7 @@ Slide note: <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>. This re
   - `--cosmic-disk R`: cosmic muons start on a disk of radius R normal to their own direction (run L15, §4).
   - Binary `bin/mx17_full_sim_twoarm_be1c1bb`. With no new option it builds the same geometry as `lnl_culiner` (checked:
     identical arm positions, no overlaps).
-- **The L13 E1 18.15 MeV table** (Cu hemisphere, as built) had never been merged: one job's ROOT file was truncated by an
+- *(19 Nov, the ogive tables)* **The L13 E1 18.15 MeV table** (Cu ogive, as built) had never been merged: one job's ROOT file was truncated by an
   EOS FUSE write on 12 Nov and its rerun was not reduced. Reduced and merged tonight (15 M pairs, 0.680 % two-arm rows per
   pair against 0.692 % in L11). It is in `sel_l13/` now, so the ×30 E1 statistics are in every fit below.
 
@@ -87,7 +95,8 @@ to horizontal, and L4 has almost none of them.
 the target, 1.08 m upstream along the track. Zenith from the intensity cos²θ through a surface normal to the track,
 θ < 89°; momentum as before (Reyna 2006 vertical spectrum; its harder spectrum at large zenith is not modelled, irrelevant
 for minimum-ionising muons). Live time per muon: 60 s / (4π/3 · R²) with R in cm, for 1 cm⁻² min⁻¹ through a horizontal
-surface. Same Cu-hemisphere geometry as the beam samples, all four arms built, cut to pairs like everything else.
+surface. All four arms built, cut to pairs like everything else. The L15 muons were simulated with the Cu ogive in place
+(the target is irrelevant for muons crossing the arms).
 
 Two-arm coincidences per day (trigger + Micromegas in the active area, any angle):
 
@@ -159,15 +168,16 @@ the Cu hemisphere smears below 120°). What they see well:
   the spot by ≥ 20 cm); the measured beam-off rate in the physics geometry is the check.
 - **The roll of the pair** (horizontal vs vertical) is simulated with arms 0–1 and 2–3, which are different modules (their
   liquid cells sit differently): part of the ±10 % between the two pairs' beam numbers is that, part is MC noise.
-- **20 µm Li film** as simulated; the review recommends 10–12 µm (51–61 % of the yield: ×1.6–2 in days, `TARGET_REVIEW.md`).
+- **20 µm Li film** as simulated; the review recommends 10–12 µm (51–61 % of the yield: ×1.7 in days for the hemisphere, §0; `TARGET_REVIEW.md`).
 - The 441 keV numbers reuse the 18.15 MeV M1 table with the 17.64 MeV yields (as `shapes_nd` does).
 
 ## 9. Next
 
 1. Proposal text (task R5): the reach rows of §3, the 441 keV rate of §2, the vertical-cosmics test of §7.2, Fig. from
-   `planning/figures.py`. The sensitivity sentence: "expected 90 % CL limit 0.8–1.3 × R(ATOMKI) in five days with liquid
-   cells, below MEG II's limit" (§0 numbers).
-2. More as-built MC for the Cu hemisphere (task R6): the EPC and the IPC at large angles in the opposite pairs, ×5.
+   `planning/figures.py`. The sensitivity sentence with the built hemisphere: "expected 90 % CL limit 2.4 × R(ATOMKI) in
+   five days with liquid cells, about MEG II's; a lighter Al end piece would reach ~0.6–0.8 ×" (§0 numbers).
+2. A two-arm Geant4 run of the lighter Al end piece (Al ogive + Cu liner, or the 45° Al cap): its rows are scaled estimates (§0).
+   The hemisphere's as-built MC (L10 + L18, ×30) is no longer the limitation.
 3. The muon segment smearing inside the Geant4 levels, not as a wrapper (FEASIBILITY_SIM §19.6 item 4).
 4. A roll angle for the stand and a 45° ("X") pair, if the mechanics prefer it (`x17_facility_search/mechanics/`):
    the L15 cosmics can be re-cut for it only after a rotated-cosmic run (the beam samples do not care).

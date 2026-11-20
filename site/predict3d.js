@@ -77,7 +77,7 @@ function buildWorld(arms, hitArms) {
     cyl.rotation.x = -Math.PI / 2; cyl.position.z = -(t.y0 + t.y1) / 20; world.add(cyl);
   }
   const bl = new THREE.Line(new THREE.BufferGeometry().setFromPoints([V3(0, -620, 0), V3(0, 0, 0)]), new THREE.LineBasicMaterial({ color: col("--s8") }));
-  world.add(bl, label("p beam →", V3(0, -560, 40)), label("Cu hemisphere + Li film", V3(0, -40, -60)));
+  world.add(bl, label("p beam →", V3(0, -560, 40)), label(EVD.target === "dome300" ? "Cu hemisphere (R 11 mm, 300 µm) + Li film" : "Cu ogive + Li film", V3(0, -40, -60)));
 }
 function dropLabels(g) { g.traverse(o => { if (o.isCSS2DObject && o.element.parentNode) o.element.parentNode.removeChild(o.element); }); }
 
@@ -105,7 +105,7 @@ function drawEvent(E) {
       new THREE.LineDashedMaterial({ color: col("--ink-2"), dashSize: 0.5, gapSize: 0.7, transparent: true, opacity: 0.7 }));
     pl.computeLineDistances(); evg.add(pl);
   }
-  const v = new THREE.Mesh(new THREE.SphereGeometry(0.35, 16, 12), new THREE.MeshBasicMaterial({ color: col("--ink") }));
+  const v = new THREE.Mesh(new THREE.SphereGeometry(0.12, 16, 12), new THREE.MeshBasicMaterial({ color: col("--ink") }));
   v.position.copy(V3(...E.vertex)); evg.add(v);
 }
 function info(E) {
@@ -135,8 +135,8 @@ function info(E) {
 }
 function setView(k) {
   view = k;
-  const P = k === "beam" ? [0, 0, 150] : k === "top" ? [0, 160, 0.01] : [88, 58, 92];
-  camera.position.set(...P); camera.up.set(0, 1, 0); controls.target.set(0, 0, 0); controls.update();
+  const P = k === "beam" ? [0, 0, 150] : k === "top" ? [0, 160, 0.01] : k === "target" ? [6, 2.2, -1.5] : [88, 58, 92];
+  camera.position.set(...P); camera.up.set(0, 1, 0); controls.target.set(0, 0, k === "target" ? 0.6 : 0); controls.update();
   document.querySelectorAll("#ev-view button").forEach(b => b.setAttribute("aria-pressed", String(b.dataset.v === k)));
   render();
 }
@@ -177,7 +177,7 @@ function init() {
   labels = new CSS2DRenderer(); labels.domElement.style.position = "absolute"; labels.domElement.style.top = "0"; labels.domElement.style.pointerEvents = "none";
   box.append(labels.domElement);
   scene = new THREE.Scene();
-  camera = new THREE.PerspectiveCamera(38, 1.6, 1, 3000);
+  camera = new THREE.PerspectiveCamera(38, 1.6, 0.1, 3000);
   controls = new OrbitControls(camera, renderer.domElement); controls.addEventListener("change", render);
   new ResizeObserver(resize).observe(box);
   document.querySelectorAll("#ev-view button").forEach(b => b.addEventListener("click", () => setView(b.dataset.v)));

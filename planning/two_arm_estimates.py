@@ -1,10 +1,11 @@
 """Two-arm feasibility run at LNL: what 8 beam days can show.
 
-Updated 2026-11-19: the two-arm numbers for the Cu hemisphere now come from the SIMULATION (task R1,
-sim2arm/TWO_ARM_STUDY.md): the FEASIBILITY_SIM §19 reference fit run on one pair of arms of the L11 + L13 Geant4
-tables, with the L15 cosmics (every zenith angle). sim2arm/out/summary_reach<SIM_TAG>.csv holds them.
+Updated 2026-11-20: the two-arm numbers for the BUILT Cu hemisphere (R 11 mm, 300 µm, rim, grey flange; Geant4 dome300)
+come from the SIMULATION (sim2arm/TWO_ARM_STUDY.md): the FEASIBILITY_SIM §19 reference fit run on one pair of arms of the
+L10 + L18 Geant4 tables, with the L15 cosmics (every zenith angle). sim2arm/out/summary_reach<SIM_TAG>.csv holds them.
+Until 20 Nov these rows came from the Cu OGIVE of the 27 Oct sketch (ogCu200, L11 + L13, pass 3), which is not built.
 The Al ogive + Cu liner has no two-arm simulation: its two-arm days are the four-arm §19.3 days times the two-arm /
-four-arm ratio simulated for the Cu hemisphere (an estimate, marked so).
+four-arm ratio simulated for the Cu ogive (pass 3, the same shape; an estimate, marked so).
 
 Rows: target x energy stack (liquid working / as at n_TOF / none) x geometry (horizontal / vertical pair) x cosmic
 veto (MM pointing + 0.6 ns TOF, the reference; pointing only).
@@ -21,7 +22,8 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 OUT.mkdir(exist_ok=True)
 SIM = HERE.parent / "sim2arm" / "out"
-SIM_TAG = "_pass3"
+SIM_TAG = "_pass4"          # dome300, the built hemisphere
+OG_TAG = "_pass3"           # ogCu200, the Cu ogive: the two-arm / four-arm ratio for the Al ogive rows
 #: (label, suffix of the summary table): the simulated 20 µm film and the review's 10–12 µm (yields of 11 µm)
 FILMS = [("11 µm Li (recommended)", "li11"), ("20 µm Li (as simulated)", "")]
 
@@ -58,7 +60,7 @@ BEAM_PLAN = [
     ("1", "1.10 MeV", "Roll to the HORIZONTAL pair. Beam on target at low current; target conditioning; current scan 0.05 → 1 µA: "
                       "trigger rates, DREAM live time, Micromegas occupancy, SiPM/plastic singles; γ-yield reference", "on"),
     ("2", "0.441 MeV", "Locate the 441 keV resonance (singles rate); 17.64 MeV M1 IPC: absolute rate, opening-angle "
-                       "shape and energy scale against Geant4 (~600 pairs/day above 90° in the E_sum window)", "on"),
+                       "shape and energy scale against Geant4 (~140 pairs/day above 90° in the E_sum window, built Cu hemisphere)", "on"),
     ("3", "1.10 MeV", "18.15 MeV region: IPC spectrum, X17 window", "on"),
     ("4", "1.10 MeV", "18.15 MeV region (cont.)", "on"),
     ("5", "1.10 MeV", "18.15 MeV region (cont.)", "on"),
@@ -72,7 +74,7 @@ DAYS_ON_RES = 5.0          # days 3-7 at 1.10 MeV
 LIVE = 0.95                # inside the fit numbers
 
 # 441 keV: two arms, selected M1 pairs per day above 90° (sim2arm spectra, MM 15° + TOF, liquid working)
-CAL_2ARM_PER_DAY = (550, 700)
+CAL_2ARM_PER_DAY = (120, 160)   # built Cu hemisphere (predictions.py, 20 Nov: 141/day); the Cu ogive gave 550-700
 
 
 def z_at_atomki(days_to_3sigma: float, days: float) -> float:
@@ -84,8 +86,8 @@ def r90(days_to_3sigma: float, days: float) -> float:
     return Z90 / z_at_atomki(days_to_3sigma, days) * R_ATOMKI
 
 
-def sim_rows(suffix=""):
-    f = SIM / f"summary_reach{SIM_TAG}{suffix}.csv"
+def sim_rows(suffix="", tag=None):
+    f = SIM / f"summary_reach{tag or SIM_TAG}{suffix}.csv"
     if not f.exists():
         return None
     with open(f) as fh:
@@ -95,23 +97,26 @@ def sim_rows(suffix=""):
 def main() -> None:
     rows = []
     sim20 = sim_rows("")
+    og20 = sim_rows("", OG_TAG)
     for film, suffix in FILMS:
-        rows += film_rows(film, sim_rows(suffix), sim20)
+        rows += film_rows(film, sim_rows(suffix), sim20, sim_rows(suffix, OG_TAG), og20)
     write(rows)
 
 
-def film_rows(film, sim, sim20):
-    """sim: this film's simulated table; sim20: the 20 µm one, the film of the four-arm §19.3 days, so the Al
-    ogive's rows scale as Al(4 arms, 20 µm) × Cu(this row) / Cu(4 arms, 20 µm)."""
+def film_rows(film, sim, sim20, og, og20):
+    """sim: this film's simulated table (the Cu hemisphere); sim20: its 20 µm one.  og, og20: the same for the Cu ogive
+    (pass 3), whose ratios scale the Al ogive's four-arm §19.3 days: Al(4 arms, 20 µm) × Cu ogive(this row) /
+    Cu ogive(4 arms, 20 µm)."""
     rows = []
     for tgt in ("Cu hemisphere (built)", "Al ogive + Cu liner (lighter)"):
         for stack, resp, key in STACKS:
             c4, lo4, hi4 = FOUR_ARM[(tgt, key)]
             for glab, pair in GEOMS:
                 for vlab, level in VETOES:
-                    s = sim.get((pair, resp, level)) if sim else None
-                    s4 = sim.get(("all", resp, "MM 15° + TOF")) if sim else None
-                    s420 = sim20.get(("all", resp, "MM 15° + TOF")) if sim20 else None
+                    T, T20 = (sim, sim20) if tgt.startswith("Cu") else (og, og20)
+                    s = T.get((pair, resp, level)) if T else None
+                    s4 = T.get(("all", resp, "MM 15° + TOF")) if T else None
+                    s420 = T20.get(("all", resp, "MM 15° + TOF")) if T20 else None
                     if s is None:
                         if level != "MM 15° + TOF" or pair != "horiz":
                             continue
@@ -124,11 +129,11 @@ def film_rows(film, sim, sim20):
                         k = float(s["days3"]) / float(s420["days3"]) if s420 else F_C
                         d2 = (lo4 * k * float(s["days3_lo"]) / float(s["days3"]), c4 * k,
                               hi4 * k * float(s["days3_hi"]) / float(s["days3"]))
-                        src = (f"§19.3 four-arm (20 µm) × {k:.2f} = the Cu hemisphere's simulated ratio of this row to its "
+                        src = (f"§19.3 four-arm (20 µm) × {k:.2f} = the Cu ogive's simulated ratio of this row to its "
                                f"four arms at 20 µm: estimate")
                     if tgt.startswith("Cu") and s4 is not None:     # four arms: the same simulation, all pairs
                         d4 = (float(s4["days3_lo"]), float(s4["days3"]), float(s4["days3_hi"]))
-                        s4l = sim.get(("all", resp, level))
+                        s4l = T.get(("all", resp, level))
                         if s4l is not None:
                             d4 = (float(s4l["days3_lo"]), float(s4l["days3"]), float(s4l["days3_hi"]))
                         src4 = "Geant4, four arms, same fit (sim2arm)"

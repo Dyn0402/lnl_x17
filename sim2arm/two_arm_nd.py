@@ -29,6 +29,7 @@ from pathlib import Path
 os.environ.setdefault('WORK_DATA', '/media/dylan/data/work')
 _W = Path(os.environ['WORK_DATA']) / 'x17_facility_search'
 os.environ.setdefault('L13_SEL', str(_W / 'lnl_sel'))
+os.environ.setdefault('L18_SEL', str(_W / 'sel_l18'))
 FS = Path(os.environ.get('X17FS', Path.home() / 'PycharmProjects' / 'x17_facility_search'))
 sys.path.insert(0, str(FS / 'lnl' / 'target' / 'shapes'))
 
@@ -43,6 +44,10 @@ OUT = HERE / 'out'
 OUT.mkdir(exist_ok=True)
 PAIRS = {'vert': (2, 3), 'horiz': (0, 1), 'adj': (0, 2), 'adj_lo': (0, 3), 'all': None}
 L15_SEL = Path(os.environ.get('L15_SEL', _W / 'sel_l15'))
+#: the target configuration of every two-arm number.  dome300 = the BUILT Cu hemisphere (R 11 mm, 300 µm wall, rim, grey
+#: flange; SHAPES_GEANT.md).  Until 20 Nov the study used ogCu200, the Cu ogive of Pierfrancesco's 27 Oct sketch (not built)
+#: under the name "Cu hemisphere": TA_CFG=ogCu200 reproduces those passes.
+CFG = os.environ.get('TA_CFG', 'dome300')
 PAIR = None
 _COMBINE0 = G._combine
 _LOAD0 = G._load
@@ -110,7 +115,8 @@ def set_pair(name):
     G._CACHE.clear()
     G._SEG.clear()
     SN._TAB.clear()
-    SN.RUNS['ogCu200'] = ['L11', 'L13']      # the dense as-built background MC (L13 has no E1 18.15 yet: L11 alone)
+    SN.RUNS['ogCu200'] = ['L11', 'L13']      # the dense as-built background MC of the Cu ogive (not built)
+    SN.RUNS['dome300'] = ['L10', 'L18']      # the BUILT Cu hemisphere, R 11 mm, 300 µm (L18: lnl_x17, 20 Nov)
 
 
 RESPS = ['LNL calibrated', 'n_TOF as is', 'LNL calibrated, LS off']
@@ -216,7 +222,7 @@ def main():
     ap.add_argument('--resps', nargs='+', default=RESPS)
     ap.add_argument('--levels', nargs='+', default=LEVELS)
     ap.add_argument('--mcs', nargs='+', default=['direct', 'transplant'])
-    ap.add_argument('--cfg', default='ogCu200')
+    ap.add_argument('--cfg', default=CFG)
     ap.add_argument('--tag', default='')
     ap.add_argument('-j', type=int, default=3)
     a = ap.parse_args()

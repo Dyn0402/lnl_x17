@@ -1,12 +1,14 @@
 # What the two-arm run should see: Geant4 predictions, observable by observable
 
-Written 2026-11-20. Shown on the page's **Predictions** tab
+Written 2026-11-20; **target corrected the same day** (the first version used the Cu ogive of the 27 Oct sketch, which
+is not built: every beam number below is now the built Cu hemisphere, R 11 mm, 300 µm wall, config `dome300`). Shown on
+the page's **Predictions** tab
 (<https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html#predict>), with a 3D view of real Geant4 events.
 Code: `predictions.py` → `out/predictions.json`, `events3d.py` → `out/events3d.json`; lxplus scripts in `lxplus/`
 (`pred_cosmic_scan.py`, `submit_traj.sh`, `run_traj.sh`, `traj_pick.py`).
 
-Set-up as in `TWO_ARM_STUDY.md`: two opposite arms, Cu hemisphere, 11 µm Li (yields; the Geant4 events are the 20 µm
-runs), 1 µA, liquid cells working ("LNL calibrated"), reference selection = MM 15° pointing + 0.6 ns TOF, E_sum window
+Set-up as in `TWO_ARM_STUDY.md`: two opposite arms, the built Cu hemisphere, 11 µm Li (yields; the Geant4 events are the
+20 µm runs), 1 µA, liquid cells working ("LNL calibrated"), reference selection = MM 15° pointing + 0.6 ns TOF, E_sum window
 13–19 MeV. A **leg** is SiPM bar AND plastic ≥ 0.5 MIP in one arm; an **MM track** is a Micromegas segment (dominant
 track, ≥ 3 steps) with its centroid in the active area (`lnl_merge.py`). The simulated chambers are 100 % efficient;
 "× ε" applies the bench efficiency ε = 0.92 per chamber.
@@ -16,9 +18,10 @@ track, ≥ 3 steps) with its centroid in the active area (`lnl_merge.py`). The s
 | sample | what | used for |
 |---|---|---|
 | L15 cosmic disk (10.0 live days, 4.89 × 10⁸ μ) | per-job parts re-scanned on lxplus (`pred_cosmic_scan.py`): every event with legs in both arms of a slot-1 pair, all per-arm columns | §2 |
-| L13 8Be γ lines, Cu hemisphere (3 × 10⁸ γ) | same script, `--mode single`: every event with a leg | §3 |
-| L11 + L13 pair tables via `two_arm_nd.py` / `shapes_nd.collect` | IPC, EPC, X17, cosmics after the analysis | §4–5 |
-| **L17** (new, 53 condor jobs, all ended normally, no retries) | MX17_Full_Geant `lnl_twoarm` 10229eb (`--trajdump` now also writes μ±), arms 0+1 (and 2+3 for vertical muons), every step of e±, γ, μ for the kept events | the 3D view |
+| **L18** 8Be γ lines, built Cu hemisphere (3 × 10⁸ γ) | same script, `--mode single`: every event with a leg | §3 |
+| **L10 + L18** pair tables via `two_arm_nd.py` / `shapes_nd.collect` (cfg `dome300`) | IPC, EPC, X17, cosmics after the analysis | §4–5 |
+| **L18** (new, 780 condor jobs, all ended normally, no retries) | the as-built hemisphere, 4 arms, ×30 L10: M1/E1 IPC 18.15 and 15.1 MeV (150 × 10⁵ each), γ lines (150 × 2 × 10⁶), X17 (30 × 10⁵) | §3–4, the reach |
+| **L17d** (53 condor jobs, all normal) | MX17_Full_Geant `lnl_twoarm` 10229eb (`--trajdump` now also writes μ±), arms 0+1 (and 2+3 for vertical muons), the hemisphere, every step of e±, γ, μ for the kept events | the 3D view |
 
 The merged L15 table keeps only events with two "ok" arms, so it could not give trigger-level fractions; the re-scan
 does (2.2 M pair-leg events).
@@ -46,39 +49,42 @@ does (2.2 M pair-leg events).
 
 | at 1 µA | 441 keV | 1.10 MeV |
 |---|---|---|
-| γ₀ at the target (17.64 + 18.15) | 54,400 /s | 14,700 /s |
-| beam legs per arm | **124 Hz** | **66.8 Hz** |
-| legs per arm with cosmics | 131 Hz | 73.6 Hz |
-| beam legs with an MM track (× ε) | 55 % | 55 % |
-| accidental pairs (20 ns), before cuts | 30 / day | 9 / day |
+| γ₀ at the target (17.64 + 18.15) | 53,700 /s | 8,530 /s |
+| beam legs per arm | **218 Hz** | **66.6 Hz** |
+| legs per arm with cosmics | 224 Hz | 73.4 Hz |
+| beam legs with an MM track (× ε) | 72 % | 71 % |
+| accidental pairs (20 ns), before cuts | 87 / day | 9 / day |
 
-- The leg probability is 1.5 × 10⁻³ per γ per arm, the same for the four lines within 5 %.
-- **Where the track comes from:** in the L17 γ events, 30 of 31 single-arm legs with an MM track had the γ interact in
-  the Cu hemisphere wall; 23 of 25 legs without a track converted behind the drift gap (readout PCB, support plate,
-  SiPM wall). The tracked fraction (55 %) against cosmics' 40 % is a direct check of the holder's material.
-- The slope (Hz per µA) is γ yield × leg probability: it measures the film's Li content.
+- The leg probability is 2.6–2.8 × 10⁻³ per γ per arm (the Cu ogive: 1.5 × 10⁻³): the 300 µm wall converts more γ.
+- **Where the track comes from:** in the L17d γ events, 79 of 83 single-arm legs with an MM track had the γ interact in
+  the Cu hemisphere (3 in the beam-line tube); the 14 legs without a track converted behind the drift gap (readout PCB,
+  support plate, SiPM wall). The tracked fraction (78 % at ε = 1; the ogive 60 %, cosmics 44 %) is a direct check of the
+  holder's material.
+- The slope (Hz per µA) is γ yield × leg probability: it measures the film's Li content and the wall together; the
+  441 keV / 1.10 MeV ratio of the slopes separates them.
 
 ## 4. Pairs at 441 keV (day 2) and 1.10 MeV (days 3–7)
 
 Per day, horizontal pair. "Both tracks" = a leg and an MM track in both arms, any θ, E_sum 0–43 MeV.
-"Selected" = θ > 90°, E_sum window, pointing + TOF.
+"Selected" = θ > 90°, E_sum window 13–19 MeV, pointing + TOF.
 
 | per day | 441 keV, both tracks | 441 keV, selected | 1.10 MeV, both tracks | 1.10 MeV, selected |
 |---|---|---|---|---|
-| M1 IPC (17.64 / 18.15) | 2,790 | 458 | 261 | 43 |
-| E1 IPC (18.15) | 103 | 19 | 1,880 | 345 |
-| 15.1 / 14.6 MeV IPC | 1,740 | 23 | 3,750 | 53 |
-| external conversions | 3,150 (11 MC) | 165 (3 MC) | 1,710 | 0.4 |
+| M1 IPC (17.64 / 18.15) | 2,030 | 133 | 128 | 8 |
+| E1 IPC (18.15) | 58 | 5 | 512 | 42 |
+| 15.1 / 14.6 MeV IPC | 971 | 2 | 972 | 2 |
+| external conversions | 5,960 (258 MC) | 1 (2 MC) | 1,670 | 17 (4 MC) |
 | cosmics | 5,930 | 68 | 5,930 | 68 |
-| X17 at R(ATOMKI) | 5 | 1 | 99 | **18** |
-| **beam total** | **7,790** | **665** | **7,700** | **510** |
+| X17 at R(ATOMKI) | 3 | 0.4 | 33 | **2.7** |
+| **beam total** | **9,020** | **141** | **3,280** | **69** |
 
-- **Selected 441 keV pairs per beam leg: 6.5 × 10⁻⁵**, independent of the Li content.
-- **The external conversions at 441 keV rest on 3 simulated events** (selected) and 11 (both tracks): good to a factor
-  ~2. They are ~25 % of the selected 441 keV sample, so D2 (665/day) is uncertain by about ±20 %. Task R6 (more
-  as-built EPC MC) fixes it.
-- Only ~30 % of the 441 keV IPC pairs land in the 13–19 MeV window: the response (energy lost in the holder and the
-  chamber, partial containment) puts most of them at 9–13 MeV. The E_sum distribution itself is a prediction to check.
+- **Selected 441 keV pairs per beam leg: 7.9 × 10⁻⁶.**
+- At trigger level the external conversions in the Cu wall are the largest beam component (5,960/day at 441 keV): the
+  wall converts the γ and the pair reaches both arms. The E_sum window and pointing remove nearly all of them.
+- Only ~14 % of the X17 pairs above 90° fall in the 13–19 MeV window (the ogive: 34 %): the wall and the rim take ~1 MeV.
+  A window scan (`out/esum_scan_dome300.csv`, 11–17 … 14–19 MeV) moves the days by ±10 % at most: the reference windows stay.
+- **Reach** (`TWO_ARM_STUDY.md` §0): 151 days to 3σ with the liquid working (11 µm), so five days give 2.35 × R(ATOMKI),
+  about MEG II's limit. With the ogive it was 25 days.
 
 ## 5. The n_TOF cross-check of the cosmic simulation (2026-11-20)
 
@@ -103,4 +109,4 @@ value, and a reconstruction gate would cut further (§5).
 
 - Fig. 1: the 3D render (Predictions tab → "save PNG"); a 1.10 MeV pair and a cosmic muon in the same set-up.
 - §3: a compact predictions table with pass criteria: A2/A3 (cosmic trigger and track fractions), C1/C2 (beam singles
-  and their tracked fraction), D2/D3 (the 441 keV calibration), E1.
+  and their tracked fraction: the hemisphere's 78 % against 44 % for cosmics), D2/D3 (the 441 keV calibration), E1.

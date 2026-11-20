@@ -2,8 +2,8 @@
 """
 events3d.py -- real Geant4 events for the 3D view of the page's Predictions tab (lnl_x17, 2026-11-20).
 
-Run L17 (sim2arm/lxplus/submit_traj.sh, MX17_Full_Geant lnl_twoarm 10229eb, --trajdump): the slot-1 two-arm
-geometry (Cu hemisphere, 20 µm Li, as built, arms 0+1 = horizontal or 2+3 = vertical), every step of every e±, γ and
+Run L17d (sim2arm/lxplus/submit_traj.sh, MX17_Full_Geant lnl_twoarm 10229eb, --trajdump): the slot-1 two-arm
+geometry (the built Cu hemisphere R 11 mm, 300 µm, rim, grey flange; 20 µm Li; as built; L17 = the Cu ogive, arms 0+1 = horizontal or 2+3 = vertical), every step of every e±, γ and
 μ written for each event; traj_pick.py kept the events worth drawing (both arms with a leg + MM track for pairs, a
 leg for γ singles, legs in both arms for cosmics).  This script picks a few typical events per kind, thins the tracks
 and writes out/events3d.json (geometry extents read from the same step points, so the drawing is the simulation's).
@@ -21,7 +21,7 @@ import numpy as np
 import pandas as pd
 
 HERE = Path(__file__).resolve().parent
-L17 = Path(os.environ.get('WORK_DATA', '/media/ucla/work')) / 'lnl_x17' / 'L17'
+L17 = Path(os.environ.get('WORK_DATA', '/media/ucla/work')) / 'lnl_x17' / os.environ.get('L17_RUN', 'L17d')
 OUT = HERE / 'out' / 'events3d.json'
 R_MAX = 700.0             # mm: clip tracks leaving the set-up
 SIG_T = 0.60
@@ -170,7 +170,7 @@ def pick(kind, sel, evs, t, n, arms):
     return picked
 
 
-def geometry():
+def geometry(dome):
     """Extents of the arm layers (arm 0, +x, G4 frame: beam +y, up +z), read from L17 step points; the
     other arms are the same stack rotated, with their pinwheel shifts (lnl_merge.SHIFT)."""
     return dict(
@@ -186,11 +186,35 @@ def geometry():
             dict(k='plastic', r0=414.2, r1=434.2, u=197, v=300, n=2, gap=3),
             dict(k='ls', r0=460.6, r1=502.8, u=451, v=451),
         ],
-        # Cu hemisphere ("ogive") wall profile, r(y) in mm, y from the base flange to the tip (L17 dome points)
-        dome=[[-63.0, 25.0], [-60.0, 24.1], [-55.0, 21.9], [-50.0, 21.1], [-35.0, 15.2], [-25.0, 10.7],
-              [-20.0, 10.0], [-15.0, 8.6], [-10.0, 6.5], [-5.0, 4.3], [-2.0, 2.6], [0.0, 0.0]],
-        beamline=[dict(r0=19.05, r1=30.0, y0=-68, y1=-63, m='Al'), dict(r0=17.4, r1=19.05, y0=-620, y1=-68, m='SS'),
-                  dict(r0=31.0, r1=57.0, y0=-620, y1=-585, m='SS')])
+        # target shell profile r(y), mm: outer radius of the LiTarget* step points per 0.5 mm in y (target_profile)
+        dome=dome,
+        beamline=[dict(r0=float(a[1]), r1=float(a[2]), y0=float(a[3]), y1=float(a[4]), m=a[0])
+                  for a in (x.split(':') for x in LINE[TGT].split(','))])
+
+
+#: the beam line of each target, as passed to Geant4 (--line Mat:r0:r1:y0:y1, mm)
+LINE = {'dome300': 'PVC:15:33:-27:-16,PVC:21:24:-165:-27,Al:20.5:40:-185:-165,SS:17.4:19.05:-620:-185,SS:31:57:-620:-585',
+        'ogCu200': 'Al:19.05:30:-68:-63,SS:17.4:19.05:-620:-68,SS:31:57:-620:-585'}
+TGT = 'dome300' if L17.name == 'L17d' else 'ogCu200'
+
+
+def target_profile(frames):
+    """outer radius of the target shell against y from the trajectory points inside LiTarget* volumes."""
+    t = pd.concat([f[f.volume.str.startswith('LiTarget')] for f in frames if len(f)])
+    P = np.r_[t[['pre_x', 'pre_y', 'pre_z']].values, t[['post_x', 'post_y', 'post_z']].values]
+    r, y = np.hypot(P[:, 0], P[:, 2]), P[:, 1]
+    edges = np.arange(np.floor(y.min()), np.ceil(y.max()) + 0.5, 0.5)
+    prof = []
+    for lo, hi in zip(edges[:-1], edges[1:]):
+        m = (y >= lo) & (y < hi)
+        if m.sum() >= 3:
+            prof.append([round(float((lo + hi) / 2), 2), round(float(np.percentile(r[m], 99)), 2)])
+    # close the shell at the apex (the end where the radius goes to 0)
+    if prof and prof[-1][1] > prof[0][1]:
+        prof.insert(0, [prof[0][0] - 0.25, 0.0])
+    elif prof:
+        prof.append([prof[-1][0] + 0.25, 0.0])
+    return prof
 
 
 def gam_origin(evs, t):
@@ -215,8 +239,9 @@ def gam_origin(evs, t):
 
 
 def main():
-    res = dict(made='2026-11-20', run='L17', g4='MX17_Full_Geant lnl_twoarm 10229eb, Cu hemisphere, as built',
-               geometry=geometry(), kinds={k: lab for k, _, lab, _, _ in KINDS}, events=[])
+    res = dict(made='2026-11-20', run=L17.name, target=TGT,
+               g4=f'MX17_Full_Geant lnl_twoarm 10229eb, {"Cu hemisphere R 11 mm, 300 µm" if TGT == "dome300" else "Cu ogive 200 µm (not built)"}, as built',
+               kinds={k: lab for k, _, lab, _, _ in KINDS}, events=[])
     cache = {}
     for key, sample, label, n, sel in KINDS:
         if sample not in cache:
@@ -233,6 +258,7 @@ def main():
         if key == 'gam_trk':
             res['gam_origin'] = gam_origin(evs, t)
             print('γ singles, first interaction:', res['gam_origin'])
+    res['geometry'] = geometry(target_profile([t for _, t in cache.values()]))
     OUT.write_text(json.dumps(res, separators=(',', ':')), encoding='utf-8')
     print('wrote', OUT, f'{OUT.stat().st_size / 1e6:.2f} MB')
 

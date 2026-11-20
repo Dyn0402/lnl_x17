@@ -1,5 +1,41 @@
 # Handoff
 
+## Two-arm study redone with the BUILT Cu hemisphere (run L18) — updated 2026-11-20 evening (dylan-MS-7C84)
+
+**Resume:** everything is regenerated, deployed and committed. Next: ask Pierfrancesco whether a lighter Al end piece can be made
+for slot 1 (T1), and simulate it in two arms (R10); upload the proposal to Overleaf (it is edited locally, R5).
+
+**What was wrong:** the 19 Nov two-arm study (passes 1–3), the proposal, the page and the first Predictions tab used `ogCu200`, the
+Cu **ogive** of Pierfrancesco's 27 Oct sketch (Ø50 × 63 mm, 200 µm), labelled "the Cu hemisphere". The built holder is the
+hemisphere R 11 mm, 300 µm, rim, on the grey flange (`dome300`, run L10). Dylan caught it (20 Nov).
+
+**Done**
+- **Run L18** (`sim2arm/lxplus/submit_l18.sh`, binary `mx17_full_sim_twoarm_10229eb`, `run_job.sh`: Geant4 + reduce in scratch,
+  eosio out): dome300 as built, 4 arms, M1/E1 IPC 18.15 + 15.1 MeV 150 × 10⁵, γ lines 150 × 2 × 10⁶, X17 30 × 10⁵. 780 jobs, all
+  started once and ended with 0 (no retries, holds, evictions). Merged in chunks on lxplus (`merge_loop_l18.sh` →
+  `/eos/.../lnl/target/sel_l18/`), combined locally (`sim2arm/combine_l18.py` → `$WORK_DATA/x17_facility_search/sel_l18/`).
+  Geometry checked identical to L10 line by line; tables agree with L10 per generated event.
+- `two_arm_nd.py`: `TA_CFG` (default dome300), `RUNS['dome300'] = ['L10', 'L18']`; x17_facility_search `shapes_nd.RUN_DIR['L18']`.
+- Pass `_pass4` (`run_pass.sh` + `after_pass.sh`). E_sum window scan (`esum_scan.py`): ±10 %, reference windows kept.
+- **Result** (11 µm, horizontal, pointing + 0.6 ns TOF): 151 / 263 / 511 d to 3σ (liquid working / as at n_TOF / none) →
+  R90(5 d) = 2.35 / 3.10 / 4.32 × R(ATOMKI); MEG II 2.07 ×. Ogive: 25 / 44 / 94 d. Selected X17 ×0.14 (acceptance ×0.58, E_sum
+  window ×0.41, γ₀ ×0.58). Al ogive + Cu liner (scaled from the ogive pass 3, estimate): 0.62 / 0.81 / 1.46 ×.
+- Rewritten: TWO_ARM_STUDY §0 (build_study_md.py), section7_plan.md, PREDICTIONS.md, slot1_feasibility/PLAN.md §0/§4,
+  proposal abstract + body (sensitivity, target paragraph, 441 keV ~140/day), plan.py (T1, R6 done, R10, risk), page
+  (overview, reach note, Predictions tab, a "Corrected 20 Nov" note at the top), the slide note (republished),
+  x17_facility_search FACILITY.md, README, dashboard (EXTRA + LOG).
+- Predictions + 3D events now hemisphere: L17d trajectories (`submit_traj.sh`, TGT=dome300), pred_gam_L18 scan; γ legs
+  2.6–2.8 × 10⁻³ per γ per arm, 78 % with a track (ogive 60 %); 441 keV 141 selected pairs/day; 1.10 MeV X17 2.7/day on 137.
+- Pass-3 (ogive) outputs committed as the reference for the Al-ogive scaling (`two_arm_estimates.OG_TAG`).
+
+**Gotchas**
+- CERN condor: RequestCpus is set at submit from RequestMemory (6 GB → 2 CPUs); editing memory later does not change it.
+  Ask 4 GB / `longlunch` for these jobs (they peak < 1 GB, run 0.3–0.7 h). With a poor user priority, 6-GB `workday` jobs sat
+  idle for 2 h.
+- The four-arm "all" fit sums pairs: with the hemisphere it is no better than the horizontal pair. Fit per pair before quoting.
+- §4.2, §5 (L16 rotated arms), geom_syst, struct_scan, tof_scan are still the ogive's (ratios carry over).
+- Overleaf is now behind `proposal/latex/` (edited here).
+
 ## Predictions tab: Geant4 predictions of every observable + 3D Geant4 events — updated 2026-11-20 (dylan-MS-7C84)
 
 **Resume:** the tab is live (<https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html#predict>); next: R8 (3D render

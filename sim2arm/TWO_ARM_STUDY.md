@@ -1,38 +1,51 @@
 # The two-arm LNL run, simulated: what 8 days can show, and how to spend them
 
-Written 2026-11-19 (overnight study). Set-up: the slot-1 feasibility run of `../slot1_feasibility/PLAN.md`: two Micromegas
-(A, B), two SiPM walls, four small 20 × 30 × 2 cm plastics, optionally two liquid cells, the Cu hemisphere target holder
-(the "Cu ogive" of the simulation; Geant4 with 20 µm Li, yields also for the recommended 10–12 µm), AN2000 at 1 µA.
+Written 2026-11-19 (overnight study); **target corrected 2026-11-20**. Set-up: the slot-1 feasibility run of
+`../slot1_feasibility/PLAN.md`: two Micromegas (A, B), two SiPM walls, four small 20 × 30 × 2 cm plastics, optionally two
+liquid cells, **the built Cu hemisphere** (R 11 mm, 300 µm wall, Cu rim 4 × 5 mm, on the photographed grey flange and tube;
+Geant4 config `dome300`; 20 µm Li, yields also for the recommended 10–12 µm), AN2000 at 1 µA.
+
+> **Correction, 2026-11-20.** The 19 Nov version of this study (passes 1–3) simulated the **Cu ogive** of Pierfrancesco's
+> 27 Oct CAD sketch (Ø50 × 63 mm, 200 µm; config `ogCu200`, runs L11 + L13) and called it "the Cu hemisphere". The ogive
+> is not built. This version uses the built hemisphere (`dome300`, runs L10 + **L18**, a new ×30 as-built run, §1.1).
+> The pass-3 ogive tables stay in `out/*_pass3*` for reference (they scale the Al-ogive rows of the planning).
 Slide note: <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>. This replaces the ×2 scaling of
 `../planning/two_arm_estimates.py` (task R1).
 
-## 0. Bottom line (2026-11-19, Geant4)
+## 0. Bottom line (2026-11-20, Geant4, the built Cu hemisphere)
 
-- **Do go for a measurement, as the second half of the run, and do not promise one.** Five days at 1.10 MeV with two
-  opposite arms give an expected 90 % CL limit of **0.93 × R(ATOMKI)** with the liquid cells working,
-  **1.19 ×** with the liquid as it ran at n_TOF and **1.78 ×** without it (11 µm Li,
-  horizontal pair, MM pointing + 0.3 ns TOF). MEG II's published limit is 2.07 × R(ATOMKI): every case beats it on
-  statistics, the two with liquid cells reach the ATOMKI ratio or near it.
-- **We would not see ATOMKI's signal at 3σ.** If it is there, the expected significance is 1.1–1.4σ
-  (liquid as at n_TOF … working): a 3σ excess with probability 3–5 %, a 2σ hint
-  with 18–27 %. Days to 3σ: 24 (23–24) and 39 (28–54).
-- **Two arms cost ×2.2 in days against four** (20 µm, liquid working: 18 vs 8 d), a little worse than
-  the ×2 the page assumed. The 10–12 µm film the target review asks for costs a further ×1.3 (§3).
-- **The liquid cells are the biggest lever: without them the days go up ×3.7.** Bring them (task S5).
-- **Geometry: opposite arms, horizontal for the beam.**
-  - With pointing + 0.3 ns TOF the vertical and horizontal pairs are equal within the MC (26 vs 24 d).
-  - Without sub-ns timing the horizontal pair keeps its reach (23 d with pointing only) and the vertical pair loses
-    it (34 d): a horizontal muon has to cross both side arms, and after pointing the horizontal pair sees ~10× fewer
-    cosmics in the window than the vertical one.
-  - Turning the arms toward the 140° X17 angle costs ×1.1 (Δφ = 160°) to ×2–2.5 (140°) in days (§5). Adjacent ("perpendicular")
-    arms see 25–120° and no X17; they are a background diagnostic (§6).
-- **Test the veto where it is hardest, without beam:** a few nights of cosmics with the arms **vertical** during installation
-  record the MEG II "140° peak" at full strength (~10⁴ cosmic pairs/day in the E_sum window, ~250 after pointing, ~1 after
-  0.3 ns TOF) and measure σ_t, the muon segment angle and the arm gains (§7.2). Then roll to horizontal for the beam.
-- **The 441 keV calibration is ~10× smaller than the proposal says:** ~600 selected pairs per day above 90° (two arms), not
-  6–12 × 10³. One day is enough for a ~5 % check of the IPC rate and shape (§2).
-- **The old cosmic sample (L4) missed the inclined muons**: it gave a horizontal pair 110 coincidences/day, the new one (L15,
-  every zenith angle) ~6,000 (§4).
+- **With the built Cu hemisphere, five days at 1.10 MeV do not beat MEG II.** Two opposite arms give an expected 90 % CL
+  limit of **2.35 × R(ATOMKI)** with the liquid cells working, **3.10 ×** with the liquid as
+  it ran at n_TOF and **4.32 ×** without it (11 µm Li, horizontal pair, MM pointing + 0.6 ns TOF). MEG II's
+  published limit is 2.07 × R(ATOMKI). Matching it would take 6 days at 1.10 MeV with the liquid working; the ATOMKI ratio
+  28 days.
+- **Why:** every lepton crosses the 300 µm Cu wall (2 % X₀) or its rim. Against the Cu ogive that the 19 Nov version simulated
+  by mistake, the hemisphere keeps ×0.58 of the X17 pairs in two arms, ×0.41 of them in the E_sum window (the energy sum
+  drops by ~1 MeV), and its film yields ×0.58 γ₀ per proton: ×0.14 in selected signal, while the cosmics stay. Days to 3σ:
+  151 (120–189) with the liquid working, 263 (215–321) as at n_TOF,
+  511 without (the ogive: 25, 44, 94).
+- **The target holder is now the decision.** A lighter end piece changes the run from a feasibility test into a first limit:
+  the Al ogive + Cu liner (four-arm Geant4 × the two-arm ratio of the Cu ogive, an estimate) gives
+  0.62 / 0.81 / 1.46 × R(ATOMKI)
+  (liquid working / as at n_TOF / none) in the same five days. The 45° Al end cap of the target review is in the same class
+  (TARGET_REVIEW.md). Ask Pierfrancesco whether either can be made for slot 1 (task T1); otherwise the run is the feasibility
+  test only, and says so.
+- **What the run still delivers with the hemisphere:** every rate, trigger and track fraction, the cosmic veto at full
+  strength, the 441 keV calibration and the material model of the holder itself (the Predictions tab; `PREDICTIONS.md`).
+  An ATOMKI-size signal would show at 0.3–0.5σ: none of that is a physics result.
+- **Two arms against four:** this fit sums all pairs of the four-arm set-up, and the vertical and adjacent pairs add
+  cosmics, so four arms come out at 83 d against 86 d for the horizontal pair (20 µm, liquid working).
+  The four-arm number needs a fit per pair before it is quoted.
+- **The 10–12 µm film costs ×1.7** in days against 20 µm (more than for the ogive: the hemisphere's beam terms
+  are smaller, so the cosmics weigh more). **The liquid cells: without them ×3.4.**
+- **Geometry: opposite arms, horizontal for the beam:** 151 d against 237 d for the vertical pair
+  (with pointing only: 132 vs 219 d).
+- **The 441 keV calibration:** ~140 selected pairs per day above 90° (two arms; the ogive gave ~600): one day measures the
+  absolute rate to ±8 %, the shape coarsely (§2).
+- **Test the veto where it is hardest, without beam:** cosmic nights with the arms vertical (unchanged: the target does not
+  matter for muons), then roll to horizontal.
+- §4.2, §5 (rotated arms, L16) and the systematics scans (geom_syst, struct_scan, tof_scan) are still the Cu ogive's; their
+  ratios carry over, their absolute days do not.
 
 
 
@@ -45,7 +58,9 @@ Slide note: <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>. This re
 - **Re-used (no new physics):** the FEASIBILITY_SIM §19 reference fit (`x17_facility_search/lnl/target/shapes/shapes_nd.py`):
   θ × |y| × E_sum, background shape floating (S_θ 2 % + S_θy 1 %), free acceptance cubic, per-arm gains, the
   n_TOF-anchored calorimeter response, the yields of the Cu hemisphere's film at E_p, live 0.95. The Cu-hemisphere Geant4
-  tables of L11 and the ×30 as-built background run L13 (both on EOS, `target/sel_l11`, `sel_l13`).
+  tables of L10 (`dome300`, 27 Oct) and the new ×30 as-built background run **L18** (20 Nov: M1/E1 IPC at 18.15 and
+  15.1 MeV, 150 × 10⁵ pairs each; 8Be γ lines, 150 × 2 × 10⁶; X17, 30 × 10⁵; binary `mx17_full_sim_twoarm_10229eb`, the
+  same hemisphere geometry as L10 line by line; on EOS `target/sel_l18`, chunks of 30–50 jobs).
 - **New, `two_arm_nd.py`:** every table the fit loads passes through one function (`lnl_geant._combine`); the wrapper keeps
   only events whose selected pair is the requested pair of arms. Normalisations stay per generated event, so every rate is
   per day of the two-arm set-up. Events with three or more good arms: 0 in the beam samples, 0.2 % of cosmics, so
@@ -55,7 +70,7 @@ Slide note: <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>. This re
   - `--cosmic-disk R`: cosmic muons start on a disk of radius R normal to their own direction (run L15, §4).
   - Binary `bin/mx17_full_sim_twoarm_be1c1bb`. With no new option it builds the same geometry as `lnl_culiner` (checked:
     identical arm positions, no overlaps).
-- **The L13 E1 18.15 MeV table** (Cu hemisphere, as built) had never been merged: one job's ROOT file was truncated by an
+- *(19 Nov, the ogive tables)* **The L13 E1 18.15 MeV table** (Cu ogive, as built) had never been merged: one job's ROOT file was truncated by an
   EOS FUSE write on 12 Nov and its rerun was not reduced. Reduced and merged tonight (15 M pairs, 0.680 % two-arm rows per
   pair against 0.692 % in L11). It is in `sel_l13/` now, so the ×30 E1 statistics are in every fit below.
 
@@ -98,7 +113,7 @@ reference only.
 | `LNL calibrated, LS off` | **no liquid**: E_sum = SiPM bar + 2 cm plastic |
 | `trigger` | no cosmic veto beyond the E_sum window |
 | `MM 15° point, μ 3°` | each segment points back to the spot (15° electron segments; the muon segments 3°, as on the bench) + 20° collinearity veto |
-| `MM 15° + TOF` | the FEASIBILITY_SIM reference: pointing + a 0.3 ns arm-to-arm time of flight (**assumed, never measured**) |
+| `MM 15° + TOF` | the FEASIBILITY_SIM reference: pointing + a 0.6 ns per-arm time of flight (**measured** on n_TOF beam-off cosmics, 0.52–0.64 ns: nTof_x17 `ntof_cosmics/results/ac_tof/report.html`; read by `lnl_geant.TOF_SIGMA_NS`) |
 
 
 ## 2. Rates per day
@@ -111,45 +126,45 @@ weighted with its film yields; cosmics L15). The signal window is 125–160°, |
 
 | pair | veto | X17 at R(ATOMKI) | beam background | cosmics (MC events) | S/B |
 |---|---|---|---|---|---|
-| horizontal | no veto | 33.7 | 1020 | 1107.0 (2862) | 1.6 % |
-| horizontal | pointing | 22.9 | 619 | 29.4 (76) | 3.5 % |
-| horizontal | pointing + 1 ns TOF | 21.9 | 596 | 20.1 (52) | 3.5 % |
-| horizontal | pointing + 0.3 ns TOF | 21.7 | 595 | 1.2 (3) | 3.6 % |
-| vertical | no veto | 35.4 | 988 | 12804.4 (33104) | 0.3 % |
-| vertical | pointing | 24.1 | 686 | 246.4 (637) | 2.6 % |
-| vertical | pointing + 1 ns TOF | 23.3 | 666 | 159.4 (412) | 2.8 % |
-| vertical | pointing + 0.3 ns TOF | 23.3 | 665 | 0.4 (1) | 3.5 % |
+| horizontal | no veto | 4.8 | 101 | 1107.0 (2862) | 0.4 % |
+| horizontal | pointing | 3.3 | 69 | 29.4 (76) | 3.3 % |
+| horizontal | pointing + 1 ns TOF | 3.2 | 67 | 20.1 (52) | 3.6 % |
+| horizontal | pointing + 0.6 ns TOF | 3.2 | 68 | 45.6 (118) | 2.8 % |
+| vertical | no veto | 4.7 | 128 | 12804.4 (33104) | 0.0 % |
+| vertical | pointing | 3.2 | 66 | 246.4 (637) | 1.0 % |
+| vertical | pointing + 1 ns TOF | 3.1 | 65 | 159.4 (412) | 1.4 % |
+| vertical | pointing + 0.6 ns TOF | 3.1 | 65 | 493.5 (1276) | 0.6 % |
 
 
-**1.10 MeV, pairs per day by opening angle** (pointing + 0.3 ns TOF, liquid working, E_sum window; in brackets: no E_sum cut)
-
-| pair | component | 25-90° | 90-125° | 125-160° | 160-180° | all |
-|---|---|---|---|---|---|---|
-| horizontal | X17 at R(ATOMKI) | 0 (0) | 0 (1) | 22 (66) | 9 (25) | 31 (91) |
-| horizontal | E1 IPC | 0 (0) | 10 (51) | 486 (1530) | 180 (507) | 677 (2088) |
-| horizontal | M1 IPC | 0 (0) | 4 (22) | 102 (345) | 25 (82) | 131 (450) |
-| horizontal | external conv. | 0 (0) | 0 (171) | 20 (1564) | 10 (179) | 29 (1914) |
-| horizontal | 15.1 MeV IPC | 0 (0) | 2 (143) | 74 (3059) | 31 (999) | 107 (4201) |
-| adjacent | X17 at R(ATOMKI) | 0 (2) | 3 (12) | 1 (5) | 0 (0) | 5 (19) |
-| adjacent | E1 IPC | 1169 (3819) | 567 (1699) | 35 (138) | 0 (0) | 1772 (5661) |
-| adjacent | M1 IPC | 737 (2480) | 222 (723) | 12 (43) | 0 (0) | 971 (3249) |
-| adjacent | external conv. | 1921 (20314) | 340 (3866) | 35 (142) | 0 (0) | 2296 (24398) |
-| adjacent | 15.1 MeV IPC | 255 (10209) | 98 (4096) | 7 (337) | 0 (1) | 360 (14657) |
-
-**0.441 MeV, pairs per day by opening angle** (pointing + 0.3 ns TOF, liquid working, E_sum window; in brackets: no E_sum cut)
+**1.10 MeV, pairs per day by opening angle** (pointing + 0.6 ns TOF, liquid working, E_sum window; in brackets: no E_sum cut)
 
 | pair | component | 25-90° | 90-125° | 125-160° | 160-180° | all |
 |---|---|---|---|---|---|---|
-| horizontal | X17 at R(ATOMKI) | 0 (0) | 0 (0) | 1 (2) | 0 (1) | 1 (3) |
-| horizontal | E1 IPC | 0 (0) | 0 (1) | 14 (43) | 5 (14) | 19 (58) |
-| horizontal | M1 IPC | 0 (0) | 13 (78) | 358 (1216) | 87 (284) | 458 (1578) |
-| horizontal | external conv. | 0 (0) | 0 (57) | 110 (1344) | 55 (201) | 165 (1601) |
-| horizontal | 15.1 MeV IPC | 0 (0) | 0 (43) | 17 (722) | 6 (220) | 23 (985) |
+| horizontal | X17 at R(ATOMKI) | 0 (0) | 0 (0) | 3 (22) | 2 (9) | 5 (32) |
+| horizontal | E1 IPC | 0 (0) | 4 (22) | 65 (443) | 19 (138) | 87 (603) |
+| horizontal | M1 IPC | 0 (0) | 1 (5) | 9 (80) | 2 (22) | 12 (107) |
+| horizontal | external conv. | 0 (0) | 0 (78) | 31 (1297) | 0 (204) | 31 (1580) |
+| horizontal | 15.1 MeV IPC | 0 (0) | 0 (43) | 3 (847) | 0 (256) | 4 (1146) |
+| adjacent | X17 at R(ATOMKI) | 0 (2) | 1 (7) | 0 (2) | 0 (0) | 1 (11) |
+| adjacent | E1 IPC | 194 (1488) | 81 (590) | 5 (47) | 0 (0) | 280 (2126) |
+| adjacent | M1 IPC | 91 (713) | 26 (202) | 1 (13) | 0 (0) | 118 (928) |
+| adjacent | external conv. | 2366 (36005) | 248 (5590) | 0 (251) | 0 (0) | 2645 (41985) |
+| adjacent | 15.1 MeV IPC | 16 (3674) | 6 (1365) | 0 (102) | 0 (0) | 22 (5143) |
+
+**0.441 MeV, pairs per day by opening angle** (pointing + 0.6 ns TOF, liquid working, E_sum window; in brackets: no E_sum cut)
+
+| pair | component | 25-90° | 90-125° | 125-160° | 160-180° | all |
+|---|---|---|---|---|---|---|
+| horizontal | X17 at R(ATOMKI) | 0 (0) | 0 (0) | 0 (1) | 0 (1) | 0 (2) |
+| horizontal | E1 IPC | 0 (0) | 0 (1) | 3 (24) | 1 (7) | 5 (32) |
+| horizontal | M1 IPC | 0 (0) | 3 (50) | 106 (874) | 25 (249) | 135 (1174) |
+| horizontal | external conv. | 0 (0) | 0 (252) | 2 (2119) | 0 (535) | 2 (2907) |
+| horizontal | 15.1 MeV IPC | 0 (0) | 0 (27) | 2 (421) | 0 (117) | 2 (565) |
 | adjacent | X17 at R(ATOMKI) | 0 (0) | 0 (0) | 0 (0) | 0 (0) | 0 (1) |
-| adjacent | E1 IPC | 33 (107) | 16 (47) | 1 (4) | 0 (0) | 49 (158) |
-| adjacent | M1 IPC | 2522 (8499) | 759 (2497) | 39 (149) | 0 (0) | 3320 (11154) |
-| adjacent | external conv. | 2282 (19992) | 285 (3824) | 56 (253) | 0 (0) | 2622 (24154) |
-| adjacent | 15.1 MeV IPC | 105 (4329) | 30 (1416) | 1 (85) | 0 (0) | 137 (5836) |
+| adjacent | E1 IPC | 10 (80) | 4 (32) | 0 (3) | 0 (0) | 15 (114) |
+| adjacent | M1 IPC | 933 (7312) | 265 (2088) | 12 (124) | 0 (0) | 1211 (9530) |
+| adjacent | external conv. | 5969 (69914) | 455 (10835) | 0 (367) | 0 (0) | 6424 (81204) |
+| adjacent | 15.1 MeV IPC | 10 (2932) | 3 (934) | 0 (59) | 0 (0) | 13 (3926) |
 
 
 - The 1.10 MeV background in the opposite pair is mostly the **E1 IPC** of direct capture, then M1 IPC, 15.1 MeV IPC and
@@ -159,88 +174,88 @@ weighted with its film yields; cosmics L15). The signal window is 125–160°, |
 
 ## 3. Reach: days to 3σ at R(ATOMKI), and what five days give
 
-Reference fit (FEASIBILITY_SIM §19), Cu hemisphere as built, 1 µA, 1.10 MeV, m_X = 16.8 MeV, live 0.95. Central value =
+Reference fit (FEASIBILITY_SIM §19), the built Cu hemisphere (dome300, L10 + L18) as built, 1 µA, 1.10 MeV, m_X = 16.8 MeV, live 0.95. Central value =
 geometric mean of the two MC-safe estimators, range in brackets.
 
 
 **20 µm Li (as simulated)** — days to 3σ at R(ATOMKI), 1 µA, 1.10 MeV (central; range of the two estimators)
 
-| pair | stack | no veto | pointing | pointing + 1 ns TOF | pointing + 0.3 ns TOF |
+| pair | stack | no veto | pointing | pointing + 1 ns TOF | pointing + 0.6 ns TOF |
 |---|---|---|---|---|---|
-| horizontal | liquid working | 23† | 17 (16–17) | 18† | 18 (18–18) |
-| horizontal | liquid as at n_TOF | 27† | 28 (22–36) | 22† | 30 (22–42) |
-| horizontal | no liquid | 49† | 66 (43–100) | 42† | 70 (42–118) |
-| vertical | liquid working | 35† | 23 (22–25) | 20† | 20 (17–23) |
-| vertical | liquid as at n_TOF | 43† | 30 (25–36) | 23† | 26 (19–34) |
-| vertical | no liquid | 64† | 68 (43–107) | 41† | 56 (37–86) |
-| adjacent | liquid working | 63† | 48 (32–71) | 71† | 51 (36–71) |
-| adjacent | liquid as at n_TOF | 58† | 57 (49–66) | 65† | 58 (51–65) |
-| adjacent | no liquid | 127† | 96 (75–123) | 121† | 76 (48–120) |
-| four arms | liquid working | 17† | 10 (8–12) | 12† | 8 (7–10) |
-| four arms | liquid as at n_TOF | 31† | 16 (15–17) | 17† | 15 (15–15) |
-| four arms | no liquid | 45† | 48 (38–61) | 38† | 43 (32–59) |
+| horizontal | liquid working | 148† | 78 (57–106) | 109† | 86 (68–110) |
+| horizontal | liquid as at n_TOF | 181† | 130 (106–160) | 158† | 151 (128–178) |
+| horizontal | no liquid | 259† | 260 (257–262) | 261† | 293 (277–310) |
+| vertical | liquid working | 262† | 125 (103–151) | 129† | 131 (111–156) |
+| vertical | liquid as at n_TOF | 330† | 230 (197–269) | 232† | 234 (195–281) |
+| vertical | no liquid | 352† | 313 (292–335) | 267† | 313 (289–339) |
+| adjacent | liquid working | 896† | 351 (137–898) | 742† | 317 (131–766) |
+| adjacent | liquid as at n_TOF | 742† | 327 (137–780) | 790† | 340 (147–788) |
+| adjacent | no liquid | 1528† | 620 (268–1433) | 1279† | 620 (297–1295) |
+| four arms | liquid working | 152† | 79 (47–132) | 127† | 83 (48–143) |
+| four arms | liquid as at n_TOF | 156† | 94 (62–142) | 138† | 103 (67–159) |
+| four arms | no liquid | 186† | 186 (148–234) | 217† | 217 (180–263) |
 
 † direct estimator only (no transplant run); compare with the direct values of the other columns (out/summary_reach*.csv, days3_direct), not with their central values.
 
 
 **11 µm Li (the review’s 10–12 µm)** — days to 3σ at R(ATOMKI), 1 µA, 1.10 MeV (central; range of the two estimators)
 
-| pair | stack | no veto | pointing | pointing + 1 ns TOF | pointing + 0.3 ns TOF |
+| pair | stack | no veto | pointing | pointing + 1 ns TOF | pointing + 0.6 ns TOF |
 |---|---|---|---|---|---|
-| horizontal | liquid working | 35† | 23 (22–24) | 24† | 24 (23–24) |
-| horizontal | liquid as at n_TOF | 44† | 38 (30–49) | 29† | 39 (28–54) |
-| horizontal | no liquid | 74† | 92 (60–143) | 57† | 87 (54–139) |
-| vertical | liquid working | 58† | 34 (32–35) | 30† | 26 (23–31) |
-| vertical | liquid as at n_TOF | 72† | 45 (37–54) | 34† | 34 (26–45) |
-| vertical | no liquid | 99† | 101 (63–162) | 59† | 78 (51–120) |
-| four arms | liquid working | 30† | 14 (11–16) | 16† | 11 (9–13) |
-| four arms | liquid as at n_TOF | 54† | 23 (23–24) | 24† | 19 (19–19) |
-| four arms | no liquid | 66† | 68 (54–84) | 54† | 59 (44–78) |
+| horizontal | liquid working | 292† | 132 (97–180) | 180† | 151 (120–189) |
+| horizontal | liquid as at n_TOF | 326† | 226 (182–282) | 275† | 263 (215–321) |
+| horizontal | no liquid | 452† | 472 (472–472) | 475† | 511 (494–529) |
+| vertical | liquid working | 548† | 219 (179–268) | 226† | 237 (193–290) |
+| vertical | liquid as at n_TOF | 654† | 425 (380–475) | 414† | 426 (361–501) |
+| vertical | no liquid | 695† | 534 (497–574) | 452† | 537 (496–581) |
+| four arms | liquid working | 295† | 135 (81–227) | 216† | 148 (85–256) |
+| four arms | liquid as at n_TOF | 308† | 174 (116–263) | 254† | 194 (126–301) |
+| four arms | no liquid | 329† | 323 (257–405) | 380† | 372 (308–450) |
 
 † direct estimator only (no transplant run); compare with the direct values of the other columns (out/summary_reach*.csv, days3_direct), not with their central values.
 
 
 **The vetoes compared with one estimator** (direct + floor, 20 µm, days to 3σ):
 
-| pair | stack | no veto | pointing | pointing + 1 ns TOF | pointing + 0.3 ns TOF |
+| pair | stack | no veto | pointing | pointing + 1 ns TOF | pointing + 0.6 ns TOF |
 |---|---|---|---|---|---|
-| horizontal | liquid working | 23 | 17 | 18 | 18 |
-| horizontal | liquid as at n_TOF | 27 | 22 | 22 | 22 |
-| horizontal | no liquid | 49 | 43 | 42 | 42 |
-| vertical | liquid working | 35 | 22 | 20 | 17 |
-| vertical | liquid as at n_TOF | 43 | 25 | 23 | 19 |
-| vertical | no liquid | 64 | 43 | 41 | 37 |
-| four arms | liquid working | 17 | 12 | 12 | 10 |
-| four arms | liquid as at n_TOF | 31 | 17 | 17 | 15 |
-| four arms | no liquid | 45 | 38 | 38 | 32 |
+| horizontal | liquid working | 148 | 106 | 109 | 110 |
+| horizontal | liquid as at n_TOF | 181 | 160 | 158 | 178 |
+| horizontal | no liquid | 259 | 257 | 261 | 277 |
+| vertical | liquid working | 262 | 151 | 129 | 156 |
+| vertical | liquid as at n_TOF | 330 | 269 | 232 | 281 |
+| vertical | no liquid | 352 | 292 | 267 | 289 |
+| four arms | liquid working | 152 | 132 | 127 | 143 |
+| four arms | liquid as at n_TOF | 156 | 142 | 138 | 159 |
+| four arms | no liquid | 186 | 234 | 217 | 263 |
 
 **Five days at 1.10 MeV** — expected Z if R = R(ATOMKI), expected 90 % CL limit / R(ATOMKI) (MEG II: 2.07), chance of ≥ 3σ and ≥ 2σ if ATOMKI is right; horizontal pair
 
 | film | stack | veto | days to 3σ | Z(5 d) | R₉₀ / R(ATOMKI) | R₉₀ / MEG II | P(≥ 3σ) | P(≥ 2σ) |
 |---|---|---|---|---|---|---|---|---|
-| 11 µm | liquid working | pointing + 0.3 ns TOF | 24 | 1.38 | 0.93 | 0.45 | 5 % | 27 % |
-| 11 µm | liquid working | pointing | 23 | 1.40 | 0.91 | 0.44 | 5 % | 27 % |
-| 11 µm | liquid as at n_TOF | pointing + 0.3 ns TOF | 39 | 1.08 | 1.19 | 0.58 | 3 % | 18 % |
-| 11 µm | liquid as at n_TOF | pointing | 38 | 1.09 | 1.18 | 0.57 | 3 % | 18 % |
-| 11 µm | no liquid | pointing + 0.3 ns TOF | 87 | 0.72 | 1.78 | 0.86 | 1 % | 10 % |
-| 11 µm | no liquid | pointing | 92 | 0.70 | 1.84 | 0.89 | 1 % | 10 % |
-| 20 µm | liquid working | pointing + 0.3 ns TOF | 18 | 1.59 | 0.81 | 0.39 | 8 % | 34 % |
-| 20 µm | liquid working | pointing | 17 | 1.63 | 0.79 | 0.38 | 9 % | 36 % |
-| 20 µm | liquid as at n_TOF | pointing + 0.3 ns TOF | 30 | 1.23 | 1.05 | 0.51 | 4 % | 22 % |
-| 20 µm | liquid as at n_TOF | pointing | 28 | 1.27 | 1.01 | 0.49 | 4 % | 23 % |
-| 20 µm | no liquid | pointing + 0.3 ns TOF | 70 | 0.80 | 1.60 | 0.77 | 1 % | 12 % |
-| 20 µm | no liquid | pointing | 66 | 0.83 | 1.55 | 0.75 | 1 % | 12 % |
+| 11 µm | liquid working | pointing + 0.6 ns TOF | 151 | 0.55 | 2.35 | 1.13 | 1 % | 7 % |
+| 11 µm | liquid working | pointing | 132 | 0.58 | 2.20 | 1.06 | 1 % | 8 % |
+| 11 µm | liquid as at n_TOF | pointing + 0.6 ns TOF | 263 | 0.41 | 3.10 | 1.50 | 0 % | 6 % |
+| 11 µm | liquid as at n_TOF | pointing | 226 | 0.45 | 2.87 | 1.39 | 1 % | 6 % |
+| 11 µm | no liquid | pointing + 0.6 ns TOF | 511 | 0.30 | 4.32 | 2.09 | 0 % | 4 % |
+| 11 µm | no liquid | pointing | 472 | 0.31 | 4.15 | 2.01 | 0 % | 5 % |
+| 20 µm | liquid working | pointing + 0.6 ns TOF | 86 | 0.72 | 1.78 | 0.86 | 1 % | 10 % |
+| 20 µm | liquid working | pointing | 78 | 0.76 | 1.68 | 0.81 | 1 % | 11 % |
+| 20 µm | liquid as at n_TOF | pointing + 0.6 ns TOF | 151 | 0.55 | 2.35 | 1.13 | 1 % | 7 % |
+| 20 µm | liquid as at n_TOF | pointing | 130 | 0.59 | 2.18 | 1.05 | 1 % | 8 % |
+| 20 µm | no liquid | pointing + 0.6 ns TOF | 293 | 0.39 | 3.27 | 1.58 | 0 % | 5 % |
+| 20 µm | no liquid | pointing | 260 | 0.42 | 3.08 | 1.49 | 0 % | 6 % |
 
 
-- **Liquid cells:** working 18 d, as at n_TOF 22 d, none
-  42 d (horizontal, direct). Without them E_sum is a SiPM bar plus 2 cm of plastic: the
-  signal in the window drops ×6, and the γ₁ (15.1 MeV) pairs are no longer separated.
-- **The time of flight matters only for the vertical pair.** Horizontal: 17 d with pointing,
-  18 d with 0.3 ns TOF. Vertical: 22 d and
-  17 d. A 1 ns TOF removes only a third of the remaining cosmics; it takes ≲ 0.4 ns.
-- **No veto at all** costs the horizontal pair ×1.3 and
-  the vertical pair ×1.6.
-- **The film:** 11 µm has ~55 % of the 20 µm yield, so the beam terms fall and the cosmics do not: ×1.3
+- **Liquid cells:** working 110 d, as at n_TOF 178 d, none
+  277 d (horizontal, direct). Without them E_sum is a SiPM bar plus 2 cm of plastic: the
+  signal in the window drops several-fold, and the γ₁ (15.1 MeV) pairs are no longer separated.
+- **The time of flight matters only for the vertical pair.** Horizontal: 106 d with pointing,
+  110 d with 0.6 ns TOF. Vertical: 151 d and
+  156 d. A 1 ns TOF removes only a third of the remaining cosmics; it takes ≲ 0.4 ns.
+- **No veto at all** costs the horizontal pair ×1.4 and
+  the vertical pair ×1.7.
+- **The film:** 11 µm has ~55 % of the 20 µm yield, so the beam terms fall and the cosmics do not: ×1.7
   in days for the horizontal pair, more for the vertical one where cosmics are a larger share.
 
 
@@ -258,7 +273,8 @@ to horizontal, and L4 has almost none of them.
 the target, 1.08 m upstream along the track. Zenith from the intensity cos²θ through a surface normal to the track,
 θ < 89°; momentum as before (Reyna 2006 vertical spectrum; its harder spectrum at large zenith is not modelled, irrelevant
 for minimum-ionising muons). Live time per muon: 60 s / (4π/3 · R²) with R in cm, for 1 cm⁻² min⁻¹ through a horizontal
-surface. Same Cu-hemisphere geometry as the beam samples, all four arms built, cut to pairs like everything else.
+surface. All four arms built, cut to pairs like everything else. The L15 muons were simulated with the Cu ogive in place
+(the target is irrelevant for muons crossing the arms).
 
 Two-arm coincidences per day (trigger + Micromegas in the active area, any angle):
 
@@ -286,12 +302,12 @@ geometry that reproduces it at full strength, which makes it the right geometry 
 
 ### 4.3 Cosmics by veto (L15, liquid working, signal window, per day)
 
-| pair | no veto | pointing | pointing + 1 ns TOF | pointing + 0.3 ns TOF |
+| pair | no veto | pointing | pointing + 1 ns TOF | pointing + 0.6 ns TOF |
 |---|---|---|---|---|
-| horizontal | 1107.0 (2862 MC) | 29.4 (76 MC) | 20.1 (52 MC) | 1.2 (3 MC) |
-| vertical | 12804.4 (33104 MC) | 246.4 (637 MC) | 159.4 (412 MC) | 0.4 (1 MC) |
+| horizontal | 1107.0 (2862 MC) | 29.4 (76 MC) | 20.1 (52 MC) | 45.6 (118 MC) |
+| vertical | 12804.4 (33104 MC) | 246.4 (637 MC) | 159.4 (412 MC) | 493.5 (1276 MC) |
 
-The fits used L15 chunks 0–3 (400 jobs, 2.45 live days: 33104 MC events in the vertical no-veto window, 76 in the horizontal pointing one); the coincidence tables of §4.1 (`out/cosmic_rates.csv`) use all of it, 10.0 live days. At the levels where cosmics matter the fits have tens to thousands of MC events; with 0.3 ns TOF, 0–7 events: there they are negligible against ~600 beam pairs either way. The vertical and four-arm cosmic tables drop rows below 40° of opening angle (memory; the fit starts at 90° with 5° smoothing), so the spectra of those two pairs show no cosmics below 40°.
+The fits used L15 chunks 0–3 (400 jobs, 2.45 live days: 33104 MC events in the vertical no-veto window, 76 in the horizontal pointing one); the coincidence tables of §4.1 (`out/cosmic_rates.csv`) use all of it, 2.5 live days. At the levels where cosmics matter the fits have tens to thousands of MC events. The vertical and four-arm cosmic tables drop rows below 40° of opening angle (memory; the fit starts at 90° with 5° smoothing), so the spectra of those two pairs show no cosmics below 40°.
 
 
 ## 5. Arms turned toward the X17 angle (run L16): no gain
@@ -324,16 +340,16 @@ the Cu hemisphere smears below 120°). What they see well:
 
 | E_p | component | adjacent, 25–90° | opposite (horizontal), all angles |
 |---|---|---|---|
-| 1.10 MeV | E1 IPC | 1169 | 677 |
-| 1.10 MeV | M1 IPC | 737 | 131 |
-| 1.10 MeV | external conversions | 1921 | 29 |
-| 1.10 MeV | 15.1 MeV IPC | 255 | 107 |
-| 0.441 MeV | E1 IPC | 33 | 19 |
-| 0.441 MeV | M1 IPC | 2522 | 458 |
-| 0.441 MeV | external conversions | 2282 | 165 |
-| 0.441 MeV | 15.1 MeV IPC | 105 | 23 |
+| 1.10 MeV | E1 IPC | 194 | 87 |
+| 1.10 MeV | M1 IPC | 91 | 12 |
+| 1.10 MeV | external conversions | 2366 | 31 |
+| 1.10 MeV | 15.1 MeV IPC | 16 | 4 |
+| 0.441 MeV | E1 IPC | 10 | 5 |
+| 0.441 MeV | M1 IPC | 933 | 135 |
+| 0.441 MeV | external conversions | 5969 | 2 |
+| 0.441 MeV | 15.1 MeV IPC | 10 | 2 |
 
-(pairs per day, pointing + 0.3 ns TOF, liquid working, E_sum window, 20 µm.) Half a day of adjacent running gives ~1,000 conversion pairs at 25–90°: the external-conversion model of the Cu wall, which carries ~20 % of the background in the X17 fit and rests on a few hundred MC events, gets a direct measurement. It also checks the opening-angle response away from the X17 window and the trigger with two arms at 90°, which is half the pair combinations of the four-arm experiment.
+(pairs per day, pointing + 0.6 ns TOF, liquid working, E_sum window, 20 µm.) Half a day of adjacent running gives ~1,000 conversion pairs at 25–90°: the external-conversion model of the Cu wall, which carries ~20 % of the background in the X17 fit and rests on a few hundred MC events, gets a direct measurement. It also checks the opening-angle response away from the X17 window and the trigger with two arms at 90°, which is half the pair combinations of the four-arm experiment.
 
 ## 7. The run plan: hedge first, then five days of X17 data
 
@@ -341,7 +357,8 @@ the Cu hemisphere smears below 120°). What they see well:
 
 Everything that makes the feasibility case (rates, calibration, backgrounds, the veto) is front-loaded and takes
 three days at most; the X17 data fill the rest. If the apparatus misbehaves, the run is still a full feasibility study;
-if it works, the last five days give a limit near the ATOMKI ratio. Nothing in the plan depends on a lucky signal.
+if it works, the last five days give a first limit: with the built Cu hemisphere ~2.4 × R(ATOMKI) at best, about MEG II's
+level; with a lighter Al end piece ~0.6–0.8 × (estimate, §0). Nothing in the plan depends on a lucky signal.
 
 ### 7.2 Before the beam: the cosmic veto test, vertical pair (installation week, ≥ 3 nights)
 
@@ -375,8 +392,8 @@ stacked vertically.
 | day | E_p | what | the number it delivers |
 |---|---|---|---|
 | 1 | 1.10 MeV | target conditioning; current scan 0.05 → 1 µA; γ-yield reference | singles and two-arm rates vs current, DREAM live time, MM occupancy; accidentals (≲ 0.02/day in the window at 2τ = 20 ns) |
-| 2 | 0.441 MeV | locate the 441 keV resonance on the arm singles; 17.64 MeV M1 IPC | ~600 pairs/day above 90° in the E_sum window (~3,000 with no E_sum cut): the absolute IPC rate, the θ shape and the E_sum peak against Geant4 to ~5 % |
-| 3–7 | 1.10 MeV | the 18.15 MeV region; 30 min yield check each day | the X17 data (§3): expected limit 0.7–1.1 × R(ATOMKI) with the liquid cells |
+| 2 | 0.441 MeV | locate the 441 keV resonance on the arm singles; 17.64 MeV M1 IPC | ~140 pairs/day above 90° in the E_sum window with the built Cu hemisphere (~1,600 with no E_sum cut; the ogive gave ~600): the absolute IPC rate to ~8 % in a day, the θ shape and the E_sum peak against Geant4 |
+| 3–7 | 1.10 MeV | the 18.15 MeV region; 30 min yield check each day | the X17 data (§3): expected limit 2.4 / 3.1 × R(ATOMKI) with the liquid working / as at n_TOF (built Cu hemisphere); 0.6–0.8 × with a lighter Al end piece (estimate) |
 | 8 | 1.10 MeV | ½ day with the arms adjacent (90°), then contingency | external conversions and small-angle IPC at 25–90°, several × 10³/day (§6) |
 | beam off | — | cosmics in the physics geometry (horizontal) | the beam-off background template in the geometry of the data |
 
@@ -408,7 +425,8 @@ day 8) is optional and comes last.
 - The apparatus on a proton beam: rates, live time, occupancy, measured against Geant4.
 - The 17.64 MeV IPC (no anomaly expected): the measured opening-angle distribution against Geant4.
 - The cosmic background in the X17 window with each veto, in the worst geometry: the answer to the MEG II critique.
-- A first X17 limit at 18.15 MeV, expected at or below the ATOMKI ratio with the liquid cells (and below MEG II's).
+- A first X17 limit at 18.15 MeV: with the built Cu hemisphere about MEG II's (2.4 × R(ATOMKI), liquid working); below the
+  ATOMKI ratio only with a lighter Al end piece (estimate).
 
 
 ## 8. Caveats
@@ -416,7 +434,7 @@ day 8) is optional and comes last.
 - **Thin Monte Carlo** is still the main limitation of the as-built Cu-hemisphere numbers: the two estimators differ by up
   to ×2 in a few rows (the range quoted). The EPC (external conversions in the 200 µm Cu wall) rests on a few hundred MC
   events in the opposite pairs; vertical and horizontal pairs differ by ×2–3 in EPC in the window, which is MC noise.
-- **TOF σ_t = 0.3 ns** (the reference level) is assumed. The "pointing only" rows do not need it; the vertical-pair cosmic
+- **TOF σ_t = 0.6 ns per arm** (the reference level) is measured with the n_TOF readout (0.52–0.64 ns); the LNL digitisers are still to check (R4). The "pointing only" rows do not need it; the vertical-pair cosmic
   nights measure it.
 - **The muon segment resolution** (3° in the "pointing" level, the bench value) is not in the Geant4 smearing itself; it
   is applied to the cosmic sample only.
@@ -425,15 +443,16 @@ day 8) is optional and comes last.
   the spot by ≥ 20 cm); the measured beam-off rate in the physics geometry is the check.
 - **The roll of the pair** (horizontal vs vertical) is simulated with arms 0–1 and 2–3, which are different modules (their
   liquid cells sit differently): part of the ±10 % between the two pairs' beam numbers is that, part is MC noise.
-- **20 µm Li film** as simulated; the review recommends 10–12 µm (51–61 % of the yield: ×1.6–2 in days, `TARGET_REVIEW.md`).
+- **20 µm Li film** as simulated; the review recommends 10–12 µm (51–61 % of the yield: ×1.7 in days for the hemisphere, §0; `TARGET_REVIEW.md`).
 - The 441 keV numbers reuse the 18.15 MeV M1 table with the 17.64 MeV yields (as `shapes_nd` does).
 
 ## 9. Next
 
 1. Proposal text (task R5): the reach rows of §3, the 441 keV rate of §2, the vertical-cosmics test of §7.2, Fig. from
-   `planning/figures.py`. The sensitivity sentence: "expected 90 % CL limit 0.8–1.3 × R(ATOMKI) in five days with liquid
-   cells, below MEG II's limit" (§0 numbers).
-2. More as-built MC for the Cu hemisphere (task R6): the EPC and the IPC at large angles in the opposite pairs, ×5.
+   `planning/figures.py`. The sensitivity sentence with the built hemisphere: "expected 90 % CL limit 2.4 × R(ATOMKI) in
+   five days with liquid cells, about MEG II's; a lighter Al end piece would reach ~0.6–0.8 ×" (§0 numbers).
+2. A two-arm Geant4 run of the lighter Al end piece (Al ogive + Cu liner, or the 45° Al cap): its rows are scaled estimates (§0).
+   The hemisphere's as-built MC (L10 + L18, ×30) is no longer the limitation.
 3. The muon segment smearing inside the Geant4 levels, not as a wrapper (FEASIBILITY_SIM §19.6 item 4).
 4. A roll angle for the stand and a 45° ("X") pair, if the mechanics prefer it (`x17_facility_search/mechanics/`):
    the L15 cosmics can be re-cut for it only after a rotated-cosmic run (the beam samples do not care).

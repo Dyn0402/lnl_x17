@@ -4,15 +4,16 @@ predictions.py -- what the slot-1 two-arm run should see, observable by observab
 (lnl_x17, 2026-11-20).  Feeds the "Predictions" tab of the page (site/template.html) through out/predictions.json.
 
 The ladder follows the run: cosmic nights (arms vertical, then horizontal), beam singles, beam pairs at 441 keV and
-1.10 MeV.  Every number is per arm or per pair of the two-arm set-up, 11 µm Li in the Cu hemisphere, 1 µA.
+1.10 MeV.  Every number is per arm or per pair of the two-arm set-up, 11 µm Li in the built Cu hemisphere (R 11 mm,
+300 µm, rim, grey flange: config dome300, runs L10 + L18; TA_CFG=ogCu200 gives the Cu ogive the 19 Nov study used), 1 µA.
 
 Inputs
   $WORK_DATA/x17_facility_search/pred/pred_cosmic_L15v2.npz   L15 cosmic-disk muons, every event with legs in both
                                                              arms of a slot-1 pair (sim2arm/lxplus/pred_cosmic_scan.py)
-  $WORK_DATA/x17_facility_search/pred/pred_gam_L13.npz        L13 8Be γ lines in the Cu hemisphere, every event with a
-                                                             leg (same script, --mode single)
+  $WORK_DATA/x17_facility_search/pred/pred_gam_L18.npz        L18 8Be γ lines in the Cu hemisphere, every event with a
+                                                             leg (same script, --mode single; L13 = the ogive)
   shapes_nd event tables via two_arm_nd.py (pairs: IPC, EPC, X17, cosmics after the analysis), as in the reach fits
-  out/summary_rates_pass3li11.csv                              the reach pass's own rates (cross-check)
+  out/summary_rates<PASS>li11.csv (PASS=_pass4: dome300)       the reach pass's own cosmic rates after the analysis
 
 Definitions (lnl_merge.py): a trigger LEG is SiPM bar >= 0.5 MIP AND plastic >= 0.5 MIP in one arm; an MM TRACK is a
 Micromegas segment (dominant track, >= 3 steps) with its charge centroid in the active area.  The simulation's
@@ -50,6 +51,8 @@ LEVEL = 'MM 15° + TOF'
 NIGHT_H = 10.0                            # one cosmic night
 C_MM_NS = 299.792458                      # mm/ns
 rng = np.random.default_rng(20261120)
+TGT = T.CFG                               # dome300 (built hemisphere) unless TA_CFG says otherwise
+GAM_FILE = os.environ.get('PRED_GAM', 'pred_gam_L18.npz' if TGT == 'dome300' else 'pred_gam_L13.npz')
 
 
 def r3(x, n=3):
@@ -143,14 +146,14 @@ def cosmics():
 
 # --------------------------------------------------------------------------- γ singles from the target
 def gamma_rates(ep):
-    y = SN.yields('ogCu200', ep, li_ug=LI_UG)
+    y = SN.yields(TGT, ep, li_ug=LI_UG)
     pps = 1e-6 / SN.OG.LR.E_CHARGE
     g0, g1, f17 = y['Y_g0'] * pps, y['Y_g1'] * pps, y['frac_17_64']
     return {18.15: g0 * (1 - f17), 17.64: g0 * f17, 15.1: g1 * (1 - f17), 14.6: g1 * f17}, y
 
 
 def singles(cos):
-    z = np.load(PRED / 'pred_gam_L13.npz')
+    z = np.load(PRED / GAM_FILE)
     ngen = int(z['cnt_n_generated'])
     lines = np.array([14.6, 15.1, 17.64, 18.15])
     nline = ngen / len(lines)
@@ -233,7 +236,7 @@ def beam_pairs(pair='horiz'):
     for ep in (441.0, 1100.0):
         d = {}
         for lev in ('trigger', LEVEL):
-            ev = SN.collect('ogCu200', 'asb', ep, RESP, level=lev, I_uA=1.0, live=SN.LIVE_S2, li_ug=LI_UG,
+            ev = SN.collect(TGT, 'asb', ep, RESP, level=lev, I_uA=1.0, live=SN.LIVE_S2, li_ug=LI_UG,
                             erange=(3.0, 40.0))
             th, E, yy, w, comp = ev['v0']['th'], ev['v0']['E'], np.abs(ev['v0']['y']), ev['w'], ev['comp']
             win = (E > ec[0]) & (E < ec[1])
@@ -259,12 +262,12 @@ def main():
     cos = cosmics()
     sg = singles(cos)
     bp = beam_pairs('horiz')
-    res = dict(made='2026-11-20', li_ug=LI_UG, eps_mm=EPS_MM, sigma_t_ns=SIG_T, night_h=NIGHT_H,
+    res = dict(made='2026-11-20', target=TGT, target_name=SN.SG.SHAPES.get(TGT, (TGT,))[0], li_ug=LI_UG, eps_mm=EPS_MM, sigma_t_ns=SIG_T, night_h=NIGHT_H,
                seg_D_15=r3(G.seg_D(15.0)), seg_D_3=r3(G.seg_D(3.0)),
                cosmics=cos, singles=sg, pairs=bp, comp_names=COMP)
     # cosmics after the full analysis (E_sum window, pointing + 0.6 ns TOF): the reach pass's own numbers
     import pandas as pd
-    sr = pd.read_csv(OUT / 'summary_rates_pass3li11.csv')
+    sr = pd.read_csv(OUT / f"summary_rates{os.environ.get('PASS', '_pass4')}li11.csv")
     for name in PAIRS:
         r = sr[(sr.pair == name) & (sr.comp == 'cos') & (sr.Ep_keV == 1100.0)]
         for ew in ('win', 'none'):
