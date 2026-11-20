@@ -1,8 +1,16 @@
 # Handoff
 
-## R11: Geant4 of the liquid cell right behind the SiPM wall — RUNNING since 2026-11-20 23:46 (dylan-MS-7C84)
+## R11: Geant4 of the liquid cell right behind the SiPM wall — updated 2026-11-20 (dylan-MS-7C84)
 
-**Resume:** when the merge loop says "all merged", rsync + `combine_r11.py`, then the fit with `TA_LAYOUT=lsf16`.
+**Resume:** R11 condor jobs submitted 23:46; check they finished + merged, then combine_r11.py and the TA_LAYOUT=lsf16 fit.
+
+**Goal:** a Geant4 reach for layout C (liquid in front of the plastics, LIQUID_CELLS.md §4; toy said 151 → ~34 d, ~1.1 ×
+R(ATOMKI) in 5 d) before the 27 Nov proposal draft. If it holds, it goes into the proposal and plan (R11 → done).
+
+**State at wrap-up (23:55):** 830 jobs idle in a busy queue (16.7k idle on the pool); merge loop alive, 0 chunks yet.
+The merge loop stops after 64 passes × 15 min = 16 h (≈ 16:00 on 21 Nov): if jobs are still running then, restart it
+(`cd /afs/cern.ch/work/d/dneff/git/x17_lnl/analysis/l15 && setsid nohup bash merge_loop_r11.sh > merge_loop_r11.log 2>&1 < /dev/null &`;
+it skips chunks already merged). The local watcher of this session dies with it.
 
 - Layout C of `slot1_feasibility/LIQUID_CELLS.md` §4: built Cu hemisphere (dome300), the n_TOF liquid can at
   `--ls-front 1.6` (cm behind the SiPM container back; plastics unchanged), leg = SiPM AND (plastic OR E_ls ≥ 1.7 MeV).
@@ -19,7 +27,7 @@
   'n_TOF as is' --levels 'MM 15° + TOF' --tag _r11` (and LI_UG=587). Compare with pass 4 (151 d, 2.35 ×). Check 001 vs 005
   events in each condor.log before quoting.
 
-## Liquid cells in the baseline, predictions table in the proposal — updated 2026-11-20 evening (dylan-MS-7C84)
+## Liquid cells in the baseline, predictions table in the proposal — updated 2026-11-20 (dylan-MS-7C84)
 
 **Resume:** proposal + page current; next: S8 (ask PF the liquid questions), R5 (Overleaf upload), R8 figure (3D render).
 
