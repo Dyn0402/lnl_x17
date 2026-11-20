@@ -7,6 +7,10 @@
 <title>LNL Feasibility Run</title>
 <meta name="description" content="The two-arm MX17 X17 feasibility study at INFN LNL: the PAC proposal (deadline 10 Dec 2026), the timeline, the set-up, the beam plan and reach, tasks, budget, risks and open questions.">
 <script>try{var t=localStorage.getItem('theme');if(t)document.documentElement.setAttribute('data-theme',t);}catch(e){}</script>
+<script type="importmap">
+{ "imports": { "three": "https://cdn.jsdelivr.net/npm/three@0.160.0/build/three.module.js",
+  "three/addons/": "https://cdn.jsdelivr.net/npm/three@0.160.0/examples/jsm/" } }
+</script>
 <style>
 :root {
   color-scheme: light;
@@ -441,6 +445,8 @@ details summary { cursor: pointer; color: var(--ink-2); }
     </div>
   </section>
 
+<!-- PREDICT_PANE -->
+
   <p class="foot">Source: <span class="kbd">lnl_x17</span> (planning/plan.py → site/build_page.py). Physics and detector numbers from
     <span class="kbd">x17_facility_search/lnl</span>. Unlisted page.</p>
 </div>
@@ -503,7 +509,7 @@ $("#themebtn").addEventListener("click", () => {
 });
 
 /* ---------- tabs ---------- */
-const TABS = [["overview", "Overview"], ["timeline", "Timeline"], ["setup", "Set-up"], ["hardware", "Hardware"], ["reach", "Beam & reach"],
+const TABS = [["overview", "Overview"], ["timeline", "Timeline"], ["setup", "Set-up"], ["hardware", "Hardware"], ["reach", "Beam & reach"], ["predict", "Predictions"],
   ["tasks", "Tasks"], ["proposal", "Proposal"], ["budget", "Budget"], ["risks", "Risks & questions"], ["slot2", "Slot 2: physics"]];
 const tabs = $("#tabs");
 for (const [id, name] of TABS) tabs.append(h("button", { class: "tab", role: "tab", "data-t": id, type: "button", on: { click: () => go(id) } }, name));
@@ -1095,6 +1101,8 @@ function slot2() {
 }
 
 /* ---------- draw ---------- */
+/* PREDICT_JS */
+
 function redraw() {
   const on = (location.hash.slice(1) || "overview");
   overview();
@@ -1102,6 +1110,7 @@ function redraw() {
   if (on === "setup") { setupSvg(); setupInfo(); }
   if (on === "hardware") { hwPage(); }
   if (on === "reach") { days(); reach(); }
+  if (on === "predict") predict();
   if (on === "tasks") tasks();
   if (on === "proposal") proposal();
   if (on === "budget") budget();
@@ -1111,6 +1120,9 @@ function redraw() {
 let rz; addEventListener("resize", () => { clearTimeout(rz); rz = setTimeout(redraw, 150); });
 setInterval(countdown, 60000);
 go(location.hash.slice(1) || "overview");
+</script>
+<script type="module">
+/* PREDICT_3D */
 </script>
 </body>
 </html>

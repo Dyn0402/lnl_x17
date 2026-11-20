@@ -38,6 +38,7 @@ and the page; it does not duplicate those studies.
 | `proposal/lnl_template/` | the official LNL templates from Indico 50487 |
 | `planning/plan.py` | **single source** of tasks, phases, milestones, hardware, budget, questions, risks → `planning/out/plan.json` |
 | `sim2arm/` | the Geant4 two-arm study: `TWO_ARM_STUDY.md`, the fit cut to one arm pair, L15/L16 condor jobs, the slide note |
+| `sim2arm/PREDICTIONS.md` | Geant4 predictions of every observable of the run and the 3D event view (page tab "Predictions"): `predictions.py`, `events3d.py`, run L17 |
 | `planning/two_arm_estimates.py` | the two-arm reach rows from `sim2arm/out/summary_reach_pass2*.csv` → `planning/out/two_arm_reach.csv`, `beam_days.csv` |
 | `planning/figures.py` | the proposal figure (`proposal/latex/figures/limit_vs_days.*`) |
 | `site/template.html`, `site/build_page.py` | the page: build, copy into dylan-cern-site |
@@ -48,6 +49,8 @@ and the page; it does not duplicate those studies.
 ```
 python3 planning/figures.py                  # if the reach changed
 make -C proposal/latex && make -C proposal/latex zip   # if the proposal changed
+WORK_DATA=/media/ucla/work ~/PycharmProjects/nTof_x17/.venv/bin/python sim2arm/predictions.py   # Predictions tab numbers
+WORK_DATA=/media/ucla/work ~/PycharmProjects/nTof_x17/.venv/bin/python sim2arm/events3d.py      # its 3D events (L17)
 python3 site/build_page.py                   # writes into ~/PycharmProjects/dylan-cern-site
 cd ~/PycharmProjects/dylan-cern-site && python3 scripts/build.py && scripts/deploy-eos.sh
 ```

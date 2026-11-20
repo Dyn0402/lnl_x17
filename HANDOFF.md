@@ -1,5 +1,45 @@
 # Handoff
 
+## Predictions tab: Geant4 predictions of every observable + 3D Geant4 events — updated 2026-11-20 (dylan-MS-7C84)
+
+**Resume:** the tab is live (<https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html#predict>); next: R8 (3D render
+as proposal Fig. 1, a short predictions table in §3), and the pass-3 follow-up below, which is still open.
+
+**Done**
+- `sim2arm/predictions.py` → `out/predictions.json`: cosmic nights (vertical/horizontal: legs, PAIR triggers, 2/1/0-track
+  fractions × ε 0.92, θ, Δt, pointing, zenith), beam singles at 441 keV / 1.10 MeV (legs per µA, tracked fraction,
+  single-arm E, accidentals), pairs at 441 keV and 1.10 MeV (trigger level and selected; θ, E_sum, |y|). Numbers and
+  caveats: `sim2arm/PREDICTIONS.md`.
+- lxplus `x17_lnl/analysis/l15/pred_cosmic_scan.py` (copy in `sim2arm/lxplus/`): re-scan of the L15 and L13 γ parts at
+  trigger level (the merged tables keep only 2-ok-arm events). Outputs `/eos/user/d/dneff/x17/lnl_pred/`, local
+  `$WORK_DATA/x17_facility_search/pred/`.
+- **Run L17** (53 condor jobs, all normal termination, none retried): MX17_Full_Geant `lnl_twoarm` 10229eb (`--trajdump` also
+  writes μ±; binary `bin/mx17_full_sim_twoarm_10229eb`, pushed), two-arm geometry, `submit_traj.sh` / `run_traj.sh` /
+  `traj_pick.py`; outputs `/eos/experiment/ntof/data/x17/lnl/L17/`, local `$WORK_DATA/lnl_x17/L17/`.
+  `sim2arm/events3d.py` → `out/events3d.json` (picked events, thinned tracks, layer extents read from the step points).
+- Page: new tab from `site/predict_pane.html`, `site/predict.js`, `site/predict3d.js` (three.js 0.160 module, fat lines,
+  save-PNG), inlined by `site/build_page.py`. plan.py tasks R7 (done), R8, R9.
+- n_TOF cosmic factor 2.5 explained (§5 of PREDICTIONS.md): the wft track gate, not chamber hardware. Open: wall-level A–C
+  0.84 vs 0.34 Hz (R9).
+
+**Findings**
+- Vertical cosmic nights: 1.89 Hz PAIR triggers (68k/night), 84 % with both tracks × ε; horizontal 0.075 Hz (25× fewer).
+- Beam legs 67 Hz/µA/arm at 1.10 MeV, 124 at 441 keV (cosmics 6.8 Hz); 55 % carry a track (× ε): almost all from γ
+  interactions in the Cu hemisphere wall.
+- 441 keV: 665 selected pairs/day, of which 165 are external conversions resting on 3 MC events (±20 % on the total; R6).
+- Only ~30 % of 441 keV IPC pairs fall in the 13–19 MeV window (the rest at 9–13 MeV after losses).
+
+**Not committed on purpose (another session's pass 3):** `planning/out/plan.json`, `two_arm_reach.csv`, the proposal
+figure/PDF/zip, `TWO_ARM_STUDY.md`, `sim2arm/out/*pass3*`, the slide note. The deployed page's Beam & reach tab already
+shows pass-3 rows (the build reads them); the proposal PDF on the site was left at the committed version. Finish the
+"Two-arm: measured σ_t plugged in (pass 3)" steps below (check §0, fix hand-written numbers, commit).
+
+**Gotchas**
+- `pred_cosmic_scan.py` runs interactively on lxplus in ~5 min (reads /eos parts directly; allowed interactively).
+- A track starting outside the 70 cm display sphere is clipped along its segment (`events3d.py`), else muons vanish.
+
+**Key files:** `sim2arm/PREDICTIONS.md`, `sim2arm/predictions.py`, `sim2arm/events3d.py`, `site/predict*.{js,html}`.
+
 ## Two-arm: measured σ_t plugged in (pass 3), shape systematics, 441 keV — updated 2026-11-19 (dylan-MS-7C84)
 
 **Resume:** pass 3 (σ_t 0.6 ns) runs detached on the desktop; when `after_pass _pass3 done` is in its log, check, deploy, commit.

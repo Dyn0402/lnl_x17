@@ -132,6 +132,12 @@ TASKS = [
          t="Proposal text from sim2arm: the 441 keV rate (~600 pairs/day above 90°, not 6–12k), the reach rows, the vertical-cosmics test"),
     dict(id="R6", ws="sim", due="2027-03-31", who="Dylan", status="todo",
          t="More as-built MC for the Cu hemisphere (EPC and IPC rest on a few hundred events per pair) before the PAC talk"),
+    dict(id="R7", ws="sim", due="2026-11-20", who="Dylan", status="done",
+         t="Geant4 predictions of every observable of the run (trigger and track fractions, cosmic θ/Δt/pointing, beam singles, 441 keV and 1.10 MeV spectra) and a 3D view of real Geant4 events (run L17): Predictions tab, sim2arm/PREDICTIONS.md (20 Nov)"),
+    dict(id="R8", ws="sim", due="2026-11-27", who="Dylan", status="todo", dep=["R7"],
+         t="Proposal: the 3D event render as Fig. 1 (save PNG from the Predictions tab) and a short table of predictions with pass criteria in §3"),
+    dict(id="R9", ws="sim", due="2027-03-31", who="Dylan", status="todo",
+         t="n_TOF beam-off A–C wall coincidences: 0.84 Hz measured vs 0.34 Hz in the cosmic toy MC; explain before quoting absolute cosmic rates (the chamber-level factor 2.5 is the reconstruction gate)"),
     # --- MM
     dict(id="M1", ws="mm", due="2027-01-15", who="Dylan", status="todo",
          t="Ask Stephan / CEA: repair B's drift window (needed); new aluminised-mylar windows for A and B (low-budget upgrade); dates"),

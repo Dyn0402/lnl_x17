@@ -30,6 +30,15 @@ def main() -> None:
     data = json.loads((ROOT / "planning" / "out" / "plan.json").read_text(encoding="utf-8"))
     tpl = (ROOT / "site" / "template.html").read_text(encoding="utf-8")
     html = tpl.replace("__DATA__", json.dumps(data, ensure_ascii=False).replace("</", "<\\/"))
+    # Predictions tab: sim2arm/predictions.py and sim2arm/events3d.py outputs, inlined
+    S = ROOT / "site"
+    pred = (ROOT / "sim2arm" / "out" / "predictions.json").read_text(encoding="utf-8")
+    evd = (ROOT / "sim2arm" / "out" / "events3d.json").read_text(encoding="utf-8")
+    js = (S / "predict.js").read_text(encoding="utf-8").replace("__PRED__", pred.replace("</", "<\\/")).replace(
+        "__EVENTS__", evd.replace("</", "<\\/"))
+    html = html.replace("<!-- PREDICT_PANE -->", (S / "predict_pane.html").read_text(encoding="utf-8"))
+    html = html.replace("/* PREDICT_JS */", js)
+    html = html.replace("/* PREDICT_3D */", (S / "predict3d.js").read_text(encoding="utf-8"))
     OUT.mkdir(parents=True, exist_ok=True)
     (OUT / "lnl-feasibility.html").write_text(html, encoding="utf-8")
     print("wrote", OUT / "lnl-feasibility.html")
