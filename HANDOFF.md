@@ -1,128 +1,52 @@
 # Handoff
 
-## Two-arm study redone with the BUILT Cu hemisphere (run L18) — updated 2026-11-20 evening (dylan-MS-7C84)
+## Two-arm study on the built Cu hemisphere + Predictions tab — updated 2026-11-20 (dylan-MS-7C84)
 
-**Resume:** everything is regenerated, deployed and committed. Next: ask Pierfrancesco whether a lighter Al end piece can be made
-for slot 1 (T1), and simulate it in two arms (R10); upload the proposal to Overleaf (it is edited locally, R5).
+**Resume:** all done and live; next: ask PF for a lighter Al end piece (T1), simulate it in two arms (R10), proposal Fig. 1 (R8).
 
-**What was wrong:** the 19 Nov two-arm study (passes 1–3), the proposal, the page and the first Predictions tab used `ogCu200`, the
-Cu **ogive** of Pierfrancesco's 27 Oct sketch (Ø50 × 63 mm, 200 µm), labelled "the Cu hemisphere". The built holder is the
-hemisphere R 11 mm, 300 µm, rim, on the grey flange (`dome300`, run L10). Dylan caught it (20 Nov).
+**Goal:** a slot-1 two-arm reach and a set of Geant4 predictions for every observable of the run, with the target holder
+that actually exists, for the LNL PAC proposal (deadline 10 Dec) and the page.
 
-**Done**
-- **Run L18** (`sim2arm/lxplus/submit_l18.sh`, binary `mx17_full_sim_twoarm_10229eb`, `run_job.sh`: Geant4 + reduce in scratch,
-  eosio out): dome300 as built, 4 arms, M1/E1 IPC 18.15 + 15.1 MeV 150 × 10⁵, γ lines 150 × 2 × 10⁶, X17 30 × 10⁵. 780 jobs, all
-  started once and ended with 0 (no retries, holds, evictions). Merged in chunks on lxplus (`merge_loop_l18.sh` →
-  `/eos/.../lnl/target/sel_l18/`), combined locally (`sim2arm/combine_l18.py` → `$WORK_DATA/x17_facility_search/sel_l18/`).
-  Geometry checked identical to L10 line by line; tables agree with L10 per generated event.
-- `two_arm_nd.py`: `TA_CFG` (default dome300), `RUNS['dome300'] = ['L10', 'L18']`; x17_facility_search `shapes_nd.RUN_DIR['L18']`.
-- Pass `_pass4` (`run_pass.sh` + `after_pass.sh`). E_sum window scan (`esum_scan.py`): ±10 %, reference windows kept.
-- **Result** (11 µm, horizontal, pointing + 0.6 ns TOF): 151 / 263 / 511 d to 3σ (liquid working / as at n_TOF / none) →
-  R90(5 d) = 2.35 / 3.10 / 4.32 × R(ATOMKI); MEG II 2.07 ×. Ogive: 25 / 44 / 94 d. Selected X17 ×0.14 (acceptance ×0.58, E_sum
-  window ×0.41, γ₀ ×0.58). Al ogive + Cu liner (scaled from the ogive pass 3, estimate): 0.62 / 0.81 / 1.46 ×.
-- Rewritten: TWO_ARM_STUDY §0 (build_study_md.py), section7_plan.md, PREDICTIONS.md, slot1_feasibility/PLAN.md §0/§4,
-  proposal abstract + body (sensitivity, target paragraph, 441 keV ~140/day), plan.py (T1, R6 done, R10, risk), page
-  (overview, reach note, Predictions tab, a "Corrected 20 Nov" note at the top), the slide note (republished),
-  x17_facility_search FACILITY.md, README, dashboard (EXTRA + LOG).
-- Predictions + 3D events now hemisphere: L17d trajectories (`submit_traj.sh`, TGT=dome300), pred_gam_L18 scan; γ legs
-  2.6–2.8 × 10⁻³ per γ per arm, 78 % with a track (ogive 60 %); 441 keV 141 selected pairs/day; 1.10 MeV X17 2.7/day on 137.
-- Pass-3 (ogive) outputs committed as the reference for the Al-ogive scaling (`two_arm_estimates.OG_TAG`).
+**Done:**
+- **Predictions tab** (page `#predict`, `sim2arm/PREDICTIONS.md`): cosmic nights (trigger, 2/1/0-track fractions × ε 0.92,
+  θ, Δt, pointing, zenith), beam singles, 441 keV and 1.10 MeV spectra; a three.js view of real Geant4 events (run L17d,
+  `--trajdump`, μ added in MX17_Full_Geant `lnl_twoarm` 10229eb) with a save-PNG button. Code: `sim2arm/predictions.py`,
+  `sim2arm/events3d.py`, `site/predict_pane.html`, `site/predict.js`, `site/predict3d.js` (inlined by `site/build_page.py`).
+- **The target was wrong:** the 19 Nov study (passes 1–3) used the Cu **ogive** of the 27 Oct sketch (`ogCu200`), labelled
+  "Cu hemisphere". Redone with the built hemisphere (`dome300`: R 11 mm, 300 µm, rim, grey flange; Dylan caught it):
+  - **Run L18** (`sim2arm/lxplus/submit_l18.sh`, `run_job.sh`, eosio staging): ×30 as-built MC, 780 jobs, all clean. Merged
+    `/eos/.../lnl/target/sel_l18/` (chunks) → `$WORK_DATA/x17_facility_search/sel_l18/` (`sim2arm/combine_l18.py`).
+  - Pass `_pass4` (`TA_CFG=dome300`, default now): 11 µm, horizontal, pointing + 0.6 ns TOF: **151 / 263 / 511 d** to 3σ
+    (liquid working / as at n_TOF / none) → R90(5 d) **2.35 / 3.10 / 4.32 × R(ATOMKI)**; MEG II 2.07 ×. Ogive: 25 / 44 / 94 d.
+    Al ogive + Cu liner (scaled from the ogive pass 3, estimate): 0.62 / 0.81 / 1.46 ×.
+  - Rewritten: TWO_ARM_STUDY §0, section7_plan.md, PREDICTIONS.md, slot1_feasibility/PLAN.md, proposal abstract + body,
+    plan.py (T1, R6 done, R7–R10, risk), page, slide note (republished), x17_facility_search FACILITY/README/dashboard.
+- n_TOF beam-off cosmic factor 2.5 = the wft track gate (57 % of clean A–C muons fail it), not the chambers (PREDICTIONS §5).
 
-**Gotchas**
-- CERN condor: RequestCpus is set at submit from RequestMemory (6 GB → 2 CPUs); editing memory later does not change it.
-  Ask 4 GB / `longlunch` for these jobs (they peak < 1 GB, run 0.3–0.7 h). With a poor user priority, 6-GB `workday` jobs sat
-  idle for 2 h.
-- The four-arm "all" fit sums pairs: with the hemisphere it is no better than the horizontal pair. Fit per pair before quoting.
+**In progress / where it stopped:** nothing running. Overleaf is behind `proposal/latex/` (edited here).
+
+**Next steps:**
+1. T1: ask Pierfrancesco whether a lighter Al end piece (Al ogive + Cu liner, or the flat 45° Al cap) can be made for slot 1.
+2. R10: two-arm Geant4 of that end piece, as L18 (`submit_l18.sh` with its geometry string; add a `CFG` in `two_arm_nd`).
+3. R8: proposal Fig. 1 = the 3D render (Predictions tab → target/3D view → save PNG); a short predictions table in §3.
+4. R5: upload `proposal/latex/` to Overleaf.
+5. R9: n_TOF A–C wall coincidences 0.84 Hz vs 0.34 Hz predicted (nTof_x17 `ntof_cosmics/ac_cosmic_rate.py`).
+6. Carried over from pass 3: x17_facility_search four-arm LNL tables and ILL/trigger_scint/sipm_wall outputs are still at the
+   old σ_t; the four-arm fit sums pairs (fit per pair before quoting); R4 (σ_t with the LNL digitisers).
+
+**Gotchas / decisions:**
+- CERN condor sets RequestCpus from RequestMemory at submit (6 GB → 2 CPUs); editing memory later does not change it. These
+  jobs peak < 1 GB and run 0.3–0.7 h: ask 4 GB, `longlunch`. With a poor user priority, 6-GB `workday` jobs sat idle 2 h.
+- E_sum window scan for the hemisphere (`sim2arm/esum_scan.py`): ±10 %, reference windows kept.
 - §4.2, §5 (L16 rotated arms), geom_syst, struct_scan, tof_scan are still the ogive's (ratios carry over).
-- Overleaf is now behind `proposal/latex/` (edited here).
+- The L15 cosmics were simulated with the ogive in place (irrelevant for muons crossing the arms).
+- `pred_cosmic_scan.py` (trigger-level rescan) runs interactively on lxplus in ~5 min; outputs `/eos/user/d/dneff/x17/lnl_pred/`.
+- `events3d.py` clips tracks on a 70 cm sphere along the segment (else the muons vanish); target outline from the step points.
 
-## Predictions tab: Geant4 predictions of every observable + 3D Geant4 events — updated 2026-11-20 (dylan-MS-7C84)
-
-**Resume:** the tab is live (<https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html#predict>); next: R8 (3D render
-as proposal Fig. 1, a short predictions table in §3), and the pass-3 follow-up below, which is still open.
-
-**Done**
-- `sim2arm/predictions.py` → `out/predictions.json`: cosmic nights (vertical/horizontal: legs, PAIR triggers, 2/1/0-track
-  fractions × ε 0.92, θ, Δt, pointing, zenith), beam singles at 441 keV / 1.10 MeV (legs per µA, tracked fraction,
-  single-arm E, accidentals), pairs at 441 keV and 1.10 MeV (trigger level and selected; θ, E_sum, |y|). Numbers and
-  caveats: `sim2arm/PREDICTIONS.md`.
-- lxplus `x17_lnl/analysis/l15/pred_cosmic_scan.py` (copy in `sim2arm/lxplus/`): re-scan of the L15 and L13 γ parts at
-  trigger level (the merged tables keep only 2-ok-arm events). Outputs `/eos/user/d/dneff/x17/lnl_pred/`, local
-  `$WORK_DATA/x17_facility_search/pred/`.
-- **Run L17** (53 condor jobs, all normal termination, none retried): MX17_Full_Geant `lnl_twoarm` 10229eb (`--trajdump` also
-  writes μ±; binary `bin/mx17_full_sim_twoarm_10229eb`, pushed), two-arm geometry, `submit_traj.sh` / `run_traj.sh` /
-  `traj_pick.py`; outputs `/eos/experiment/ntof/data/x17/lnl/L17/`, local `$WORK_DATA/lnl_x17/L17/`.
-  `sim2arm/events3d.py` → `out/events3d.json` (picked events, thinned tracks, layer extents read from the step points).
-- Page: new tab from `site/predict_pane.html`, `site/predict.js`, `site/predict3d.js` (three.js 0.160 module, fat lines,
-  save-PNG), inlined by `site/build_page.py`. plan.py tasks R7 (done), R8, R9.
-- n_TOF cosmic factor 2.5 explained (§5 of PREDICTIONS.md): the wft track gate, not chamber hardware. Open: wall-level A–C
-  0.84 vs 0.34 Hz (R9).
-
-**Findings**
-- Vertical cosmic nights: 1.89 Hz PAIR triggers (68k/night), 84 % with both tracks × ε; horizontal 0.075 Hz (25× fewer).
-- Beam legs 67 Hz/µA/arm at 1.10 MeV, 124 at 441 keV (cosmics 6.8 Hz); 55 % carry a track (× ε): almost all from γ
-  interactions in the Cu hemisphere wall.
-- 441 keV: 665 selected pairs/day, of which 165 are external conversions resting on 3 MC events (±20 % on the total; R6).
-- Only ~30 % of 441 keV IPC pairs fall in the 13–19 MeV window (the rest at 9–13 MeV after losses).
-
-**Not committed on purpose (another session's pass 3):** `planning/out/plan.json`, `two_arm_reach.csv`, the proposal
-figure/PDF/zip, `TWO_ARM_STUDY.md`, `sim2arm/out/*pass3*`, the slide note. The deployed page's Beam & reach tab already
-shows pass-3 rows (the build reads them); the proposal PDF on the site was left at the committed version. Finish the
-"Two-arm: measured σ_t plugged in (pass 3)" steps below (check §0, fix hand-written numbers, commit).
-
-**Gotchas**
-- `pred_cosmic_scan.py` runs interactively on lxplus in ~5 min (reads /eos parts directly; allowed interactively).
-- A track starting outside the 70 cm display sphere is clipped along its segment (`events3d.py`), else muons vanish.
-
-**Key files:** `sim2arm/PREDICTIONS.md`, `sim2arm/predictions.py`, `sim2arm/events3d.py`, `site/predict*.{js,html}`.
-
-## Two-arm: measured σ_t plugged in (pass 3), shape systematics, 441 keV — updated 2026-11-19 (dylan-MS-7C84)
-
-**Resume:** pass 3 (σ_t 0.6 ns) runs detached on the desktop; when `after_pass _pass3 done` is in its log, check, deploy, commit.
-
-**Goal:** every LNL number uses the measured arm-to-arm σ_t (0.6 ns per arm) instead of the assumed 0.3, and the IPC
-shape systematics of the two-arm fit are understood.
-
-**Done**
-- **σ_t measured** (nTof_x17 `ntof_cosmics/ac_tof_beamoff.py`, report `ntof_cosmics/results/ac_tof/report.html`,
-  machine-readable `results/ac_tof/timing.json`): beam-off A–C wall muons (2,579) show the muon's ±2.5 ns TOF as two
-  peaks; **0.52–0.64 ns per arm (walls), 0.95 (plastics)**, n_TOF readout. Beam-run muons give ~6 ns (pulse fit under beam).
-  The first look moved to nTof_x17 `ntof_cosmics/results/ac_tof/firstlook/`.
-- x17_facility_search `lnl_geant.TOF_SIGMA_NS` now reads it (0.60; `LNL_TOF_SIGMA_NS=0.3` reproduces pass 2); helper
-  `sipm_wall/measured_timing.py` for ILL / trigger_scint / sipm_wall (code defaults switched, their tables not re-run).
-- Labels here say "pointing + 0.6 ns TOF"; `SIM_TAG` and the `--tag` defaults are `_pass3`; template/page text updated.
-- `sim2arm/tof_scan.py`: horizontal 17.4 d (no TOF) → 17.7 at any σ_t; vertical 17.1 / 17.9 / 18.7 d at 0.3 / 0.6 / 0.7 ns
-  (pointing 3° for muons). First pass-3 rows: vertical `MM 15° + TOF` (15° for muons too) at 0.6 ns is 23.3 d with
-  494 cosmics/day (was ~17 d, 0.4/day at 0.3): the reference level leans on TOF, so the vertical pair suffers.
-- `sim2arm/geom_syst.py`: fake X17 from 2 mm misplacements ≤ 0.01 R(ATOMKI) horizontal, ≤ 0.11 vertical; a dead 10 mm
-  MM band −0.18 R (−0.4σ, 5 d). `sim2arm/struct_scan.py`: harsher unknown structure costs ≤ +1.5 d.
-- 441 keV stays on opposite arms (adjacent: 39 M1 pairs/day in 125–160° against 358).
-
-**In progress**
-- `run_pass.sh _pass3 6 && after_pass.sh _pass3`, started 12:25 detached (setsid), log
-  `/media/ucla/work/claude-jobs/lnl_pass3.log`, parts `sim2arm/out/parts/*_pass3*` (resumable). ~3 h. If it died, rerun
-  the same command (`WORK_DATA=/media/ucla/work setsid nohup bash -c 'bash sim2arm/run_pass.sh _pass3 6 && bash
-  sim2arm/after_pass.sh _pass3' > /media/ucla/work/claude-jobs/lnl_pass3.log 2>&1 &`): finished tasks are skipped.
-- Until then `TWO_ARM_STUDY.md`, the proposal, `planning/out/` and the page still show the pass-2 (0.3 ns) numbers, and
-  `planning/two_arm_estimates.py` fails (no `summary_reach_pass3*.csv` yet).
-
-**Next steps**
-1. When the log says done: read `sim2arm/TWO_ARM_STUDY.md` §0 (regenerated) — the reach rows and the vertical vs horizontal
-   comparison change; fix any hand-written sentence in `build_study_md.py`/the template that the numbers contradict
-   (e.g. "vertical and horizontal equal within the MC").
-2. Update the hand-written numbers in `proposal/latex/body_content.tex` (R90 0.93/1.19 × R(ATOMKI), Z, days) and `plan.py`
-   texts from `planning/out/two_arm_reach.csv`; `make -C proposal/latex`, `python3 site/build_page.py`, deploy (README),
-   republish the slide note (`sim2arm/out/lnl-two-arm-run.html`, publish-note skill), commit + push; Overleaf (R5).
-3. x17_facility_search: four-arm LNL tables and ILL/trigger_scint/sipm_wall outputs are still at the old σ_t (noted in
-   their docs); re-run when they matter. The four-arm fit should fit each arm pair separately (it sums them now).
-4. R4: σ_t with the LNL digitisers (V1742 / CFD).
-
-**Gotchas**
-- `pkill -f <pattern>` kills the calling Bash tool's own shell when its command line contains the pattern: use `[x]yz`.
-- The data for the passes is now on the desktop too: `$WORK_DATA/x17_facility_search/lnl_sel` (L11, L13 ogCu200 asb) and
-  `sel_l15` (L15 chunks 0–3, the ones the fits use).
-
-**Key files**: `sim2arm/run_pass.sh`, `sim2arm/after_pass.sh`, `sim2arm/tof_scan.py`, `sim2arm/geom_syst.py`, `sim2arm/struct_scan.py`.
+**Key files & commands:**
+- `WORK_DATA=/media/ucla/work bash sim2arm/run_pass.sh _pass4 6 && bash sim2arm/after_pass.sh _pass4` — the reach (~3 h)
+- `WORK_DATA=/media/ucla/work ~/PycharmProjects/nTof_x17/.venv/bin/python sim2arm/predictions.py` (then `events3d.py`)
+- `python3 site/build_page.py`, then in dylan-cern-site `python3 scripts/build.py && scripts/deploy-eos.sh`
 
 ## Two-arm Geant4 study (R1) and the 8-day plan — updated 2026-11-19 (dylan-Yoga, overnight)
 
