@@ -134,6 +134,8 @@ TASKS = [
          t="More as-built MC for the Cu hemisphere: done 20 Nov (run L18, ×30 the L10 tables; the 19 Nov study had used the Cu ogive)"),
     dict(id="R10", ws="sim", due="2026-12-05", who="Dylan", status="todo",
          t="Two-arm Geant4 of the lighter Al end piece (Al ogive + Cu liner or the 45° Al cap), as L18 for the hemisphere: its slot-1 rows are scaled estimates now"),
+    dict(id="R11", ws="sim", due="2026-12-05", who="Dylan", status="todo",
+         t="Geant4 of the liquid cell right behind the SiPM wall (plastics behind), leg = SiPM × (liquid OR plastic): the toy says ×4 in X17 pairs, 151 → ~34 d, ~1.1 × R(ATOMKI) in 5 d (sim2arm/leg_layout.py, LIQUID_CELLS.md §4, estimate). Needs the LS options of S6 and the new leg in the reduction"),
     dict(id="R7", ws="sim", due="2026-11-20", who="Dylan", status="done",
          t="Geant4 predictions of every observable of the run (trigger and track fractions, cosmic θ/Δt/pointing, beam singles, 441 keV and 1.10 MeV spectra) and a 3D view of real Geant4 events (run L17): Predictions tab, sim2arm/PREDICTIONS.md (20 Nov)"),
     dict(id="R8", ws="sim", due="2026-11-27", who="Dylan", status="todo", dep=["R7"],
@@ -165,7 +167,7 @@ TASKS = [
     dict(id="S7", ws="scint", due="2027-02-28", who="Dylan", status="todo",
          t="Wider liquid cells to replace the big plastics, within ~60 L: oversized-cell Geant4 run at 35/41/47 cm (60–80 cm sides need 27–56 L for 2 arms, ~53 L for 4 arms at 60 × 60 × 3 cm); trigger leg, light collection, PMTs (LIQUID_CELLS.md §3)"),
     dict(id="S8", ws="scint", due="2026-12-05", who="Dylan", status="todo",
-         t="Ask PF: how much liquid (~60 L?), which liquid, who remakes the cans and when, how many PMTs; '4 cm in parallel / 2 cm in series': per arm or in total?"),
+         t="Ask PF: can the new cans sit right behind the SiPM wall, in the 6 cm gap before the plastics (R11)? How much liquid (~60 L?), which liquid, who remakes the cans and when, how many PMTs; '4 cm in parallel / 2 cm in series': per arm or in total?"),
     dict(id="S9", ws="scint", due="2027-05-01", who="Pierfrancesco", status="todo", dep=["S8"],
          t="Remake 2 liquid-cell cans (45 × 45 × 2 cm baseline, or the S6/S7 design) and fill them"),
     # --- target

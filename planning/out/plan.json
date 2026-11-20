@@ -446,6 +446,14 @@
    "t": "Two-arm Geant4 of the lighter Al end piece (Al ogive + Cu liner or the 45° Al cap), as L18 for the hemisphere: its slot-1 rows are scaled estimates now"
   },
   {
+   "id": "R11",
+   "ws": "sim",
+   "due": "2026-12-05",
+   "who": "Dylan",
+   "status": "todo",
+   "t": "Geant4 of the liquid cell right behind the SiPM wall (plastics behind), leg = SiPM × (liquid OR plastic): the toy says ×4 in X17 pairs, 151 → ~34 d, ~1.1 × R(ATOMKI) in 5 d (sim2arm/leg_layout.py, LIQUID_CELLS.md §4, estimate). Needs the LS options of S6 and the new leg in the reduction"
+  },
+  {
    "id": "R7",
    "ws": "sim",
    "due": "2026-11-20",
@@ -566,7 +574,7 @@
    "due": "2026-12-05",
    "who": "Dylan",
    "status": "todo",
-   "t": "Ask PF: how much liquid (~60 L?), which liquid, who remakes the cans and when, how many PMTs; '4 cm in parallel / 2 cm in series': per arm or in total?"
+   "t": "Ask PF: can the new cans sit right behind the SiPM wall, in the 6 cm gap before the plastics (R11)? How much liquid (~60 L?), which liquid, who remakes the cans and when, how many PMTs; '4 cm in parallel / 2 cm in series': per arm or in total?"
   },
   {
    "id": "S9",
@@ -1123,7 +1131,7 @@
      "where": "(ask)",
      "cond": "unknown",
      "avail_l": "ours to take",
-     "note": "Unusable at n_TOF from pile-up (γ-flash); untested at low rates."
+     "note": "Unusable at n_TOF from pile-up (γ-flash); untested at low rates. PF (20 Nov 2026): the liquid is there (~60 L, ask), the cans must be remade, PMTs are short."
     }
    ],
    "place": [

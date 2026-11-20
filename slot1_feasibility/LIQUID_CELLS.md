@@ -69,11 +69,42 @@ Open points before this can replace the big plastics:
 3. Weight and mechanics: 54 L of liquid per arm is ~47 kg plus the can, on the arm stand.
 4. Safety: flammable liquid (if EJ-301/BC-501A-like) in the hall: LNL rules, with the gas premix (L2).
 
-## 4. To do (plan.py)
+## 4. Liquid in front: right behind the SiPM wall, the plastics behind it (Dylan, 20 Nov)
+
+Code: `../sim2arm/leg_layout.py` → `../sim2arm/out/leg_layout.csv` (15 s). **A scaling estimate:** the geometric leg
+toy of `FEASIBILITY_SIM.md` §9 (fitted to the Geant4 X17 pair-tags), horizontal pair only, counting in 125–155°; days
+∝ B/S², applied to the Geant4 hemisphere reach (151 d to 3σ, 2.35 × R(ATOMKI) in 5 d, liquid working).
+
+| layout | X17 pairs | days to 3σ | 90 % limit in 5 d |
+|---|---|---|---|
+| A. as now: leg = SiPM × plastics (2 × 20×30); liquid behind, energy only | ×1 | 151 | 2.35 × |
+| B. as now, but the liquid also makes a leg | ×1.7 | ~83 | ~1.7 × |
+| **C. liquid 45×45 right behind the SiPM wall, the 2 plastics behind; leg = SiPM × (liquid OR plastic)** | **×4.2** | **~34** | **~1.1 ×** |
+| D. as C with 3 plastics (60 × 30) behind | ×4.8 | ~30 | ~1.0 × |
+| E. 3 plastics 60 × 30, no liquid in the leg | ×1.9 | ~79 | ~1.7 × |
+| F. a 60 × 60 cell right behind the SiPM wall | ×7.2 | ~20 | ~0.85 × |
+
+- **The gain is the trigger leg, not the order as such.** Today a lepton needs a SiPM bar and a 40 × 30 cm plastic; the
+  liquid only adds energy. A 45 × 45 cell 10 cm closer covers ~4× more pairs, and the IPC grows with it (S/B unchanged),
+  so the days fall as 1/S. B shows half of it with the cell where it is now.
+- **The plastics behind add almost no acceptance** (C with or without them is the same): they sit in the cell's shadow.
+  Their use is calorimetry: 2 cm liquid + 2 cm plastic stops more of the soft lepton. The third block (D) gains ×1.15 in
+  the toy, and less in reality, since a lepton loses ~4 MeV in the liquid before reaching it. Possible (8 plastics exist,
+  inventory `plast_small`), but it costs 2 more PMTs, which are short.
+- **Not in the toy, for the Geant4 run:** cosmics (half of the selected background with the hemisphere; their legs grow
+  with the area too, so they should scale roughly like the IPC); the E_sum window for leptons that hit only 2 cm of
+  liquid (worse calorimetry outside the plastics); the extra energy threshold to reach the plastics.
+- Mechanics: the gap SiPM wall → plastics is 6.1–6.5 cm; the n_TOF can (2.1 cm, faces bulged ~1.3 cm each) would fit, and
+  the new cans can be designed for it (ask). Trigger: the leg uses the liquid PMT in the 20 ns coincidence; the
+  arm-to-arm TOF stays on the SiPM walls. Beam singles roughly double (~150 Hz per arm at 1.10 MeV): fine for DREAM.
+
+## 5. To do (plan.py)
 
 - **S6** Geant4 thickness scan of the liquid (2, 2 + 2 in series, 4, 5 cm; two arms, the hemisphere, L18 tables):
   expose `ls_slab_thick_cm`, `ls_slab_u/v_cm`, `ls_fill_liters` and the cell position on the MX17_Full_Geant command line.
 - **S7** Geant4 run with an oversized liquid cell (like `--big-plastic`; cut smaller squares offline) at 35, 41 and 47 cm:
   replaces the toy above; decides whether wide cells replace the big plastics for slot 2.
+- **R11** Geant4 of layout C (and F): the liquid right behind the SiPM wall, leg = SiPM × (liquid OR plastic), as L18;
+  needs the LS position and size on the command line (S6) and the leg definition in the reduction.
 - **S8** Ask Pierfrancesco: how much liquid (~60 L?), which liquid, who remakes the cans, how many PMTs exist, and what he
   means by "in parallel / in series".
