@@ -23,14 +23,14 @@ Started 2026-11-18 as an outline. It is the experiment slot 1 prepares; nothing 
 | 441 keV IPC: angular resolution, acceptance, energy scale | the reach numbers of the proposal, from data instead of Geant4 |
 | cosmic rate in the X17 window, with and without the track veto | whether the TOF cut is needed; the shielding |
 | arm-to-arm timing | 13 against 20 days as built |
-| liquid cells at LNL rates | whether the liquid stays, or big plastics only |
+| liquid cells at LNL rates | whether wide liquid cells (~60 L: ~60 × 60 × 3 cm per arm) replace the big plastics (`../slot1_feasibility/LIQUID_CELLS.md` §3) |
 | target lifetime, LiOH conversion, γ-yield stability | the film thickness, the holder |
 | trigger and singles rates vs current | prescale, DREAM live time at > 1 µA, whether to ask for more current |
 
 ## 2. To do (after the PAC answer)
 
 1. Re-bulk C and D at CEA; four windows.
-2. Big plastics: bench-test a 5 cm plate (response), then buy raw slabs (`x17_facility_search/trigger_scint/`).
+2. Big plastics: bench-test a 5 cm plate (response), then buy raw slabs (`x17_facility_search/trigger_scint/`). Alternative (20 Nov): wide liquid cells from the liquid we have, since the cans are remade anyway (task S7).
 3. Choose the DAQ architecture after bench test T5.
 4. The INFN commission request, with the slot-1 calibration in it.
 5. The full proposal: the slot-1 results as the "status of activities from previous periods" that continuation

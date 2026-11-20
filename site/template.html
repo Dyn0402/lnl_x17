@@ -299,7 +299,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
         <button type="button" data-m="4" aria-pressed="false">Slot 2 · four arms</button>
       </span>
       <label><input type="checkbox" id="su-mu" checked> cosmic muons</label>
-      <label><input type="checkbox" id="su-ls"> liquid cells</label>
+      <label><input type="checkbox" id="su-ls" checked> liquid cells</label>
     </div>
     <div class="grid2">
       <div class="card"><div id="setup-svg"></div>
@@ -442,7 +442,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
           <tr><td>441 keV IPC: resolution, acceptance, energy scale</td><td>the reach in the proposal, from data</td></tr>
           <tr><td>cosmics in the window, ± track veto</td><td>whether TOF is needed; shielding</td></tr>
           <tr><td>arm-to-arm timing</td><td>13 vs 20 days as built</td></tr>
-          <tr><td>liquid cells at LNL rates</td><td>keep them, or big plastics only</td></tr>
+          <tr><td>liquid cells at LNL rates</td><td>thicker / wider cells (from ~60 L) or big plastics</td></tr>
           <tr><td>target lifetime, LiOH, γ-yield stability</td><td>film thickness, holder</td></tr>
           <tr><td>trigger and singles vs current</td><td>prescale; ask for more than 1 µA?</td></tr>
         </table>
@@ -550,14 +550,15 @@ function overview() {
     st.append(h("div", { class: "step " + cls }, n, h("span", { class: "d" }, `${fmt(a, { month: "short", year: "2-digit" })}`)));
   }
   const rm = D.reach.find(r => r.target.startsWith("Cu") && r.energy_stack.startsWith("SiPM"));
-  const rl = D.reach.find(r => r.target.startsWith("Cu") && r.energy_stack.includes("as at"));
+  const rl = D.reach.find(r => r.target.startsWith("Cu") && r.energy_stack.includes("working"));
+  const rn = D.reach.find(r => r.target.startsWith("Cu") && r.energy_stack.includes("as at"));
   const fx = $("#facts"); fx.innerHTML = "";
   [["Machine", "AN2000, 0.2–2.0 MV (CN as fallback, no 441 keV)"],
    ["Beam", "protons, 0.441 and 1.10 MeV, ≤ 1 µA, continuous"],
    ["Beam days", "8: 1 set-up · 1 at 441 keV · 5 at 1.10 MeV · ½ adjacent + contingency; cosmic nights before the beam"],
    ["Set-up", "2 of the 4 MX17 arms (A ready, B after a drift-window repair), ~24 scintillator channels"],
    ["When", "second half of 2027 (our plan, not an allocation)"],
-   ["Expected reach", (rl ? rl.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL in 5 days with the liquid cells as at n_TOF" + (rm ? `, ${rm.r90_over_atomki} × without them` : "") + " (Geant4, two arms, horizontal pair, built Cu hemisphere, " + (rl ? rl.film.replace(/ \(.*\)/, "") : "") + "). An ATOMKI-size signal would show at " + (rl ? rl.z_in_5d : "–") + "σ. MEG II: 2.07 ×. A lighter Al end piece: ~0.6–0.8 × (estimate)"],
+   ["Expected reach", (rl ? rl.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL in 5 days with two 2 cm liquid cells in new cans" + (rn ? `, ${rn.r90_over_atomki} × with the liquid as at n_TOF` : "") + (rm ? `, ${rm.r90_over_atomki} × without it` : "") + " (Geant4, two arms, horizontal pair, built Cu hemisphere, " + (rl ? rl.film.replace(/ \(.*\)/, "") : "") + "). An ATOMKI-size signal would show at " + (rl ? rl.z_in_5d : "–") + "σ. MEG II: 2.07 ×. A lighter Al end piece: ~0.6–0.8 × (estimate)"],
   ].forEach(([k, v]) => fx.append(h("dt", {}, k), h("dd", {}, v)));
   const nx = $("#nextup"); nx.innerHTML = "";
   D.tasks.filter(t => t.status !== "done" && !ticked(t.id)).sort((a, b) => a.due.localeCompare(b.due)).slice(0, 6).forEach(t => {
@@ -569,7 +570,7 @@ function overview() {
     ["Machine", "AN2000 (441 keV calibration possible) or CN (≥ 0.8 MV, no 441)."],
     ["Spokesperson & GLIMOS", "Needed on the abstract page."],
     ["Target & holder", "Pressed Li on Cu, 10–12 µm, in the Cu hemisphere (already built: most likely). Confirm with Pierfrancesco."],
-    ["Liquid cells", "Two 45 × 45 cm cells behind the plastics: without them the days to 3σ go up ×2–4 (Geant4). Even as at n_TOF they beat none."],
+    ["Liquid cells", "Decided 20 Nov: two 45 × 45 × 2 cm cells in new cans (the liquid exists, PF). Without them ×3.4 in days. Open: thicker (4 cm, or 2 + 2 in series) and wider cells that could replace the big plastics, from ~60 L (S6–S8)."],
     ["Arm orientation", "Opposite arms. Vertical for the cosmic nights before the beam (the veto test), horizontal for the beam days (robust if the veto disappoints). Needs a stand that rolls 90°."],
     ["Author list", "Massimi, Mengoni, Gervino, Gustavino, Cosentino + who else."],
   ];
@@ -750,7 +751,7 @@ function setupInfo() {
 const PLACES = [
   ["stand", "rect", [118, 40, 250, 320], "two-arm stand", 124, 378],
   ["beamline", "line", "M14 200 H190", "AN2000 beam line", 16, 190],
-  ["ls", "rect", [140, 52, 170, 28], "liquid cell (opt.)", 0, 0], ["ls", "rect", [140, 320, 170, 28], "", 0, 0],
+  ["ls", "rect", [140, 52, 170, 28], "liquid cell, 2 cm", 0, 0], ["ls", "rect", [140, 320, 170, 28], "", 0, 0],
   ["plast", "rect", [165, 86, 120, 20], "plastics + PMTs", 0, 0], ["plast", "rect", [165, 294, 120, 20], "", 0, 0],
   ["walls", "rect", [140, 112, 170, 20], "SiPM wall", 0, 0], ["walls", "rect", [140, 268, 170, 20], "", 0, 0],
   ["mmA", "rect", [140, 140, 170, 26], "Micromegas A", 0, 0],
@@ -920,7 +921,7 @@ $("#r-stack").append(...uniq("energy_stack").map(s => h("option", { value: s }, 
 $("#r-geom").append(...uniq("geometry").map(s => h("option", { value: s }, s)));
 $("#r-film").append(...uniq("film").map(s => h("option", { value: s }, s)));
 $("#r-veto").append(...uniq("veto").map(s => h("option", { value: s }, s + (s.includes("TOF") ? " (reference)" : ""))));
-$("#r-stack").value = uniq("energy_stack").find(s => s.includes("as at")) || uniq("energy_stack")[0];
+$("#r-stack").value = uniq("energy_stack").find(s => s.includes("working")) || uniq("energy_stack")[0];
 let rArms = 2;
 $$("#r-arms button").forEach(b => b.onclick = () => { rArms = +b.dataset.a; $$("#r-arms button").forEach(x => x.setAttribute("aria-pressed", x === b)); reach(); });
 ["r-tgt", "r-film", "r-stack", "r-geom", "r-veto", "r-days"].forEach(id => $("#" + id).addEventListener("input", reach));

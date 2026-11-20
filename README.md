@@ -24,6 +24,8 @@ and the page; it does not duplicate those studies.
   ATOMKI-size signal would show at 0.7–1.4σ: a limit, not a 3σ test. Plan: cosmic nights with the arms **vertical** before the
   beam (the veto test), **horizontal** for the beam days, opposite arms (turning them in costs time), 441 keV for one day
   (~600 pairs/day, not 6–12k), ½ day adjacent for external conversions. Bring the liquid cells (×2–4 in days).
+- **Liquid cells in (PF, 20 Nov):** the proposal assumes two 45 × 45 × 2 cm cells in new cans (2.35 × R(ATOMKI) in 5 d with the built
+  hemisphere, 4.3 × without). Thicker (4 cm, 2 + 2 in series) and wider cells from ~60 L: `slot1_feasibility/LIQUID_CELLS.md`, S6–S8.
 - AN2000, not CN: the CN starts at 0.8 MV, so no 441 keV calibration there.
 - Next: P1 (outline + questions to Pierfrancesco), P3 (INFN-AAI account), R5 (proposal text from sim2arm, Overleaf), draft v1 by 27 Nov.
 
@@ -32,6 +34,7 @@ and the page; it does not duplicate those studies.
 | path | what |
 |---|---|
 | `slot1_feasibility/PLAN.md` | the feasibility study: set-up, beam days, reach, timeline, budget, risks |
+| `slot1_feasibility/LIQUID_CELLS.md` | the liquid cells: 2 × 2 cm baseline (20 Nov), thicker or wider ones from ~60 L |
 | `slot2_physics/PLAN.md` | the full experiment, outline and hand-over |
 | `proposal/STRUCTURE.md` | how an LNL PAC proposal is built (rules, submission, review) |
 | `proposal/latex/` | the draft in the LNL template: `main.tex` (both parts), text in `abstract_content.tex` + `body_content.tex` (`make`, `make zip`); on [Overleaf](https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f) |

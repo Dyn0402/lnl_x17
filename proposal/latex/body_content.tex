@@ -67,7 +67,7 @@ backgrounds and response. That is the aim of this proposal.
   \node[right] at (1.95,1.35) {Micromegas TPC, arm A};
   \node[right] at (1.95,1.85) {SiPM wall, 20 bars};
   \node[right] at (1.95,2.25) {2 plastics $20{\times}30{\times}2$~cm};
-  \node[right] at (1.95,2.85) {liquid cell (option)};
+  \node[right] at (1.95,2.85) {liquid scintillator $45{\times}45{\times}2$~cm};
   \node[right] at (1.95,-1.35) {Micromegas TPC, arm B};
   % pair, opening angle 140 deg
   \draw[->,red!70!black,thick] (0,0) -- (1.37,1.15) node[pos=0.55,above left=-1pt]{$e^+$};
@@ -80,15 +80,17 @@ backgrounds and response. That is the aim of this proposal.
 \end{tikzpicture}
 \caption{The two-arm configuration (view along the vertical, not to scale). Each arm: a Micromegas TPC
 (30~mm drift, $399\times360$~mm$^2$ active), a wall of 20 SiPM-read plastic bars, two plastic
-scintillators. The arms face each other across the beam, where the \Xs{} pairs ($\theta\approx135$--$140^\circ$)
+scintillators, a liquid scintillator cell. The arms face each other across the beam, where the \Xs{} pairs ($\theta\approx135$--$140^\circ$)
 land. A cosmic muon crosses both arms on one straight line and is rejected.}
 \label{fig:setup}
 \end{figure}
 
 \paragraph{Arms.} Each arm (Fig.~\ref{fig:setup}) is, going outward from the beam axis: a Micromegas TPC
 with a 30~mm drift gap and an aluminised-mylar window, its faces at $\pm204$~mm; a wall of 20
-EJ-212 bars read by SiPMs; two $20\times30\times2$~cm$^3$ plastic scintillators with PMTs.
-\todo{decide: two $45\times45$~cm liquid cells behind the plastics (they ran at n\_TOF; rates at LNL are far lower).}
+EJ-212 bars read by SiPMs; two $20\times30\times2$~cm$^3$ plastic scintillators with PMTs; a
+$45\times45\times2$~cm$^3$ liquid scintillator cell read by one PMT, filled with the liquid used at n\_TOF in a new
+container. The liquid adds the energy that 2~cm of plastic does not stop: without it the running time for the same
+sensitivity grows by a factor 3.4 in simulation. Thicker cells (4~cm, or two 2~cm cells in series) are being studied.
 The two chambers chosen reached 91--93\,\% efficiency within 5~mm on a cosmic bench in 2026; one needs a
 repair of its drift window (CEA Saclay, spring 2027).
 
@@ -104,12 +106,13 @@ backing in the argon glovebox of the LNL CN target laboratory) at the end of the
 hemisphere that closes the line ($R = 11$~mm, 300~\si{\micro\metre} wall). Its wall costs most of the sensitivity: every
 lepton crosses 2\,\% $X_0$ of copper or its rim, losing $\sim$1~MeV and scattering by $\sim$10$^\circ$. A lighter aluminium end
 piece (an Al ogive with a thin Cu liner, or a flat Al end cap at 45$^\circ$) would cut the running time needed by about an
-order of magnitude in simulation. \todo{decide with P.~Mastinu whether one can be made for this run.}
+order of magnitude in simulation; an optimised holder is being studied at LNL. \todo{whether one can be ready for this run.}
 A 10--12~\si{\micro\metre} film keeps the 1.10~MeV beam above the 441~keV resonance even after partial
 conversion to LiOH. Boron-free lithium is required ($^{11}$B$(p,\gamma)$ gives 16--17~MeV $\gamma$ rays).
 
 \section{Measurements and expected precision}
 
+Each measurement tests a Geant4 prediction of the run (Table~\ref{tab:pred}).
 \begin{enumerate}[leftmargin=1.5em]
 \item \textbf{Rates and live time.} A current scan from 0.05 to 1~\si{\micro\ampere} at 1.10~MeV:
 single-arm and two-arm trigger rates, DREAM live time, Micromegas occupancy and noise, the
@@ -131,12 +134,37 @@ $\sim7$ IPC pairs/s into $4\pi$ per \si{\micro\ampere} for a 300~\si{\micro\gram
 We fit the opening angle, the energy sharing and the energy sum together, with the background shape
 free within the calibration. The full Geant4 simulation of the two-arm set-up with the Cu hemisphere
 (10--12~\si{\micro\metre} Li) gives an expected 90\,\% CL sensitivity in five days of $R \lesssim 2.4\times R_\mathrm{ATOMKI}$
-with liquid scintillator cells behind the plastics (3.1$\times$ with the liquid as it ran at n\_TOF), and $4.3\times R_\mathrm{ATOMKI}$
+with the liquid cells (3.1$\times$ with the liquid response as it was at n\_TOF), and $4.3\times R_\mathrm{ATOMKI}$
 with the SiPM walls and plastics alone (Fig.~\ref{fig:reach}); MEG~II's limit is $2.1\times R_\mathrm{ATOMKI}$. With a
 lighter aluminium end piece the same five days would give $\sim$0.6--0.8$\times R_\mathrm{ATOMKI}$ (estimate from the
 four-arm simulation). This run tests the method and the backgrounds and sets a first limit; the full experiment
 (four arms, light holder, large plastics) is designed for the discovery-level test.
 \end{enumerate}
+
+\begin{table}[h]
+\centering\small
+\begin{tabular}{lll}
+\toprule
+observable & Geant4 prediction & what it checks \\
+\midrule
+cosmic PAIR triggers, arms vertical & 1.9~Hz ($7\times10^4$ per night) & veto at full strength \\
+\quad with tracks in 2 / 1 / 0 arms & 84 / 15 / 0.7\,\% & chamber efficiency in situ \\
+\quad at 125--$160^\circ$; wall-to-wall $\Delta t$ & 57\,\%; $+2.3$~ns, all downward & the $140^\circ$ structure; $\sigma_t$ \\
+cosmic PAIR triggers, arms horizontal & 0.075~Hz (25$\times$ fewer) & orientation of the beam days \\
+single-arm legs, per \si{\micro\ampere} & 218~Hz (441~keV), 67~Hz (1.10~MeV) & Li yield, holder wall \\
+\quad with a Micromegas track & 72\,\% / 71\,\% & conversions in the Cu wall \\
+two-track pairs per day, all $\theta$ & 9000 (441~keV), 3300 (1.10~MeV) & acceptance, live time \\
+selected pairs per day ($\theta>90^\circ$) & 141 (441~keV), 69 (1.10~MeV) & IPC rate and shape, $E$ scale \\
+\quad of which external conversions & 1 / 17 & holder model \\
+selected cosmic pairs per day & 68 & veto with beam \\
+\Xs{} at $R_\mathrm{ATOMKI}$, selected per day & 2.7 (1.10~MeV) & the sensitivity above \\
+\bottomrule
+\end{tabular}
+\caption{Geant4 predictions for the run, two horizontal arms (vertical where stated), the Cu hemisphere, 11~\si{\micro\metre}
+Li, 1~\si{\micro\ampere}, chamber efficiency 0.92. Selected: energy sum 13--19~MeV, track pointing, 0.6~ns time of flight.
+Each is a test of an input of the reach; the run compares them with the data.}
+\label{tab:pred}
+\end{table}
 
 \begin{figure}[t]
 \centering
@@ -178,8 +206,8 @@ The CN would allow the 1.10~MeV programme but not the 441~keV calibration, below
 \section{From feasibility to the full experiment; requirements}
 
 The calibration, the measured backgrounds and the timing between arms will replace the corresponding
-simulation inputs and fix the full experiment: four arms, larger plastic scintillators (a factor of
-13--15 in running time in simulation), and a programme on and off resonance (0.80, 1.10, 1.225~MeV).
+simulation inputs and fix the full experiment: four arms, larger calorimeter legs (large plastic scintillators gain a factor of
+13--15 in running time in simulation; wider and thicker cells from the $\sim$60~L of liquid available are being studied as an alternative), and a programme on and off resonance (0.80, 1.10, 1.225~MeV).
 That experiment will be the subject of a later proposal.
 
 \textbf{Requirements and safety.} Gas: premixed Ar/iC$_4$H$_{10}$ (95/5, non-flammable-limit to be

@@ -1,5 +1,25 @@
 # Handoff
 
+## Liquid cells in the baseline, predictions table in the proposal — updated 2026-11-20 evening (dylan-MS-7C84)
+
+**Resume:** proposal + page current; next: S8 (ask PF the liquid questions), R5 (Overleaf upload), R8 figure (3D render).
+
+- **PF's e-mail of 20 Nov** (`correspondence/2026-11-20_mastinu_target_liquid.md`): the Cu hemisphere works ("at least for
+  the forward angles"), an engineering thesis on the holder is requested; the liquid exists, the cans must be remade,
+  PMTs are short; "4 cm in parallel or 2 cm in series" to discuss.
+- **Decided (Dylan):** the proposal assumes two 45 × 45 × 2 cm liquid cells in new cans = the simulated "liquid working"
+  row (2.35 × R(ATOMKI) in 5 d). Proposal: abstract, Fig. 1 label/caption, Arms paragraph, §3 item 4, §5 (wide liquid
+  as the alternative to big plastics), target paragraph (holder study at LNL). Body still 4 pages.
+- **New Table I in §3:** Geant4 predictions (PREDICTIONS.md §2–4) with what each checks. The 3D Fig. 1 of R8 is not done
+  (needs the PNG saved from the Predictions tab in a browser).
+- **`slot1_feasibility/LIQUID_CELLS.md`:** thickness (PF's options), and a volume budget for wider cells within ~60 L
+  (2 arms: 70 × 70 × 5 or 80 × 80 × 4 cm; 4 arms: ~60 × 60 × 3 cm) against the §9 acceptance toy. **All estimates.**
+- plan.py: S5 done; S6 (thickness Geant4 scan), S7 (oversized-cell Geant4, replace big plastics?), S8 (questions to PF),
+  S9 (remake cans); hardware `ls` → make, budget line "New cans" €1.5k (**a guess**); risk; questions; T1 note. Page:
+  reach headline and default stack now "liquid working"; set-up view shows the liquid cell by default.
+- x17_facility_search: FACILITY.md, inventory `ls`, dashboard LOG (survey redeployed).
+- Overleaf is still behind `proposal/latex/` (R5).
+
 ## Two-arm study on the built Cu hemisphere + Predictions tab — updated 2026-11-20 (dylan-MS-7C84)
 
 **Resume:** all done and live; next: ask PF for a lighter Al end piece (T1), simulate it in two arms (R10), proposal Fig. 1 (R8).

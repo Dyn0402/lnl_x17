@@ -28,7 +28,7 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
      ogive of the 27 Oct sketch, simulated by mistake.)
 - **Why it matters:** a positive PAC answer lets us build the 2-branch full detector; results back the INFN commission
   request and the full-experiment proposal (slot 2).
-- **The decisions now:** machine (AN2000 for 441 keV); target and holder; bring two liquid cells or not; spokesperson and
+- **The decisions now:** machine (AN2000 for 441 keV); target and holder; ~~bring two liquid cells or not~~ (decided 20 Nov: yes, 2 × 2 cm in new cans, `LIQUID_CELLS.md`); spokesperson and
   GLIMOS; author list.
 
 ## 1. Pierfrancesco's guidance (e-mail, 18 Nov 2026)
@@ -51,7 +51,7 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 | DREAM | borrow | 4 FEUs + TCM + 32 cables from CEA; solder the TCM busy LEMO |
 | SiPM walls × 2 | ready | ganged as at n_TOF: 8 channels per wall, 16 of 20 bars |
 | plastics 20 × 30 × 2 cm × 4 | find PMTs | scintillators owned; PMTs went back to the lender |
-| liquid cells × 2 | decide | 45 × 45 cm, one PMT each; 67–76 % pile-up at n_TOF from the γ-flash; LNL rates are far lower |
+| liquid cells × 2 | make (new cans) | 45 × 45 × 2 cm, one PMT each; the liquid exists, the cans are remade (PF, 20 Nov). Thicker/wider cells to study: `LIQUID_CELLS.md` |
 | digitizers ~24 ch | find | 16 wall + 4 PMT (+2 LS) + trigger word; one V1742 (32 ch) covers it |
 | trigger | borrow | n_TOF logic for two arms: 2–3 N1081B, a dual timer, FIFOs, NIM bin |
 | gas | buy | Ar/iC₄H₁₀ 95/5 premix and panel; flammable-gas rules at LNL (ask) |
@@ -120,7 +120,7 @@ Horizontal pair:
 | 20 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing only | 4.5 | 7.0 (5-9) | 2.54 | 0.5 | 0.24 |
 
 - Not a discovery run: an ATOMKI-size signal shows at 1–1.5σ with the liquid cells. Quote the limit column as "sensitivity".
-- The liquid cells are the biggest lever (×2–4 in days). The 10–12 µm film (LiOH) costs ×1.3 against 20 µm.
+- The liquid cells are the biggest lever (×3.4 in days with the hemisphere); the proposal assumes them (20 Nov). The 10–12 µm film (LiOH) costs ×1.3 against 20 µm.
 - The 0.3 ns arm-to-arm TOF is not measured; the horizontal pair does not need it (pointing only gives the same days).
 - 441 keV: ~140 selected pairs per day above 90° (two arms, E_sum window, built Cu hemisphere), ~1,600 without the E_sum cut (the Cu ogive gave ~600 / ~3,000).
 

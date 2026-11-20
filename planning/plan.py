@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 OUT.mkdir(exist_ok=True)
 
-UPDATED = "2026-11-19"
+UPDATED = "2026-11-20"
 DEADLINE = "2026-12-10T23:59:00+01:00"   # PAC proposal deadline, CET
 PAC = ("2027-01-25", "2027-01-29")
 
@@ -151,18 +151,26 @@ TASKS = [
          t="Cosmic bench, 2 MM + DREAM: efficiency, segment angle (μ ≲ 3°), noise with B's existing M1s"),
     # --- scint / trigger
     dict(id="S1", ws="scint", due="2027-01-31", who="Pierfrancesco", status="todo",
-         t="Find PMTs for the 4 small plastics (+2 for liquid cells if taken)"),
+         t="Find PMTs for the 4 small plastics + 2 for the liquid cells (PF, 20 Nov: PMTs are short)"),
     dict(id="S2", ws="scint", due="2027-01-31", who="Pierfrancesco", status="todo",
          t="Digitizers: ~24 channels (16 wall + 4–6 PMT + trigger word) from LNL pool; else ask CAEN for a test loan"),
     dict(id="S3", ws="scint", due="2027-02-28", who="Dylan", status="todo",
          t="Trigger logic: 2–3 N1081B, a dual timer, FIFOs/splitters, NIM bin — borrow list"),
     dict(id="S4", ws="scint", due="2027-05-31", who="Dylan", status="todo",
          t="Bench tests T1, T2, T4 (prescaler, busy lock 1:1, trigger word)"),
-    dict(id="S5", ws="scint", due="2027-02-28", who="Dylan", status="todo",
-         t="Decide: bring 2 liquid cells? Without them the days to 3σ go up ×2–4 (sim2arm); even as at n_TOF they beat none"),
+    dict(id="S5", ws="scint", due="2026-11-20", who="Dylan", status="done",
+         t="Liquid cells decided (PF + Dylan, 20 Nov): the proposal assumes 2 cells, 2 cm thick, one per arm, in new cans (the simulated 'liquid working': 2.35 × R(ATOMKI) in 5 d; 4.3 × without)"),
+    dict(id="S6", ws="scint", due="2027-01-31", who="Dylan", status="todo",
+         t="Thicker liquid cells: Geant4 scan 2 / 2+2 in series / 4 / 5 cm (PF: '4 cm in parallel or 2 cm in series'); expose the LS dimensions on the MX17_Full_Geant command line (slot1_feasibility/LIQUID_CELLS.md §2)"),
+    dict(id="S7", ws="scint", due="2027-02-28", who="Dylan", status="todo",
+         t="Wider liquid cells to replace the big plastics, within ~60 L: oversized-cell Geant4 run at 35/41/47 cm (60–80 cm sides need 27–56 L for 2 arms, ~53 L for 4 arms at 60 × 60 × 3 cm); trigger leg, light collection, PMTs (LIQUID_CELLS.md §3)"),
+    dict(id="S8", ws="scint", due="2026-12-05", who="Dylan", status="todo",
+         t="Ask PF: how much liquid (~60 L?), which liquid, who remakes the cans and when, how many PMTs; '4 cm in parallel / 2 cm in series': per arm or in total?"),
+    dict(id="S9", ws="scint", due="2027-05-01", who="Pierfrancesco", status="todo", dep=["S8"],
+         t="Remake 2 liquid-cell cans (45 × 45 × 2 cm baseline, or the S6/S7 design) and fill them"),
     # --- target
     dict(id="T1", ws="target", due="2026-12-01", who="Pierfrancesco", status="todo",
-         t="Target for the proposal: pressed Li on Cu (CN group), 10–12 µm; holder: the Cu hemisphere (already built: R 11 mm, 300 µm, rim; simulated as dome300 since 20 Nov, the 19 Nov numbers used the Cu ogive by mistake); a lighter Al end piece (Al ogive + Cu liner, or a flat Al end cap at 45°) would cut the days ×6–15 in simulation: ask whether one can be made for slot 1"),
+         t="Target for the proposal: pressed Li on Cu (CN group), 10–12 µm; holder: the Cu hemisphere (already built: R 11 mm, 300 µm, rim; simulated as dome300 since 20 Nov, the 19 Nov numbers used the Cu ogive by mistake); a lighter Al end piece (Al ogive + Cu liner, or a flat Al end cap at 45°) would cut the days ×6–15 in simulation: ask whether one can be made for slot 1. PF (20 Nov): the hemisphere exists and works, 'at least for the forward angles'; he has asked for an engineering thesis on the holder"),
     dict(id="T2", ws="target", due="2027-06-30", who="Pierfrancesco", status="todo",
          t="Build the holder; make films; a week of LiOH-conversion test on the line"),
     # --- site
@@ -244,10 +252,10 @@ HARDWARE = [
          who="Pierfrancesco", state="to find", need="2027-05-01", b="If the PMTs must be bought: 4–6 fast 2″ PMTs + bases", inv=["pmt_small"], place=["plast"], tasks=["S1"],
          note="The n_TOF PMTs went back to their lender. Borrow again or find others that fit; buying is the expensive fallback.",
          detail="Fast 2″ tubes. Ask whether the original lender can lend them again (question for Pierfrancesco)."),
-    dict(id="ls", part="Liquid cells 45 × 45 cm (optional)", qty="2", grp="Scintillators", status="decide", org="MX17 collaboration", src="MX17 collaboration (n_TOF set-up)",
-         who="Dylan / Pierfrancesco", state="to decide", need="2027-05-01", inv=["ls"], place=["ls"], tasks=["S5"],
-         note="67–76 % pile-up at n_TOF (γ-flash), so left out of the budget. LNL rates are far lower. With them the reach is ×3.6 better.",
-         detail="Need 2 more PMTs and 2 digitizer channels if taken."),
+    dict(id="ls", part="Liquid cells 45 × 45 × 2 cm, new cans", qty="2", grp="Scintillators", status="make", org="MX17 collaboration", src="liquid from the n_TOF set-up (~60 L, to confirm); cans remade",
+         who="Pierfrancesco / Dylan", state="to make", need="2027-05-01", b="New cans for the 2 liquid cells", inv=["ls"], place=["ls"], tasks=["S5", "S6", "S7", "S8", "S9"],
+         note="In the proposal (PF, 20 Nov: 'the liquid we have, the cans have to be remade'). Without them the days to 3σ go up ×3.4. 67–76 % pile-up at n_TOF (γ-flash); LNL rates are far lower.",
+         detail="2 PMTs and 2 digitizer channels. Thicker (4 cm, or 2 + 2 in series) and wider cells (in place of the big plastics) to study: slot1_feasibility/LIQUID_CELLS.md."),
     # --- Trigger & DAQ
     dict(id="dig", part="Digitizers, ~24 channels", qty="1 V1742 or 2 × V1730", grp="Trigger & DAQ", status="find", org="INFN / LNL", src="LNL pool, else a CAEN loan",
          who="Pierfrancesco / CAEN", state="to find", need="2027-05-01", b="If no digitizer loan: V1742 (32 ch)", place=["vme"], tasks=["S2"],
@@ -340,6 +348,7 @@ BUDGET = [
     dict(item="Repair B's drift window", c=300, lo=0, hi=1000, basis="items.py driftfix (guess)", tier="need"),
     dict(item="Gas: premix bottles, regulators, panel", c=3000, lo=2000, hi=4500, basis="items.py gas", tier="need"),
     dict(item="Splitters, LEMO cables, adapters (2 arms)", c=3800, lo=2500, hi=5000, basis="items.py splitters €7.6k for 4 arms, halved", tier="need"),
+    dict(item="New cans for the 2 liquid cells", c=1500, lo=600, hi=3000, basis="guess (ask PF: CFRP or Al, LNL workshop)", tier="need"),
     dict(item="Shipping CEA/CERN → LNL and back", c=2000, lo=1000, hi=4000, basis="guess", tier="need"),
     dict(item="New aluminised-mylar drift windows, A and B", c=1250, lo=500, hi=2500, basis="items.py windows €2.5k for 4, × 2/4", tier="low"),
     dict(item="Low-permeation gas lines", c=400, lo=250, hi=700, basis="items.py gaslines", tier="low"),
@@ -360,6 +369,8 @@ QUESTIONS = [
     dict(who="Pierfrancesco", q="AN2000 or CN? The CN starts at 0.8 MV, so no 441 keV calibration there; AN2000 runs 0.2–2.0 MV self-service."),
     dict(who="Pierfrancesco", q="Target for the proposal: pressed Li on Cu in the existing Cu hemisphere: confirm it fits the AN2000 line end?"),
     dict(who="Pierfrancesco", q="Can the stand roll 90° about the beam? Plan (sim2arm): vertical pair for the cosmic nights before the beam, horizontal for the beam days."),
+    dict(who="Pierfrancesco", q="Liquid scintillator: how many litres (~60 L?), which liquid, who remakes the cans and by when, how many PMTs? '4 cm in parallel or 2 cm in series': per arm or in total? Wider cells could replace the big plastics (LIQUID_CELLS.md)."),
+    dict(who="Pierfrancesco", q="The holder thesis: when would a student start, and could a lighter end piece exist before H2 2027?"),
     dict(who="Pierfrancesco", q="A γ-yield monitor (LaBr₃ or NaI) from the LNL pool for the target's daily check?"),
     dict(who="Pierfrancesco", q="'Commission II': which INFN commission, and when must the request be in? Results before that date?"),
     dict(who="Pierfrancesco", q="Is the H2-2027 window flexible to June–July, so that results exist before the funding requests?"),
@@ -386,6 +397,8 @@ RISKS = [
          m="Simulated (sim2arm, 20 Nov, run L18): with the hemisphere's 300 µm wall five days give 2.4 × R(ATOMKI) (liquid working), about MEG II's limit; an ATOMKI-size signal shows at ~0.5σ. A lighter Al end piece gives ~0.6–0.8 × (estimate). Ask PF whether one can be made (T1, R10); otherwise sell the run as the feasibility test it is."),
     dict(r="Cosmic veto weaker than simulated (σ_t > 0.4 ns, segments worse than 3°)", l="med", i="med",
          m="n_TOF beam-off muons: σ_t 0.52–0.64 ns per arm (19 Nov). Horizontal pair for the beam days: its days barely depend on σ_t (17.4 d with no TOF, 17.7 at any σ_t; sim2arm tof_scan); the vertical pair goes 17.1 → 18.7 d from 0.3 to 0.7 ns. R4 with the LNL readout."),
+    dict(r="Liquid-cell cans not remade in time, or PMTs not found", l="med", i="med",
+         m="The proposal assumes them (2.35 × R(ATOMKI) in 5 d); without them 4.3 ×, the run stays a feasibility test. Ask now (S8); the n_TOF cans as a fallback if they can be reused."),
     dict(r="Li film degrades (LiOH) under beam", l="med", i="med",
          m="10–12 µm films; γ-yield monitor each day; a spare film; a week's conversion test before the run."),
     dict(r="Machine-future decision (one machine to replace AN2000 + CN)", l="low", i="high",
@@ -422,7 +435,7 @@ SLOT2 = dict(
     when="2028 (next PAC call, est. late 2027)",
     setup=[
         "Four arms: A, B + re-bulked C and D, new windows on all",
-        "Big plastics (4 × ~78 × 80 × 5 cm in-house plates) behind the SiPM walls: ×13–15 in running time",
+        "Big plastics (4 × ~78 × 80 × 5 cm in-house plates) behind the SiPM walls: ×13–15 in running time; or wide liquid cells from the ~60 L we have (~60 × 60 × 3 cm for 4 arms; S7, LIQUID_CELLS.md)",
         "SiPM walls per bar end (FERS, 160 ch) in the Upgrade preset; ganged in Self",
         "Own trigger/DAQ (architecture B or D), DREAM still from CEA",
         "Target from the slot-1 experience (flat Al end cap / Cu ogive, 10–12 µm Li)",
