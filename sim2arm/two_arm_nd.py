@@ -44,6 +44,13 @@ OUT = HERE / 'out'
 OUT.mkdir(exist_ok=True)
 PAIRS = {'vert': (2, 3), 'horiz': (0, 1), 'adj': (0, 2), 'adj_lo': (0, 3), 'all': None}
 L15_SEL = Path(os.environ.get('L15_SEL', _W / 'sel_l15'))
+#: R11 (2026-11-20): the liquid cell right behind the SiPM wall, leg = SiPM AND (plastic OR liquid >= 1.7 MeV).
+#: TA_LAYOUT=lsf16 swaps every dome300 table for the R11 run (beam samples and cosmics, same names with the R11 prefix).
+LAYOUT = os.environ.get('TA_LAYOUT', '')
+R11_SEL = Path(os.environ.get('R11_SEL', _W / 'sel_r11'))
+SN.RUN_DIR['R11'] = R11_SEL
+COS_SEL, COS_GLOB = ((R11_SEL, 'R11_cosmicdisk_dome300_lsf16_c*_sel.npz') if LAYOUT == 'lsf16'
+                     else (L15_SEL, 'L15_cosmicdisk_ta4arm_c*_sel.npz'))
 #: the target configuration of every two-arm number.  dome300 = the BUILT Cu hemisphere (R 11 mm, 300 µm wall, rim, grey
 #: flange; SHAPES_GEANT.md).  Until 20 Nov the study used ogCu200, the Cu ogive of Pierfrancesco's 27 Oct sketch (not built)
 #: under the name "Cu hemisphere": TA_CFG=ogCu200 reproduces those passes.
@@ -86,7 +93,7 @@ def load_cos(run, sample, hw):
     never reach the set-up's centre: it gives the horizontal pair 110 coincidences/day where the disk gives ~6,250.
     The disk table's n_generated is rescaled to L4 units (lnl_geant.MU_LIVE_S per muon)."""
     if run == 'L4' and sample == 'cosmic' and hw.startswith('as built') and COSMICS == 'disk':
-        fl = sorted(L15_SEL.glob('L15_cosmicdisk_ta4arm_c*_sel.npz'))      # merged in chunks of ~100 parts
+        fl = sorted(COS_SEL.glob(COS_GLOB))      # merged in chunks of ~100 parts (L15; R11 with TA_LAYOUT=lsf16)
         if fl:
             zs = []
             for f in fl:      # memory: cut each chunk to the pair first; the big pairs also drop theta < 40 deg rows
@@ -117,6 +124,8 @@ def set_pair(name):
     SN._TAB.clear()
     SN.RUNS['ogCu200'] = ['L11', 'L13']      # the dense as-built background MC of the Cu ogive (not built)
     SN.RUNS['dome300'] = ['L10', 'L18']      # the BUILT Cu hemisphere, R 11 mm, 300 µm (L18: lnl_x17, 20 Nov)
+    if LAYOUT == 'lsf16':
+        SN.RUNS['dome300'] = ['R11']         # the same hemisphere, liquid right behind the SiPM wall (R11)
 
 
 RESPS = ['LNL calibrated', 'n_TOF as is', 'LNL calibrated, LS off']

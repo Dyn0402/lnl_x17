@@ -1,5 +1,24 @@
 # Handoff
 
+## R11: Geant4 of the liquid cell right behind the SiPM wall — RUNNING since 2026-11-20 23:46 (dylan-MS-7C84)
+
+**Resume:** when the merge loop says "all merged", rsync + `combine_r11.py`, then the fit with `TA_LAYOUT=lsf16`.
+
+- Layout C of `slot1_feasibility/LIQUID_CELLS.md` §4: built Cu hemisphere (dome300), the n_TOF liquid can at
+  `--ls-front 1.6` (cm behind the SiPM container back; plastics unchanged), leg = SiPM AND (plastic OR E_ls ≥ 1.7 MeV).
+- MX17_Full_Geant `lnl_twoarm` 5e526a8 (pushed): `--ls-front`, `--ls-slab u v thick fill`, world fits the sideways PMT.
+  Binary `bin/mx17_full_sim_twoarm_5e526a8`. Overlap check clean; the job fails on any overlap.
+- Reduction: lxplus `analysis/r11/` (copies in `sim2arm/lxplus/r11/`): ill_pairs also writes `sipm_legs`, `plast_legs`;
+  `lnl_merge_rot.py` forms the leg when `LS_LEG` is set. Smoke R11t: horizontal pair-tag 2.05 % of X17 (L18 layout ~0.8 %);
+  SiPM × plastic legs nearly vanish (leptons stop in the liquid).
+- Clusters 4699219–4699225: M1/E1 18.15 (100 × 1e5), M1/E1 15.1 (50 × 1e5), gam_8Be (100 × 2e6), X17 (30 × 1e5),
+  cosmicdisk (400 × 3e5 = 2.45 live d). Logs `~/condor/lnl/R11/<sample>/logs`. Parts `/eos/.../lnl/R11/<sample>_dome300_lsf16`.
+- Merge loop on lxplus (`setsid`, `analysis/l15/merge_loop_r11.log`) → `/eos/.../lnl/target/sel_r11/` chunks.
+- Then: `rsync -a lxplus:/eos/experiment/ntof/data/x17/lnl/target/sel_r11/ $WORK_DATA/x17_facility_search/sel_r11_chunks/`;
+  `python sim2arm/combine_r11.py`; `TA_LAYOUT=lsf16 sim2arm/two_arm_nd.py reach --pairs horiz vert --resps 'LNL calibrated'
+  'n_TOF as is' --levels 'MM 15° + TOF' --tag _r11` (and LI_UG=587). Compare with pass 4 (151 d, 2.35 ×). Check 001 vs 005
+  events in each condor.log before quoting.
+
 ## Liquid cells in the baseline, predictions table in the proposal — updated 2026-11-20 evening (dylan-MS-7C84)
 
 **Resume:** proposal + page current; next: S8 (ask PF the liquid questions), R5 (Overleaf upload), R8 figure (3D render).
