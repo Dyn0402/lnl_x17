@@ -1,22 +1,19 @@
 # Handoff
 
-## R11: Geant4 of the liquid cell right behind the SiPM wall — updated 2026-11-21 (dylan-MS-7C84)
+## R11: Geant4 of the liquid cell right behind the SiPM wall — updated 2026-11-21 23:50 (dylan-MS-7C84)
 
-**Resume:** R11b (more beam MC) submitted 21 Nov 17:30; when merged: fetch, combine, refit (commands below), update
-LIQUID_CELLS.md §4.1 and the proposal if the gain holds.
+**Resume:** done. Layout C gives no gain (LIQUID_CELLS.md §4.1); the baseline stays in the proposal. Next on the proposal:
+S8 (questions to PF), R5 (Overleaf), R8 (Fig. 1).
 
-- **R11 result (21 Nov, LIQUID_CELLS.md §4.1):** toy gain not confirmed. Horizontal, 11 µm, liquid working: direct 197 d /
-  transplant 43 d → 91 d central, 1.83 × (pass 4: 189 / 120 → 151 d, 2.35 ×). X17 acceptance ×2.5 (toy ×4.2); cosmics ×3.5,
-  γ₁ ×7. The transplant is not valid here (86 % of the arm energy in the liquid; it keeps the baseline's energy shapes).
-  The direct is limited by thin beam MC (raw fits unstable: `sim2arm/r11_diag.py`). Proposal keeps the baseline.
-- **R11b:** clusters 4712563–4712567 (M1/E1 18.15 200 × 1e5, M1/E1 15.1 150 × 1e5, gam_8Be 200 × 2e6), logs
-  `~/condor/lnl/R11b/<sample>/logs`. Merge loop `analysis/l15/merge_loop_r11b.sh` (setsid, 96 × 15 min = 24 h, up to
-  ~17:30 on 22 Nov; restart the same way if needed, it skips merged chunks) → `sel_r11/R11b_*` (36 chunks).
-- EPC is read from run L3 in shapes_nd (not layout-specific); γ₁ comes from E1_15.1.
-- Then: check 001 vs 005 in each condor.log; `rsync -a lxplus:/eos/experiment/ntof/data/x17/lnl/target/sel_r11/
-  $WORK_DATA/x17_facility_search/sel_r11_chunks/`; `python sim2arm/combine_r11.py` (R11 + R11b; `R11B=0` = R11 only);
-  `bash sim2arm/run_r11.sh` (clear `sim2arm/out/parts/reach_r11*` first, the fits are cached per task), then
-  `summarize.py --tag _r11li11` and `--tag _r11`. If AFS reads say "Permission denied" on lxplus, run `aklog`.
+- R11 (830 jobs) + R11b (900 jobs, ×3–4 beam MC; clusters 4712563–4712567), all clean (001 = 005, exit 0).
+- Horizontal, 11 µm, LNL calibrated: direct 284 d (raw 266) against 189 d for pass 4; transplant 47 d is not valid here
+  (86 % of the arm energy in the liquid, the transplant keeps the baseline's energy shapes). R11-only: 197 / 43 d, so the
+  thin MC was optimistic. Acceptance ×2.5 (toy ×4.2), cosmics ×3.5, γ₁ ×7 in the signal region.
+- Outputs `sim2arm/out/summary_reach_r11li11.csv`, `_r11.csv`; R11-only `*_r11*only.csv`; diagnostics `sim2arm/r11_diag.py`.
+- The fit cache `sim2arm/out/parts/<what><tag>/` is keyed by the task, not the tables: clear it when the tables change.
+- EPC uses the configuration's own gam_8Be (`tp_epc='own'`); L3 is only the baseline's.
+- Not simulated: a higher liquid leg threshold, a cosmic veto. Tables on `$WORK_DATA/x17_facility_search/sel_r11/`
+  (chunks on EOS `lnl/target/sel_r11/`).
 
 ## Liquid cells in the baseline, predictions table in the proposal — updated 2026-11-20 (dylan-MS-7C84)
 

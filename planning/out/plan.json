@@ -450,8 +450,8 @@
    "ws": "sim",
    "due": "2026-12-05",
    "who": "Dylan",
-   "status": "active",
-   "t": "Geant4 of the liquid cell right behind the SiPM wall (run R11, 21 Nov): the toy's gain (151 -> ~34 d) is not confirmed. X17 acceptance x2.5 (not x4.2), backgrounds grow faster (cosmics x3.5); 91 d central (1.83 x R(ATOMKI)) but the estimators span 43-197 d (direct = no gain) and the transplant is not valid for this layout. More beam MC submitted 21 Nov (run R11b, 900 jobs, x3-4); refit when merged (LIQUID_CELLS.md 4.1). Proposal keeps the baseline until then"
+   "status": "done",
+   "t": "Geant4 of the liquid cell right behind the SiPM wall (runs R11 + R11b, 21 Nov): no gain. Own MC (direct) 284 d to 3 sigma vs 189 d for the baseline; X17 acceptance x2.5 (toy x4.2), cosmics x3.5, gamma1 x7; the transplant (47 d) does not apply to this layout. Baseline kept (LIQUID_CELLS.md 4.1)"
   },
   {
    "id": "R7",
@@ -574,7 +574,7 @@
    "due": "2026-12-05",
    "who": "Dylan",
    "status": "todo",
-   "t": "Ask PF: can the new cans sit right behind the SiPM wall, in the 6 cm gap before the plastics (R11)? How much liquid (~60 L?), which liquid, who remakes the cans and when, how many PMTs; '4 cm in parallel / 2 cm in series': per arm or in total?"
+   "t": "Ask PF: how much liquid (~60 L?), which liquid, who remakes the cans and when, how many PMTs; '4 cm in parallel / 2 cm in series': per arm or in total?"
   },
   {
    "id": "S9",

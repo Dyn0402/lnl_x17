@@ -71,6 +71,8 @@ Open points before this can replace the big plastics:
 
 ## 4. Liquid in front: right behind the SiPM wall, the plastics behind it (Dylan, 20 Nov)
 
+**Superseded by Geant4 (§4.1, 21 Nov):** layout C gives no gain over layout A. The toy below is kept for the record.
+
 Code: `../sim2arm/leg_layout.py` → `../sim2arm/out/leg_layout.csv` (15 s). **A scaling estimate:** the geometric leg
 toy of `FEASIBILITY_SIM.md` §9 (fitted to the Geant4 X17 pair-tags), horizontal pair only, counting in 125–155°; days
 ∝ B/S², applied to the Geant4 hemisphere reach (151 d to 3σ, 2.35 × R(ATOMKI) in 5 d, liquid working).
@@ -98,49 +100,51 @@ toy of `FEASIBILITY_SIM.md` §9 (fitted to the Geant4 X17 pair-tags), horizontal
   the new cans can be designed for it (ask). Trigger: the leg uses the liquid PMT in the 20 ns coincidence; the
   arm-to-arm TOF stays on the SiPM walls. Beam singles roughly double (~150 Hz per arm at 1.10 MeV): fine for DREAM.
 
-### 4.1 Geant4 of layout C (run R11, 21 Nov): the toy's gain is not confirmed
+### 4.1 Geant4 of layout C (runs R11 + R11b, 21 Nov): no gain over the baseline
 
-We simulated layout C in Geant4 (run R11, the built Cu hemisphere, the n_TOF liquid can 1.6 cm behind the SiPM wall,
-leg = SiPM AND (plastic OR E_ls ≥ 1.7 MeV)). All 830 condor jobs ran once and exited cleanly. The reach fit is the
-pass-4 fit (`TA_LAYOUT=lsf16`, `sim2arm/run_r11.sh`, outputs `sim2arm/out/summary_reach_r11*.csv`).
+We simulated layout C in Geant4. The geometry is the built Cu hemisphere with the n_TOF liquid can 1.6 cm behind the SiPM
+wall, and the leg is SiPM AND (plastic OR E_ls ≥ 1.7 MeV). Run R11 (830 jobs) gave the signal, the cosmics and a first
+set of beam backgrounds. Run R11b (900 jobs) added ×3 the beam MC at 18.15 MeV and in gam_8Be, and ×4 at 15.1 MeV. Every
+job of both runs started once and exited 0. The reach fit is the pass-4 fit (`TA_LAYOUT=lsf16`, `sim2arm/run_r11.sh`).
+The outputs are `sim2arm/out/summary_reach_r11li11.csv` (11 µm) and `summary_reach_r11.csv` (20 µm). The R11-only fits
+are kept as `summary_reach_r11*only.csv`.
 
-The table below gives the days to 3σ for the horizontal pair at MM 15° + TOF with an 11 µm film. The central value is
-the geometric mean of the two estimators (§1.3 of TWO_ARM_STUDY), and the range is the two estimators.
+The table below gives the days to 3σ for the horizontal pair at MM 15° + TOF with an 11 µm film. Section 1.3 of
+TWO_ARM_STUDY defines the two estimators. The direct estimator uses the configuration's own tables, and the transplant
+puts its rates and angle residuals on the dense baseline MC.
 
-| layout | response | days to 3σ (direct / transplant) | central | 90 % limit in 5 d |
-|---|---|---|---|---|
-| A. pass 4 (L18) | LNL calibrated | 189 / 120 | 151 | 2.35 × |
-| C. R11 | LNL calibrated | 197 / 43 | 91 | 1.83 × |
-| A. pass 4 (L18) | n_TOF as is | 321 / 215 | 263 | 3.10 × |
-| C. R11 | n_TOF as is | 245 / 100 | 156 | 2.39 × |
+| layout | response | direct | transplant | geometric mean | 90 % limit in 5 d |
+|---|---|---|---|---|---|
+| A. pass 4 (L18) | LNL calibrated | 189 | 120 | 151 | 2.35 × |
+| C. R11 only | LNL calibrated | 197 | 43 | 91 | 1.83 × |
+| **C. R11 + R11b** | LNL calibrated | **284** | 47 | 115 | 2.05 × |
+| A. pass 4 (L18) | n_TOF as is | 321 | 215 | 263 | 3.10 × |
+| C. R11 + R11b | n_TOF as is | 324 | 115 | 193 | 2.66 × |
 
 What the simulation shows:
-- **The X17 acceptance grows ×2.5, not ×4.2** (horizontal pair, in the signal region 130–155° and the E_sum window).
-  The toy overestimated the gain in acceptance.
-- **The backgrounds grow faster than the signal.** In the signal region the IPC (E1) grows ×2.3, the γ₁ pairs ×7, and the
-  cosmics ×3.5. The cosmics are now 56 % of the background there, against 40 % in pass 4. So the toy's assumption
-  "S/B unchanged" does not hold.
-- **The two estimators disagree by a factor 4.6** (pass 4: 1.6). The direct estimator uses R11's own tables and finds no
-  gain over pass 4 (197 against 189 d). The transplant puts R11's rates and angle residuals on the dense baseline MC, and
-  it finds ×2.8. However, the transplant keeps the baseline's energy shapes. In R11, 86 % of the arm energy of an X17
-  pair is in the liquid (pass 4: 14 %). For this reason the transplant is not a valid estimator for this layout. It
-  misses that the energy response is now the liquid's (the X17 E_sum width grows from 2.15 to 2.56 MeV with the LNL
-  calibrated response, and from 2.4 to 4.7 MeV with the n_TOF response).
-- **The direct estimator is limited by the beam MC.** R11 has fewer beam events per live day than L18 (430 beam jobs
-  against 780, and twice the rate per MC event). In the signal region there are 345 E1, 160 M1, 28 γ₁ and 5 EPC MC
-  events. The raw fits (no floor) are unstable with these tables: without cosmics they give 0.7 d with the ideal
-  response, which is not physical (`sim2arm/r11_diag.py`). So the direct 197 d is driven partly by the floor, and we
-  cannot yet say how much of the toy's gain survives.
+- **The X17 acceptance grows ×2.5, not ×4.2** (horizontal pair, signal region 130–155°, E_sum window). The toy
+  overestimated the gain in acceptance.
+- **The backgrounds grow faster than the signal.** In the signal region the IPC (E1) grows ×2.3, the γ₁ pairs ×7 and the
+  cosmics ×3.5. The cosmics are 56 % of the background there, against 40 % in pass 4. So the toy's assumption "S/B
+  unchanged" does not hold.
+- **With more MC the direct estimator got worse, and it is now stable.** It went from 197 to 284 days. The floor now
+  changes it by only 7 % (raw 266 d), against 15 % before. This means that the thin R11 tables were optimistic, and the
+  direct estimator is now set by the physics rather than by the MC. Compared with the direct estimator of pass 4 (189 d),
+  layout C needs 1.5 × more days.
+- **The transplant does not apply to this layout.** It stayed near 45 d with more MC, because it uses the baseline MC for
+  the beam shapes. In R11, 86 % of the arm energy of an X17 pair is in the liquid, against 14 % in pass 4. The transplant
+  keeps the baseline's energy shapes, so it misses that the energy response is now the liquid's. For the LNL calibrated
+  response the X17 E_sum width grows from 2.15 to 2.56 MeV, and for the n_TOF response from 2.4 to 4.7 MeV. For this
+  reason the geometric mean (115 d) is not a meaningful number here, and we use the direct estimator.
 
-What this means: we have no Geant4 evidence yet that layout C beats the baseline. The proposal keeps the baseline
-(151 d, 2.35 × R(ATOMKI) in 5 d). To settle it, R11 needs about ×3 more beam MC (E1 18.15, M1 18.15, gam_8Be, and an
-EPC sample), so that the direct estimator no longer depends on the floor. The jobs are short (0.3–0.7 h, 4 GB, `longlunch`).
+What this means: layout C does not beat the baseline in Geant4. Its own MC gives 1.5 × more days to 3σ than layout A.
+The proposal keeps the baseline: two 45 × 45 × 2 cm cells behind the plastics, 151 d to 3σ and 2.35 × R(ATOMKI) in 5 d.
+The toy of §4 was wrong for two reasons. It overestimated the gain in acceptance, and it assumed that the backgrounds
+scale like the signal.
 
-**Submitted 21 Nov, 17:30 (run R11b, clusters 4712563–4712567, 900 jobs):** M1 and E1 18.15 at 200 × 10⁵ each, M1 and
-E1 15.1 at 150 × 10⁵ each (E1 15.1 gives the γ₁ component), gam_8Be at 200 × 2 × 10⁶. With R11 this is ×3 the beam MC
-at 18.15 MeV and ×4 at 15.1 MeV. The EPC component is read from the baseline run L3 in the fit (`shapes_nd`), so an R11
-EPC sample would not be used. The merge loop `merge_loop_r11b.sh` writes `R11b_*` chunks to `sel_r11/`, and
-`combine_r11.py` adds them to the R11 tables.
+Limits of this result: we simulated one position (1.6 cm behind the SiPM wall) and one leg threshold (1.7 MeV). A higher
+liquid threshold or a cosmic veto might recover part of the gain, but we have not simulated them. Layout F (a 60 × 60
+cell in front) would grow the cosmics in the same way and is not expected to do better.
 
 ## 5. To do (plan.py)
 
@@ -148,7 +152,6 @@ EPC sample would not be used. The merge loop `merge_loop_r11b.sh` writes `R11b_*
   expose `ls_slab_thick_cm`, `ls_slab_u/v_cm`, `ls_fill_liters` and the cell position on the MX17_Full_Geant command line.
 - **S7** Geant4 run with an oversized liquid cell (like `--big-plastic`; cut smaller squares offline) at 35, 41 and 47 cm:
   replaces the toy above; decides whether wide cells replace the big plastics for slot 2.
-- **R11** Geant4 of layout C (and F): the liquid right behind the SiPM wall, leg = SiPM × (liquid OR plastic), as L18;
-  needs the LS position and size on the command line (S6) and the leg definition in the reduction.
+- **R11** done 21 Nov (§4.1): layout C needs 1.5 × more days than the baseline in Geant4. The baseline stays.
 - **S8** Ask Pierfrancesco: how much liquid (~60 L?), which liquid, who remakes the cans, how many PMTs exist, and what he
   means by "in parallel / in series".
