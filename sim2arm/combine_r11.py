@@ -29,6 +29,10 @@ import lnl_geant as G         # noqa: E402
 #: chunks per sample (njobs / chunk size of merge_loop_r11.sh)
 NCH = {'M1_18.15': 4, 'E1_18.15': 4, 'M1_15.1': 2, 'E1_15.1': 2, 'gam_8Be': 4, 'X17_m16.8': 1}
 NCOS = 8
+#: R11b (21 Nov): x3-4 more beam MC of the same layout (merge_loop_r11b.sh, prefix R11b_), added to the R11 tables.
+#: R11B=0 builds the R11-only tables (the 21 Nov result).
+NCH_B = {'M1_18.15': 8, 'E1_18.15': 8, 'M1_15.1': 6, 'E1_15.1': 6, 'gam_8Be': 8}
+USE_B = os.environ.get('R11B', '1') != '0'
 
 
 def main():
@@ -39,6 +43,12 @@ def main():
         if len(fl) < n:
             print(f'{s}: {len(fl)} of {n} chunks, waiting')
             continue
+        if USE_B and s in NCH_B:
+            fb = sorted(SRC.glob(f'R11b_{s}_dome300_lsf16_c*_sel.npz'))
+            if len(fb) < NCH_B[s]:
+                print(f'{s}: R11b {len(fb)} of {NCH_B[s]} chunks, waiting')
+                continue
+            fl += fb
         z = G._combine([dict(np.load(f, allow_pickle=True)) for f in fl])
         np.savez_compressed(out, **z)
         print(f'{s}: {len(fl)} chunks, {int(z["cnt_n_generated"]):,} generated, {len(z["reco_c"]):,} rows -> {out}')

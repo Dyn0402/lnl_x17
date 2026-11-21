@@ -136,6 +136,12 @@ What this means: we have no Geant4 evidence yet that layout C beats the baseline
 (151 d, 2.35 × R(ATOMKI) in 5 d). To settle it, R11 needs about ×3 more beam MC (E1 18.15, M1 18.15, gam_8Be, and an
 EPC sample), so that the direct estimator no longer depends on the floor. The jobs are short (0.3–0.7 h, 4 GB, `longlunch`).
 
+**Submitted 21 Nov, 17:30 (run R11b, clusters 4712563–4712567, 900 jobs):** M1 and E1 18.15 at 200 × 10⁵ each, M1 and
+E1 15.1 at 150 × 10⁵ each (E1 15.1 gives the γ₁ component), gam_8Be at 200 × 2 × 10⁶. With R11 this is ×3 the beam MC
+at 18.15 MeV and ×4 at 15.1 MeV. The EPC component is read from the baseline run L3 in the fit (`shapes_nd`), so an R11
+EPC sample would not be used. The merge loop `merge_loop_r11b.sh` writes `R11b_*` chunks to `sel_r11/`, and
+`combine_r11.py` adds them to the R11 tables.
+
 ## 5. To do (plan.py)
 
 - **S6** Geant4 thickness scan of the liquid (2, 2 + 2 in series, 4, 5 cm; two arms, the hemisphere, L18 tables):

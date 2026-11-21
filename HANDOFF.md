@@ -1,31 +1,22 @@
 # Handoff
 
-## R11: Geant4 of the liquid cell right behind the SiPM wall — updated 2026-11-20 (dylan-MS-7C84)
+## R11: Geant4 of the liquid cell right behind the SiPM wall — updated 2026-11-21 (dylan-MS-7C84)
 
-**Resume:** R11 condor jobs submitted 23:46; check they finished + merged, then combine_r11.py and the TA_LAYOUT=lsf16 fit.
+**Resume:** R11b (more beam MC) submitted 21 Nov 17:30; when merged: fetch, combine, refit (commands below), update
+LIQUID_CELLS.md §4.1 and the proposal if the gain holds.
 
-**Goal:** a Geant4 reach for layout C (liquid in front of the plastics, LIQUID_CELLS.md §4; toy said 151 → ~34 d, ~1.1 ×
-R(ATOMKI) in 5 d) before the 27 Nov proposal draft. If it holds, it goes into the proposal and plan (R11 → done).
-
-**State at wrap-up (23:55):** 830 jobs idle in a busy queue (16.7k idle on the pool); merge loop alive, 0 chunks yet.
-The merge loop stops after 64 passes × 15 min = 16 h (≈ 16:00 on 21 Nov): if jobs are still running then, restart it
-(`cd /afs/cern.ch/work/d/dneff/git/x17_lnl/analysis/l15 && setsid nohup bash merge_loop_r11.sh > merge_loop_r11.log 2>&1 < /dev/null &`;
-it skips chunks already merged). The local watcher of this session dies with it.
-
-- Layout C of `slot1_feasibility/LIQUID_CELLS.md` §4: built Cu hemisphere (dome300), the n_TOF liquid can at
-  `--ls-front 1.6` (cm behind the SiPM container back; plastics unchanged), leg = SiPM AND (plastic OR E_ls ≥ 1.7 MeV).
-- MX17_Full_Geant `lnl_twoarm` 5e526a8 (pushed): `--ls-front`, `--ls-slab u v thick fill`, world fits the sideways PMT.
-  Binary `bin/mx17_full_sim_twoarm_5e526a8`. Overlap check clean; the job fails on any overlap.
-- Reduction: lxplus `analysis/r11/` (copies in `sim2arm/lxplus/r11/`): ill_pairs also writes `sipm_legs`, `plast_legs`;
-  `lnl_merge_rot.py` forms the leg when `LS_LEG` is set. Smoke R11t: horizontal pair-tag 2.05 % of X17 (L18 layout ~0.8 %);
-  SiPM × plastic legs nearly vanish (leptons stop in the liquid).
-- Clusters 4699219–4699225: M1/E1 18.15 (100 × 1e5), M1/E1 15.1 (50 × 1e5), gam_8Be (100 × 2e6), X17 (30 × 1e5),
-  cosmicdisk (400 × 3e5 = 2.45 live d). Logs `~/condor/lnl/R11/<sample>/logs`. Parts `/eos/.../lnl/R11/<sample>_dome300_lsf16`.
-- Merge loop on lxplus (`setsid`, `analysis/l15/merge_loop_r11.log`) → `/eos/.../lnl/target/sel_r11/` chunks.
-- Then: `rsync -a lxplus:/eos/experiment/ntof/data/x17/lnl/target/sel_r11/ $WORK_DATA/x17_facility_search/sel_r11_chunks/`;
-  `python sim2arm/combine_r11.py`; `TA_LAYOUT=lsf16 sim2arm/two_arm_nd.py reach --pairs horiz vert --resps 'LNL calibrated'
-  'n_TOF as is' --levels 'MM 15° + TOF' --tag _r11` (and LI_UG=587). Compare with pass 4 (151 d, 2.35 ×). Check 001 vs 005
-  events in each condor.log before quoting.
+- **R11 result (21 Nov, LIQUID_CELLS.md §4.1):** toy gain not confirmed. Horizontal, 11 µm, liquid working: direct 197 d /
+  transplant 43 d → 91 d central, 1.83 × (pass 4: 189 / 120 → 151 d, 2.35 ×). X17 acceptance ×2.5 (toy ×4.2); cosmics ×3.5,
+  γ₁ ×7. The transplant is not valid here (86 % of the arm energy in the liquid; it keeps the baseline's energy shapes).
+  The direct is limited by thin beam MC (raw fits unstable: `sim2arm/r11_diag.py`). Proposal keeps the baseline.
+- **R11b:** clusters 4712563–4712567 (M1/E1 18.15 200 × 1e5, M1/E1 15.1 150 × 1e5, gam_8Be 200 × 2e6), logs
+  `~/condor/lnl/R11b/<sample>/logs`. Merge loop `analysis/l15/merge_loop_r11b.sh` (setsid, 96 × 15 min = 24 h, up to
+  ~17:30 on 22 Nov; restart the same way if needed, it skips merged chunks) → `sel_r11/R11b_*` (36 chunks).
+- EPC is read from run L3 in shapes_nd (not layout-specific); γ₁ comes from E1_15.1.
+- Then: check 001 vs 005 in each condor.log; `rsync -a lxplus:/eos/experiment/ntof/data/x17/lnl/target/sel_r11/
+  $WORK_DATA/x17_facility_search/sel_r11_chunks/`; `python sim2arm/combine_r11.py` (R11 + R11b; `R11B=0` = R11 only);
+  `bash sim2arm/run_r11.sh` (clear `sim2arm/out/parts/reach_r11*` first, the fits are cached per task), then
+  `summarize.py --tag _r11li11` and `--tag _r11`. If AFS reads say "Permission denied" on lxplus, run `aklog`.
 
 ## Liquid cells in the baseline, predictions table in the proposal — updated 2026-11-20 (dylan-MS-7C84)
 

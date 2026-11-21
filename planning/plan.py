@@ -135,7 +135,7 @@ TASKS = [
     dict(id="R10", ws="sim", due="2026-12-05", who="Dylan", status="todo",
          t="Two-arm Geant4 of the lighter Al end piece (Al ogive + Cu liner or the 45° Al cap), as L18 for the hemisphere: its slot-1 rows are scaled estimates now"),
     dict(id="R11", ws="sim", due="2026-12-05", who="Dylan", status="active",
-         t="Geant4 of the liquid cell right behind the SiPM wall (run R11, 21 Nov): the toy's gain (151 -> ~34 d) is not confirmed. X17 acceptance x2.5 (not x4.2), backgrounds grow faster (cosmics x3.5); 91 d central (1.83 x R(ATOMKI)) but the estimators span 43-197 d (direct = no gain) and the transplant is not valid for this layout. Needs ~x3 more beam MC before quoting (LIQUID_CELLS.md 4.1). Proposal keeps the baseline"),
+         t="Geant4 of the liquid cell right behind the SiPM wall (run R11, 21 Nov): the toy's gain (151 -> ~34 d) is not confirmed. X17 acceptance x2.5 (not x4.2), backgrounds grow faster (cosmics x3.5); 91 d central (1.83 x R(ATOMKI)) but the estimators span 43-197 d (direct = no gain) and the transplant is not valid for this layout. More beam MC submitted 21 Nov (run R11b, 900 jobs, x3-4); refit when merged (LIQUID_CELLS.md 4.1). Proposal keeps the baseline until then"),
     dict(id="R7", ws="sim", due="2026-11-20", who="Dylan", status="done",
          t="Geant4 predictions of every observable of the run (trigger and track fractions, cosmic θ/Δt/pointing, beam singles, 441 keV and 1.10 MeV spectra) and a 3D view of real Geant4 events (run L17): Predictions tab, sim2arm/PREDICTIONS.md (20 Nov)"),
     dict(id="R8", ws="sim", due="2026-11-27", who="Dylan", status="todo", dep=["R7"],
