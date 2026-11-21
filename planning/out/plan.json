@@ -450,8 +450,8 @@
    "ws": "sim",
    "due": "2026-12-05",
    "who": "Dylan",
-   "status": "todo",
-   "t": "Geant4 of the liquid cell right behind the SiPM wall (plastics behind), leg = SiPM × (liquid OR plastic): the toy says ×4 in X17 pairs, 151 → ~34 d, ~1.1 × R(ATOMKI) in 5 d (sim2arm/leg_layout.py, LIQUID_CELLS.md §4, estimate). Needs the LS options of S6 and the new leg in the reduction"
+   "status": "active",
+   "t": "Geant4 of the liquid cell right behind the SiPM wall (run R11, 21 Nov): the toy's gain (151 -> ~34 d) is not confirmed. X17 acceptance x2.5 (not x4.2), backgrounds grow faster (cosmics x3.5); 91 d central (1.83 x R(ATOMKI)) but the estimators span 43-197 d (direct = no gain) and the transplant is not valid for this layout. Needs ~x3 more beam MC before quoting (LIQUID_CELLS.md 4.1). Proposal keeps the baseline"
   },
   {
    "id": "R7",
