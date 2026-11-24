@@ -1,5 +1,20 @@
 # Handoff
 
+## Proposal rewritten in Dylan's style, beam request table — updated 2026-11-24 (dylan-MS-7C84)
+
+**Resume:** proposal current in `proposal/latex/` (abstract 1 page, body 4 pages) and on the site; Overleaf is behind (upload
+`proposal/out/lnl_x17_pac_proposal.zip`). Next: S8 (questions to PF), R8 (Fig. 1 render), Overleaf.
+
+- Abstract and body prose rewritten per `nTof_x17/papers/WRITING_STYLE.md` (one claim per sentence, terms defined, R_ATOMKI
+  defined once, MEG II quoted as 2.07 × R_ATOMKI). Numbers: Cu hemisphere pass 4 (TWO_ARM_STUDY §0, PREDICTIONS.md).
+- Changed claims: §1's four-arm light-holder reach was "one to two weeks / about a day" (that was the Cu ogive); now
+  "about 5 to 9 days as built, less than a day with large plastics" (Al ogive + Cu liner, FEASIBILITY_SIM §19.3, at the
+  old σ_t 0.3 ns). Abstract (iv) now quotes 2.35 × and 0.6–0.8 × (estimate). Table II caption said "three energies": two.
+- Beam request table at the bottom of the abstract page, template style (|c| columns, hlines): p, 0.441 MeV 1 day /
+  1.10 MeV 7 days, ≤ 1 µA, continuous, metallic Li 10–12 µm on Cu 300 µm (backing = the hemisphere: confirm with PF).
+- To fit 4 pages: Fig. 1 and Fig. 2 captions beside the figures, tables and references in \footnotesize, a −0.6 cm before
+  the references.
+
 ## R11: Geant4 of the liquid cell right behind the SiPM wall — updated 2026-11-21 23:50 (dylan-MS-7C84)
 
 **Resume:** done. Layout C gives no gain (LIQUID_CELLS.md §4.1); the baseline stays in the proposal. Next on the proposal:

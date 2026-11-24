@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 OUT.mkdir(exist_ok=True)
 
-UPDATED = "2026-11-20"
+UPDATED = "2026-11-24"
 DEADLINE = "2026-12-10T23:59:00+01:00"   # PAC proposal deadline, CET
 PAC = ("2027-01-25", "2027-01-29")
 
@@ -128,8 +128,8 @@ TASKS = [
          t="Geant4: two-arm geometry with the real target holder and stand (MX17_Full_Geant branch from lnl_target)"),
     dict(id="R4", ws="sim", due="2027-06-30", who="Dylan", status="todo",
          t="Timing on cosmics with the LNL readout (V1742/CFD): n_TOF beam-off muons give σ_t 0.52–0.64 ns per arm (walls), 0.95 (plastics) with the n_TOF readout (nTof_x17 ac_tof_beamoff, 19 Nov); decides the TOF cut"),
-    dict(id="R5", ws="sim", due="2026-11-27", who="Dylan", status="todo", dep=["R1"],
-         t="Proposal text from sim2arm: the 441 keV rate (~140 pairs/day above 90° with the built Cu hemisphere), the reach rows (2.4 × R(ATOMKI) in 5 d, liquid working), the vertical-cosmics test"),
+    dict(id="R5", ws="sim", due="2026-11-27", who="Dylan", status="done", dep=["R1"],
+         t="Proposal text from sim2arm: the 441 keV rate (~140 pairs/day above 90° with the built Cu hemisphere), the reach rows (2.35 × R(ATOMKI) in 5 d, liquid working), the vertical-cosmics test. Done 24 Nov: abstract + body rewritten in Dylan's style, beam request table on the abstract page; Overleaf still to update"),
     dict(id="R6", ws="sim", due="2026-11-20", who="Dylan", status="done",
          t="More as-built MC for the Cu hemisphere: done 20 Nov (run L18, ×30 the L10 tables; the 19 Nov study had used the Cu ogive)"),
     dict(id="R10", ws="sim", due="2026-12-05", who="Dylan", status="todo",

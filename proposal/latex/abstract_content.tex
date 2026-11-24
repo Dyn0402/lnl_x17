@@ -1,4 +1,5 @@
 % Abstract page (1 page). Compiled by abstract.tex (alone) and main.tex (full proposal).
+% Rewritten 2026-11-24 in Dylan's style (nTof_x17/papers/WRITING_STYLE.md); beam request table added (template style).
 \begin{center}
 \begin{large}
 {\bf AN2000 ACCELERATOR}\\
@@ -30,25 +31,41 @@ $^1$ \todo{affiliation}. $^2$ INFN, Laboratori Nazionali di Legnaro, Legnaro (Pa
 {\bf Abstract}
 \end{center}
 
-The anomaly reported by ATOMKI in the opening-angle distribution of $e^+e^-$ pairs from the 18.15~MeV
-$1^+$ state of \Be{}, interpreted as a new boson of about 17~MeV (\Xs), has been neither confirmed nor
-excluded: a two-arm spectrometer in Hanoi reported a similar excess, MEG~II found none, and a 2026
-study showed that cosmic rays alone can produce a bump near $140^\circ$ in ATOMKI-type spectrometers.
-The MX17 apparatus, built for and operated in 2026 at CERN n\_TOF, tracks each lepton in a large
-Micromegas time projection chamber in front of a scintillator wall, plastic and liquid scintillators. It
-measures the pair opening angle from the hit positions, rejects cosmic rays by their straight,
-collinear tracks, and covers about 40\,\% of the solid angle for the \Xs{} pairs with four arms, against
-a few per cent for scintillator telescopes.
+The ATOMKI group reported an excess of $e^+e^-$ pairs at large opening angles in the decay of the 18.15~MeV
+$1^+$ state of \Be{}. They interpret the excess as a new boson with a mass of about 17~MeV, called \Xs{}.
+The anomaly is still neither confirmed nor excluded. A two-arm spectrometer in Hanoi reported a similar
+excess, while MEG~II found none. In addition, a 2026 study showed that cosmic rays alone can produce a bump
+near $140^\circ$ in ATOMKI-type spectrometers.
 
-We propose an 8-day feasibility study with two opposite arms of the apparatus around a thin metallic
-\Li{} target on AN2000: (i)~rates, live time and detector occupancy on a proton beam; (ii)~a calibration
-of acceptance, angular resolution and energy scale on the 17.64~MeV M1 transition at the 441~keV
-resonance, where no anomaly is expected; (iii)~a measurement of the cosmic-ray and beam-induced
-backgrounds with and without the tracking veto; and (iv)~a first look at the 18.15~MeV region at
-$E_p = 1.10$~MeV: with the existing copper target holder the expected sensitivity is at the level of the MEG~II
-limit with the liquid scintillator cells; a lighter aluminium end piece would bring it below the ATOMKI ratio.
-The results will fix the design and the beam request of the full four-arm experiment.
+The MX17 apparatus was built for, and operated in 2026 at, CERN n\_TOF. Each arm tracks the lepton in a large
+Micromegas time projection chamber, placed in front of a scintillator wall, plastic scintillators and a liquid
+scintillator. For this reason MX17 measures the pair opening angle from the hit positions, and it rejects
+cosmic rays by their straight tracks that cross two arms. With four arms it covers about 40\,\% of the solid
+angle for the \Xs{} pairs, while scintillator telescopes cover a few per cent.
 
-\vspace{.3cm}
-\noindent\textbf{Beam request:} protons on a thin metallic \Li{} target, $E_p = 0.441$ and $1.10$~MeV, up to
-1~\si{\micro\ampere}, continuous; 8 days on AN2000 in the second half of 2027.
+We propose an 8-day feasibility study on AN2000, with two opposite arms of the apparatus around a thin
+metallic \Li{} target. We will measure (i)~the rates, the live time and the detector occupancy on a proton
+beam; (ii)~the acceptance, the angular resolution and the energy scale on the 17.64~MeV M1 transition at the
+441~keV resonance, where no anomaly is expected; (iii)~the cosmic-ray and beam-induced backgrounds, with and
+without the tracking veto; and (iv)~the 18.15~MeV region at $E_p = 1.10$~MeV. For item (iv) we will use the
+existing copper target holder. With this holder, a Geant4 simulation gives an expected 90\,\% CL limit in five
+days of $2.35\times R_\mathrm{ATOMKI}$, which is close to the MEG~II limit ($2.07\times R_\mathrm{ATOMKI}$). A
+lighter aluminium end piece would bring the expected limit to about $0.6$--$0.8\times R_\mathrm{ATOMKI}$, below the
+ATOMKI ratio (an estimate scaled from the four-arm simulation). The results
+will fix the design and the beam request of the full four-arm experiment.
+
+\vspace{.5cm}
+\begin{center}
+{\bf Beam request}\\[.2cm]
+\begin{tabular}{|c|c|c|c|c|c|c|}
+\hline
+\ Beam & $E_p$ (MeV) & Intensity & Beam mode & Target & Backing & Beam time \ \\
+\hline
+\ $p$ & 0.441 & $\le 1$~\si{\micro\ampere} & continuous & metallic \Li{}, 10--12~\si{\micro\metre} & Cu, 300~\si{\micro\metre} & 1 day \ \\
+\ $p$ & 1.10 & $\le 1$~\si{\micro\ampere} & continuous & metallic \Li{}, 10--12~\si{\micro\metre} & Cu, 300~\si{\micro\metre} & 7 days \ \\
+\hline
+\multicolumn{6}{|r|}{total \ } & 8 days \ \\
+\hline
+\end{tabular}\\[.15cm]
+Experimental setup: MX17, two arms. Accelerator: AN2000, in the second half of 2027.
+\end{center}
