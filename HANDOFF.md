@@ -2,8 +2,13 @@
 
 ## Proposal rewritten in Dylan's style, beam request table — updated 2026-11-24 (dylan-MS-7C84)
 
-**Resume:** proposal current in `proposal/latex/` (abstract 1 page, body 4 pages) and on the site; Overleaf is behind (upload
-`proposal/out/lnl_x17_pac_proposal.zip`). Next: S8 (questions to PF), R8 (Fig. 1 render), Overleaf.
+**Resume:** proposal current in `proposal/latex/` (abstract 1 page, body 4 pages), on the site and on Overleaf (pushed
+2026-11-24 through Overleaf's git: `git clone https://git.overleaf.com/6afdf0e8d237ac71ebb14b1f`). Next: S8 (questions to
+PF), R8 (Fig. 1 render).
+
+- Overleaf had two edits by Dylan (19 Nov): spokesperson = P. Mastinu (body; now also the abstract) and a todo asking for the
+  beam request as a template table (done). Before editing here, clone Overleaf and diff it against the repo first.
+- `figures/limit_vs_days.pdf` on Overleaf is now an uploaded file, no longer linked from the site.
 
 - Abstract and body prose rewritten per `nTof_x17/papers/WRITING_STYLE.md` (one claim per sentence, terms defined, R_ATOMKI
   defined once, MEG II quoted as 2.07 × R_ATOMKI). Numbers: Cu hemisphere pass 4 (TWO_ARM_STUDY §0, PREDICTIONS.md).

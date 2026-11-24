@@ -427,7 +427,7 @@
    "dep": [
     "R1"
    ],
-   "t": "Proposal text from sim2arm: the 441 keV rate (~140 pairs/day above 90° with the built Cu hemisphere), the reach rows (2.35 × R(ATOMKI) in 5 d, liquid working), the vertical-cosmics test. Done 24 Nov: abstract + body rewritten in Dylan's style, beam request table on the abstract page; Overleaf still to update"
+   "t": "Proposal text from sim2arm: the 441 keV rate (~140 pairs/day above 90° with the built Cu hemisphere), the reach rows (2.35 × R(ATOMKI) in 5 d, liquid working), the vertical-cosmics test. Done 24 Nov: abstract + body rewritten in Dylan's style, beam request table on the abstract page; pushed to Overleaf"
   },
   {
    "id": "R6",

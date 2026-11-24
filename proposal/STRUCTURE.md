@@ -88,7 +88,8 @@ On Overleaf `figures/limit_vs_days.pdf` is a linked file from `https://dylan-nef
 `latex/` compiles locally with `make` (abstract.pdf, body.pdf, proposal.pdf merged, main.pdf; needs revtex4, which is in
 `~/texmf/tex/latex/` on the desktop, from Ubuntu's texlive-publishers). `make zip` rebuilds the upload zip. Overleaf and the
 repo were identical on 2026-11-19 (no edits had been made on Overleaf). From now on they can drift: pick one as the master
-(Overleaf's Git integration can be added as a remote here).
+(Overleaf's Git integration can be added as a remote here). 2026-11-24: synced by `git push` to
+`https://git.overleaf.com/6afdf0e8d237ac71ebb14b1f` (diff Overleaf against the repo before each push: Dylan edits there).
 
 ## Sources
 
