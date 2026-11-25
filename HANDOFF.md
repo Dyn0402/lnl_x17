@@ -14,9 +14,24 @@
   (fallback: the next period, autumn 2027). Page, PLAN.md §5, README, STRUCTURE.md; x17_facility_search FACILITY.md,
   lnl/README.md, dashboard. Site deployed.
 
+- Proposal edits after Dylan's read (25 Nov): the fit sentence (θ, asymmetry, E_sum, a few % shape freedom) moved from
+  measurement (3) to the start of "Expected sensitivity", as the method of the projected limits; the TPC resolution is
+  "around 1° for cosmic-ray muons". Dylan's own Overleaf edits kept (D⁺ contamination sentence, 92 % efficiency).
+
 **Next steps:**
 1. Ask PF: June or July preferred for the CN; what happens if we slip past July.
 2. The loans now need answers in Dec–Jan (B's window by March, DREAM from mid-Feb, PMTs/digitizers by end Feb).
+3. Open, left as is (Dylan, 25 Nov): "Readiness and safety" is not asked for by the template (only the four request
+   bullets are); it pre-answers the technical review. Option: fold chamber status into Apparatus and the neutron/γ/gas
+   lines into the "Experimental setup" bullet.
+
+**Gotchas / decisions:**
+- Fig. 2(b, c) use level "MM 15° + TOF": cosmic muons are smeared by 15° like electrons (the FEASIBILITY_SIM §19 artefact),
+  so the grey cosmic band is conservative; "MM 15° point, μ 3°" would cut it by 89 %. Not checked: which level the 3.8 ×
+  limit uses.
+- Dylan edits in Overleaf: always `git pull` the Overleaf clone and edit *that* copy, then copy back to the repo. Copying
+  the repo file over Overleaf once erased his D⁺ edit (restored).
+- dylan-cern-site's branch is `master`, not `main`.
 
 ## Budget and inventory: loans from n_TOF and CERN, the hardware at CEA — updated 2026-11-25 (dylan-MS-7C84)
 
