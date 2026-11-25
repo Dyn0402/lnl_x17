@@ -31,6 +31,10 @@ loan, and what it costs if a loan falls through.
 3. Rate the 9 loans still without a confidence (DREAM FEUs, PMTs, digitizers, VME, HV, Li films, line, stand, γ monitor).
 
 **Gotchas / decisions:**
+- Digitizer: the V1742 from LNL stays the choice (Dylan, 25 Nov: "definitely ideal"); the CERN-pool options
+  (4 × DT5730SB etc., `x17_facility_search/inventory/CERN_EPOOL.md` §4) are kept in mind as the fallback.
+- epool: the rentals list shows a fee of 0 for returned items; fees come from the catalogue. Reading the site's login
+  token through JS was blocked (permission check); use the UI pages and read the table DOM instead.
 - Adapters and Ts come from n_TOF (Dylan, 25 Nov), so no connector line is critical; T-splitting the walls as at n_TOF.
 - `nTof_x17_DAQ/n1081b/n1081b_module_map.py` `_module1()` raises NameError (`sect`) when called alone (not fixed, other repo).
 - Another session works in `sim2arm/` here: commit by path only.
