@@ -79,7 +79,7 @@ def cut(z, pair):
 
 
 def combine_pair(zs):
-    return cut(_COMBINE0(zs), PAIR)
+    return cut(combine_common(zs), PAIR)
 
 
 #: live seconds per generated muon: L4 plane (3 x 3 m, 1 /cm^2/min) and the L15 disk (R = 90 cm, A_eff = 4 pi R^2 / 3)
@@ -115,11 +115,48 @@ def load_cos(run, sample, hw):
     return _LOAD0(run, sample, hw)
 
 
+#: L19 (2026-11-25): the ⁸Be γ lines at x100 L18 (analog, same geometry; pair rows only, no singles).
+#: TA_EPC_RUN=L19 adds its table to the EPC pair component; the singles (accidental pairing, lnl_geant.singles) keep
+#: the configuration's own γ table, whose sg_* rows match its n_generated.
+EPC_RUN = os.environ.get('TA_EPC_RUN', '')
+SN.RUN_DIR['L19'] = Path(os.environ.get('L19_SEL', _W / 'sel_l19'))
+_FILES0, _SINGLES0, _IN_SINGLES = SN.files, G.singles, [False]
+
+
+def files_epc(cfg, kind, det):
+    fl = _FILES0(cfg, kind, det)
+    if kind == 'epc' and EPC_RUN and not _IN_SINGLES[0] and fl:
+        f = SN.RUN_DIR[EPC_RUN] / f'{EPC_RUN}_gam_8Be_{CFG}_asb_sel.npz'
+        if not f.exists():
+            raise FileNotFoundError(f)
+        fl = fl + [f]
+    return fl
+
+
+def singles_own(hw):
+    _IN_SINGLES[0] = True
+    try:
+        return _SINGLES0(hw)
+    finally:
+        _IN_SINGLES[0] = False
+
+
+def combine_common(zs):
+    """lnl_geant._combine on the keys every table has (L19 has no sg_* singles and adds g_* truth)."""
+    if len(zs) > 1:
+        keys = set(zs[0]).intersection(*map(set, zs[1:]))
+        zs = [{k: z[k] for k in z if k in keys} for z in zs]
+    return _COMBINE0(zs)
+
+
 def set_pair(name):
     global PAIR
     PAIR = PAIRS[name]
     G._combine = combine_pair
     G._load = load_cos
+    if EPC_RUN:
+        SN.files = files_epc
+        G.singles = singles_own
     G._CACHE.clear()
     G._SEG.clear()
     SN._TAB.clear()

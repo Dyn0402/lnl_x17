@@ -602,6 +602,22 @@
    "t": "Target for the proposal: pressed Li on Cu (CN group), 10–12 µm; holder: the Cu hemisphere (already built: R 11 mm, 300 µm, rim; simulated as dome300 since 20 Nov, the 19 Nov numbers used the Cu ogive by mistake); a lighter Al end piece (Al ogive + Cu liner, or a flat Al end cap at 45°) would cut the days ×7 in simulation (R10: 21 d against 151 d to 3σ, liquid working): ask whether one can be made for slot 1. PF (20 Nov): the hemisphere exists and works, 'at least for the forward angles'; he has asked for an engineering thesis on the holder"
   },
   {
+   "id": "T3",
+   "ws": "target",
+   "due": "2026-11-25",
+   "who": "Dylan",
+   "status": "done",
+   "t": "What a ±50 % uncertainty on the Li film's thickness and homogeneity does (slot1_feasibility/LI_THICKNESS.md, sim2arm/li_thickness.py): yields, LiOH, reach for 17 film scenarios; in-situ measurement from the 1.10 MeV / 441 keV yield ratio"
+  },
+  {
+   "id": "R12",
+   "ws": "sim",
+   "due": "2026-11-27",
+   "who": "Dylan",
+   "status": "active",
+   "t": "External conversions at x100 statistics: run L19 (3e10 ⁸Be γ, analog, the built Cu hemisphere; lnl_twoarm 07bea64 records the γ's first interaction), cluster 4762099; refit with TA_EPC_RUN=L19 (sim2arm/EPC_L19.md)"
+  },
+  {
    "id": "T2",
    "ws": "target",
    "due": "2027-05-31",
@@ -2099,7 +2115,11 @@
   },
   {
    "who": "Pierfrancesco",
-   "q": "A γ-yield monitor (LaBr₃ or NaI) from the LNL pool for the target's daily check?"
+   "q": "A γ-yield monitor (LaBr₃ or NaI) from the LNL pool for the target's daily check? A LaBr₃ is preferred: it separates 17.64 from 18.15 MeV (the alarm for a film that reaches 441 keV) and sees the 478 keV line (the Li content, PIGE)."
+  },
+  {
+   "who": "Pierfrancesco",
+   "q": "Li films (LI_THICKNESS.md, 25 Nov): can LNL measure each film's thickness and uniformity before the run (RBS / NRA / PIGE at a few spots, or weighing)? How long does a film change take on the CN line, and how many spare films can we have?"
   },
   {
    "who": "Pierfrancesco",
@@ -2216,6 +2236,12 @@
    "l": "med",
    "i": "med",
    "m": "10–12 µm films; γ-yield monitor each day; a spare film; a week's conversion test before the run."
+  },
+  {
+   "r": "Li film thickness and homogeneity known only to ~50 % (whatever film is made)",
+   "l": "high",
+   "i": "med",
+   "m": "slot1_feasibility/LI_THICKNESS.md (25 Nov): the γ rate follows the mean thickness, so the 46 h limit spans 6.2 × (0.5 × 11 µm) to 3.1 × (1.5 ×) around 3.8 × R(ATOMKI); an uneven film with the right mean costs 3–18 % in days. The danger is unevenness plus LiOH: thick spots reach 441 keV (36 % of γ₀ from 17.64 MeV at ±50 % spread and half the Li converted; days × 2.3–3.7). Measure the film on day 1 (γ₀ yield ratio 1.10 MeV / 441 keV, which does not depend on the film; 478 keV PIGE), watch 17.64/18.15 with the LaBr₃, bring spare films, map films by IBA before the run if LNL can. R stays normalised to the γ monitor, so the thickness changes only the statistics."
   },
   {
    "r": "Machine-future decision (one machine to replace AN2000 + CN)",

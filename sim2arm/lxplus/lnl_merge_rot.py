@@ -59,13 +59,16 @@ def main():
     ap.add_argument("parts", nargs="+")
     ap.add_argument("-o", "--out", required=True)
     a = ap.parse_args()
-    R, ngen = {}, 0
+    R, ngen, GC = {}, 0, {}
     have_t = all((Path(p).parent.parent / "parts_time" / Path(p).name).exists() for p in a.parts)
     for p in a.parts:
         z = np.load(p)
         ngen += int(z["n_generated"].sum())
         for k in z.files:
-            if k != "n_generated":
+            if k == "gcnt_vol":                   # lnl_first.py: generated events per first-interaction volume
+                for v, n in zip(z["gcnt_vol"], z["gcnt_n"]):
+                    GC[str(v)] = GC.get(str(v), 0) + int(n)
+            elif k not in ("n_generated", "gcnt_n"):
                 R.setdefault(k, []).append(z[k])
         if have_t:                        # lnl_time.py: earliest scintillator time per arm
             T = np.load(Path(p).parent.parent / "parts_time" / Path(p).name)
@@ -149,8 +152,9 @@ def main():
     if "em_d" in R:                       # truth lepton momenta (MeV): the γ* direction for
         out["em_p"] = R["em_d"][s].astype(np.float32)          # anisotropy reweighting
         out["ep_p"] = R["ep_d"][s].astype(np.float32)
-    if not np.isin(R["event_type"], (0, 1)).all():
-        # γ lines / cosmics: every ok arm as a single (for accidental pairing)
+    if not np.isin(R["event_type"], (0, 1)).all() and not _os.environ.get("DROP_SG"):
+        # γ lines / cosmics: every ok arm as a single (for accidental pairing).  DROP_SG=1 (L19, per-job pair
+        # tables of the high-statistics EPC run): no singles; the cnt_line_* singles counters are kept.
         ie, ia = np.nonzero(ok)
         out.update(sg_arm=ia.astype(np.int8), sg_E=Earm[ie, ia].astype(np.float32),
                    sg_E_sipm=R["E_sipm"][ie, ia].astype(np.float32),
@@ -163,6 +167,12 @@ def main():
                    sg_nok=nok[ie].astype(np.int8))
         if "t_sipm" in R:
             out["sg_t_sipm"] = R["t_sipm"][ie, ia]
+    for k in R:                                  # lnl_first.py (L19): the primary γ's first interaction
+        if k.startswith("g_"):
+            out[k] = R[k][s]
+    if GC:
+        out["gcnt_vol"] = np.array(sorted(GC), dtype="U24")
+        out["gcnt_n"] = np.array([GC[v] for v in sorted(GC)], np.int64)
     for k, v in counts.items():
         out[f"cnt_{k}"] = np.array(v)
     np.savez_compressed(a.out, **out)
