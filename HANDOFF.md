@@ -1,42 +1,43 @@
 # Handoff
 
-## The CN instead of AN2000 — updated 2026-11-25 (dylan-MS-7C84)
+## The CN instead of AN2000, 8 working days — updated 2026-11-25 (dylan-MS-7C84)
 
-**Later the same day: the allocation is 8 days in total (Dylan).** Reworked to 8 working days (8 h of beam each, assumed):
-day 1 scan + 1.10 MeV, day 2 H₂⁺ for 441 keV (else 1.10 MeV), days 3–7 at 1.10 MeV, day 8 arms at 90°. That is 46 h at
-1.10 MeV: expected limit 3.8 / 5.0 / 7.0 × R(ATOMKI) (liquid working / as at n_TOF / none), 1.4–1.9 × with the Al holder;
-130 beam + 130 cosmic pairs (rate to 12 %); 441 keV: 46 + 23 pairs in 8 h (18 %). Night running would give back the
-2.35 ×; 4 µA on working hours gives 1.7 ×. Fig. 2 (8 h, 46 h) and Fig. 3 ("requested" at 1.9 d) use `H441`, `H110` in
-`make_figures.py`; `two_arm_estimates.py` DAYS_ON_RES stays 5 (the csv columns `*_5d` keep their meaning). The text below
-about 20 working days is superseded.
+**Resume:** proposal is on the CN, 8 working days; Dylan asks Pierfrancesco the CN questions (P2), then revise the text.
 
-**Resume:** Dylan asks Pierfrancesco the CN questions (P2; `planning/plan.py` QUESTIONS, `slot1_feasibility/CN_BEAM.md` §6).
-The proposal (`proposal/latex/`, pushed to Overleaf) now asks for the CN. Change it again when the answers come.
+**Goal:** AN2000 is probably not available and the allocation is 8 days. Rewrite the slot-1 PAC proposal (deadline
+10 Dec) for the CN, at 1 µA and working hours only, with the 441 keV point asked for (H₂⁺) but not relied on.
 
-**Why:** Dylan learned that AN2000 is probably not available. Decided (Dylan): write the proposal for 1 µA and working
-hours only, and request the 441 keV point with H₂⁺ without making the proposal depend on it.
+**Done:**
+- Proposal (`proposal/latex/`, Overleaf, page): "CN ACCELERATOR"; 8 working days, 8 h of beam each (assumed): day 1
+  current scan + 1.10 MeV, day 2 H₂⁺ at 0.883 MV for 441 keV (asked as a question; "we expect some D⁺"; else 1.10 MeV),
+  days 3–7 at 1.10 MeV, day 8 arms at 90°. 46 h at 1.10 MeV ≈ 1.9 days of beam ("day of beam" = 24 h, defined in §II).
+- Numbers (scaled as 1/√hours from the pass-4 / R10 fits): limit 3.8 / 5.0 / 7.0 × R(ATOMKI) (liquid working / as at
+  n_TOF / none), 1.4–1.9 × with the Al holder; ~130 beam + 130 cosmic pairs (rate to 12 %), X17 adds 5; 441 keV: 46 + 23
+  pairs in 8 h (18 %); ~45 selected cosmic pairs per night.
+- Fits at 2 and 4 µA (`sim2arm/run_cn.sh`; `two_arm_nd.py` reads `TA_IUA`; `sim2arm/out/two_arm_reach_cn*.csv`), 5 days of
+  beam: hemisphere 2.35 / 1.58 / 1.08 ×, Al ogive 0.88 / 0.60 / 0.42 ×. For the 46 h: 4 µA gives 1.7 × (hemisphere).
+- `slot1_feasibility/CN_BEAM.md` (the analysis: machines, H₂⁺, current, hours, the 8-day table); plan.py questions and
+  risks; `two_arm_estimates.py` BEAM_PLAN; README, PLAN.md banner, page; x17_facility_search FACILITY.md, lnl/README.md,
+  dashboard. Page and survey deployed.
 
-**Done**
-- `slot1_feasibility/CN_BEAM.md`: the implications. 441 keV via H₂⁺ at 0.883 MV (two 0.441 MeV protons; the D⁺
-  admixture is a question); the CN's documented current at 0.8–2 MeV is 1 µA (the ~4 µA is the authorised limit, set by
-  neutrons); full current only on −15°/0°/+15°; working days, mainly daytime.
-- **Fits at 2 and 4 µA** (`sim2arm/run_cn.sh`; `two_arm_nd.py` now reads `TA_IUA`; tags `_cn{2,4}[al]li11`, raw csvs in
-  `sim2arm/out/two_arm_reach_cn*.csv`): built hemisphere, liquid working, 5 days of beam: 2.35 / 1.58 / 1.08 × R(ATOMKI)
-  at 1 / 2 / 4 µA (151 / 68 / 32 d to 3σ); Al ogive 0.88 / 0.60 / 0.42 × (21 / 10 / 4.8 d). Almost 1/I, since 91–94 % of the
-  background is beam-induced. No summarize.py run on these tags (central = geometric mean of direct and transplant).
-- **Proposal:** "CN ACCELERATOR"; 20 working days (8 h of beam each, assumed) = 1 scan + 3 H₂⁺ (conditional) + 15 at
-  1.10 MeV (= the 5 days of beam) + 1 adjacent; "days of beam" (24 h) defined in §II; Table I in working days; the cosmic
-  nights (45 selected pairs per night) as a plus. Body still 4 pages: figures at 92 % width, the "15 % lower with the bench
-  efficiency" sentence left to the Table I caption, todos shortened. Dylan's Overleaf edits of 25 Nov were taken first.
-- Fig. 2/3 labels "days of beam" (`make_figures.py`). plan.py (P2, questions, risks, the line hardware, phase),
-  `two_arm_estimates.py` BEAM_PLAN, README, PLAN.md banner, page; x17_facility_search FACILITY.md, lnl/README.md,
-  dashboard (EXTRA + LOG). Page and survey deployed (site 5192154).
+**Next steps:**
+1. Pierfrancesco: night running (24 h days → 2.35 ×), >1 µA (4 µA → 1.7 ×), H₂⁺ on the CN (and D⁺ level, may have no
+   answer), which line (full current only on −15°/0°/+15°), hours per working day.
+2. Update the proposal with the answers; with 24 h days restore the 5-days-of-beam numbers (set `H110`, `H441` in
+   `proposal/figsrc/make_figures.py`).
 
-**Open**
-- The 8 h/working day is our guess from "mainly during daytime". With 24 h running the programme fits in 8 days again.
-- 20 working days is twice a typical CN allocation (~10 days, CN paper). If PF thinks that is too much, cut the 1.10 MeV
-  days; the limit goes as √hours.
-- If 4 µA is granted, the run sets a limit at about half of MEG II's: the motivation text would change.
+**Gotchas / decisions:**
+- Day 8 (arms at 90°) kept rather than more 1.10 MeV (3.8 → 3.5 ×): external conversions rest on 2 MC events (±70 %).
+- Rejected for 441 keV: a thick Li foil at 0.80 MeV (adds 10–20 % E1 direct capture, where ATOMKI 2022 claims X17).
+- To fit 4 pages: figures at 92 % width, "15 % lower with bench efficiency" only in the Table I caption, "(1.1 W)" and
+  the [line, spot, floor] todo removed (still in plan.py).
+- `two_arm_estimates.DAYS_ON_RES` stays 5 (csv columns `*_5d`); the page notes the reach tables are for 5 days of beam.
+- Overleaf: clone `https://git.overleaf.com/6afdf0e8d237ac71ebb14b1f`, diff against `proposal/latex/` before editing.
+
+**Key files & commands:**
+- `slot1_feasibility/CN_BEAM.md`, `proposal/latex/{abstract,body}_content.tex` (`make` prints the page count)
+- `python3 proposal/figsrc/make_figures.py`; `python3 planning/plan.py`; `python3 site/build_page.py`, then in
+  dylan-cern-site `python3 scripts/build.py && scripts/deploy-eos.sh`
 
 ## Proposal audited against the LNL call and rebuilt around figures — updated 2026-11-25 (dylan-MS-7C84)
 
