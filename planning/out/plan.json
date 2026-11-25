@@ -194,9 +194,9 @@
   },
   {
    "ws": "run",
-   "name": "20 CN working days of beam (H2 2027)",
+   "name": "8 CN working days of beam (H2 2027)",
    "start": "2027-09-20",
-   "end": "2027-10-15",
+   "end": "2027-09-30",
    "est": true
   },
   {
@@ -649,7 +649,7 @@
    "due": "2027-10-01",
    "who": "all",
    "status": "todo",
-   "t": "20 CN working days of beam (8 h each, assumed) + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"
+   "t": "8 CN working days of beam (8 h each, assumed) + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"
   },
   {
    "id": "F1",
@@ -1853,11 +1853,11 @@
   },
   {
    "who": "Pierfrancesco",
-   "q": "CN instead of AN2000 (25 Nov): the proposal now asks 20 working days on the CN at 1 µA, 8 h of beam per working day (17 at 1.10 MeV + 3 with H₂⁺ for 441 keV, conditional). Is that how the CN works (hours per day, nights, weekends)? (slot1_feasibility/CN_BEAM.md)"
+   "q": "CN instead of AN2000 (25 Nov): the proposal asks 8 working days on the CN at 1 µA (the 8-day allocation), 8 h of beam per working day: 7 at 1.10 MeV + 1 with H₂⁺ for 441 keV (else also 1.10 MeV). Is that how the CN works (hours per day, nights, weekends)? (slot1_feasibility/CN_BEAM.md)"
   },
   {
    "who": "Pierfrancesco",
-   "q": "Can the CN give more than 1 µA at 1.10 MeV? The beam sheet says 1 µA at 0.8–2 MeV; the CN paper's ~4 µA limit is set by neutrons, and ⁷Li(p,n) makes none below 1.88 MeV. 4 µA would bring 5 days of beam from 2.35 to ~1.1 × R(ATOMKI) (CN_BEAM.md §3)."
+   "q": "Can the CN give more than 1 µA at 1.10 MeV? The beam sheet says 1 µA at 0.8–2 MeV; the CN paper's ~4 µA limit is set by neutrons, and ⁷Li(p,n) makes none below 1.88 MeV. With the 46 h at 1.10 MeV, 4 µA would bring the limit from 3.8 to 1.7 × R(ATOMKI) (CN_BEAM.md §3); nights would bring 3.8 to 2.35 ×."
   },
   {
    "who": "Pierfrancesco",
@@ -1897,7 +1897,7 @@
   },
   {
    "who": "LNL Accelerator Division",
-   "q": "CN hours: how many hours of beam per working day (the proposal assumes 8)? Nights or weekends with authorisation? A four-week block at ~1 MV (column shorted)?"
+   "q": "CN hours: how many hours of beam per working day (the proposal assumes 8)? Nights or weekends with authorisation (8 × 24 h would give 5 days of beam at 1.10 MeV, as in the AN2000 plan)?"
   },
   {
    "who": "LNL Accelerator Division",
@@ -1955,13 +1955,13 @@
    "r": "No H₂⁺ beam on the CN, so no 441 keV calibration",
    "l": "med",
    "i": "med",
-   "m": "The request is 17 working days at 1.10 MeV without it (the 3 H₂⁺ days are conditional). The energy scale then comes from the 18.15 MeV pairs; the run loses its transition without an expected anomaly."
+   "m": "Without it the H₂⁺ day is also at 1.10 MeV (the request stays 8 working days). The energy scale then comes from the 18.15 MeV pairs; the run loses its transition without an expected anomaly."
   },
   {
    "r": "CN gives fewer beam hours than assumed (8 h per working day) or a shorter block",
    "l": "med",
    "i": "high",
-   "m": "Every per-day number is per 24 h of beam; the reach scales as the square root of the hours. Ask the hours now (P2); nights are cosmic data in any case."
+   "m": "With 8 working days of 8 h the run has 46 h at 1.10 MeV: 3.8 × R(ATOMKI) (2.35 × with 24 h days). The reach scales as the square root of the hours. Ask for night running (P2); nights are cosmic data in any case."
   },
   {
    "r": "The built Cu hemisphere limits the physics reach",
@@ -2944,23 +2944,23 @@
   {
    "day": "1",
    "E_p": "1.10 MeV",
-   "what": "Roll to the HORIZONTAL pair. Beam on target at low current; target conditioning; current scan 0.05 → 1 µA: trigger rates, DREAM live time, Micromegas occupancy, SiPM/plastic singles; γ-yield reference",
+   "what": "Roll to the HORIZONTAL pair. Beam on target at low current; current scan 0.05 → 1 µA (~2 h): trigger rates, DREAM live time, Micromegas occupancy, singles; γ-yield reference; then ~6 h in the 18.15 MeV region",
    "beam": "on"
   },
   {
-   "day": "2–4",
+   "day": "2",
    "E_p": "0.441 MeV",
-   "what": "H₂⁺ at 0.883 MV (two 0.441 MeV protons), IF the CN can provide it: 17.64 MeV M1 IPC, absolute rate, opening-angle shape and energy scale against Geant4 (~47 selected pairs per working day, 141 per day of beam). Without H₂⁺ these days are not requested",
+   "what": "H₂⁺ at 0.883 MV (two 0.441 MeV protons), IF the CN can provide it: 17.64 MeV M1 IPC, ~46 selected pairs in 8 h (rate to ~18 %), opening-angle shape and energy scale. Otherwise this day is at 1.10 MeV",
    "beam": "on"
   },
   {
-   "day": "5–19",
+   "day": "3–7",
    "E_p": "1.10 MeV",
-   "what": "18.15 MeV region: IPC spectrum, X17 window (15 working days = 5 days of beam); γ-yield check each day",
+   "what": "18.15 MeV region: IPC spectrum, X17 window (40 h; 46 h with day 1 = 1.9 days of beam); γ-yield check each day",
    "beam": "on"
   },
   {
-   "day": "20",
+   "day": "8",
    "E_p": "1.10 MeV",
    "what": "Arms ADJACENT (90°): small-angle IPC and external conversions (~500 pairs in 8 h)",
    "beam": "on"
@@ -2968,7 +2968,7 @@
   {
    "day": "nights",
    "E_p": "—",
-   "what": "Every night and weekend without beam: cosmics with the full trigger in the physics geometry (~45 selected pairs per 16-hour night)",
+   "what": "Every night and the weekend without beam: cosmics with the full trigger in the physics geometry (~45 selected pairs per 16-hour night)",
    "beam": "off"
   }
  ],

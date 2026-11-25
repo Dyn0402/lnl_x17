@@ -72,7 +72,7 @@ PHASES = [
     # integration
     dict(ws="run", name="Full chain, 2 arms, cosmics", start="2027-06-15", end="2027-07-31", est=True),
     dict(ws="run", name="Ship + install at LNL, cosmic commissioning", start="2027-08-23", end="2027-09-17", est=True),
-    dict(ws="run", name="20 CN working days of beam (H2 2027)", start="2027-09-20", end="2027-10-15", est=True),
+    dict(ws="run", name="8 CN working days of beam (H2 2027)", start="2027-09-20", end="2027-09-30", est=True),
     dict(ws="run", name="First results note", start="2027-10-01", end="2027-11-30", est=True),
     # funding
     dict(ws="fund", name="INFN commission request (preventivi; dates: ask)", start="2027-06-01", end="2027-09-30", est=True),
@@ -188,7 +188,7 @@ TASKS = [
     dict(id="I2", ws="run", due="2027-09-17", who="all", status="todo",
          t="Ship, install, commission on cosmics at LNL: ≥ 3 nights with the arms VERTICAL (σ_t, μ segment angle, MIP gains, each cosmic veto), then roll to horizontal"),
     dict(id="I3", ws="run", due="2027-10-01", who="all", status="todo",
-         t="20 CN working days of beam (8 h each, assumed) + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"),
+         t="8 CN working days of beam (8 h each, assumed) + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"),
     # --- funding
     dict(id="F1", ws="fund", due="2026-12-15", who="Pierfrancesco", status="todo",
          t="Which commission and when are the requests due? (Pierfrancesco wrote 'commission II'; INFN preventivi are usually prepared in summer: ask)"),
@@ -368,8 +368,8 @@ BUDGET = [
 # Open questions, by who answers.
 QUESTIONS = [
     dict(who="Pierfrancesco", q="Spokesperson(s) and GLIMOS for the abstract page? (GLIMOS is normally local.)"),
-    dict(who="Pierfrancesco", q="CN instead of AN2000 (25 Nov): the proposal now asks 20 working days on the CN at 1 µA, 8 h of beam per working day (17 at 1.10 MeV + 3 with H₂⁺ for 441 keV, conditional). Is that how the CN works (hours per day, nights, weekends)? (slot1_feasibility/CN_BEAM.md)"),
-    dict(who="Pierfrancesco", q="Can the CN give more than 1 µA at 1.10 MeV? The beam sheet says 1 µA at 0.8–2 MeV; the CN paper's ~4 µA limit is set by neutrons, and ⁷Li(p,n) makes none below 1.88 MeV. 4 µA would bring 5 days of beam from 2.35 to ~1.1 × R(ATOMKI) (CN_BEAM.md §3)."),
+    dict(who="Pierfrancesco", q="CN instead of AN2000 (25 Nov): the proposal asks 8 working days on the CN at 1 µA (the 8-day allocation), 8 h of beam per working day: 7 at 1.10 MeV + 1 with H₂⁺ for 441 keV (else also 1.10 MeV). Is that how the CN works (hours per day, nights, weekends)? (slot1_feasibility/CN_BEAM.md)"),
+    dict(who="Pierfrancesco", q="Can the CN give more than 1 µA at 1.10 MeV? The beam sheet says 1 µA at 0.8–2 MeV; the CN paper's ~4 µA limit is set by neutrons, and ⁷Li(p,n) makes none below 1.88 MeV. With the 46 h at 1.10 MeV, 4 µA would bring the limit from 3.8 to 1.7 × R(ATOMKI) (CN_BEAM.md §3); nights would bring 3.8 to 2.35 ×."),
     dict(who="Pierfrancesco", q="Target for the proposal: pressed Li on Cu in the existing Cu hemisphere: confirm it fits the CN line end?"),
     dict(who="Pierfrancesco", q="Can the stand roll 90° about the beam? Plan (sim2arm): vertical pair for the cosmic nights before the beam, horizontal for the beam days."),
     dict(who="Pierfrancesco", q="Liquid scintillator: how many litres (~60 L?), which liquid, who remakes the cans and by when, how many PMTs? '4 cm in parallel or 2 cm in series': per arm or in total? Wider cells could replace the big plastics (LIQUID_CELLS.md)."),
@@ -379,7 +379,7 @@ QUESTIONS = [
     dict(who="Pierfrancesco", q="Is the H2-2027 window flexible to June–July, so that results exist before the funding requests?"),
     dict(who="Pierfrancesco", q="Author list: affiliations for Massimi, Mengoni, Gervino, Gustavino, Cosentino; anyone else (n_TOF, CEA, Torino)?"),
     dict(who="LNL Accelerator Division", q="A CN line (−15°, 0° or +15°, for the full current) ending in ~1.5 × 1.5 m of free floor; beam height; 1 µA at 1.10 MeV on a ~5 mm spot?"),
-    dict(who="LNL Accelerator Division", q="CN hours: how many hours of beam per working day (the proposal assumes 8)? Nights or weekends with authorisation? A four-week block at ~1 MV (column shorted)?"),
+    dict(who="LNL Accelerator Division", q="CN hours: how many hours of beam per working day (the proposal assumes 8)? Nights or weekends with authorisation (8 × 24 h would give 5 days of beam at 1.10 MeV, as in the AN2000 plan)?"),
     dict(who="LNL Accelerator Division", q="H₂⁺ from the CN source at 0.883 MV (two 0.441 MeV protons), up to 0.5 µA? How much D⁺ comes with it (same mass, makes neutrons in ⁷Li(d,n))? The 441 keV calibration depends on it; the proposal does not."),
     dict(who="Pierfrancesco", q="The call allocates 20 Feb – 30 Jul 2027 (the call page says 2026, a typo). We ask for the second half of 2027: say 'from July', or ask to be scheduled in the next period?"),
     dict(who="Pierfrancesco", q="Body length: the template says 4 pages, the LNL submission page says 5. The draft keeps to 4: is that what people do?"),
@@ -398,9 +398,9 @@ RISKS = [
     dict(r="Too few digitizer channels", l="low", i="med",
          m="Two arms need ~24, PM can find 10–20; CAEN loan; ganged walls keep it at 8 per wall."),
     dict(r="No H₂⁺ beam on the CN, so no 441 keV calibration", l="med", i="med",
-         m="The request is 17 working days at 1.10 MeV without it (the 3 H₂⁺ days are conditional). The energy scale then comes from the 18.15 MeV pairs; the run loses its transition without an expected anomaly."),
+         m="Without it the H₂⁺ day is also at 1.10 MeV (the request stays 8 working days). The energy scale then comes from the 18.15 MeV pairs; the run loses its transition without an expected anomaly."),
     dict(r="CN gives fewer beam hours than assumed (8 h per working day) or a shorter block", l="med", i="high",
-         m="Every per-day number is per 24 h of beam; the reach scales as the square root of the hours. Ask the hours now (P2); nights are cosmic data in any case."),
+         m="With 8 working days of 8 h the run has 46 h at 1.10 MeV: 3.8 × R(ATOMKI) (2.35 × with 24 h days). The reach scales as the square root of the hours. Ask for night running (P2); nights are cosmic data in any case."),
     dict(r="The built Cu hemisphere limits the physics reach", l="high", i="high",
          m="Simulated (sim2arm, 20 Nov, run L18): with the hemisphere's 300 µm wall five days give 2.4 × R(ATOMKI) (liquid working), about MEG II's limit; an ATOMKI-size signal shows at ~0.5σ. A lighter Al end piece (Al ogive + Cu liner) gives 0.9–1.2 × (Geant4, R10, 25 Nov), about the ATOMKI ratio. Ask PF whether one can be made (T1); otherwise sell the run as the feasibility test it is."),
     dict(r="Cosmic veto weaker than simulated (σ_t > 0.4 ns, segments worse than 3°)", l="med", i="med",

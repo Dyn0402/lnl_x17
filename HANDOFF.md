@@ -2,6 +2,14 @@
 
 ## The CN instead of AN2000 — updated 2026-11-25 (dylan-MS-7C84)
 
+**Later the same day: the allocation is 8 days in total (Dylan).** Reworked to 8 working days (8 h of beam each, assumed):
+day 1 scan + 1.10 MeV, day 2 H₂⁺ for 441 keV (else 1.10 MeV), days 3–7 at 1.10 MeV, day 8 arms at 90°. That is 46 h at
+1.10 MeV: expected limit 3.8 / 5.0 / 7.0 × R(ATOMKI) (liquid working / as at n_TOF / none), 1.4–1.9 × with the Al holder;
+130 beam + 130 cosmic pairs (rate to 12 %); 441 keV: 46 + 23 pairs in 8 h (18 %). Night running would give back the
+2.35 ×; 4 µA on working hours gives 1.7 ×. Fig. 2 (8 h, 46 h) and Fig. 3 ("requested" at 1.9 d) use `H441`, `H110` in
+`make_figures.py`; `two_arm_estimates.py` DAYS_ON_RES stays 5 (the csv columns `*_5d` keep their meaning). The text below
+about 20 working days is superseded.
+
 **Resume:** Dylan asks Pierfrancesco the CN questions (P2; `planning/plan.py` QUESTIONS, `slot1_feasibility/CN_BEAM.md` §6).
 The proposal (`proposal/latex/`, pushed to Overleaf) now asks for the CN. Change it again when the answers come.
 

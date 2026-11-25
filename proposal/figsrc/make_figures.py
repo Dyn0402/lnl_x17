@@ -58,6 +58,11 @@ def tag(ax, s, x=0.0, y=1.03):
     ax.text(x, y, s, transform=ax.transAxes, ha="left", va="bottom", fontsize=8, fontweight="bold")
 
 
+# The request (2026-11-25, slot1_feasibility/CN_BEAM.md): 8 CN working days, ~8 h of beam each.  Day 1 scan (~2 h) +
+# 6 h at 1.10 MeV, day 2 H2+ (441 keV), days 3-7 at 1.10 MeV, day 8 arms at 90 deg: 46 h at 1.10 MeV with the opposite arms.
+H441, H110 = 8.0, 46.0
+REQ_DAYS = H110 / 24.0
+
 # --------------------------------------------------------------------------------------------------------- Fig. 1c
 def fig_event():
     ev = json.load(open(SIM / "events3d.json"))
@@ -248,9 +253,10 @@ def fig_predictions():
         print(f"{title}: IPC {ipc.sum():.0f} (M1 {h['M1'].sum():.0f}, E1 {h['E1'].sum():.0f}, 15 MeV {h['g1'].sum():.0f}), EPC {h['epc'].sum():.0f}, cosmics {h['cos'].sum():.0f}, "
               f"X17 {h['sig'].sum():.1f} in {days} d")
 
-    stack(axs[1], 441.0, 1, r"(b) $E_p$ = 441 keV (H$_2^+$), one day of beam", 0)
-    r_lim = float(next(r for r in reach_rows() if r["target"].startswith("Cu") and r["energy_stack"] == "+ liquid working")["r90_over_atomki"])
-    stack(axs[2], 1100.0, 5, r"(c) $E_p$ = 1.10 MeV, five days of beam", r_lim)
+    stack(axs[1], 441.0, H441 / 24, r"(b) $E_p$ = 441 keV (H$_2^+$), 8 hours of beam", 0)
+    d_fix = float(next(r for r in reach_rows() if r["target"].startswith("Cu") and r["energy_stack"] == "+ liquid working")["d2_c"])
+    r_lim = E.r90(d_fix, REQ_DAYS) / E.R_ATOMKI
+    stack(axs[2], 1100.0, REQ_DAYS, rf"(c) $E_p$ = 1.10 MeV, {H110:.0f} hours of beam", r_lim)
     fig.savefig(FIG / "fig_predictions.pdf")
     fig.savefig(FIG / "fig_predictions.png", dpi=200)
     plt.close(fig)
@@ -289,8 +295,8 @@ def fig_reach():
     ax.axhline(E.R_MEG2_90 / U, color=INK, lw=0.8, ls=":")
     ax.text(9.9, E.R_MEG2_90 / U * 1.04, "MEG II, 90 % CL", ha="right", va="bottom", fontsize=7,
             bbox=dict(fc="white", ec="none", pad=0.4, alpha=0.8))
-    ax.axvline(E.DAYS_ON_RES, color=GRID, lw=0.8, zorder=0)
-    ax.text(E.DAYS_ON_RES + 0.12, 0.345, "requested", fontsize=7, color=MUTED, va="bottom")
+    ax.axvline(REQ_DAYS, color=GRID, lw=0.8, zorder=0)
+    ax.text(REQ_DAYS + 0.12, 0.345, "requested", fontsize=7, color=MUTED, va="bottom")
     ax.set_yscale("log")
     ax.set_ylim(0.33, 14)
     ax.set_yticks([0.5, 1, 2, 5, 10])

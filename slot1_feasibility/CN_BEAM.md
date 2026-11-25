@@ -3,7 +3,8 @@
 Written 2026-11-25. Dylan learned that the AN2000 beam is probably not available, so the proposal now asks for the CN.
 This note says what the change does to the request, the calibration and the reach. It also records the choices made
 for the proposal text (Dylan, 25 Nov): assume 1 µA, assume beam on working hours only, and request the 441 keV point
-with an H₂⁺ beam without making the proposal depend on it.
+with an H₂⁺ beam without making the proposal depend on it. Later the same day (Dylan): **the allocation is 8 days in
+total**, so the request is 8 working days, not the 20 of the first version of this note.
 
 Sources: the LNL beam sheet (`x17_facility_search/lnl/refs/LNL_Beams_AN2000_CN.txt`), the 2026 CN paper
 (arXiv:2605.12005, same folder), `x17_facility_search/lnl/FACILITY.md`, and the two-arm fits of `sim2arm/` (new tags
@@ -13,17 +14,20 @@ Sources: the LNL beam sheet (`x17_facility_search/lnl/refs/LNL_Beams_AN2000_CN.t
 
 1. **The 441 keV calibration is not necessarily lost.** The CN cannot run below 0.8 MV, so it cannot accelerate protons
    to 441 keV. However, an H₂⁺ ion accelerated through 0.883 MV breaks up in the target into two protons of 0.441 MeV
-   each. The CN beam sheet does not list H₂⁺, so we ask for it. The proposal requests 3 working days of H₂⁺ and says that
-   without it the request is the 17 days at 1.10 MeV alone.
+   each. The CN beam sheet does not list H₂⁺, so we ask for it. The proposal requests one working day of H₂⁺ and says that
+   without it this day is also at 1.10 MeV.
 2. **More current is not documented.** The CN beam sheet gives up to 1 µA at 0.8–2 MeV, the same as AN2000. The ~4 µA of
    the CN paper is the authorised limit of the machine, and that limit is set by neutrons. Since ⁷Li(p,n) makes no
    neutrons below 1.88 MeV, 4 µA at 1.10 MeV is a reasonable thing to ask for, but not to assume.
 3. **If we got 4 µA, the reach would improve almost as if we had four times the beam time.** The fit gives
-   1.08 × R(ATOMKI) after 5 days of beam with the built Cu hemisphere (2.35 × at 1 µA). This is half of the MEG II limit.
-   With the lighter Al holder it gives 0.42 × R(ATOMKI).
-4. **The CN runs on working days, mainly in the daytime.** We assume 8 hours of beam per working day. To keep the
-   5 days of beam (120 h) at 1.10 MeV that every reach number uses, the request becomes **20 working days** (four weeks)
-   instead of 8 days. This is larger than a typical CN allocation (~10 days, of which ~7 for data, CN paper).
+   1.08 × R(ATOMKI) after 5 days of beam with the built Cu hemisphere (2.35 × at 1 µA). For the 8-day run (46 h at
+   1.10 MeV) it gives 1.7 × R(ATOMKI), against 3.8 × at 1 µA, which is below the MEG II limit (2.07 ×).
+4. **The CN runs on working days, mainly in the daytime, and we have 8 days.** We assume 8 hours of beam per working day,
+   so the run has 64 hours of beam, of which 46 at 1.10 MeV with the arms opposite (§4). That is about two days of beam
+   instead of the five of the AN2000 plan. The expected limit with the existing holder therefore goes from 2.35 to
+   **3.8 × R(ATOMKI)**, and with the lighter holder from 0.88 to 1.4 ×. The run stays a feasibility test: it measures
+   the rates, the backgrounds and the cosmic rejection, which do not need the full statistics. Night running would give
+   back the five days of beam, so it is the first thing to ask for.
 5. **The nights become an asset.** Every night without beam the arms record cosmic rays in the geometry of the beam days,
    about 45 selected cosmic pairs per 16-hour night. This is twice the cosmic exposure of the beam hours.
 
@@ -123,30 +127,49 @@ the hemisphere, 6 % for the Al ogive, with the liquid cells working). A hand sca
 ### 3.3 Combined with working hours
 
 At 8 hours of beam per working day, 4 µA gives 32 µA·h per working day, against 24 µA·h for a 24-hour day at 1 µA. So
-4 µA on working hours would recover more than the beam lost to the night.
+4 µA on working hours would recover more than the beam lost to the night. For the 8-day run (46 h at 1.10 MeV, central
+fit at 4 µA: 31.9 days to 3σ) the expected limit would be 1.7 × R(ATOMKI) with the built hemisphere, and about 0.7 ×
+with the Al ogive (4.8 days to 3σ).
 
-## 4. Working hours and the request
+## 4. Working hours and the request: 8 working days
 
-The proposal assumes 8 hours of beam per working day (ask). One day of beam (24 h) therefore takes three working days.
+The allocation is 8 days (Dylan, 25 Nov). The proposal assumes 8 hours of beam per working day (ask). One day of beam
+(24 h) therefore takes three working days.
 
-| working days | E_p | what | days of beam |
+| working day | E_p | what | hours at 1.10 MeV (opposite arms) |
 |---|---|---|---|
-| 1 | 1.10 MeV | current scan | 1/3 |
-| 2–4 | 0.441 MeV (H₂⁺) | 17.64 MeV calibration, if H₂⁺ is available | 1 |
-| 5–19 | 1.10 MeV | 18.15 MeV region | 5 |
-| 20 | 1.10 MeV | arms at 90° (~500 pairs) | 1/3 |
+| 1 | 1.10 MeV | current scan (~2 h), then the 18.15 MeV region | 6 |
+| 2 | 0.441 MeV (H₂⁺) | 17.64 MeV calibration: 46 beam + 23 cosmic pairs, the rate to ~18 % | 0 (8 if no H₂⁺) |
+| 3–7 | 1.10 MeV | 18.15 MeV region | 40 |
+| 8 | 1.10 MeV | arms at 90° (~500 pairs): external conversions | 0 |
 | nights | — | cosmics, physics geometry, ~45 selected pairs per night | — |
 
-The total is 20 working days, or 17 without H₂⁺. If the Accelerator Division allows 24-hour running, the same programme
-fits in 8 calendar days, as before. With fewer hours per day, the limit gets worse as the square root of the hours
-(for example, 6 hours per day would turn 2.35 into 2.7 × R(ATOMKI)).
+The run has 46 hours at 1.10 MeV with the arms opposite (54 without H₂⁺). In 46 hours the simulation gives about 130
+selected pairs from the beam (80 E1, 35 external conversions, 16 M1) and 130 cosmic pairs, so the pair rate in the
+signal region is measured to about 12 %. An X17 at R(ATOMKI) would add 5 pairs.
+
+Expected 90 % CL limit (two arms, horizontal pair, 11 µm Li; R90 ∝ 1/√hours):
+
+| | 46 h (the request) | 54 h (no H₂⁺) | 120 h (24-hour days) |
+|---|---|---|---|
+| Cu hemisphere, liquid working | 3.8 × | 3.5 × | 2.35 × |
+| Cu hemisphere, liquid as at n_TOF | 5.0 × | 4.6 × | 3.1 × |
+| Cu hemisphere, no liquid | 7.0 × | 6.4 × | 4.3 × |
+| Al ogive + Cu liner, liquid working | 1.4 × | 1.3 × | 0.88 × |
+| Al ogive + Cu liner, as at n_TOF | 1.9 × | 1.8 × | 1.19 × |
+
+We considered dropping the day with the arms at 90° to gain 8 hours at 1.10 MeV (3.8 → 3.5 ×). We kept it, because the
+external conversions in the window rest on 2 simulated events (±70 %), and that day measures them at six times the rate
+of the opposite pair. For a feasibility test that measurement is worth more than a 10 % better limit.
 
 ## 5. What changed in the proposal (25 Nov)
 
-- Abstract page: "CN ACCELERATOR", the request in working days, and a beam table with protons at 1.10 MeV (17 days) and
-  H₂⁺ at 0.883 MV (3 days, marked conditional).
+- Abstract page: "CN ACCELERATOR", 8 working days, and a beam table with protons at 1.10 MeV (7 days) and H₂⁺ at
+  0.883 MV (1 day, else 1.10 MeV). Limits 3.8–7.0 × (1.4–1.9 × with the lighter holder) for the 46 h at 1.10 MeV.
 - Body: the CN in §I; "days of beam" defined in §II; the H₂⁺ route and the fall-back in measurement (2); Table I in
-  working days; the hours assumption and the cosmic nights in §III; the request as 20 working days. To stay on 4 pages,
+  working days; the hours assumption and the cosmic nights in §III; the request as 8 working days; Fig. 2(b) 8 h at
+  441 keV, Fig. 2(c) 46 h at 1.10 MeV, Fig. 3 "requested" at 1.9 days of beam; the numbers of (2), (3) and the
+  sensitivity paragraph for 8 h and 46 h. To stay on 4 pages,
   the figures are at 92 % width and the sentence on the 15 % efficiency loss is left to the Table I caption.
 - Fig. 2 and Fig. 3 labels say "days of beam".
 - `planning/plan.py` (questions, risks, P2, hardware line), `two_arm_estimates.py` BEAM_PLAN, the page.
@@ -154,10 +177,10 @@ fits in 8 calendar days, as before. With fewer hours per day, the limit gets wor
 ## 6. Questions (in `planning/plan.py`)
 
 For Pierfrancesco:
-1. Is 8 hours of beam per working day what the CN gives? Nights, weekends?
+1. Is 8 hours of beam per working day what the CN gives? Nights, weekends? (24-hour days: 3.8 → 2.35 × R(ATOMKI).)
 2. Can the CN give more than 1 µA at 1.10 MeV, given no neutrons below 1.88 MeV? (§3: 2.35 → 1.08 × R(ATOMKI).)
 3. Does the target holder fit a CN line end, and which line (−15°, 0°, +15°)?
 
 For the Accelerator Division:
 4. H₂⁺ at 0.883 MV, up to 0.5 µA, and its D⁺ content.
-5. A four-week block at ~1 MV (column shorted).
+5. Night running at ~1 MV for the 8 days (it would give back the five days of beam).
