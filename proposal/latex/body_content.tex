@@ -51,36 +51,36 @@ pair creation (IPC) pairs in the signal window~\cite{MEG26}.
 
 A measurement that settles the question therefore needs four things. The lepton directions must be measured. The
 rejection of cosmic rays must be strong, and it must be demonstrated with data. The angular response must be
-calibrated on a transition with no anomaly. Finally, the acceptance must be large. The MX17 apparatus was designed for
+calibrated on a transition with no anomaly. Finally, the acceptance must be large for adequate statistics. The MX17 apparatus was designed for
 these requirements, and it took data in 2026 at CERN n\_TOF, where it searches for \Xs{} in
-$^3$He$(n,e^+e^-)^4$He~\cite{Gus25}. We propose to test two of its arms with the AN2000 proton beam, as the first step
-towards a four-arm \Xs{} experiment at LNL. This measurement would be complementary to the scintillator-telescope
-spectrometer that took data on AN2000 in 2023--24~\cite{GS25}.
+$^3$He$(n,e^+e^-)^4$He~\cite{Gus25}. We propose to test two of its arms with the proton beam of the CN accelerator, as the first step
+towards a four-arm \Xs{} experiment at LNL. \todo{This measurement would be complementary to the scintillator-telescope
+spectrometer that took data on AN2000 in 2023--24~\cite{GS25}.}
 \todo{one sentence after talking to the LNL \Be{} group (T.~Marchi et al.)}
 
 \section{Proposed Experiment}
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig_predictions.pdf}
+\includegraphics[width=0.92\textwidth]{figures/fig_predictions.pdf}
 \caption{Geant4 predictions at 1~\si{\micro\ampere} with the existing target holder. (a) Cosmic-ray pairs per day as a
 function of the reconstructed opening angle, with the arms vertical, before and after the vetoes. The band marks
-125--$160^\circ$. (b) Selected pairs in one day at 441~keV, with the arms horizontal. The points are the expected total
-with its statistical error. (c) Selected pairs in five days at 1.10~MeV. The red line is an \Xs{} signal at the expected
+125--$160^\circ$. (b) Selected pairs in one day of beam at 441~keV (H$_2^+$ beam), with the arms horizontal. The points are the expected total
+with its statistical error. (c) Selected pairs in five days of beam at 1.10~MeV. The red line is an \Xs{} signal at the expected
 limit of this run. The external conversions are drawn with their shape before the energy cut, since too few simulated
 ones pass it.}
 \label{fig:pred}
 \end{figure}
 
 \textbf{Apparatus.} Figure~\ref{fig:setup}(a) shows the MX17 apparatus as it took data at n\_TOF in 2026. Each arm
-contains, going outward from the target, a Micromegas time projection chamber (TPC), a wall of plastic bars read out by
+contains, going outward from the target, a Micromegas time projection chamber (TPC), a wall of plastic scintillating bars read out by
 SiPMs, plastic scintillators read out by PMTs, and a liquid scintillator cell. The TPC has an active area of
-$40\times36$~cm$^2$ and a 3~cm drift gap, and it measures a segment of each track. On a cosmic-ray bench, the angular
-resolution of a single chamber is 0.8$^\circ$ and its efficiency is 91--93\,\%. The scintillators give the trigger, the
-time and the energy. Figure~\ref{fig:setup}(b) shows tracks measured at n\_TOF by two opposite arms. The tracks point
+$40\times36$~cm$^2$ and a 3~cm drift gap, and it measures a segment of each track with an angular resolution of around 1$^\circ$ and efficiency above 90\%.
+%. On a cosmic-ray bench, the angular resolution of a single chamber is 0.8$^\circ$ and its efficiency is 91--93\,\%. 
+The scintillators provide the trigger, the time and the energy. Figure~\ref{fig:setup}(b) shows tracks measured at n\_TOF by two opposite arms. The tracks point
 back to the target, which is what the opening-angle measurement and the cosmic-ray rejection require.
 
-For this study we bring the two best chambers, and we place the two arms on opposite sides of the beam, with the TPC
+For the proposed LNL beam time we bring the two best chambers, and we place the two arms on opposite sides of the beam, with the TPC
 faces at 20~cm from the target. Figure~\ref{fig:setup}(c) shows this set-up. The opening angle of a pair is the angle
 between its two hits in the TPCs, as seen from the target. Two opposite arms accept the \Xs{} pairs, which open at about
 $140^\circ$. The Micromegas are read out by the DREAM electronics of CEA Saclay, and the scintillators by about 24
@@ -98,7 +98,8 @@ for this run}
 \textbf{Measurements.} The run consists of a scan of the beam current (Section~III) and of three measurements.
 Figure~\ref{fig:pred} shows the Geant4 prediction for each measurement. A \emph{selected pair} has a track in both
 TPCs that points to the target, a time difference between the arms that is consistent with two leptons from the
-target, an energy sum of 13--19~MeV and an opening angle above $90^\circ$.
+target, an energy sum of 13--19~MeV and an opening angle above $90^\circ$. We count the beam time in \emph{days of beam}, where one day of beam is
+24 hours of beam on target.
 
 \emph{(1) Cosmic rays.} A muon that passes at a distance from the target crosses both arms, and it is reconstructed as
 a pair with an opening angle below $180^\circ$. Figure~\ref{fig:pred}(a) shows that 57\,\% of these coincidences fall at
@@ -109,19 +110,20 @@ target, and the muon reaches the second arm 2.3~ns after the first (the time-of-
 together with the energy-sum window. We will measure these numbers before the beam days, during at least three nights
 with the two arms stacked vertically, where the cosmic-ray rate is highest ($7\times10^4$ PAIR triggers per 10-hour
 night). About 1000 pairs should survive the selection in three nights, so the rejection is measured to about 3\,\%.
-The simulation reproduces the absolute cosmic-ray rate measured at n\_TOF only within a factor of 2.5, and these nights
-fix it. For the beam days the arms are horizontal, where the cosmic-ray trigger rate is 25 times lower.
+%The simulation reproduces the absolute cosmic-ray rate measured at n\_TOF only within a factor of 2.5, and these nights fix it.  % Not finished with n_TOF analysis yet, don't want to claim this.
+For the beam days the arms are horizontal, where the cosmic-ray trigger rate is 25 times lower.
 
 \emph{(2) Calibration at $E_p = 441$~keV.} This narrow resonance populates the 17.64~MeV state, which decays by an M1
-transition. ATOMKI saw no anomaly here, so the IPC pairs of this transition calibrate the apparatus. We set the beam
-energy just above the resonance, so that the protons reach it inside the film. Figure~\ref{fig:pred}(b) shows the
-expected spectrum after one day. It contains 141 pairs from the beam and 68 cosmic-ray pairs, so we measure the
-absolute pair rate to about 10\,\%. We also compare the opening-angle distribution with Geant4, and we fix the energy
-scale from the energy sum.
+transition. ATOMKI saw no anomaly here, so the IPC pairs of this transition calibrate the apparatus. The CN cannot
+accelerate protons to 441~keV, since its minimum voltage is 0.8~MV. However, an H$_2^+$ ion accelerated through 0.883~MV
+gives two protons of 0.441~MeV each, as in part of the MEG~II beam~\cite{MEG24}. Figure~\ref{fig:pred}(b) shows the expected spectrum after one day of beam. It contains 141 pairs from the beam and 68
+cosmic-ray pairs, so we measure the absolute pair rate to about 10\,\%. We also compare the opening-angle distribution
+with Geant4, and we fix the energy scale from the energy sum. \todo{H$_2^+$ on the CN: confirm} Without H$_2^+$, the
+energy scale comes from the 18.15~MeV pairs, and the run has no transition without an expected anomaly.
 
 \emph{(3) The 18.15~MeV region at $E_p = 1.10$~MeV.} ATOMKI also measured at this energy~\cite{Kra16}. The protons
 lose about 0.1~MeV in the film, so they cross the resonance at 1.03~MeV inside the film. Figure~\ref{fig:pred}(c) shows
-the expected spectrum after five days. It contains about 350 pairs from the beam and 340 cosmic-ray pairs, so we
+the expected spectrum after five days of beam. It contains about 350 pairs from the beam and 340 cosmic-ray pairs, so we
 measure the pair rate in the signal region to about 8\,\%. Most of the beam pairs are E1 pairs from direct proton
 capture (210) and external conversions, which are $\gamma$ rays that convert in the target holder (about 90, with a
 large uncertainty from the simulation statistics). The calibration at 441~keV does not test these two components, and
@@ -132,7 +134,8 @@ shape by a few per cent.
 \section{Rate Estimates and Beam Time Request}
 
 \begin{table}[b]
-\caption{Use of the beam time, and Geant4 estimates at 1~\si{\micro\ampere}. The track fractions include the chamber
+\caption{Use of the beam time, in working days with 8 hours of beam, and Geant4 estimates at 1~\si{\micro\ampere}
+(0.441~MeV: 1~\si{\micro\ampere} of protons). The track fractions include the chamber
 efficiency of 0.92. The pair rates assume fully efficient chambers and a live time of 95\,\%.}
 \label{tab:days}
 \centering\footnotesize
@@ -145,63 +148,60 @@ day & $E_p$ (MeV) & measurement & Geant4 estimate \\
 \hline
 nights before & beam off & \cellA{arms vertical: vetoes, time of flight} & \cellB{1.9~Hz of PAIR triggers, 84\,\% with two tracks} \\
 1 & 1.10 & \cellA{current scan: rates and live time} & \cellB{leg rate 67~Hz per arm, 71\,\% with a track} \\
-2 & 0.441 & \cellA{17.64~MeV calibration} & \cellB{leg rate 218~Hz per arm; 141 selected pairs per day} \\
-3--7 & 1.10 & \cellA{18.15~MeV region; $\gamma$-yield checks} & \cellB{selected pairs per day: 69 from the beam, 68 cosmic, 2.7 \Xs{} at \Ratk} \\
-8 & 1.10 & \cellA{arms at $90^\circ$: external conversions} & \cellB{about 1500 pairs per day (half a day)} \\
+2--4 & 0.441 & \cellA{17.64~MeV calibration (H$_2^+$)} & \cellB{leg rate 218~Hz per arm; 47 selected pairs per day} \\
+5--19 & 1.10 & \cellA{18.15~MeV region; $\gamma$-yield checks} & \cellB{per day: 23 beam, 23 cosmic, 0.9 \Xs{} at \Ratk} \\
+20 & 1.10 & \cellA{arms at $90^\circ$: external conversions} & \cellB{about 500 pairs} \\
 \hline\hline
 \end{tabular}
 \end{table}
 
-Table~\ref{tab:days} shows how the eight days are used, with the rate that the Geant4 simulation predicts for each
+Table~\ref{tab:days} shows how the 20 working days are used, with the rate that the Geant4 simulation predicts for each
 measurement. At 1~\si{\micro\ampere} the target emits $5.4\times10^{4}$ ground-state $\gamma$ rays (17.6--18.2~MeV) per
 second at 441~keV, and $8.5\times10^{3}$ per second at 1.10~MeV. On the first day we scan the beam current from 0.05 to
-1~\si{\micro\ampere}, and we measure the trigger rates, the live time and the occupancy of the Micromegas as a function
-of the current. A $\gamma$ detector monitors the $\gamma$ yield of the target, to which
-$R$ is normalised. \todo{LaBr$_3$ or NaI from the LNL pool} The estimates assume 24 hours of beam per day.
-\todo{confirm with the Accelerator Division}
+1~\si{\micro\ampere} and measure the trigger rates, the live time and the Micromegas occupancy. A $\gamma$ detector monitors the $\gamma$ yield of the target, to which
+$R$ is normalised. \todo{LaBr$_3$ or NaI from the LNL pool} The CN runs mainly in the daytime on working days, so
+we assume 8 hours of beam per working day, and one day of beam takes three working days. \todo{confirm} Every night the arms record cosmic rays in the
+geometry of the beam days (45 selected pairs per night).
 
 \begin{figure}[t]
 \centering
-\includegraphics[width=\textwidth]{figures/fig_reach.pdf}
-\caption{(a) Expected 90\,\% CL upper limit on $R$, in units of \Ratk{}, as a function of the days at 1.10~MeV, for three
+\includegraphics[width=0.92\textwidth]{figures/fig_reach.pdf}
+\caption{(a) Expected 90\,\% CL upper limit on $R$, in units of \Ratk{}, as a function of the days of beam at 1.10~MeV, for three
 responses of the liquid cells (Geant4). The bands show the uncertainty from the limited number of simulated background
 events. The dashed line is the simulation of a lighter aluminium holder. (b) Days needed for a $3\sigma$ test of
 \Ratk{}. The open circle is a scaling estimate.}
 \label{fig:reach}
 \end{figure}
 
-\textbf{Expected sensitivity.} Figure~\ref{fig:reach}(a) shows the expected limit on $R$ as a function of the days at
-1.10~MeV. With the existing target holder, the expected 90\,\% CL limit after five days is $2.35\times\Ratk$ if the
+\textbf{Expected sensitivity.} Figure~\ref{fig:reach}(a) shows the expected limit on $R$ as a function of the days of beam
+at 1.10~MeV. With the existing target holder, the expected 90\,\% CL limit after five days of beam (15 working days) is $2.35\times\Ratk$ if the
 liquid cells reach their design response. It is $3.1\times\Ratk$ if they respond as they did at n\_TOF, and
-$4.3\times\Ratk$ without them. The pair rates are 15\,\% lower with the chamber efficiency measured on the bench. The run therefore does not improve on the MEG~II limit. Its aim is to
+$4.3\times\Ratk$ without them. The run therefore does not improve on the MEG~II limit. Its aim is to
 replace the inputs of the simulation with data. Figure~\ref{fig:reach}(b) shows what depends on these inputs. A $3\sigma$ test of \Ratk{} needs about 150 days with this set-up. In the simulation it needs about 20 days
 with a lighter holder, and about 12 days with four arms. We estimate that it needs about a day with large plastic
-scintillators in addition, which absorb the full energy of the leptons. With a lighter holder, the five days of this
+scintillators in addition, which absorb the full energy of the leptons. With a lighter holder, the five days of beam of this
 run would give an expected limit of 0.9 to $1.2\times\Ratk$.
 
-\textbf{Beam time request.} We request \textbf{8 days of proton beam on AN2000}, as follows.
+\textbf{Beam time request.} We request \textbf{20 working days of beam on the CN} (four weeks, about 160 hours), in the second half of 2027, since both arms will be tested together on cosmic rays by June 2027.
 \begin{itemize}
-\item \textbf{Beam:} protons, continuous, up to 1~\si{\micro\ampere} on target (1.1~W), at 0.441~MeV (1 day) and
-1.10~MeV (7 days), with at most one energy change per day. The CN cannot provide the 441~keV beam (its minimum is
-0.8~MV). \todo{beam spot $\approx5$~mm at 1~\si{\micro\ampere}, not the $0^\circ$ line: confirm}
-\item \textbf{Target:} metallic lithium (natural, 92.4\,\% \Li{}, free of boron), 10--12~\si{\micro\metre} (about
-0.6~mg/cm$^2$), on a copper backing of 300~\si{\micro\metre} (the target holder).
+\item \textbf{Beam:} continuous, at most one energy change per day. Protons of 1.10~MeV, up to 1~\si{\micro\ampere} on
+target (1.1~W), for 17 working days. H$_2^+$ at 0.883~MV, up to 0.5~\si{\micro\ampere} (1~\si{\micro\ampere} of
+0.441~MeV protons), for 3 working days. Without H$_2^+$, we request only the 17 days at 1.10~MeV. \todo{line, spot, floor}
+\item \textbf{Target:} metallic lithium (natural, 92.4\,\% \Li{}, free of boron), 10--12~\si{\micro\metre} (0.6~mg/cm$^2$), on a copper backing of 300~\si{\micro\metre} (the target holder).
 \item \textbf{Experimental setup:} MX17, two arms, on about $1.5\times1.5$~m$^2$ of free floor around the end of the
-beam line. The installation and the cosmic-ray nights take about two weeks without beam. \todo{line and floor: confirm}
-\item \textbf{Beam time:} 8 days, in the second half of 2027, since both arms will be tested together on cosmic rays
-by June 2027.
+beam line. The installation and the cosmic-ray nights take about two weeks without beam.
 \end{itemize}
 
 \textbf{Readiness and safety.} One of the two chambers is ready, and the other
 needs a repair of its drift window, which is planned at CEA Saclay for spring 2027. The SiPM walls and the plastic
-scintillators exist, their PMTs are still to be borrowed, and the liquid cells (4~L each) will get new containers. Both beam energies are below the \Li$(p,n)$ threshold of 1.88~MeV, so the target produces no
+scintillators exist, their PMTs are still to be borrowed, and the liquid cells (4~L each) will get new containers. Both proton energies are below the \Li$(p,n)$ threshold of 1.88~MeV, so the target produces no
 neutrons. At 1.10~MeV the target also emits about $10^7$ $\gamma$ rays per second of 478~keV from \Li$(p,p'\gamma)$.
 They cannot make a leg. We estimate that they give a few kHz of singles in each Micromegas and a dose rate of about
 1~\si{\micro\sievert}/h at 1~m. The Micromegas use a premixed Ar/iC$_4$H$_{10}$ (95/5) gas at about 1~L/h. This mixture is flammable, and it
 is led to an exhaust. \todo{LNL rules}
 
 % Run-in reference list, to save space: \cite{key} prints [n] from the label ref:key (macros.tex).
-\vspace{2mm}\noindent\rule{0.3\textwidth}{0.4pt}\par\vspace{1mm}
+\vspace{0mm}\noindent\rule{0.3\textwidth}{0.4pt}\par\vspace{1mm}
 {\footnotesize\noindent
 \rref{Kra16}A.J.~Krasznahorkay \emph{et al.}, PRL \textbf{116}, 042501 (2016); PRC \textbf{104}, 044003 (2021); PRC \textbf{106}, L061601 (2022).\ \ 
 \rref{Anh24}Tran The Anh \emph{et al.}, Universe \textbf{10}, 168 (2024).\ \ 

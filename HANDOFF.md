@@ -1,5 +1,35 @@
 # Handoff
 
+## The CN instead of AN2000 — updated 2026-11-25 (dylan-MS-7C84)
+
+**Resume:** Dylan asks Pierfrancesco the CN questions (P2; `planning/plan.py` QUESTIONS, `slot1_feasibility/CN_BEAM.md` §6).
+The proposal (`proposal/latex/`, pushed to Overleaf) now asks for the CN. Change it again when the answers come.
+
+**Why:** Dylan learned that AN2000 is probably not available. Decided (Dylan): write the proposal for 1 µA and working
+hours only, and request the 441 keV point with H₂⁺ without making the proposal depend on it.
+
+**Done**
+- `slot1_feasibility/CN_BEAM.md`: the implications. 441 keV via H₂⁺ at 0.883 MV (two 0.441 MeV protons; the D⁺
+  admixture is a question); the CN's documented current at 0.8–2 MeV is 1 µA (the ~4 µA is the authorised limit, set by
+  neutrons); full current only on −15°/0°/+15°; working days, mainly daytime.
+- **Fits at 2 and 4 µA** (`sim2arm/run_cn.sh`; `two_arm_nd.py` now reads `TA_IUA`; tags `_cn{2,4}[al]li11`, raw csvs in
+  `sim2arm/out/two_arm_reach_cn*.csv`): built hemisphere, liquid working, 5 days of beam: 2.35 / 1.58 / 1.08 × R(ATOMKI)
+  at 1 / 2 / 4 µA (151 / 68 / 32 d to 3σ); Al ogive 0.88 / – / 0.42 × (21 / – / 4.8 d). Almost 1/I, since 91–94 % of the
+  background is beam-induced. No summarize.py run on these tags (central = geometric mean of direct and transplant).
+- **Proposal:** "CN ACCELERATOR"; 20 working days (8 h of beam each, assumed) = 1 scan + 3 H₂⁺ (conditional) + 15 at
+  1.10 MeV (= the 5 days of beam) + 1 adjacent; "days of beam" (24 h) defined in §II; Table I in working days; the cosmic
+  nights (45 selected pairs per night) as a plus. Body still 4 pages: figures at 92 % width, the "15 % lower with the bench
+  efficiency" sentence left to the Table I caption, todos shortened. Dylan's Overleaf edits of 25 Nov were taken first.
+- Fig. 2/3 labels "days of beam" (`make_figures.py`). plan.py (P2, questions, risks, the line hardware, phase),
+  `two_arm_estimates.py` BEAM_PLAN, README, PLAN.md banner, page; x17_facility_search FACILITY.md, lnl/README.md,
+  dashboard (EXTRA + LOG). Page and survey deployed (site 5192154).
+
+**Open**
+- The 8 h/working day is our guess from "mainly during daytime". With 24 h running the programme fits in 8 days again.
+- 20 working days is twice a typical CN allocation (~10 days, CN paper). If PF thinks that is too much, cut the 1.10 MeV
+  days; the limit goes as √hours.
+- If 4 µA is granted, the run sets a limit at about half of MEG II's: the motivation text would change.
+
 ## Proposal audited against the LNL call and rebuilt around figures — updated 2026-11-25 (dylan-MS-7C84)
 
 **Resume:** `proposal/latex/main.pdf` (1 abstract page + 4 body pages) is the draft for Dylan to proof-read; on Overleaf

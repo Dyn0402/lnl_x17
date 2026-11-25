@@ -1,5 +1,5 @@
 {
- "updated": "2026-11-24",
+ "updated": "2026-11-25",
  "deadline": "2026-12-10T23:59:00+01:00",
  "pac": [
   "2027-01-25",
@@ -194,9 +194,9 @@
   },
   {
    "ws": "run",
-   "name": "8 beam days (H2 2027)",
+   "name": "20 CN working days of beam (H2 2027)",
    "start": "2027-09-20",
-   "end": "2027-10-01",
+   "end": "2027-10-15",
    "est": true
   },
   {
@@ -289,7 +289,7 @@
    "due": "2026-11-20",
    "who": "Pierfrancesco",
    "status": "todo",
-   "t": "Informal contact with Anna Selva / the Accelerator Division: AN2000 vs CN, 0.441 + 1.10 MeV at 1 µA, line and floor space, H2 2027"
+   "t": "Informal contact with Anna Selva / the Accelerator Division: the CN (AN2000 probably not available, 25 Nov), 1.10 MeV at 1 µA and H₂⁺ at 0.883 MV, hours per working day, line and floor space, H2 2027"
   },
   {
    "id": "P3",
@@ -649,7 +649,7 @@
    "due": "2027-10-01",
    "who": "all",
    "status": "todo",
-   "t": "8 beam days + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"
+   "t": "20 CN working days of beam (8 h each, assumed) + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"
   },
   {
    "id": "F1",
@@ -1618,14 +1618,14 @@
     "T1"
    ],
    "note": "Already built, so the baseline (Dylan, 19 Nov): R 11 mm, 300 µm, Cu rim, on the grey flange (Geant4 dome300, runs L10 + L18). Not the Cu ogive of the 27 Oct sketch, which the 19 Nov two-arm numbers used by mistake. A flat Al end cap at 45° would be lighter.",
-   "detail": "Confirm it fits the AN2000 line end (question for Pierfrancesco).",
+   "detail": "Confirm it fits the CN line end (question for Pierfrancesco).",
    "cash": 0,
    "fallback": 0,
    "tier": ""
   },
   {
    "id": "line",
-   "part": "AN2000 beam line end + floor space",
+   "part": "CN beam line end + floor space",
    "qty": "~1.5 × 1.5 m",
    "grp": "Target & beam line",
    "status": "borrow",
@@ -1642,7 +1642,7 @@
     "L3"
    ],
    "note": "A line ending in ~1.5 × 1.5 m of open floor, beam height, cable path to the control room.",
-   "detail": "AN2000 is self-service; one energy change per day.",
+   "detail": "CN (25 Nov: AN2000 probably not available). Full current only on the small-angle lines (−15°, 0°, +15°); larger angles can drop to 30 %. Working days, mainly daytime.",
    "cash": 0,
    "fallback": 0,
    "tier": "",
@@ -1853,11 +1853,15 @@
   },
   {
    "who": "Pierfrancesco",
-   "q": "AN2000 or CN? The CN starts at 0.8 MV, so no 441 keV calibration there; AN2000 runs 0.2–2.0 MV self-service."
+   "q": "CN instead of AN2000 (25 Nov): the proposal now asks 20 working days on the CN at 1 µA, 8 h of beam per working day (17 at 1.10 MeV + 3 with H₂⁺ for 441 keV, conditional). Is that how the CN works (hours per day, nights, weekends)? (slot1_feasibility/CN_BEAM.md)"
   },
   {
    "who": "Pierfrancesco",
-   "q": "Target for the proposal: pressed Li on Cu in the existing Cu hemisphere: confirm it fits the AN2000 line end?"
+   "q": "Can the CN give more than 1 µA at 1.10 MeV? The beam sheet says 1 µA at 0.8–2 MeV; the CN paper's ~4 µA limit is set by neutrons, and ⁷Li(p,n) makes none below 1.88 MeV. 4 µA would bring 5 days of beam from 2.35 to ~1.1 × R(ATOMKI) (CN_BEAM.md §3)."
+  },
+  {
+   "who": "Pierfrancesco",
+   "q": "Target for the proposal: pressed Li on Cu in the existing Cu hemisphere: confirm it fits the CN line end?"
   },
   {
    "who": "Pierfrancesco",
@@ -1889,15 +1893,15 @@
   },
   {
    "who": "LNL Accelerator Division",
-   "q": "A line on AN2000 (or CN) ending in ~1.5 × 1.5 m of free floor; beam height; 1 µA at 0.441 and 1.10 MeV on that line?"
+   "q": "A CN line (−15°, 0° or +15°, for the full current) ending in ~1.5 × 1.5 m of free floor; beam height; 1 µA at 1.10 MeV on a ~5 mm spot?"
   },
   {
    "who": "LNL Accelerator Division",
-   "q": "Is a PAC 'day' 24 h? Night and weekend running with self-service AN2000?"
+   "q": "CN hours: how many hours of beam per working day (the proposal assumes 8)? Nights or weekends with authorisation? A four-week block at ~1 MV (column shorted)?"
   },
   {
    "who": "LNL Accelerator Division",
-   "q": "1 µA with which beam spot? The AN2000 table gives up to 1000 nA on all lines except 0° (20 nA), but 150 nA 'at small radius'. Every rate in the proposal assumes 1 µA on the ~5 mm Li spot."
+   "q": "H₂⁺ from the CN source at 0.883 MV (two 0.441 MeV protons), up to 0.5 µA? How much D⁺ comes with it (same mass, makes neutrons in ⁷Li(d,n))? The 441 keV calibration depends on it; the proposal does not."
   },
   {
    "who": "Pierfrancesco",
@@ -1948,10 +1952,16 @@
    "m": "Two arms need ~24, PM can find 10–20; CAEN loan; ganged walls keep it at 8 per wall."
   },
   {
-   "r": "AN2000 room occupied (LNL ⁸Be spectrometer) or no free line",
+   "r": "No H₂⁺ beam on the CN, so no 441 keV calibration",
+   "l": "med",
+   "i": "med",
+   "m": "The request is 17 working days at 1.10 MeV without it (the 3 H₂⁺ days are conditional). The energy scale then comes from the 18.15 MeV pairs; the run loses its transition without an expected anomaly."
+  },
+  {
+   "r": "CN gives fewer beam hours than assumed (8 h per working day) or a shorter block",
    "l": "med",
    "i": "high",
-   "m": "Talk to the Marchi group first; CN fallback (no 441 keV; 1.03–1.10 only)."
+   "m": "Every per-day number is per 24 h of beam; the reach scales as the square root of the hours. Ask the hours now (P2); nights are cosmic data in any case."
   },
   {
    "r": "The built Cu hemisphere limits the physics reach",
@@ -2928,7 +2938,7 @@
   {
    "day": "before",
    "E_p": "—",
-   "what": "Installation week, VERTICAL pair: ≥ 3 nights of cosmics with the full trigger. Measures the arm-to-arm time of flight (σ_t), each arm's MIP gain and the rejection of every cosmic veto, in the worst geometry",
+   "what": "Installation weeks, VERTICAL pair: ≥ 3 nights of cosmics with the full trigger. Measures the arm-to-arm time of flight (σ_t), each arm's MIP gain and the rejection of every cosmic veto, in the worst geometry",
    "beam": "off"
   },
   {
@@ -2938,51 +2948,27 @@
    "beam": "on"
   },
   {
-   "day": "2",
+   "day": "2–4",
    "E_p": "0.441 MeV",
-   "what": "Locate the 441 keV resonance (singles rate); 17.64 MeV M1 IPC: absolute rate, opening-angle shape and energy scale against Geant4 (~140 pairs/day above 90° in the E_sum window, built Cu hemisphere)",
+   "what": "H₂⁺ at 0.883 MV (two 0.441 MeV protons), IF the CN can provide it: 17.64 MeV M1 IPC, absolute rate, opening-angle shape and energy scale against Geant4 (~47 selected pairs per working day, 141 per day of beam). Without H₂⁺ these days are not requested",
    "beam": "on"
   },
   {
-   "day": "3",
+   "day": "5–19",
    "E_p": "1.10 MeV",
-   "what": "18.15 MeV region: IPC spectrum, X17 window",
+   "what": "18.15 MeV region: IPC spectrum, X17 window (15 working days = 5 days of beam); γ-yield check each day",
    "beam": "on"
   },
   {
-   "day": "4",
+   "day": "20",
    "E_p": "1.10 MeV",
-   "what": "18.15 MeV region (cont.)",
-   "beam": "on"
-  },
-  {
-   "day": "5",
-   "E_p": "1.10 MeV",
-   "what": "18.15 MeV region (cont.)",
-   "beam": "on"
-  },
-  {
-   "day": "6",
-   "E_p": "1.10 MeV",
-   "what": "18.15 MeV region (cont.)",
-   "beam": "on"
-  },
-  {
-   "day": "7",
-   "E_p": "1.10 MeV",
-   "what": "18.15 MeV region (cont.); end-of-run target check (γ yield vs day 1)",
-   "beam": "on"
-  },
-  {
-   "day": "8",
-   "E_p": "1.10 MeV",
-   "what": "Half a day with the arms ADJACENT (90°): small-angle IPC and external conversions at 6× the opposite-pair rate; then back to opposite, or contingency",
+   "what": "Arms ADJACENT (90°): small-angle IPC and external conversions (~500 pairs in 8 h)",
    "beam": "on"
   },
   {
    "day": "nights",
    "E_p": "—",
-   "what": "Any beam-off time: cosmics with the full trigger in the physics geometry",
+   "what": "Every night and weekend without beam: cosmics with the full trigger in the physics geometry (~45 selected pairs per 16-hour night)",
    "beam": "off"
   }
  ],

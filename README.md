@@ -2,7 +2,7 @@
 
 Started 2026-11-18. Two beam slots at LNL, on ⁷Li(p,e⁺e⁻)⁸Be with the n_TOF MX17 apparatus:
 
-1. **Slot 1, the feasibility study** (`slot1_feasibility/`): two opposite arms, ~8 days on AN2000 in H2 2027. Proposal to the
+1. **Slot 1, the feasibility study** (`slot1_feasibility/`): two opposite arms, 20 working days on the CN in H2 2027 (was ~8 days on AN2000 until 25 Nov). Proposal to the
    Jan 2027 PAC, **deadline 10 Dec 2026, 23:59 CET**.
 2. **Slot 2, the physics experiment** (`slot2_physics/`): four arms with big plastics, a later PAC.
 
@@ -13,6 +13,10 @@ and the page; it does not duplicate those studies.
 **Live page (unlisted):** <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>
 
 ## Read this first (2026-11-18, reach updated 2026-11-19)
+
+- **25 Nov: the CN, not AN2000** (AN2000 probably not available). The proposal asks 20 working days at 1 µA, assuming 8 h of
+  beam per working day: 1 scan + 3 with H₂⁺ at 0.883 MV for 441 keV (conditional) + 15 at 1.10 MeV (= the 5 days of beam of
+  every reach number) + 1 adjacent. Implications and the 2/4 µA fits: `slot1_feasibility/CN_BEAM.md`.
 
 - Pierfrancesco (18 Nov): ask for an **X17 feasibility study**, ~8 days, measure in H2 2027; he does the informal contact;
   co-proponents Massimi, Mengoni, Gervino, Gustavino, Cosentino (`correspondence/2026-11-18_mastinu_pac.md`).
@@ -26,7 +30,7 @@ and the page; it does not duplicate those studies.
   (~600 pairs/day, not 6–12k), ½ day adjacent for external conversions. Bring the liquid cells (×2–4 in days).
 - **Liquid cells in (PF, 20 Nov):** the proposal assumes two 45 × 45 × 2 cm cells in new cans (2.35 × R(ATOMKI) in 5 d with the built
   hemisphere, 4.3 × without). Thicker (4 cm, 2 + 2 in series) and wider cells from ~60 L: `slot1_feasibility/LIQUID_CELLS.md`, S6–S8.
-- AN2000, not CN: the CN starts at 0.8 MV, so no 441 keV calibration there.
+- ~~AN2000, not CN~~ (superseded 25 Nov): the CN starts at 0.8 MV; 441 keV only with an H₂⁺ beam (CN_BEAM.md §2).
 - Next: P1 (outline + questions to Pierfrancesco), P3 (INFN-AAI account), R5 (proposal text from sim2arm, Overleaf), draft v1 by 27 Nov.
 
 ## Map

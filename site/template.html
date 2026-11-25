@@ -204,7 +204,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
     <div>
       <p class="crumb"><a href="./">← Facility studies</a> · <a href="lnl.html">the LNL study</a> · <a href="budget.html">budget</a></p>
       <h1>LNL feasibility run: two MX17 arms on ⁷Li(p,e⁺e⁻)⁸Be</h1>
-      <p class="tagline">First beam slot at INFN Legnaro: an 8-day X17 feasibility study on AN2000 in H2 2027. The proposal goes to the
+      <p class="tagline">First beam slot at INFN Legnaro: an X17 feasibility study of 20 working days on the CN in H2 2027 (AN2000 probably not available, 25 Nov). The proposal goes to the
         PAC by <b>10 Dec 2026</b>. Updated <span id="upd"></span>.</p>
     </div>
     <button class="themebtn" id="themebtn" type="button">Theme</button>
@@ -220,7 +220,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
   <section class="pane" id="p-overview">
     <div class="card intro">
       <div>
-        <p class="lead">An <b>8-day X17 feasibility study</b> with <b>two MX17 arms</b> on AN2000 at LNL, H2 2027.
+        <p class="lead">An <b>X17 feasibility study of 20 working days</b> (8 h of beam each, ≈ 7 days of beam) with <b>two MX17 arms</b> on the CN at LNL, H2 2027.
           Proposal due <b>10 Dec 2026</b>.</p>
         <p class="small muted" style="margin:0">Background, the plan in a paragraph and the LNL call: <a href="#ov-details">at the bottom</a>.</p>
       </div>
@@ -260,7 +260,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
         <ul class="small" style="margin:0;padding-left:18px">
           <li><b>Why tracking.</b> The opening angle comes from hit positions and cosmic rays are rejected by their straight tracks: the
             two points at issue in the ATOMKI result (MEG II, 2026).</li>
-          <li><b>What 8 days deliver.</b> Rates and backgrounds on beam, a calibration on the 441 keV resonance (no anomaly there), and a
+          <li><b>What the run delivers.</b> Rates and backgrounds on beam, a calibration on the 441 keV resonance (no anomaly there; needs an H₂⁺ beam from the CN, conditional), and a
             first look at 18.15 MeV near the ATOMKI level. The results set the design of the four-arm experiment (slot 2).</li>
           <li><b>The document.</b> Official LNL template: a one-page abstract and a body of at most 4 pages. Red brackets mark open
             items; the page plan is in the <a href="#proposal" data-go="proposal">Proposal</a> tab.</li>
@@ -333,10 +333,10 @@ details summary { cursor: pointer; color: var(--ink-2); }
 
   <!-- BEAM & REACH -->
   <section class="pane" id="p-reach">
-    <h3 style="margin-top:0">The 8 days</h3>
+    <h3 style="margin-top:0">The 20 working days (CN, 8 h of beam each)</h3>
     <div class="days" id="days"></div>
     <div class="card" id="dayinfo" style="margin-top:10px"></div>
-    <h2>What 8 days can reach</h2>
+    <h2>What the run can reach (days of beam = 24 h of beam)</h2>
     <div class="controls">
       <label>Target <select id="r-tgt"></select></label>
       <label>Energy stack <select id="r-stack"></select></label>
@@ -388,7 +388,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
       <div class="card"><b>1 · The apparatus on a proton beam.</b> Trigger and singles rates vs current, DREAM live time, Micromegas occupancy,
         the Li target's behaviour. Everything the Geant4 reach assumes, measured.</div>
       <div class="card"><b>2 · A calibration at 441 keV.</b> The 17.64 MeV M1 pairs, where ATOMKI saw no anomaly: angular resolution,
-        acceptance and energy scale against Geant4. ~140 selected pairs a day above 90° with two arms and the Cu hemisphere: the rate to ~8 % in a day.</div>
+        acceptance and energy scale against Geant4. ~140 selected pairs per day of beam above 90° with two arms and the Cu hemisphere: the rate to ~10 % in one day of beam (3 working days). The CN starts at 0.8 MV, so this needs H₂⁺ at 0.883 MV (two 0.441 MeV protons): asked for, not relied on.</div>
       <div class="card"><b>3 · The backgrounds.</b> Cosmic nights with the arms vertical before the beam: the 140° cosmic peak MEG II pointed at,
         measured with and without each veto, and the arm-to-arm time of flight. Accidentals and external pairs with beam.</div>
       <div class="card"><b>4 · A first look at 18.15 MeV.</b> Five days at 1.10 MeV, two opposite arms, the built Cu hemisphere: an expected 90 % CL limit of
@@ -553,9 +553,9 @@ function overview() {
   const rl = D.reach.find(r => r.target.startsWith("Cu") && r.energy_stack.includes("working"));
   const rn = D.reach.find(r => r.target.startsWith("Cu") && r.energy_stack.includes("as at"));
   const fx = $("#facts"); fx.innerHTML = "";
-  [["Machine", "AN2000, 0.2–2.0 MV (CN as fallback, no 441 keV)"],
-   ["Beam", "protons, 0.441 and 1.10 MeV, ≤ 1 µA, continuous"],
-   ["Beam days", "8: 1 set-up · 1 at 441 keV · 5 at 1.10 MeV · ½ adjacent + contingency; cosmic nights before the beam"],
+  [["Machine", "CN, 0.8–5.5 MV (AN2000 probably not available, 25 Nov)"],
+   ["Beam", "protons 1.10 MeV ≤ 1 µA; H₂⁺ 0.883 MV ≤ 0.5 µA (0.441 MeV protons, if available); continuous"],
+   ["Beam days", "20 working days (8 h of beam each, assumed): 1 scan · 3 at 441 keV (H₂⁺, conditional) · 15 at 1.10 MeV · 1 adjacent; cosmic nights before and between"],
    ["Set-up", "2 of the 4 MX17 arms (A ready, B after a drift-window repair), ~24 scintillator channels"],
    ["When", "second half of 2027 (our plan, not an allocation)"],
    ["Expected reach", (rl ? rl.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL in 5 days with two 2 cm liquid cells in new cans" + (rn ? `, ${rn.r90_over_atomki} × with the liquid as at n_TOF` : "") + (rm ? `, ${rm.r90_over_atomki} × without it` : "") + " (Geant4, two arms, horizontal pair, built Cu hemisphere, " + (rl ? rl.film.replace(/ \(.*\)/, "") : "") + "). An ATOMKI-size signal would show at " + (rl ? rl.z_in_5d : "–") + "σ. MEG II: 2.07 ×. A lighter Al end piece: 0.9–1.2 × (Geant4, R10)"],
@@ -567,7 +567,7 @@ function overview() {
   });
   const dc = $("#decisions"); dc.innerHTML = "";
   const DEC = [
-    ["Machine", "AN2000 (441 keV calibration possible) or CN (≥ 0.8 MV, no 441)."],
+    ["Machine", "25 Nov: the CN (AN2000 probably not available). Assumed 1 µA and 8 h of beam per working day; ask PF the hours, H₂⁺ for 441 keV, and >1 µA (4 µA: 2.35 → 1.08 × R(ATOMKI), CN_BEAM.md)."],
     ["Spokesperson & GLIMOS", "Needed on the abstract page."],
     ["Target & holder", "Pressed Li on Cu, 10–12 µm, in the Cu hemisphere (already built: most likely). Confirm with Pierfrancesco."],
     ["Liquid cells", "Decided 20 Nov: two 45 × 45 × 2 cm cells in new cans (the liquid exists, PF). Without them ×3.4 in days. Open: thicker (4 cm, or 2 + 2 in series) and wider cells that could replace the big plastics, from ~60 L (S6–S8)."],
@@ -750,7 +750,7 @@ function setupInfo() {
 // HARDWARE.place lists the keys an item occupies. [key, kind, geometry, label, label x, label y]
 const PLACES = [
   ["stand", "rect", [118, 40, 250, 320], "two-arm stand", 124, 378],
-  ["beamline", "line", "M14 200 H190", "AN2000 beam line", 16, 190],
+  ["beamline", "line", "M14 200 H190", "CN beam line", 16, 190],
   ["ls", "rect", [140, 52, 170, 28], "liquid cell, 2 cm", 0, 0], ["ls", "rect", [140, 320, 170, 28], "", 0, 0],
   ["plast", "rect", [165, 86, 120, 20], "plastics + PMTs", 0, 0], ["plast", "rect", [165, 294, 120, 20], "", 0, 0],
   ["walls", "rect", [140, 112, 170, 20], "SiPM wall", 0, 0], ["walls", "rect", [140, 268, 170, 20], "", 0, 0],

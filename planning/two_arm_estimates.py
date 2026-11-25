@@ -55,23 +55,22 @@ FOUR_ARM = {
     ("Al ogive + Cu liner (lighter)", "fix"): (4.5, 3.6, 5.5),
 }
 
-# The 8-day request (2026-11-19, sim2arm/TWO_ARM_STUDY.md §7). The cosmic veto test runs before the beam.
+# The request (2026-11-25, slot1_feasibility/CN_BEAM.md): 20 working days on the CN, 1 µA, ~8 h of beam per working day
+# (assumed; ask), so 3 working days = one day of beam (24 h).  The 441 keV days need H2+ at 0.883 MV (conditional).
+# Until 25 Nov: 8 days of 24 h on AN2000 (sim2arm/TWO_ARM_STUDY.md section 7).
 BEAM_PLAN = [
     # (day, E_p, what, beam)
-    ("before", "—", "Installation week, VERTICAL pair: ≥ 3 nights of cosmics with the full trigger. Measures the arm-to-arm "
+    ("before", "—", "Installation weeks, VERTICAL pair: ≥ 3 nights of cosmics with the full trigger. Measures the arm-to-arm "
                     "time of flight (σ_t), each arm's MIP gain and the rejection of every cosmic veto, in the worst geometry", "off"),
     ("1", "1.10 MeV", "Roll to the HORIZONTAL pair. Beam on target at low current; target conditioning; current scan 0.05 → 1 µA: "
                       "trigger rates, DREAM live time, Micromegas occupancy, SiPM/plastic singles; γ-yield reference", "on"),
-    ("2", "0.441 MeV", "Locate the 441 keV resonance (singles rate); 17.64 MeV M1 IPC: absolute rate, opening-angle "
-                       "shape and energy scale against Geant4 (~140 pairs/day above 90° in the E_sum window, built Cu hemisphere)", "on"),
-    ("3", "1.10 MeV", "18.15 MeV region: IPC spectrum, X17 window", "on"),
-    ("4", "1.10 MeV", "18.15 MeV region (cont.)", "on"),
-    ("5", "1.10 MeV", "18.15 MeV region (cont.)", "on"),
-    ("6", "1.10 MeV", "18.15 MeV region (cont.)", "on"),
-    ("7", "1.10 MeV", "18.15 MeV region (cont.); end-of-run target check (γ yield vs day 1)", "on"),
-    ("8", "1.10 MeV", "Half a day with the arms ADJACENT (90°): small-angle IPC and external conversions at 6× the "
-                      "opposite-pair rate; then back to opposite, or contingency", "on"),
-    ("nights", "—", "Any beam-off time: cosmics with the full trigger in the physics geometry", "off"),
+    ("2–4", "0.441 MeV", "H₂⁺ at 0.883 MV (two 0.441 MeV protons), IF the CN can provide it: 17.64 MeV M1 IPC, absolute rate, "
+                         "opening-angle shape and energy scale against Geant4 (~47 selected pairs per working day, 141 per day of "
+                         "beam). Without H₂⁺ these days are not requested", "on"),
+    ("5–19", "1.10 MeV", "18.15 MeV region: IPC spectrum, X17 window (15 working days = 5 days of beam); γ-yield check each day", "on"),
+    ("20", "1.10 MeV", "Arms ADJACENT (90°): small-angle IPC and external conversions (~500 pairs in 8 h)", "on"),
+    ("nights", "—", "Every night and weekend without beam: cosmics with the full trigger in the physics geometry "
+                    "(~45 selected pairs per 16-hour night)", "off"),
 ]
 DAYS_ON_RES = 5.0          # days 3-7 at 1.10 MeV
 LIVE = 0.95                # inside the fit numbers

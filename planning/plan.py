@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 OUT.mkdir(exist_ok=True)
 
-UPDATED = "2026-11-24"
+UPDATED = "2026-11-25"
 DEADLINE = "2026-12-10T23:59:00+01:00"   # PAC proposal deadline, CET
 PAC = ("2027-01-25", "2027-01-29")
 
@@ -72,7 +72,7 @@ PHASES = [
     # integration
     dict(ws="run", name="Full chain, 2 arms, cosmics", start="2027-06-15", end="2027-07-31", est=True),
     dict(ws="run", name="Ship + install at LNL, cosmic commissioning", start="2027-08-23", end="2027-09-17", est=True),
-    dict(ws="run", name="8 beam days (H2 2027)", start="2027-09-20", end="2027-10-01", est=True),
+    dict(ws="run", name="20 CN working days of beam (H2 2027)", start="2027-09-20", end="2027-10-15", est=True),
     dict(ws="run", name="First results note", start="2027-10-01", end="2027-11-30", est=True),
     # funding
     dict(ws="fund", name="INFN commission request (preventivi; dates: ask)", start="2027-06-01", end="2027-09-30", est=True),
@@ -98,7 +98,7 @@ TASKS = [
     dict(id="P1", ws="prop", due="2026-11-20", who="Dylan", status="active",
          t="Send Pierfrancesco the outline, the two-arm numbers and the questions (spokesperson, GLIMOS, author list)"),
     dict(id="P2", ws="prop", due="2026-11-20", who="Pierfrancesco", status="todo",
-         t="Informal contact with Anna Selva / the Accelerator Division: AN2000 vs CN, 0.441 + 1.10 MeV at 1 µA, line and floor space, H2 2027"),
+         t="Informal contact with Anna Selva / the Accelerator Division: the CN (AN2000 probably not available, 25 Nov), 1.10 MeV at 1 µA and H₂⁺ at 0.883 MV, hours per working day, line and floor space, H2 2027"),
     dict(id="P3", ws="prop", due="2026-11-23", who="Dylan", status="todo",
          t="Get the INFN-AAI account + 'Risorse IT' (needed to submit on Indico)"),
     dict(id="P3b", ws="prop", due="2026-11-18", who="Dylan", status="done",
@@ -188,7 +188,7 @@ TASKS = [
     dict(id="I2", ws="run", due="2027-09-17", who="all", status="todo",
          t="Ship, install, commission on cosmics at LNL: ≥ 3 nights with the arms VERTICAL (σ_t, μ segment angle, MIP gains, each cosmic veto), then roll to horizontal"),
     dict(id="I3", ws="run", due="2027-10-01", who="all", status="todo",
-         t="8 beam days + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"),
+         t="20 CN working days of beam (8 h each, assumed) + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"),
     # --- funding
     dict(id="F1", ws="fund", due="2026-12-15", who="Pierfrancesco", status="todo",
          t="Which commission and when are the requests due? (Pierfrancesco wrote 'commission II'; INFN preventivi are usually prepared in summer: ask)"),
@@ -316,10 +316,10 @@ HARDWARE = [
     dict(id="holder", part="Cu hemisphere target holder", qty="1", grp="Target & beam line", status="ready", org="INFN / LNL", src="LNL (already built)",
          who="Pierfrancesco", state="in hand", need="2027-08-31", inv=["cu_hemi"], place=["target"], tasks=["T1"],
          note="Already built, so the baseline (Dylan, 19 Nov): R 11 mm, 300 µm, Cu rim, on the grey flange (Geant4 dome300, runs L10 + L18). Not the Cu ogive of the 27 Oct sketch, which the 19 Nov two-arm numbers used by mistake. A flat Al end cap at 45° would be lighter.",
-         detail="Confirm it fits the AN2000 line end (question for Pierfrancesco)."),
-    dict(id="line", part="AN2000 beam line end + floor space", qty="~1.5 × 1.5 m", grp="Target & beam line", status="borrow", org="INFN / LNL", src="LNL Accelerator Division",
+         detail="Confirm it fits the CN line end (question for Pierfrancesco)."),
+    dict(id="line", part="CN beam line end + floor space", qty="~1.5 × 1.5 m", grp="Target & beam line", status="borrow", org="INFN / LNL", src="LNL Accelerator Division",
          who="Pierfrancesco", state="to ask", need="2027-09-01", place=["beamline"], tasks=["P2", "L3"],
-         note="A line ending in ~1.5 × 1.5 m of open floor, beam height, cable path to the control room.", detail="AN2000 is self-service; one energy change per day."),
+         note="A line ending in ~1.5 × 1.5 m of open floor, beam height, cable path to the control room.", detail="CN (25 Nov: AN2000 probably not available). Full current only on the small-angle lines (−15°, 0°, +15°); larger angles can drop to 30 %. Working days, mainly daytime."),
     dict(id="stand", part="Two-arm stand", qty="1", grp="Target & beam line", status="decide", org="INFN / LNL", src="LNL mechanics (ask)",
          who="Pierfrancesco", state="to decide", need="2027-08-01", place=["stand"], tasks=["L3", "R3"],
          note="Two opposite arms, faces at ±204 mm from the beam axis. It should roll 90° about the beam: vertical for the cosmic nights, horizontal for the beam days (sim2arm, 19 Nov).",
@@ -368,8 +368,9 @@ BUDGET = [
 # Open questions, by who answers.
 QUESTIONS = [
     dict(who="Pierfrancesco", q="Spokesperson(s) and GLIMOS for the abstract page? (GLIMOS is normally local.)"),
-    dict(who="Pierfrancesco", q="AN2000 or CN? The CN starts at 0.8 MV, so no 441 keV calibration there; AN2000 runs 0.2–2.0 MV self-service."),
-    dict(who="Pierfrancesco", q="Target for the proposal: pressed Li on Cu in the existing Cu hemisphere: confirm it fits the AN2000 line end?"),
+    dict(who="Pierfrancesco", q="CN instead of AN2000 (25 Nov): the proposal now asks 20 working days on the CN at 1 µA, 8 h of beam per working day (17 at 1.10 MeV + 3 with H₂⁺ for 441 keV, conditional). Is that how the CN works (hours per day, nights, weekends)? (slot1_feasibility/CN_BEAM.md)"),
+    dict(who="Pierfrancesco", q="Can the CN give more than 1 µA at 1.10 MeV? The beam sheet says 1 µA at 0.8–2 MeV; the CN paper's ~4 µA limit is set by neutrons, and ⁷Li(p,n) makes none below 1.88 MeV. 4 µA would bring 5 days of beam from 2.35 to ~1.1 × R(ATOMKI) (CN_BEAM.md §3)."),
+    dict(who="Pierfrancesco", q="Target for the proposal: pressed Li on Cu in the existing Cu hemisphere: confirm it fits the CN line end?"),
     dict(who="Pierfrancesco", q="Can the stand roll 90° about the beam? Plan (sim2arm): vertical pair for the cosmic nights before the beam, horizontal for the beam days."),
     dict(who="Pierfrancesco", q="Liquid scintillator: how many litres (~60 L?), which liquid, who remakes the cans and by when, how many PMTs? '4 cm in parallel or 2 cm in series': per arm or in total? Wider cells could replace the big plastics (LIQUID_CELLS.md)."),
     dict(who="Pierfrancesco", q="The holder thesis: when would a student start, and could a lighter end piece exist before H2 2027?"),
@@ -377,9 +378,9 @@ QUESTIONS = [
     dict(who="Pierfrancesco", q="'Commission II': which INFN commission, and when must the request be in? Results before that date?"),
     dict(who="Pierfrancesco", q="Is the H2-2027 window flexible to June–July, so that results exist before the funding requests?"),
     dict(who="Pierfrancesco", q="Author list: affiliations for Massimi, Mengoni, Gervino, Gustavino, Cosentino; anyone else (n_TOF, CEA, Torino)?"),
-    dict(who="LNL Accelerator Division", q="A line on AN2000 (or CN) ending in ~1.5 × 1.5 m of free floor; beam height; 1 µA at 0.441 and 1.10 MeV on that line?"),
-    dict(who="LNL Accelerator Division", q="Is a PAC 'day' 24 h? Night and weekend running with self-service AN2000?"),
-    dict(who="LNL Accelerator Division", q="1 µA with which beam spot? The AN2000 table gives up to 1000 nA on all lines except 0° (20 nA), but 150 nA 'at small radius'. Every rate in the proposal assumes 1 µA on the ~5 mm Li spot."),
+    dict(who="LNL Accelerator Division", q="A CN line (−15°, 0° or +15°, for the full current) ending in ~1.5 × 1.5 m of free floor; beam height; 1 µA at 1.10 MeV on a ~5 mm spot?"),
+    dict(who="LNL Accelerator Division", q="CN hours: how many hours of beam per working day (the proposal assumes 8)? Nights or weekends with authorisation? A four-week block at ~1 MV (column shorted)?"),
+    dict(who="LNL Accelerator Division", q="H₂⁺ from the CN source at 0.883 MV (two 0.441 MeV protons), up to 0.5 µA? How much D⁺ comes with it (same mass, makes neutrons in ⁷Li(d,n))? The 441 keV calibration depends on it; the proposal does not."),
     dict(who="Pierfrancesco", q="The call allocates 20 Feb – 30 Jul 2027 (the call page says 2026, a typo). We ask for the second half of 2027: say 'from July', or ask to be scheduled in the next period?"),
     dict(who="Pierfrancesco", q="Body length: the template says 4 pages, the LNL submission page says 5. The draft keeps to 4: is that what people do?"),
     dict(who="LNL Accelerator Division", q="Flammable premix (Ar/iC₄H₁₀ 95/5) in the hall: rules, storage, exhaust."),
@@ -396,8 +397,10 @@ RISKS = [
          m="Ask now (M2); 4 FEUs is half the system; fix dates with CEA before the PAC talk."),
     dict(r="Too few digitizer channels", l="low", i="med",
          m="Two arms need ~24, PM can find 10–20; CAEN loan; ganged walls keep it at 8 per wall."),
-    dict(r="AN2000 room occupied (LNL ⁸Be spectrometer) or no free line", l="med", i="high",
-         m="Talk to the Marchi group first; CN fallback (no 441 keV; 1.03–1.10 only)."),
+    dict(r="No H₂⁺ beam on the CN, so no 441 keV calibration", l="med", i="med",
+         m="The request is 17 working days at 1.10 MeV without it (the 3 H₂⁺ days are conditional). The energy scale then comes from the 18.15 MeV pairs; the run loses its transition without an expected anomaly."),
+    dict(r="CN gives fewer beam hours than assumed (8 h per working day) or a shorter block", l="med", i="high",
+         m="Every per-day number is per 24 h of beam; the reach scales as the square root of the hours. Ask the hours now (P2); nights are cosmic data in any case."),
     dict(r="The built Cu hemisphere limits the physics reach", l="high", i="high",
          m="Simulated (sim2arm, 20 Nov, run L18): with the hemisphere's 300 µm wall five days give 2.4 × R(ATOMKI) (liquid working), about MEG II's limit; an ATOMKI-size signal shows at ~0.5σ. A lighter Al end piece (Al ogive + Cu liner) gives 0.9–1.2 × (Geant4, R10, 25 Nov), about the ATOMKI ratio. Ask PF whether one can be made (T1); otherwise sell the run as the feasibility test it is."),
     dict(r="Cosmic veto weaker than simulated (σ_t > 0.4 ns, segments worse than 3°)", l="med", i="med",

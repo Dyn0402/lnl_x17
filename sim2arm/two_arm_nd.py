@@ -140,6 +140,9 @@ RESPS = ['LNL calibrated', 'n_TOF as is', 'LNL calibrated, LS off']
 #: Li film areal density for the yields [µg/cm²]; None = the simulated 20 µm (1068).  The target review recommends
 #: 10-12 µm (LiOH conversion): LI_UG=587 is 11 µm (53.4 µg/cm² per µm); the Geant4 events stay those of the 20 µm run.
 LI_UG = float(os.environ['LI_UG']) if os.environ.get('LI_UG') else None
+#: beam current on target [µA] (2026-11-25, the CN question): every beam component and the accidentals scale with it, the
+#: cosmics do not.  Default 1 µA (the AN2000 sheet); TA_IUA=4 is the CN's authorised continuous limit (an ask at 1.1 MeV).
+I_UA = float(os.environ.get('TA_IUA', '1.0'))
 LEVELS = ['trigger', 'MM 15°', 'MM 15° point, μ 3°', 'MM 15° point, μ 3° + TOF 1 ns', 'MM 15° + TOF', 'MM 3°']
 
 
@@ -151,7 +154,7 @@ def task(args):
     an = N.analyses(ec)[SN.REF_AN]
     t0 = time.time()
     try:
-        ev = SN.collect(cfg, 'asb', 1100.0, resp, level=level, I_uA=1.0, live=SN.LIVE_S2,
+        ev = SN.collect(cfg, 'asb', 1100.0, resp, level=level, I_uA=I_UA, live=SN.LIVE_S2,
                         transplant=mc == 'transplant', li_ug=LI_UG)
         _, _, names, out = SN.templates(ev, an, SN.REF_STRUCT)
         d_raw = SN.days_from(out, names)
@@ -162,7 +165,7 @@ def task(args):
             cnt = SN.counting(ev, ec)
         except Exception:
             cnt = {}
-        r = dict(pair=pair, config=cfg, resp=resp, level=level, mc=mc, ecut=f'{ec[0]:g}-{ec[1]:g}', li_ug=LI_UG or 1068.0,
+        r = dict(pair=pair, config=cfg, resp=resp, level=level, mc=mc, ecut=f'{ec[0]:g}-{ec[1]:g}', li_ug=LI_UG or 1068.0, I_uA=I_UA,
                  days_floor1=d_fl, days_raw=d_raw, S_fitout=out['S'], B_fitout=out['B'], **mn, **rc,
                  **{f'cnt_{k}': v for k, v in cnt.items()}, g0_per_day=ev['meta']['g0_per_day'])
     except Exception as e:     # noqa: BLE001
@@ -188,7 +191,7 @@ def task_spectra(args):
     rows = []
     t0 = time.time()
     for elab, ec in (('win', SN.window('asb', resp)), ('none', (0.0, 60.0))):
-        ev = SN.collect(cfg, 'asb', ep, resp, level=level, I_uA=1.0, live=SN.LIVE_S2, erange=ec, li_ug=LI_UG)
+        ev = SN.collect(cfg, 'asb', ep, resp, level=level, I_uA=I_UA, live=SN.LIVE_S2, erange=ec, li_ug=LI_UG)
         th, E, w, comp = ev['v0']['th'], ev['v0']['E'], ev['w'], ev['comp']
         m0 = (E > ec[0]) & (E < ec[1])
         for c in np.unique(comp):
