@@ -155,10 +155,10 @@ outline to Pierfrancesco (20 Nov), INFN-AAI account (23 Nov), co-proponents (24 
 
 For our planning, not the proposal. Tiers (Dylan, 18 Nov 2026; new drift windows moved to the low tier 19 Nov; `plan.py` `TIERS`, `BUDGET`), central values.
 Updated 25 Nov 2026 with the loans below.
-- **Critical for the test, €9.1k**: repair of B's drift window €0.3k, gas premix + regulators + panel €3k, splitters and
-  LEMO↔BNC adapters €1.3k, new cans for the 2 liquid cells €1.5k, the CERN electronics-pool rental fee €1k (a guess), shipping €2k.
+- **Critical for the test, €7.8k**: repair of B's drift window €0.3k, gas premix + regulators + panel €3k, new cans for the 2
+  liquid cells €1.5k, the CERN electronics-pool rental fee €1k (a guess), shipping €2k. The cables, Ts and adapters come from n_TOF.
   B runs with its existing (noisier) Italian M1 cards.
-- **Low-budget upgrade, +€4.4k**: new aluminised-mylar drift windows for A and B €1.25k, low-permeation gas lines €0.4k, gas and environment sensors (slow control Tier 1) €2.5k, switched
+- **Low-budget upgrade, +€5.2k**: 50 Ω resistive splitters for the wall channels instead of Ts €0.8k, new aluminised-mylar drift windows for A and B €1.25k, low-permeation gas lines €0.4k, gas and environment sensors (slow control Tier 1) €2.5k, switched
   PDU (remote power switch) €0.3k.
 - **High-budget upgrade, +€8k** (toward the final measurement): 4 CERN M1 cards for B.
 
@@ -167,7 +167,8 @@ page's Hardware tab.
 - **n_TOF's LEMO cables and Ts: very likely**, if we return them. n_TOF has about 60 cables of 16 ns, 60 of 5 ns, 20 of 2 ns,
   20 of 1 ns, and about 30 LEMO Ts (Dylan's estimate). This agrees with the n_TOF set-up, which used ~150 LEMO connections
   for four arms (`nTof_x17_DAQ/n1081b/n1081b_module_map.py` and the budget item `splitters`). The two arms need about 110
-  cables and 20 Ts. For this reason the cables leave the critical line, which falls from €3.8k to €1.3k.
+  cables, 20 Ts and ~20 adapters. The Ts also split the wall channels, as at n_TOF. For this reason the €3.8k line for
+  splitters, cables and adapters leaves the critical tier; matched splitters become a low-budget upgrade.
 - **The NIM modules and the DREAM LV supply: hopefully rented from the CERN electronics pool** and taken to LNL. These are
   2 N1081B, the N93B dual timer, 3–4 linear FIFOs, a NIM bin and the Wiener PL512 that powered DREAM at n_TOF. The fee,
   and whether the pool lets modules leave CERN, are questions to the pool.
@@ -175,8 +176,8 @@ page's Hardware tab.
   and the DREAM core (1 TCM, 1 network card, 1 large NIM module) are kept for us. The FEUs and their cables went back into
   CEA's common pool, so we must ask for 4 FEUs and 32 cables.
 
-Only if a loan falls through (+€61k in all): a V1742 €9.5k, 2 N1081B €14k, 3 linear FIFOs €6.9k, a NIM bin €5.1k, a VME
-crate €4.8k, an N93B €2.7k, an LV supply €1.9k, the LEMO cables and Ts €4.5k, PMTs €6–24k. Prices from the CAEN offer
+Only if a loan falls through (+€62k in all): a V1742 €9.5k, 2 N1081B €14k, 3 linear FIFOs €6.9k, a NIM bin €5.1k, a VME
+crate €4.8k, an N93B €2.7k, an LV supply €1.9k, the LEMO cables, Ts and adapters €5k, PMTs €6–24k. Prices from the CAEN offer
 26OFC.01101 and `x17_facility_search/budget/items.py`. The hardware facts (owner, location, condition) are in the central
 inventory, `x17_facility_search/inventory/INVENTORY.md`.
 

@@ -1383,8 +1383,8 @@
   },
   {
    "id": "lemo",
-   "part": "LEMO cables + Ts (n_TOF's set)",
-   "qty": "~110 cables + ~20 Ts needed",
+   "part": "LEMO cables, Ts, adapters (n_TOF's set)",
+   "qty": "~110 cables, ~20 Ts, ~20 adapters needed",
    "grp": "Trigger & DAQ",
    "status": "borrow",
    "org": "CERN (n_TOF / pool)",
@@ -1393,7 +1393,7 @@
    "who": "n_TOF (Dylan)",
    "state": "to ask",
    "need": "2027-05-01",
-   "b": "If no n_TOF LEMO loan: ~110 LEMO cables + 20 Ts",
+   "b": "If no n_TOF LEMO loan: ~110 LEMO cables, 20 Ts, 20 adapters",
    "inv": [
     {
      "id": "lemo_ntof",
@@ -1422,42 +1422,42 @@
    "tasks": [
     "S3"
    ],
-   "note": "n_TOF has about 60 × 16 ns, 60 × 5 ns, 20 × 2 ns and 20 × 1 ns LEMO cables and ~30 LEMO Ts (Dylan's estimate, 25 Nov). We can very likely borrow them if we return them.",
+   "note": "n_TOF has about 60 × 16 ns, 60 × 5 ns, 20 × 2 ns and 20 × 1 ns LEMO cables and ~30 LEMO Ts, plus the small connectors and adapters (Dylan's estimate, 25 Nov). We can very likely borrow them if we return them. The Ts also do the split of the wall channels, as at n_TOF.",
    "detail": "The count agrees with the n_TOF set-up: ~120 N1081B inputs and outputs in use (n1081b_module_map.py) plus the wall, plastic and FIFO links, ~150 cables for 4 arms. Two arms need about 110: 16 wall channels to the splitters, digitizer and FIFOs (~50), the FIFO sums and plastics to the trigger and digitizer (~20), ~30 between the 2 N1081Bs, the timer and DREAM, the trigger word and the clock (~10). 16 ns ≈ 3.2 m, 5 ns ≈ 1 m at ~5 ns/m.",
    "cash": 0,
-   "fallback": 4500,
+   "fallback": 5000,
    "tier": "loan",
-   "lo": 3000,
-   "hi": 6000,
-   "basis": "items.py splitters: LEMO 00 cable €25–49 made up; T €12–30"
+   "lo": 3300,
+   "hi": 6800,
+   "basis": "items.py splitters: LEMO 00 cable €25–49 made up; T €12–30; LEMO↔BNC adapter €15–40"
   },
   {
    "id": "split",
-   "part": "Splitters and LEMO↔BNC adapters",
-   "qty": "for 2 arms",
+   "part": "50 Ω resistive splitters for the wall channels",
+   "qty": "~20",
    "grp": "Trigger & DAQ",
    "status": "buy",
    "org": "purchase",
    "src": "to order",
    "who": "Dylan",
-   "state": "to order",
+   "state": "to decide",
    "need": "2027-05-01",
-   "b": "Splitters and LEMO↔BNC adapters (2 arms)",
+   "b": "50 Ω resistive splitters for the 16 wall channels (instead of Ts)",
    "place": [
     "cables"
    ],
    "tasks": [
     "S3"
    ],
-   "note": "Every scintillator signal goes to the digitizer and to the trigger. A BNC-T split halved the plastic amplitude at n_TOF, so the PMTs go through the FIFOs and the wall channels through 50 Ω splitters. The LEMO cables and Ts come from n_TOF (line above).",
-   "detail": "x17_facility_search budget item 'splitters' without the cables: ~20 resistive splitters (€10–84) and ~20 LEMO↔BNC adapters (€24).",
-   "cash": 1300,
+   "note": "Low-budget upgrade. Every scintillator signal goes to the digitizer and to the trigger. The PMTs go through the FIFOs (a T split halved the plastic amplitude at n_TOF). The wall channels can be split with n_TOF's Ts, as at n_TOF; matched splitters avoid the reflections of a T.",
+   "detail": "x17_facility_search budget item 'splitters': resistive splitters €10–84 each (BNC-T to Mini-Circuits ZFRSC-42-S+).",
+   "cash": 800,
    "fallback": 0,
-   "tier": "need",
+   "tier": "low",
    "inv": [],
-   "lo": 700,
-   "hi": 2200,
-   "basis": "items.py splitters without the cables: ~20 resistive splitters €10–84 + ~20 adapters €24 (25 Nov: the LEMO cables and Ts are borrowed from n_TOF)"
+   "lo": 200,
+   "hi": 1700,
+   "basis": "items.py splitters: 20 × €10–84; n_TOF's Ts do the job for the test"
   },
   {
    "id": "pc",
@@ -1905,14 +1905,6 @@
    "tier": "need"
   },
   {
-   "item": "Splitters and LEMO↔BNC adapters (2 arms)",
-   "c": 1300,
-   "lo": 700,
-   "hi": 2200,
-   "basis": "items.py splitters without the cables: ~20 resistive splitters €10–84 + ~20 adapters €24 (25 Nov: the LEMO cables and Ts are borrowed from n_TOF)",
-   "tier": "need"
-  },
-  {
    "item": "CERN pool rental fee: 2 N1081B, N93B, FIFOs, NIM bin, LV",
    "c": 1000,
    "lo": 0,
@@ -1958,6 +1950,14 @@
    "lo": 2000,
    "hi": 3200,
    "basis": "items.py slowctl",
+   "tier": "low"
+  },
+  {
+   "item": "50 Ω resistive splitters for the 16 wall channels (instead of Ts)",
+   "c": 800,
+   "lo": 200,
+   "hi": 1700,
+   "basis": "items.py splitters: 20 × €10–84; n_TOF's Ts do the job for the test",
    "tier": "low"
   },
   {
@@ -2021,11 +2021,11 @@
    "conf": "hopefully"
   },
   {
-   "item": "If no n_TOF LEMO loan: ~110 LEMO cables + 20 Ts",
-   "c": 4500,
-   "lo": 3000,
-   "hi": 6000,
-   "basis": "items.py splitters: LEMO 00 cable €25–49 made up; T €12–30",
+   "item": "If no n_TOF LEMO loan: ~110 LEMO cables, 20 Ts, 20 adapters",
+   "c": 5000,
+   "lo": 3300,
+   "hi": 6800,
+   "basis": "items.py splitters: LEMO 00 cable €25–49 made up; T €12–30; LEMO↔BNC adapter €15–40",
    "tier": "loan",
    "conf": "very likely"
   },

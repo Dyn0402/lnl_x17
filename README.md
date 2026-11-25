@@ -21,7 +21,7 @@ and the page; it does not duplicate those studies.
 - Pierfrancesco (18 Nov): ask for an **X17 feasibility study**, ~8 days, measure in H2 2027; he does the informal contact;
   co-proponents Massimi, Mengoni, Gervino, Gustavino, Cosentino (`correspondence/2026-11-18_mastinu_pac.md`).
 - Set-up: Micromegas A (ready) + B (drift fix by Stephan), 2 SiPM walls, 4 small plastics (PMTs to find), ~24 digitizer channels,
-  half of DREAM. Cash ~€9k critical for the test (+€4k low-, +€8k high-budget upgrades) if every loan comes through. 25 Nov: LEMO cables + Ts
+  half of DREAM. Cash ~€8k critical for the test (+€5k low-, +€8k high-budget upgrades) if every loan comes through. 25 Nov: LEMO cables + Ts
   from n_TOF (very likely), NIM modules + DREAM LV rented from the CERN pool (hopefully); `slot1_feasibility/PLAN.md` §7.
 - **Geant4 two-arm study (19 Nov, `sim2arm/TWO_ARM_STUDY.md`, note
   <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>):** 5 days at 1.10 MeV, 11 µm Li, horizontal pair: expected 90 %

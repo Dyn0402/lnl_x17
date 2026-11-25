@@ -1071,7 +1071,7 @@ function budget() {
   }
   const tl = $("#b-tiles"); tl.innerHTML = "";
   [["Critical for the test", "€" + (sumT(["need"]) / 1e3).toFixed(1) + "k", "if every loan comes through"],
-   ["+ low-budget upgrade", "€" + (sumT(["need", "low"]) / 1e3).toFixed(1) + "k", "gas lines, sensors, remote power switch"],
+   ["+ low-budget upgrade", "€" + (sumT(["need", "low"]) / 1e3).toFixed(1) + "k", "windows, gas lines, sensors, splitters, PDU"],
    ["+ high-budget upgrade", "€" + (sumT(["need", "low", "high"]) / 1e3).toFixed(1) + "k", "adds 4 CERN M1 cards for B"],
    ["Selected total", "€" + (c / 1e3).toFixed(1) + "k", `range €${(lo / 1e3).toFixed(0)}–${(hi / 1e3).toFixed(0)}k`]].forEach(([k, v, s]) => tl.append(h("div", { class: "tile" }, h("div", { class: "k" }, k), h("div", { class: "v" }, v), h("div", { class: "s" }, s))));
   loans();

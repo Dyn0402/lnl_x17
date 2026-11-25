@@ -7,7 +7,7 @@ cards, the DAQ PC and the DREAM core (TCM, network card, large NIM module) at CE
 common pool; n_TOF's LEMO cables (~60 × 16 ns, 60 × 5 ns, 20 × 2 ns, 20 × 1 ns, an estimate) and ~30 Ts; the Wiener PL512.
 `plan.py`: new `conf` field (LOAN_CONF) on loans, shown on the Hardware tab; LEMO from n_TOF very likely; 2 N1081B, N93B,
 3–4 FIFOs, NIM bin, LV hopefully rented from the CERN pool, with fallback lines and a €1k rental-fee guess. Critical cash
-€10.6k → €9.1k; if every loan fails +€61k. items.py Lean €103k → €59k. `slot1_feasibility/PLAN.md` §7.
+€10.6k → €7.8k (cables, Ts, adapters from n_TOF; resistive splitters moved to the low tier); if every loan fails +€62k. items.py Lean €103k → €59k. `slot1_feasibility/PLAN.md` §7.
 
 **Next:** count the n_TOF cables by length; ask the CERN pool (off-site rental, fee), n_TOF (LEMO loan), CEA (is the large
 NIM module a NIM bin? FEUs from the pool); write down what the M2 and M4 cards are.
