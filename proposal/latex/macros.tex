@@ -6,7 +6,7 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{siunitx}
-\usepackage[inline]{enumitem}
+\usepackage{enumitem}
 \usepackage[hidelinks]{hyperref}
 \setlist{nosep,leftmargin=1.2em}
 \sisetup{range-phrase=--,range-units=single}
@@ -24,5 +24,7 @@
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.85}
 \setcounter{topnumber}{2}\setcounter{bottomnumber}{2}\setcounter{totalnumber}{3}
-% Run-in reference list in the body: \cite{key} prints [n] from \label{ref:key}.
-\renewcommand{\cite}[1]{\ref{ref:#1}}
+% Run-in reference list in the body (plain LaTeX, no package): \rref{key} starts entry [n], \cite{key} prints [n].
+\newcounter{rref}
+\newcommand{\rref}[1]{\refstepcounter{rref}\label{ref:#1}[\therref]~}
+\renewcommand{\cite}[1]{[\ref{ref:#1}]}

@@ -141,7 +141,7 @@ efficient chambers and a live time of 95\,\%.}
 \centering\footnotesize
 % Only l columns: revtex4 (2001) breaks on p{} and @{} with the array package of current TeX Live (Overleaf).
 \newcommand{\cellA}[1]{\parbox[t]{0.315\textwidth}{\raggedright #1\strut}}
-\newcommand{\cellB}[1]{\parbox[t]{0.455\textwidth}{\raggedright #1\strut}}
+\newcommand{\cellB}[1]{\parbox[t]{0.45\textwidth}{\raggedright #1\strut}}
 \begin{tabular}{llll}
 \hline\hline
 day & $E_p$ (MeV) & measurement & Geant4 estimate \\
@@ -205,12 +205,10 @@ is led to an exhaust. \todo{LNL rules}
 % Run-in reference list, to save space: \cite{key} prints [n] from the label ref:key (macros.tex).
 \vspace{2mm}\noindent\rule{0.3\textwidth}{0.4pt}\par\vspace{1mm}
 {\footnotesize\noindent
-\begin{enumerate*}[label={[\arabic*]},itemjoin={\ \ }]
-\item\label{ref:Kra16} A.J.~Krasznahorkay \emph{et al.}, PRL \textbf{116}, 042501 (2016); PRC \textbf{104}, 044003 (2021); PRC \textbf{106}, L061601 (2022).
-\item\label{ref:Anh24} Tran The Anh \emph{et al.}, Universe \textbf{10}, 168 (2024).
-\item\label{ref:MEG24} K.~Afanaciev \emph{et al.} (MEG~II), Eur.\ Phys.\ J.\ C \textbf{85}, 763 (2025).
-\item\label{ref:PADME25} F.~Bossi \emph{et al.} (PADME), JHEP \textbf{11}, 007 (2025).
-\item\label{ref:MEG26} H.~Benmansour \emph{et al.}, arXiv:2609.18383 (2026).
-\item\label{ref:Gus25} C.~Gustavino \emph{et al.}, NIM A \textbf{1072}, 170087 (2025); P.~Mastinu \emph{et al.}, EPJ Web Conf.\ \textbf{378}, 04004 (2026).
-\item\label{ref:GS25} B.~G\'ongora-Serv\'in \emph{et al.}, Acta Phys.\ Pol.\ B Proc.\ Suppl.\ \textbf{18}, 2-A13 (2025).
-\end{enumerate*}\par}
+\rref{Kra16}A.J.~Krasznahorkay \emph{et al.}, PRL \textbf{116}, 042501 (2016); PRC \textbf{104}, 044003 (2021); PRC \textbf{106}, L061601 (2022).\ \ 
+\rref{Anh24}Tran The Anh \emph{et al.}, Universe \textbf{10}, 168 (2024).\ \ 
+\rref{MEG24}K.~Afanaciev \emph{et al.} (MEG~II), Eur.\ Phys.\ J.\ C \textbf{85}, 763 (2025).\ \ 
+\rref{PADME25}F.~Bossi \emph{et al.} (PADME), JHEP \textbf{11}, 007 (2025).\ \ 
+\rref{MEG26}H.~Benmansour \emph{et al.}, arXiv:2609.18383 (2026).\ \ 
+\rref{Gus25}C.~Gustavino \emph{et al.}, NIM A \textbf{1072}, 170087 (2025); P.~Mastinu \emph{et al.}, EPJ Web Conf.\ \textbf{378}, 04004 (2026).\ \ 
+\rref{GS25}B.~G\'ongora-Serv\'in \emph{et al.}, Acta Phys.\ Pol.\ B Proc.\ Suppl.\ \textbf{18}, 2-A13 (2025).\par}
