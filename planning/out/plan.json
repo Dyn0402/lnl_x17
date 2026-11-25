@@ -320,11 +320,11 @@
    "ws": "prop",
    "due": "2026-11-27",
    "who": "Dylan",
-   "status": "todo",
+   "status": "active",
    "dep": [
     "R1"
    ],
-   "t": "Draft v1 in Overleaf: abstract page + body of at most 4 pages (LNL template, 12 pt, figures and references included)"
+   "t": "Draft v1 in Overleaf: abstract page + body of at most 4 pages (LNL template, 12 pt, figures and references included). 25 Nov: audited against the call and rebuilt around three figures (apparatus + n_TOF data + Geant4 event; the Geant4 predictions; reach and the path to the full experiment), template sections, one rates table; Dylan to proof-read"
   },
   {
    "id": "P6",
@@ -466,11 +466,11 @@
    "ws": "sim",
    "due": "2026-11-27",
    "who": "Dylan",
-   "status": "todo",
+   "status": "done",
    "dep": [
     "R7"
    ],
-   "t": "Proposal: the 3D event render as Fig. 1 (save PNG from the Predictions tab) and a short table of predictions with pass criteria in §3"
+   "t": "Proposal: the Geant4 event as Fig. 1c (drawn from sim2arm/out/events3d.json by proposal/figsrc/make_figures.py, 25 Nov), the predictions as Fig. 2 and the rates in Table I"
   },
   {
    "id": "R9",
@@ -1897,6 +1897,18 @@
   },
   {
    "who": "LNL Accelerator Division",
+   "q": "1 µA with which beam spot? The AN2000 table gives up to 1000 nA on all lines except 0° (20 nA), but 150 nA 'at small radius'. Every rate in the proposal assumes 1 µA on the ~5 mm Li spot."
+  },
+  {
+   "who": "Pierfrancesco",
+   "q": "The call allocates 20 Feb – 30 Jul 2027 (the call page says 2026, a typo). We ask for the second half of 2027: say 'from July', or ask to be scheduled in the next period?"
+  },
+  {
+   "who": "Pierfrancesco",
+   "q": "Body length: the template says 4 pages, the LNL submission page says 5. The draft keeps to 4: is that what people do?"
+  },
+  {
+   "who": "LNL Accelerator Division",
    "q": "Flammable premix (Ar/iC₄H₁₀ 95/5) in the hall: rules, storage, exhaust."
   },
   {
@@ -1982,7 +1994,9 @@
   "rules": [
    "Use the LNL templates (abstract + body, LaTeX or Word); submit PDF only. Abstract: one page (not counted in the body)",
    "Abstract fields: title, accelerator, set-up, spokesperson(s), GLIMOS, all authors + affiliations, short summary",
-   "Body: max 4 pages per the official template (the LNL web page says 5), 12 pt, tables + figures + references included",
+   "Body: max 4 pages per the official template (the LNL web page says 'strictly' 5; re-read 25 Nov), 12 pt, tables + figures + references included. We keep to 4",
+   "Template sections: Scientific Motivation / Proposed Experiment / Rate Estimates and Beam Time Request; the request lists beam (ion, intensity, energy, pulsed or continuous), target (isotope, thickness, backing), set-up, days; figure captions below, table captions above",
+   "Allocation period of this call: 20 Feb – 30 Jul 2027 (call page, read 25 Nov; it prints 2026)",
    "Body must contain: scientific motivation; technical details (instrumentation, quantities measured, precision); beam days from count-rate estimates",
    "Online: Beam Time Request, then the Targets Request Form; keep the confirmation e-mail (password)",
    "Needs an active INFN-AAI account with 'Risorse IT'",
@@ -1992,51 +2006,37 @@
   "sections": [
    {
     "id": "abs",
-    "name": "Abstract page",
+    "name": "Abstract page (with the beam request table)",
     "status": "draft",
     "pages": 1,
     "owner": "Dylan"
    },
    {
     "id": "mot",
-    "name": "1. Scientific motivation",
-    "status": "draft",
-    "pages": 0.9,
-    "owner": "Dylan"
-   },
-   {
-    "id": "app",
-    "name": "2. MX17 and the two-arm set-up",
-    "status": "draft",
-    "pages": 0.9,
-    "owner": "Dylan"
-   },
-   {
-    "id": "meas",
-    "name": "3. Measurements and precision",
-    "status": "draft",
-    "pages": 0.9,
-    "owner": "Dylan"
-   },
-   {
-    "id": "beam",
-    "name": "4. Beam request and count rates",
+    "name": "1. Scientific Motivation",
     "status": "draft",
     "pages": 0.6,
     "owner": "Dylan"
    },
    {
-    "id": "next",
-    "name": "5. From feasibility to the full experiment",
+    "id": "exp",
+    "name": "2. Proposed Experiment (apparatus, target, the three measurements; Figs. 1–2)",
     "status": "draft",
-    "pages": 0.4,
+    "pages": 2.0,
+    "owner": "Dylan"
+   },
+   {
+    "id": "beam",
+    "name": "3. Rate Estimates and Beam Time Request (Table I, Fig. 3, the request, readiness and safety)",
+    "status": "draft",
+    "pages": 1.2,
     "owner": "Dylan"
    },
    {
     "id": "ref",
     "name": "References",
     "status": "draft",
-    "pages": 0.3,
+    "pages": 0.2,
     "owner": "Dylan"
    }
   ]

@@ -1,5 +1,62 @@
 # Handoff
 
+## Proposal audited against the LNL call and rebuilt around figures — updated 2026-11-25 (dylan-MS-7C84)
+
+**Resume:** `proposal/latex/main.pdf` (1 abstract page + 4 body pages) is the draft for Dylan to proof-read; on Overleaf
+and on the page. Next: Dylan's read, then the open items below to Pierfrancesco (P6).
+
+**Goal (Dylan, 25 Nov):** audit the beam-use proposal against what LNL asks, clean up the presentation, make it
+figure-heavy, get it close to ready.
+
+**What the audit found (rules: `proposal/STRUCTURE.md` §1–2, re-read from the LNL pages on 25 Nov)**
+- The template wants three sections (Scientific Motivation / Proposed Experiment / Rate Estimates and Beam Time Request),
+  the request as beam / target / set-up / days, figure captions below and table captions above. The old draft had five
+  sections, captions beside the figures and under the tables. Fixed.
+- Body length: the template says 4 pages, the LNL submission page "strictly" 5. Kept to 4.
+- The call's allocation period is 20 Feb – 30 Jul 2027 (the page prints 2026); we ask for the second half of 2027.
+- AN2000: "up to 1000 nA on all beamlines except 0°", but "150 nA at small radius". Every rate assumes 1 µA.
+- The abstract page still needs the GLIMOS, the author list and Dylan's affiliation (red markers).
+
+**Done**
+- **Figures** (`proposal/figsrc/make_figures.py`, drawn at print size from `sim2arm/out/` and `planning/out/`):
+  Fig. 1 = photo of MX17 at n_TOF + the run-145 tracks of arms A and C (`make_ntof_fans.py`, real data, 15,930 tracks) +
+  a Geant4 event of the two-arm set-up with the target holder (from `events3d.json`: X17 event 1238, muon 6819);
+  Fig. 2 = Geant4 predictions (cosmic rays before/after the vetoes, the 441 keV day, the five 1.10 MeV days);
+  Fig. 3 = expected limit against days + days to 3σ from this run to the full experiment. One table (days + rates).
+- **Text** rewritten in Dylan's style around the figures; references checked on arXiv/INSPIRE (MEG II now EPJC 85, 763;
+  PADME JHEP 11 (2025) 007; Hanoi Universe 10, 168; n_TOF set-up NIM A 1072, 170087). The reference list is run-in
+  (`\cite` is redefined in `macros.tex` to print the number of `\label{ref:key}`), which saves three lines.
+- **Two independent reviews** (a referee read and a number audit against the tables) and their fixes:
+  - the 1.10 MeV days are now justified by what they measure (the pair rate in the signal region to 8 %, the E1 and
+    external-conversion backgrounds that the 441 keV day does not test), not by the limit; the text says the run does
+    not improve on MEG II;
+  - **the pair rates and the reach assume fully efficient chambers** (only the track fractions carry ε = 0.92): with
+    ε² the pairs are 15 % lower (2.35 → ~2.55 × R(ATOMKI), an arithmetic scaling). Said in the Table I caption and text;
+  - "loses about 1 MeV" is the pair's energy sum, not each lepton; the opening angle is smeared by 24° (σ68,
+    SHAPES_GEANT.md); 15 % (not 14 %) of X17 pairs in the E_sum window; the leg coincidence is 20 ns (the PAIR window
+    50 ns); the resonance is at 1.03 MeV; day 8 at 11 µm gives ~1,500 conversions per day, not "several thousand";
+  - the cosmic rate is 25× lower at trigger level (12× after selection); absolute cosmic rates carry the factor 2.5 of
+    PREDICTIONS §5; the external conversions in the window rest on 2 MC events (87 in 5 d, ±70 %);
+  - the light-holder numbers are labelled as scaling estimates everywhere. **The audit thinks they may be optimistic
+    by ~×1.8** (the §19.3 base used σ_t 0.3 ns and the L4 cosmics; a like-for-like scaling gives ~19 d, 0.83 ×).
+- plan.py: P5 active, R8 done, three new questions (beam spot at 1 µA, the allocation period, 4 or 5 pages).
+
+**Open items for Dylan / Pierfrancesco (red in the PDF)**
+1. GLIMOS, authors and affiliations; one sentence after talking to the LNL ⁸Be group.
+2. Is a beam day 24 h on AN2000 in self-service? All "per day" numbers assume 24 h.
+3. 1 µA on a ~5 mm spot on a line that is not 0°?
+4. The γ monitor (LaBr₃ or NaI) for the normalisation; installation time in the hall (~2 weeks assumed).
+5. Whether a lighter holder can exist for this run; the flammable-gas rules; the liquid's type and flash point.
+6. Second half of 2027 against the 20 Feb – 30 Jul allocation period.
+7. Fig. 1b shows n_TOF data (already in the MPGD26 proceedings): check that the collaboration is fine with it here.
+
+**Gotchas**
+- The body is exactly 4 pages with about three lines of slack. `make` prints the page count.
+- revtex4 floats: `[b]` goes on the current page if it fits, `[t]` to the top of the next page.
+- `figures/limit_vs_days.*` is no longer used by the proposal (the page still shows it).
+- `make_ntof_fans.py` needs the nTof_x17 venv and the run-145 files; its paths are repointed in the script
+  (`/media/dylan/data/x17/sept26_prelim/…`).
+
 ## Proposal rewritten in Dylan's style, beam request table — updated 2026-11-24 (dylan-MS-7C84)
 
 **Resume:** proposal current in `proposal/latex/` (abstract 1 page, body 4 pages), on the site and on Overleaf (pushed

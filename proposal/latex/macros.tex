@@ -6,7 +6,7 @@
 \usepackage{xcolor}
 \usepackage{tikz}
 \usepackage{siunitx}
-\usepackage{enumitem}
+\usepackage[inline]{enumitem}
 \usepackage[hidelinks]{hyperref}
 \setlist{nosep,leftmargin=1.2em}
 \sisetup{range-phrase=--,range-units=single}
@@ -17,3 +17,12 @@
 \newcommand{\Li}{\ensuremath{^{7}\mathrm{Li}}}
 \newcommand{\pee}{\ensuremath{(p,e^+e^-)}}
 \newcommand{\Xs}{X17}
+\newcommand{\Ratk}{\ensuremath{R_\mathrm{ATOMKI}}}
+% Let a figure take the top or the bottom of a page that already holds text (LaTeX's defaults are 0.7 / 0.3 / 0.2).
+\renewcommand{\topfraction}{0.85}
+\renewcommand{\bottomfraction}{0.7}
+\renewcommand{\textfraction}{0.1}
+\renewcommand{\floatpagefraction}{0.85}
+\setcounter{topnumber}{2}\setcounter{bottomnumber}{2}\setcounter{totalnumber}{3}
+% Run-in reference list in the body: \cite{key} prints [n] from \label{ref:key}.
+\renewcommand{\cite}[1]{\ref{ref:#1}}

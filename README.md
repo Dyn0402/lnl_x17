@@ -43,14 +43,16 @@ and the page; it does not duplicate those studies.
 | `sim2arm/` | the Geant4 two-arm study: `TWO_ARM_STUDY.md`, the fit cut to one arm pair, L15/L16 condor jobs, the slide note |
 | `sim2arm/PREDICTIONS.md` | Geant4 predictions of every observable of the run and the 3D event view (page tab "Predictions"): `predictions.py`, `events3d.py`, run L17 |
 | `planning/two_arm_estimates.py` | the two-arm reach rows from `sim2arm/out/summary_reach_pass2*.csv` → `planning/out/two_arm_reach.csv`, `beam_days.csv` |
-| `planning/figures.py` | the proposal figure (`proposal/latex/figures/limit_vs_days.*`) |
+| `proposal/figsrc/make_figures.py` | the proposal figures at print size (`proposal/latex/figures/fig_event`, `fig_predictions`, `fig_reach`, the n_TOF photo); `make_ntof_fans.py` redraws the n_TOF run-145 tracks |
+| `planning/figures.py` | the reach figure of the page (`proposal/latex/figures/limit_vs_days.*`; no longer in the proposal) |
 | `site/template.html`, `site/build_page.py` | the page: build, copy into dylan-cern-site |
 | `correspondence/` | short summaries of the e-mails that set decisions |
 
 ## Update the page
 
 ```
-python3 planning/figures.py                  # if the reach changed
+python3 planning/two_arm_estimates.py && python3 planning/figures.py   # if the reach changed
+python3 proposal/figsrc/make_figures.py      # the proposal figures (after a new pass or reach table)
 make -C proposal/latex && make -C proposal/latex zip   # if the proposal changed
 WORK_DATA=/media/ucla/work ~/PycharmProjects/nTof_x17/.venv/bin/python sim2arm/predictions.py   # Predictions tab numbers
 WORK_DATA=/media/ucla/work ~/PycharmProjects/nTof_x17/.venv/bin/python sim2arm/events3d.py      # its 3D events (L17)
