@@ -84,7 +84,7 @@ For this study we bring the two best chambers, and we place the two arms on oppo
 faces at 20~cm from the target. Figure~\ref{fig:setup}(c) shows this set-up. The opening angle of a pair is the angle
 between its two hits in the TPCs, as seen from the target. Two opposite arms accept the \Xs{} pairs, which open at about
 $140^\circ$. The Micromegas are read out by the DREAM electronics of CEA Saclay, and the scintillators by about 24
-digitizer channels. The trigger is that of the n\_TOF run. A \emph{leg} is a 20~ns coincidence of the SiPM wall and a
+digitizer channels. In the trigger, which is that of the n\_TOF run, a \emph{leg} is a 20~ns coincidence of the SiPM wall and a
 plastic scintillator in one arm, and the PAIR trigger requires a leg in both arms.
 
 \textbf{Target.} The target is a metallic lithium film, 10--12~\si{\micro\metre} thick, pressed in the argon glovebox
@@ -92,9 +92,8 @@ of the LNL CN target laboratory. The film sits at the apex of the existing targe
 closes the beam line (radius 11~mm, 300~\si{\micro\metre} wall). The inset of Fig.~\ref{fig:setup}(c) shows it. This
 holder is the main limitation of the present set-up. Every lepton crosses 2\,\% of a radiation length of copper. In
 the simulation, the energy sum of a pair drops by about 1~MeV and its opening angle is smeared by about $24^\circ$. As a
-result, only 15\,\% of the \Xs{} pairs are measured with an energy sum in the selection window. We estimate that a
-lighter aluminium holder would reduce the running time needed by about an order of magnitude. This estimate is scaled
-from the four-arm simulation. A study of such a holder has been requested at LNL. \todo{whether one can be ready
+result, only 15\,\% of the \Xs{} pairs are measured with an energy sum in the selection window. By scaling the four-arm simulation, we estimate that a lighter aluminium holder would reduce the running time needed by
+about an order of magnitude. A study of such a holder has been requested at LNL. \todo{whether one can be ready
 for this run}
 
 \textbf{Measurements.} The run consists of a scan of the beam current (Section~III) and of three measurements.
@@ -106,8 +105,8 @@ target, an energy sum of 13--19~MeV and an opening angle above $90^\circ$.
 a pair with an opening angle below $180^\circ$. Figure~\ref{fig:pred}(a) shows that 57\,\% of these coincidences fall at
 125--$160^\circ$, where the \Xs{} signal is expected. This is the same peak that was found for the ATOMKI
 spectrometers~\cite{MEG26}. MX17 recognises a muon in two ways. The two track segments lie on one straight line that misses the
-target, and the muon reaches the second arm 2.3~ns after the first, while the time-of-flight resolution measured at
-n\_TOF is 0.6~ns per arm. In the simulation these two vetoes reject 96\,\% of the cosmic-ray pairs, and 99.5\,\%
+target, and the muon reaches the second arm 2.3~ns after the first (the time-of-flight resolution measured at n\_TOF is
+0.6~ns per arm). In the simulation these two vetoes reject 96\,\% of the cosmic-ray pairs, and 99.5\,\%
 together with the energy-sum window. We will measure these numbers before the beam days, during at least three nights
 with the two arms stacked vertically, where the cosmic-ray rate is highest ($7\times10^4$ PAIR triggers per 10-hour
 night). About 1000 pairs should survive the selection in three nights, so the rejection is measured to about 3\,\%.
@@ -134,9 +133,8 @@ shape by a few per cent.
 \section{Rate Estimates and Beam Time Request}
 
 \begin{table}[b]
-\caption{Use of the beam time, and Geant4 estimates at 1~\si{\micro\ampere} (existing target holder,
-11~\si{\micro\metre} Li). The track fractions include the chamber efficiency of 0.92. The pair rates assume fully
-efficient chambers and a live time of 95\,\%.}
+\caption{Use of the beam time, and Geant4 estimates at 1~\si{\micro\ampere}. The track fractions include the chamber
+efficiency of 0.92. The pair rates assume fully efficient chambers and a live time of 95\,\%.}
 \label{tab:days}
 \centering\footnotesize
 % Only l columns: revtex4 (2001) breaks on p{} and @{} with the array package of current TeX Live (Overleaf).
@@ -197,9 +195,10 @@ by June 2027.
 
 \textbf{Readiness and safety.} One of the two chambers is ready, and the other
 needs a repair of its drift window, which is planned at CEA Saclay for spring 2027. The SiPM walls and the plastic
-scintillators exist. The PMTs of the plastic scintillators are still to be borrowed, and the liquid cells (4~L each)
-will get new containers. Both beam energies are below the \Li$(p,n)$ threshold of 1.88~MeV, so the target produces no
-neutrons. The Micromegas use a premixed Ar/iC$_4$H$_{10}$ (95/5) gas at about 1~L/h. This mixture is flammable, and it
+scintillators exist, their PMTs are still to be borrowed, and the liquid cells (4~L each) will get new containers. Both beam energies are below the \Li$(p,n)$ threshold of 1.88~MeV, so the target produces no
+neutrons. At 1.10~MeV the target also emits about $10^7$ $\gamma$ rays per second of 478~keV from \Li$(p,p'\gamma)$.
+They cannot make a leg. We estimate that they give a few kHz of singles in each Micromegas and a dose rate of about
+1~\si{\micro\sievert}/h at 1~m. The Micromegas use a premixed Ar/iC$_4$H$_{10}$ (95/5) gas at about 1~L/h. This mixture is flammable, and it
 is led to an exhaust. \todo{LNL rules}
 
 % Run-in reference list, to save space: \cite{key} prints [n] from the label ref:key (macros.tex).

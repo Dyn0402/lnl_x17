@@ -39,6 +39,11 @@ figure-heavy, get it close to ready.
     PREDICTIONS §5; the external conversions in the window rest on 2 MC events (87 in 5 d, ±70 %);
   - the light-holder numbers are labelled as scaling estimates everywhere. **The audit thinks they may be optimistic
     by ~×1.8** (the §19.3 base used σ_t 0.3 ns and the L4 cosmics; a like-for-like scaling gives ~19 d, 0.83 ×).
+- **The 478 keV line of ⁷Li(p,p′γ)**, which the simulation does not have (`slot1_feasibility/GAMMA_478_ESTIMATE.md`, a
+  literature estimate): ~10⁷ γ/s at 1.10 MeV and 1 µA (±30 %, Taskaev 2021 / Mateus 2002), none at 441 keV (threshold
+  0.546 MeV); it cannot make a leg; a few kHz of singles per Micromegas, ~20 kHz above 100 keV per scintillator layer,
+  ~0.8 µSv/h at 1 m. One sentence in the proposal. The same note: fluorine in the lithium is the contaminant to ask
+  about (¹⁹F(p,αγ): 10⁻³ F per Li would add 20 % of the 17–18 MeV γ yield).
 - plan.py: P5 active, R8 done, three new questions (beam spot at 1 µA, the allocation period, 4 or 5 pages).
 
 **Open items for Dylan / Pierfrancesco (red in the PDF)**
