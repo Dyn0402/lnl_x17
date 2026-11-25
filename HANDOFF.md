@@ -2,7 +2,7 @@
 
 ## Budget and inventory: loans from n_TOF and CERN, the hardware at CEA — updated 2026-11-25 (dylan-MS-7C84)
 
-**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental ~285 CHF/month → €1.6k, critical €8.4k. Next: ask the pool about LNL, confirm the DREAM LV model.
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 
 **Goal:** a detailed slot-1 budget and the central hardware inventory: what we own, borrow or rent, how sure we are of each
 loan, and what it costs if a loan falls through.
@@ -25,7 +25,7 @@ loan, and what it costs if a loan falls through.
   Dylan rented a Delta SM3545-D (35 V/45 A) 25 Mar–13 Aug on T299563: is that the DREAM LV? (ask)
 
 **Next steps:**
-1. (done 25 Nov) epool fees → inventory + BUDGET. Still to ask: may rented modules go to LNL; DREAM LV = SM3545-D or PL512?
+1. (done 25 Nov) epool fees → inventory + BUDGET. LV = Delta SM3545-D (Dylan). Rental ~2 months, for the feasibility study only; the physics run (winter 2027) gets its own plan. Still to ask: may rented modules go to LNL?
 2. Ask: CERN pool (off-site rental to LNL, fee), n_TOF (LEMO loan dates), CEA (is the large NIM module a NIM bin? 4 FEUs +
    32 cables from the pool). Count the n_TOF cables by length. Write down what the M2 and M4 cards are.
 3. Rate the 9 loans still without a confidence (DREAM FEUs, PMTs, digitizers, VME, HV, Li films, line, stand, γ monitor).
@@ -42,7 +42,7 @@ loan, and what it costs if a loan falls through.
 
 ## The CN instead of AN2000, 8 working days — updated 2026-11-25 (dylan-MS-7C84)
 
-**Resume:** proposal is on the CN, 8 working days; Dylan asks Pierfrancesco the CN questions (P2), then revise the text.
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 
 **Goal:** AN2000 is probably not available and the allocation is 8 days. Rewrite the slot-1 PAC proposal (deadline
 10 Dec) for the CN, at 1 µA and working hours only, with the 441 keV point asked for (H₂⁺) but not relied on.
@@ -81,7 +81,7 @@ loan, and what it costs if a loan falls through.
 
 ## Proposal audited against the LNL call and rebuilt around figures — updated 2026-11-25 (dylan-MS-7C84)
 
-**Resume:** `proposal/latex/main.pdf` (1 abstract page + 4 body pages) is the draft for Dylan to proof-read; on Overleaf
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 and on the page. Next: Dylan's read, then the open items below to Pierfrancesco (P6).
 
 **Goal (Dylan, 25 Nov):** audit the beam-use proposal against what LNL asks, clean up the presentation, make it
@@ -156,7 +156,7 @@ figure-heavy, get it close to ready.
 
 ## Proposal rewritten in Dylan's style, beam request table — updated 2026-11-24 (dylan-MS-7C84)
 
-**Resume:** proposal current in `proposal/latex/` (abstract 1 page, body 4 pages), on the site and on Overleaf (pushed
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 2026-11-24 through Overleaf's git: `git clone https://git.overleaf.com/6afdf0e8d237ac71ebb14b1f`). Next: S8 (questions to
 PF), R8 (Fig. 1 render).
 
@@ -176,7 +176,7 @@ PF), R8 (Fig. 1 render).
 
 ## R11: Geant4 of the liquid cell right behind the SiPM wall — updated 2026-11-21 23:50 (dylan-MS-7C84)
 
-**Resume:** done. Layout C gives no gain (LIQUID_CELLS.md §4.1); the baseline stays in the proposal. Next on the proposal:
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 S8 (questions to PF), R5 (Overleaf), R8 (Fig. 1).
 
 - R11 (830 jobs) + R11b (900 jobs, ×3–4 beam MC; clusters 4712563–4712567), all clean (001 = 005, exit 0).
@@ -191,7 +191,7 @@ S8 (questions to PF), R5 (Overleaf), R8 (Fig. 1).
 
 ## Liquid cells in the baseline, predictions table in the proposal — updated 2026-11-20 (dylan-MS-7C84)
 
-**Resume:** proposal + page current; next: S8 (ask PF the liquid questions), R5 (Overleaf upload), R8 figure (3D render).
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 
 - **PF's e-mail of 20 Nov** (`correspondence/2026-11-20_mastinu_target_liquid.md`): the Cu hemisphere works ("at least for
   the forward angles"), an engineering thesis on the holder is requested; the liquid exists, the cans must be remade,
@@ -211,7 +211,7 @@ S8 (questions to PF), R5 (Overleaf), R8 (Fig. 1).
 
 ## Two-arm study on the built Cu hemisphere + Predictions tab — updated 2026-11-20 (dylan-MS-7C84)
 
-**Resume:** all done and live; next: ask PF for a lighter Al end piece (T1), simulate it in two arms (R10), proposal Fig. 1 (R8).
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 
 **Goal:** a slot-1 two-arm reach and a set of Geant4 predictions for every observable of the run, with the target holder
 that actually exists, for the LNL PAC proposal (deadline 10 Dec) and the page.
@@ -259,7 +259,7 @@ that actually exists, for the LNL PAC proposal (deadline 10 Dec) and the page.
 
 ## Two-arm Geant4 study (R1) and the 8-day plan — updated 2026-11-19 (dylan-Yoga, overnight)
 
-**Resume:** read `sim2arm/TWO_ARM_STUDY.md` §0 (or the note <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>);
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 next: upload the new `proposal/latex/body_content.tex` to Overleaf (R5), then P1 with the new numbers.
 
 **Goal (Dylan, 18 Nov night):** careful analysis and simulation of a bare-bones two-Micromegas LNL run (~8 days): can we see
@@ -301,7 +301,7 @@ prepares the physics run and gives results for funding proposals. Liquid cells e
 
 ## LNL page + proposal: Overleaf, budget, Cu hemisphere, Hardware tab, inventory — updated 2026-11-19 (dylan-MS-7C84)
 
-**Resume:** page and Overleaf draft current; next: P1 (outline + questions to Pierfrancesco), P3 (INFN-AAI), R1 (two-arm re-reduction).
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 
 **Goal:** get the PAC proposal (due 10 Dec 2026) and the planning page into shape for Pierfrancesco and the co-proponents.
 
@@ -341,7 +341,7 @@ prepares the physics run and gives results for funding proposals. Liquid cells e
 
 ## LNL proposal page: template, Overleaf, budget tiers — updated 2026-11-18 (dylan-MS-7C84)
 
-**Resume:** the draft is in the official LNL template and on Overleaf; the page's overview leads with Indico and closes with
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 Overleaf; budget split into tiers. Next steps unchanged (P1, P3, R1).
 
 **Done**
@@ -362,7 +362,7 @@ Overleaf; budget split into tiers. Next steps unchanged (P1, P3, R1).
 
 ## LNL PAC feasibility proposal — updated 2026-11-18 (dylan-MS-7C84)
 
-**Resume:** proposal draft v0 and the planning page are up; next: send Pierfrancesco the outline and questions (P1), get the
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).
 INFN-AAI account (P3), run the two-arm re-reduction (R1).
 
 **Goal (Dylan, 18 Nov):** after Pierfrancesco's reply, start a real proposal (X17 feasibility study, the most easily available
