@@ -52,12 +52,12 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 |---|---|---|
 | Micromegas A (det3) | ready | 92.9 % within 5 mm on the bench; runs as is; a new aluminised-mylar window is optional (low-budget upgrade) |
 | Micromegas B (det2) | fix | 91.3 %; drift-window repair (Stephan, CEA), new window optional; runs with its existing Italian M1 cards (new CERN cards: high-budget upgrade) |
-| DREAM | borrow | 4 FEUs + TCM + 32 cables from CEA; solder the TCM busy LEMO |
+| DREAM | borrow | the TCM, network card, large NIM module and DAQ PC are kept for us at CEA; 4 FEUs + 32 cables come from CEA's common pool (ask); solder the TCM busy LEMO |
 | SiPM walls × 2 | ready | ganged as at n_TOF: 8 channels per wall, 16 of 20 bars |
 | plastics 20 × 30 × 2 cm × 4 | find PMTs | scintillators owned; PMTs went back to the lender |
 | liquid cells × 2 | make (new cans) | 45 × 45 × 2 cm, one PMT each; the liquid exists, the cans are remade (PF, 20 Nov). Thicker/wider cells to study: `LIQUID_CELLS.md` |
 | digitizers ~24 ch | find | 16 wall + 4 PMT (+2 LS) + trigger word; one V1742 (32 ch) covers it |
-| trigger | borrow | n_TOF logic for two arms: 2–3 N1081B, a dual timer, FIFOs, NIM bin |
+| trigger | borrow | n_TOF logic for two arms: 2 N1081B, a dual timer, 3–4 FIFOs, NIM bin, rented from the CERN pool (hopefully); LEMO cables + Ts from n_TOF (very likely) |
 | gas | buy | Ar/iC₄H₁₀ 95/5 premix and panel; flammable-gas rules at LNL (ask) |
 | target | decide | LNL's pressed Li on Cu, 10–12 µm; holder: the Cu hemisphere, already built (R 11 mm, 300 µm; the 'Cu hemisphere' rows of §4 since 20 Nov); a lighter Al end piece (Al ogive + Cu liner, or a flat 45° Al cap) would cut the days ×6–15: ask PF whether one can be made |
 
@@ -153,16 +153,32 @@ outline to Pierfrancesco (20 Nov), INFN-AAI account (23 Nov), co-proponents (24 
 
 ## 7. Budget
 
-For our planning, not the proposal. Tiers (Dylan, 18 Nov 2026; new drift windows moved to the low tier 19 Nov; `plan.py` `TIERS`, `BUDGET`), central values:
-- **Critical for the test, €9.1k**: repair of B's drift window €0.3k, gas premix + regulators + panel €3k, splitters / LEMO / adapters
-  €3.8k, shipping €2k. B runs with its existing (noisier) Italian M1 cards.
+For our planning, not the proposal. Tiers (Dylan, 18 Nov 2026; new drift windows moved to the low tier 19 Nov; `plan.py` `TIERS`, `BUDGET`), central values.
+Updated 25 Nov 2026 with the loans below.
+- **Critical for the test, €9.1k**: repair of B's drift window €0.3k, gas premix + regulators + panel €3k, splitters and
+  LEMO↔BNC adapters €1.3k, new cans for the 2 liquid cells €1.5k, the CERN electronics-pool rental fee €1k (a guess), shipping €2k.
+  B runs with its existing (noisier) Italian M1 cards.
 - **Low-budget upgrade, +€4.4k**: new aluminised-mylar drift windows for A and B €1.25k, low-permeation gas lines €0.4k, gas and environment sensors (slow control Tier 1) €2.5k, switched
   PDU (remote power switch) €0.3k.
 - **High-budget upgrade, +€8k** (toward the final measurement): 4 CERN M1 cards for B.
 
-Only if a loan falls through: a V1742 €9.5k,
-2 N1081B €14k, a VME crate €4.8k, an N93B €2.7k, PMTs €6–24k. Prices from the CAEN offer 26OFC.01101 and
-`x17_facility_search/budget/items.py`.
+**Loans and how sure we are of them (25 Nov 2026).** Each loan carries a confidence in `plan.py` (`conf`), shown on the
+page's Hardware tab.
+- **n_TOF's LEMO cables and Ts: very likely**, if we return them. n_TOF has about 60 cables of 16 ns, 60 of 5 ns, 20 of 2 ns,
+  20 of 1 ns, and about 30 LEMO Ts (Dylan's estimate). This agrees with the n_TOF set-up, which used ~150 LEMO connections
+  for four arms (`nTof_x17_DAQ/n1081b/n1081b_module_map.py` and the budget item `splitters`). The two arms need about 110
+  cables and 20 Ts. For this reason the cables leave the critical line, which falls from €3.8k to €1.3k.
+- **The NIM modules and the DREAM LV supply: hopefully rented from the CERN electronics pool** and taken to LNL. These are
+  2 N1081B, the N93B dual timer, 3–4 linear FIFOs, a NIM bin and the Wiener PL512 that powered DREAM at n_TOF. The fee,
+  and whether the pool lets modules leave CERN, are questions to the pool.
+- **At CEA Saclay (Dylan, 25 Nov):** the five Micromegas A–E, 4 good and 20 bad M1 cards, 4 M4 cards, 16 M2 cards, the DAQ PC
+  and the DREAM core (1 TCM, 1 network card, 1 large NIM module) are kept for us. The FEUs and their cables went back into
+  CEA's common pool, so we must ask for 4 FEUs and 32 cables.
+
+Only if a loan falls through (+€61k in all): a V1742 €9.5k, 2 N1081B €14k, 3 linear FIFOs €6.9k, a NIM bin €5.1k, a VME
+crate €4.8k, an N93B €2.7k, an LV supply €1.9k, the LEMO cables and Ts €4.5k, PMTs €6–24k. Prices from the CAEN offer
+26OFC.01101 and `x17_facility_search/budget/items.py`. The hardware facts (owner, location, condition) are in the central
+inventory, `x17_facility_search/inventory/INVENTORY.md`.
 
 ## 8. Risks
 

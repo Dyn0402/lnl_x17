@@ -322,7 +322,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
       <input type="search" id="hw-q" placeholder="Search items, lenders, notes" aria-label="Search hardware">
       <label>Group by <select id="hw-grp">
         <option value="grp">system</option><option value="org">lender / source</option><option value="who">contact</option>
-        <option value="status">action</option><option value="state">state</option><option value="tier">budget tier</option><option value="">no grouping</option>
+        <option value="status">action</option><option value="state">state</option><option value="conf">loan confidence</option><option value="tier">budget tier</option><option value="">no grouping</option>
       </select></label>
       <label><input type="checkbox" id="hw-open"> hide what is in hand</label>
     </div>
@@ -844,7 +844,7 @@ function hwTable2() {
   t.append(h("thead", {}, head));
   const tb = h("tbody"); t.append(tb);
   const gk = $("#hw-grp").value;
-  const gval = x => gk === "tier" ? TIER_L[x.tier || ""] : (x[gk] || "—");
+  const gval = x => gk === "tier" ? TIER_L[x.tier || ""] : gk === "conf" ? (x.conf ? "loan " + x.conf : "no loan confidence set") : (x[gk] || "—");
   const groups = [];
   if (gk) { for (const x of rows) { let g = groups.find(g => g.k === gval(x)); if (!g) groups.push(g = { k: gval(x), r: [] }); g.r.push(x); } }
   else groups.push({ k: null, r: rows });
@@ -856,7 +856,7 @@ function hwTable2() {
     for (const x of g.r) tb.append(h("tr", { class: "it" + (x.id === hwSel ? " sel" : ""), on: { click: () => hwSelect(x.id, true) } },
       h("td", {}, h("b", {}, x.part), x.qty && x.qty !== "1" ? h("span", { class: "q" }, x.qty) : ""),
       h("td", { style: "white-space:nowrap" }, stChip(x.status)), h("td", { class: "small" }, x.src, h("span", { class: "q" }, x.who)),
-      h("td", { class: "small" }, x.state), h("td", { class: "small", style: "white-space:nowrap" }, x.need ? fmt(x.need, { month: "short", year: "numeric" }) : "—"),
+      h("td", { class: "small" }, x.state, x.conf ? h("span", { class: "q" }, "loan: " + x.conf) : ""), h("td", { class: "small", style: "white-space:nowrap" }, x.need ? fmt(x.need, { month: "short", year: "numeric" }) : "—"),
       h("td", { class: "num small", style: "white-space:nowrap" }, x.cash ? eur(x.cash) : x.fallback ? h("span", { class: "muted" }, `(${eur(x.fallback)})`) : "—",
         x.tier && x.tier !== "loan" ? h("span", { class: "q" }, TIER_L[x.tier].replace("-budget upgrade", " upgrade")) : x.tier === "loan" ? h("span", { class: "q" }, "if no loan") : "")));
   }
@@ -873,7 +873,7 @@ function hwDetail() {
     h("p", { style: "margin:0" }, stChip(x.status), "  ", h("span", { class: "chip" }, x.state), " ", x.tier ? h("span", { class: "chip" }, TIER_L[x.tier]) : ""));
   const dl = h("dl", { class: "hwdl" });
   const row = (k, v) => { if (v) dl.append(h("dt", {}, k), h("dd", {}, v)); };
-  row("Quantity", x.qty); row("From", x.src); row("Contact", x.who);
+  row("Quantity", x.qty); row("From", x.src); row("Contact", x.who); row("Loan confidence", x.conf);
   if (x.need) { const dd = Math.round((parse(x.need) - TODAY) / DAY); row("Needed by", `${fmtY(x.need)} (${dd > 0 ? dd + " days from now" : "past"})`); }
   if (x.cash) row("Cash", `${eur(x.cash)} (${eur(x.lo)}–${eur(x.hi)}); ${x.basis}`);
   if (x.fallback) row("If the loan fails", `${eur(x.fallback)} to buy; ${x.basis}`);
@@ -1060,7 +1060,7 @@ function budget() {
         on: { change: e => { bOpt[i] = e.target.checked; store.set("bopt2", bOpt); budget(); } } });
       t.append(h("tr", { style: on ? "" : "opacity:.6" }, h("td", {}, ctl), h("td", {}, b.item), h("td", { class: "num" }, "€" + (b.c / 1e3).toFixed(1) + "k"),
         h("td", { class: "num small muted" }, b.lo === b.hi ? "quoted" : `${(b.lo / 1e3).toFixed(1)}–${(b.hi / 1e3).toFixed(1)}k`),
-        h("td", { style: "width:22%" }, h("span", { class: "bbar" + (need ? "" : " opt"), style: `width:${b.c / max * 100}%` })), h("td", { class: "small muted" }, b.basis)));
+        h("td", { style: "width:22%" }, h("span", { class: "bbar" + (need ? "" : " opt"), style: `width:${b.c / max * 100}%` })), h("td", { class: "small muted" }, b.conf ? `loan ${b.conf}; ` : "", b.basis)));
     }
   }
   const tl = $("#b-tiles"); tl.innerHTML = "";

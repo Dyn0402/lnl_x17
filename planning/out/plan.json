@@ -494,7 +494,7 @@
    "due": "2027-01-15",
    "who": "Dylan",
    "status": "todo",
-   "t": "Ask CEA for the DREAM loan for H2 2027: 4 FEUs + TCM + 32 cables + LV; solder the TCM busy LEMO"
+   "t": "Ask CEA for the DREAM loan for H2 2027: 4 FEUs + 32 cables from CEA's common pool (the TCM, network card, NIM module and DAQ PC are kept for us at CEA); solder the TCM busy LEMO"
   },
   {
    "id": "M3",
@@ -534,7 +534,7 @@
    "due": "2027-02-28",
    "who": "Dylan",
    "status": "todo",
-   "t": "Trigger logic: 2–3 N1081B, a dual timer, FIFOs/splitters, NIM bin — borrow list"
+   "t": "Borrow list (25 Nov): LEMO cables + Ts from n_TOF (very likely, returned after the run); 2 N1081B, the N93B, 3–4 linear FIFOs, a NIM bin and the Wiener LV rented from the CERN electronics pool and taken to LNL (hopefully); splitters + adapters bought"
   },
   {
    "id": "S4",
@@ -686,7 +686,7 @@
      "name": "Micromegas A (det3)",
      "qty": "1",
      "owner": "MX17 collaboration",
-     "where": "(ask)",
+     "where": "CEA Saclay",
      "cond": "good",
      "avail_l": "ours to take",
      "note": "Best chamber: 92.9 % within 5 mm on the cosmic bench. Bulked by Stephan (CEA), 15 Jun 2026."
@@ -722,7 +722,7 @@
      "name": "Micromegas B (det2)",
      "qty": "1",
      "owner": "MX17 collaboration",
-     "where": "(ask)",
+     "where": "CEA Saclay",
      "cond": "fix",
      "avail_l": "ours to take",
      "note": "91.3 % on the bench. Drift needs a repair, likely just an electrical connection (Dylan, 19 Nov 2026)."
@@ -762,7 +762,7 @@
      "name": "Micromegas A (det3)",
      "qty": "1",
      "owner": "MX17 collaboration",
-     "where": "(ask)",
+     "where": "CEA Saclay",
      "cond": "good",
      "avail_l": "ours to take",
      "note": "Best chamber: 92.9 % within 5 mm on the cosmic bench. Bulked by Stephan (CEA), 15 Jun 2026."
@@ -772,7 +772,7 @@
      "name": "Micromegas B (det2)",
      "qty": "1",
      "owner": "MX17 collaboration",
-     "where": "(ask)",
+     "where": "CEA Saclay",
      "cond": "fix",
      "avail_l": "ours to take",
      "note": "91.3 % on the bench. Drift needs a repair, likely just an electrical connection (Dylan, 19 Nov 2026)."
@@ -796,8 +796,8 @@
   },
   {
    "id": "mmCD",
-   "part": "Micromegas C, D (spares)",
-   "qty": "2",
+   "part": "Micromegas C, D, E (spares)",
+   "qty": "3",
    "grp": "Micromegas & DREAM",
    "status": "decide",
    "org": "CEA Saclay",
@@ -811,7 +811,7 @@
      "name": "Micromegas C (det6)",
      "qty": "1",
      "owner": "MX17 collaboration",
-     "where": "(ask)",
+     "where": "CEA Saclay",
      "cond": "rebulk",
      "avail_l": "ours to take",
      "note": "57.8 % within 5 mm, spark-limited; needs re-bulking at CEA."
@@ -821,15 +821,25 @@
      "name": "Micromegas D (det7)",
      "qty": "1",
      "owner": "MX17 collaboration",
-     "where": "(ask)",
+     "where": "CEA Saclay",
      "cond": "rebulk",
      "avail_l": "ours to take",
      "note": "43.1 % within 5 mm; ~130 of 512 X channels dead. Needs re-bulking."
+    },
+    {
+     "id": "mmE",
+     "name": "Micromegas E (det4)",
+     "qty": "1",
+     "owner": "MX17 collaboration",
+     "where": "CEA Saclay",
+     "cond": "partial",
+     "avail_l": "ours to take",
+     "note": "62 % of the area does not amplify, in fixed stripes along X; the rest is a normal chamber (77 % efficient). Ran in the banco/P2 DREAM crate at the SPS, Jul 2026 (nTof_x17/mx_june_cosmic_qa/det4_sps_assessment/DET4_SPS_ASSESSMENT.md). All five chambers A–E are at CEA Saclay (Dylan, 25 Nov 2026)."
     }
    ],
    "place": [],
    "tasks": [],
-   "note": "Spark-limited (57.8 %, 43.1 %); re-bulk needed. Not required for slot 1. C re-bulked would be the spare.",
+   "note": "C and D are spark-limited (57.8 %, 43.1 %) and need a re-bulk; E (det4) amplifies on only 38 % of its area. Not required for slot 1. C re-bulked would be the spare. All five chambers are at CEA Saclay (25 Nov).",
    "detail": "Needed for slot 2 (four arms).",
    "cash": 0,
    "fallback": 0,
@@ -849,23 +859,23 @@
    "inv": [
     {
      "id": "m1cern",
-     "name": "M1 multiplex cards, CERN design",
+     "name": "M1 multiplex cards, good (CERN design)",
      "qty": "4",
      "owner": "MX17 collaboration (ask)",
-     "where": "on Micromegas A",
+     "where": "CEA Saclay",
      "cond": "good",
      "avail_l": "ours to take",
-     "note": "The clean cards; ran on A at n_TOF."
+     "note": "The clean cards; ran on A at n_TOF. 4 good M1 cards at CEA (Dylan, 25 Nov 2026)."
     },
     {
      "id": "m1ital",
-     "name": "M1 multiplex cards, Italian",
-     "qty": "12",
+     "name": "M1 multiplex cards, bad (Italian)",
+     "qty": "20",
      "owner": "MX17 collaboration (ask)",
-     "where": "on Micromegas B, C, D",
+     "where": "CEA Saclay",
      "cond": "partial",
      "avail_l": "ours to take",
-     "note": "Noisy at n_TOF; replacing them is budget item m1."
+     "note": "Noisy at n_TOF (B, C, D) and on E; replacing them is budget item m1. 20 bad M1 cards at CEA (Dylan, 25 Nov 2026; was counted as 12)."
     }
    ],
    "place": [
@@ -874,7 +884,7 @@
    "tasks": [
     "M4"
    ],
-   "note": "Clean CERN cards on A; B keeps its noisier Italian cards for slot 1.",
+   "note": "Clean CERN cards on A; B keeps its noisier Italian cards for slot 1. At CEA: 4 good and 20 bad M1 cards, plus 4 M4 and 16 M2 cards (25 Nov).",
    "detail": "The noise on B's cards was seen at n_TOF; the cosmic bench (M4) measures it with the LNL set-up.",
    "cash": 0,
    "fallback": 0,
@@ -895,13 +905,13 @@
    "inv": [
     {
      "id": "m1ital",
-     "name": "M1 multiplex cards, Italian",
-     "qty": "12",
+     "name": "M1 multiplex cards, bad (Italian)",
+     "qty": "20",
      "owner": "MX17 collaboration (ask)",
-     "where": "on Micromegas B, C, D",
+     "where": "CEA Saclay",
      "cond": "partial",
      "avail_l": "ours to take",
-     "note": "Noisy at n_TOF; replacing them is budget item m1."
+     "note": "Noisy at n_TOF (B, C, D) and on E; replacing them is budget item m1. 20 bad M1 cards at CEA (Dylan, 25 Nov 2026; was counted as 12)."
     }
    ],
    "place": [
@@ -922,34 +932,44 @@
   {
    "id": "dream",
    "part": "DREAM: FEUs + TCM + cables",
-   "qty": "4 FEUs, 1 TCM, 32 cables",
+   "qty": "4 FEUs, 32 cables; 1 TCM, network card, NIM module",
    "grp": "Micromegas & DREAM",
    "status": "borrow",
    "org": "CEA Saclay",
-   "src": "CEA Saclay",
+   "src": "CEA Saclay: the TCM, network card and NIM module are kept for us; FEUs and cables from CEA's common pool",
    "who": "Stephan (CEA)",
    "state": "to ask",
    "need": "2027-05-01",
    "inv": [
     {
      "id": "dream",
-     "name": "DREAM DAQ: FEUs + trigger/clock unit (TCM)",
-     "qty": "8 FEUs, 1 TCM",
+     "name": "DREAM DAQ core: TCM + network card + large NIM module",
+     "qty": "1 TCM, 1 network card, 1 NIM module",
      "owner": "CEA Saclay",
-     "where": "(ask)",
+     "where": "CEA Saclay",
+     "cond": "good",
+     "avail_l": "held for MX17 by its owner",
+     "note": "Kept for MX17 at CEA (Dylan, 25 Nov 2026). The FEUs and the cables are separate (dream_feu, dreamcab). Is the large NIM module the NIM bin that the budget counts on with DREAM (ask)? Liability ~€72k for the full n_TOF system. The TCM busy output has no LEMO fitted yet (daq_trigger/PLAN.md §4.2)."
+    },
+    {
+     "id": "dream_feu",
+     "name": "DREAM FEUs",
+     "qty": "8 used at n_TOF",
+     "owner": "CEA Saclay",
+     "where": "CEA Saclay (common pool)",
      "cond": "good",
      "avail_l": "lent on request",
-     "note": "Lent for n_TOF 2026, liability ~€72k for the full system. The TCM busy output has no LEMO fitted yet (daq_trigger/PLAN.md §4.2)."
+     "note": "Back in CEA's common pool after n_TOF (Dylan, 25 Nov 2026): ask for them for each run."
     },
     {
      "id": "dreamcab",
      "name": "FEU ↔ M1 cables, 2 m",
-     "qty": "64",
-     "owner": "CEA Saclay (ask)",
-     "where": "(ask)",
+     "qty": "64 used at n_TOF",
+     "owner": "CEA Saclay",
+     "where": "CEA Saclay (common pool)",
      "cond": "good",
      "avail_l": "lent on request",
-     "note": "Come with the DREAM loan (ask)."
+     "note": "Back in CEA's common pool with the FEUs (Dylan, 25 Nov 2026): ask for them for each run."
     }
    ],
    "place": [
@@ -959,7 +979,7 @@
    "tasks": [
     "M2"
    ],
-   "note": "Half the n_TOF system. Solder a LEMO on the TCM busy output before the run (daq_trigger/PLAN.md §4.2).",
+   "note": "Half the n_TOF system. The TCM, the network card and the large NIM module are at CEA for us; the FEUs and cables went back into CEA's common pool, so they must be asked for (25 Nov). Solder a LEMO on the TCM busy output before the run (daq_trigger/PLAN.md §4.2).",
    "detail": "A loan with a liability (the full 8-FEU system was valued at €72k in the budget). At LNL rates DREAM is > 95 % live.",
    "cash": 0,
    "fallback": 0,
@@ -979,13 +999,13 @@
    "inv": [
     {
      "id": "dream",
-     "name": "DREAM DAQ: FEUs + trigger/clock unit (TCM)",
-     "qty": "8 FEUs, 1 TCM",
+     "name": "DREAM DAQ core: TCM + network card + large NIM module",
+     "qty": "1 TCM, 1 network card, 1 NIM module",
      "owner": "CEA Saclay",
-     "where": "(ask)",
+     "where": "CEA Saclay",
      "cond": "good",
-     "avail_l": "lent on request",
-     "note": "Lent for n_TOF 2026, liability ~€72k for the full system. The TCM busy output has no LEMO fitted yet (daq_trigger/PLAN.md §4.2)."
+     "avail_l": "held for MX17 by its owner",
+     "note": "Kept for MX17 at CEA (Dylan, 25 Nov 2026). The FEUs and the cables are separate (dream_feu, dreamcab). Is the large NIM module the NIM bin that the budget counts on with DREAM (ask)? Liability ~€72k for the full n_TOF system. The TCM busy output has no LEMO fitted yet (daq_trigger/PLAN.md §4.2)."
     }
    ],
    "place": [
@@ -1215,9 +1235,10 @@
    "qty": "2",
    "grp": "Trigger & DAQ",
    "status": "borrow",
-   "org": "INFN / LNL",
-   "src": "LNL pool, else a CAEN loan",
-   "who": "Pierfrancesco / CAEN",
+   "org": "CERN (n_TOF / pool)",
+   "src": "CERN electronics pool: rent and take to LNL; else the LNL pool or a CAEN loan",
+   "conf": "hopefully",
+   "who": "Dylan / Pierfrancesco / CAEN",
    "state": "to ask",
    "need": "2027-05-01",
    "b": "If no N1081B loan: 2 × N1081B",
@@ -1255,9 +1276,10 @@
    "qty": "1 (N93B)",
    "grp": "Trigger & DAQ",
    "status": "borrow",
-   "org": "INFN / LNL",
-   "src": "LNL pool",
-   "who": "Pierfrancesco",
+   "org": "CERN (n_TOF / pool)",
+   "src": "CERN electronics pool: rent and take to LNL; else the LNL pool",
+   "conf": "hopefully",
+   "who": "Dylan / Pierfrancesco",
    "state": "to ask",
    "need": "2027-05-01",
    "b": "If no dual timer: N93B",
@@ -1289,32 +1311,127 @@
    "basis": "CAEN offer"
   },
   {
-   "id": "nimbin",
-   "part": "NIM bin",
-   "qty": "1–2",
+   "id": "fifo",
+   "part": "Linear fan-in/fan-outs (428F)",
+   "qty": "3–4",
    "grp": "Trigger & DAQ",
    "status": "borrow",
-   "org": "INFN / LNL",
-   "src": "LNL pool",
-   "who": "Pierfrancesco",
+   "org": "CERN (n_TOF / pool)",
+   "src": "CERN electronics pool: rent and take to LNL; else the LNL pool",
+   "conf": "hopefully",
+   "who": "Dylan / Pierfrancesco",
    "state": "to ask",
    "need": "2027-05-01",
+   "b": "If no FIFO rental: 3 × CAEN N625",
+   "inv": [
+    {
+     "id": "fifo_cern",
+     "name": "Linear fan-in/fan-outs (428F)",
+     "qty": "6",
+     "owner": "CERN electronics pool",
+     "where": "CERN pool",
+     "cond": "good",
+     "avail_l": "returned, ask again",
+     "note": "Rented for n_TOF."
+    }
+   ],
    "place": [
     "nim"
    ],
    "tasks": [
     "S3"
    ],
-   "note": "For the N1081Bs, the timer and the linear FIFOs.",
-   "detail": "Standard pool item (ask).",
+   "note": "As at n_TOF: one per wall sums the top and bottom ends of each segment for the trigger; one fans the 4 plastic PMTs (+2 liquid cells) out to the digitizer and the trigger.",
+   "detail": "x17_facility_search budget item 'fifo': 6 at n_TOF for 4 arms, so 3 for two (4 with the liquid cells). The N625 is €2,290 (CAEN offer 26OFC.01101).",
    "cash": 0,
-   "fallback": 0,
-   "tier": "",
-   "inv": []
+   "fallback": 6870,
+   "tier": "loan",
+   "lo": 6870,
+   "hi": 6870,
+   "basis": "CAEN offer, €2,290 each"
+  },
+  {
+   "id": "nimbin",
+   "part": "NIM bin",
+   "qty": "1–2",
+   "grp": "Trigger & DAQ",
+   "status": "borrow",
+   "org": "CERN (n_TOF / pool)",
+   "src": "CERN electronics pool with the modules (or the large NIM module kept at CEA, ask); else the LNL pool",
+   "conf": "hopefully",
+   "who": "Dylan / Pierfrancesco",
+   "state": "to ask",
+   "need": "2027-05-01",
+   "b": "If no NIM bin rental: 1 × CAEN NIM8303",
+   "place": [
+    "nim"
+   ],
+   "tasks": [
+    "S3"
+   ],
+   "note": "For the N1081Bs, the timer and the linear FIFOs: 2 × 2 + 1 + 3–4 = 8–9 slots, one 12-slot bin.",
+   "detail": "Is the 'large NIM module' kept with DREAM at CEA the NIM bin the budget counts on (ask Stephan)?",
+   "cash": 0,
+   "fallback": 5110,
+   "tier": "loan",
+   "inv": [],
+   "lo": 4390,
+   "hi": 5110,
+   "basis": "CAEN offer €5,110 (12 slots); GANIL tender €4,390"
+  },
+  {
+   "id": "lemo",
+   "part": "LEMO cables + Ts (n_TOF's set)",
+   "qty": "~110 cables + ~20 Ts needed",
+   "grp": "Trigger & DAQ",
+   "status": "borrow",
+   "org": "CERN (n_TOF / pool)",
+   "src": "n_TOF: the cables and connectors of the 2026 set-up, returned after the run",
+   "conf": "very likely",
+   "who": "n_TOF (Dylan)",
+   "state": "to ask",
+   "need": "2027-05-01",
+   "b": "If no n_TOF LEMO loan: ~110 LEMO cables + 20 Ts",
+   "inv": [
+    {
+     "id": "lemo_ntof",
+     "name": "LEMO 00 coax cables, by delay",
+     "qty": "~60 × 16 ns, ~60 × 5 ns, ~20 × 2 ns, ~20 × 1 ns",
+     "owner": "CERN n_TOF",
+     "where": "CERN n_TOF",
+     "cond": "good",
+     "avail_l": "lent on request",
+     "note": "The cables of the 2026 set-up. The lengths are Dylan's estimate (25 Nov 2026), not a count. They agree with the connections in use: ~120 N1081B inputs and outputs (nTof_x17_DAQ/n1081b/n1081b_module_map.py) plus the wall, plastic and FIFO links, ~150 in all (budget/items.py splitters). At ~5 ns/m: 16 ns ≈ 3.2 m, 5 ns ≈ 1 m, 2 ns ≈ 40 cm, 1 ns ≈ 20 cm. n_TOF lends them if we return them (Dylan, 25 Nov 2026)."
+    },
+    {
+     "id": "lemo_t_ntof",
+     "name": "LEMO T connectors and small adapters",
+     "qty": "~30 Ts (+ adapters: count)",
+     "owner": "CERN n_TOF",
+     "where": "CERN n_TOF",
+     "cond": "good",
+     "avail_l": "lent on request",
+     "note": "Dylan's estimate (25 Nov 2026). Lent with the cables, to be returned."
+    }
+   ],
+   "place": [
+    "cables"
+   ],
+   "tasks": [
+    "S3"
+   ],
+   "note": "n_TOF has about 60 × 16 ns, 60 × 5 ns, 20 × 2 ns and 20 × 1 ns LEMO cables and ~30 LEMO Ts (Dylan's estimate, 25 Nov). We can very likely borrow them if we return them.",
+   "detail": "The count agrees with the n_TOF set-up: ~120 N1081B inputs and outputs in use (n1081b_module_map.py) plus the wall, plastic and FIFO links, ~150 cables for 4 arms. Two arms need about 110: 16 wall channels to the splitters, digitizer and FIFOs (~50), the FIFO sums and plastics to the trigger and digitizer (~20), ~30 between the 2 N1081Bs, the timer and DREAM, the trigger word and the clock (~10). 16 ns ≈ 3.2 m, 5 ns ≈ 1 m at ~5 ns/m.",
+   "cash": 0,
+   "fallback": 4500,
+   "tier": "loan",
+   "lo": 3000,
+   "hi": 6000,
+   "basis": "items.py splitters: LEMO 00 cable €25–49 made up; T €12–30"
   },
   {
    "id": "split",
-   "part": "Active splitters, LEMO cables, adapters",
+   "part": "Splitters and LEMO↔BNC adapters",
    "qty": "for 2 arms",
    "grp": "Trigger & DAQ",
    "status": "buy",
@@ -1323,22 +1440,22 @@
    "who": "Dylan",
    "state": "to order",
    "need": "2027-05-01",
-   "b": "Splitters, LEMO cables, adapters (2 arms)",
+   "b": "Splitters and LEMO↔BNC adapters (2 arms)",
    "place": [
     "cables"
    ],
    "tasks": [
     "S3"
    ],
-   "note": "Every scintillator signal is split actively: one copy to the digitizer, one to the trigger. A passive split halved the plastic amplitude at n_TOF.",
-   "detail": "x17_facility_search budget item 'splitters' (€7.6k for 4 arms), halved.",
-   "cash": 3800,
+   "note": "Every scintillator signal goes to the digitizer and to the trigger. A BNC-T split halved the plastic amplitude at n_TOF, so the PMTs go through the FIFOs and the wall channels through 50 Ω splitters. The LEMO cables and Ts come from n_TOF (line above).",
+   "detail": "x17_facility_search budget item 'splitters' without the cables: ~20 resistive splitters (€10–84) and ~20 LEMO↔BNC adapters (€24).",
+   "cash": 1300,
    "fallback": 0,
    "tier": "need",
    "inv": [],
-   "lo": 2500,
-   "hi": 5000,
-   "basis": "items.py splitters €7.6k for 4 arms, halved"
+   "lo": 700,
+   "hi": 2200,
+   "basis": "items.py splitters without the cables: ~20 resistive splitters €10–84 + ~20 adapters €24 (25 Nov: the LEMO cables and Ts are borrowed from n_TOF)"
   },
   {
    "id": "pc",
@@ -1347,9 +1464,9 @@
    "grp": "Trigger & DAQ",
    "status": "borrow",
    "org": "CEA Saclay",
-   "src": "CEA Saclay",
+   "src": "CEA Saclay (kept for us)",
    "who": "Stephan (CEA)",
-   "state": "to ask",
+   "state": "agreed",
    "need": "2027-05-01",
    "inv": [
     {
@@ -1357,10 +1474,10 @@
      "name": "DAQ PC (DREAM + run control)",
      "qty": "1",
      "owner": "CEA Saclay",
-     "where": "(ask)",
+     "where": "CEA Saclay",
      "cond": "good",
-     "avail_l": "lent on request",
-     "note": "Not Dylan's: borrow it from CEA for each run (Dylan, 19 Nov 2026)."
+     "avail_l": "held for MX17 by its owner",
+     "note": "Not Dylan's (19 Nov 2026); kept for MX17 at CEA with the DREAM core (Dylan, 25 Nov 2026)."
     }
    ],
    "place": [
@@ -1370,7 +1487,7 @@
     "M2",
     "I1"
    ],
-   "note": "Not Dylan's: borrow it from CEA with the DREAM loan (Dylan, 19 Nov 2026). Run control from n_TOF: DREAM + digitizers on one event list.",
+   "note": "Not Dylan's, but kept for MX17 at CEA with the DREAM core (Dylan, 25 Nov 2026). Run control from n_TOF: DREAM + digitizers on one event list.",
    "detail": "Network at LNL: ask (task L3).",
    "cash": 0,
    "fallback": 0,
@@ -1437,27 +1554,69 @@
   },
   {
    "id": "lv",
-   "part": "LV supply 5 V / ~25 A",
+   "part": "LV supply 5 V / ~25 A (DREAM)",
    "qty": "1",
    "grp": "Power",
    "status": "borrow",
-   "org": "INFN / LNL",
-   "src": "LNL / CERN pool",
-   "who": "Pierfrancesco",
+   "org": "CERN (n_TOF / pool)",
+   "src": "CERN electronics pool: the Wiener PL512 that powered DREAM at n_TOF, rented and taken to LNL; else LNL",
+   "conf": "hopefully",
+   "who": "Dylan",
    "state": "to ask",
    "need": "2027-05-01",
+   "b": "If no LV rental: TDK-Lambda GEN6-100/LN",
+   "inv": [
+    {
+     "id": "lv_dream",
+     "name": "Wiener PL512 LV supply (DREAM FEUs + TCM)",
+     "qty": "1",
+     "owner": "CERN electronics pool (ask)",
+     "where": "(ask)",
+     "cond": "good",
+     "avail_l": "returned, ask again",
+     "note": "The low-voltage supply that powered DREAM at n_TOF (read by nTof_x17_DAQ/weiner_ps_monitor.py; model to confirm). To rent again from CERN and take to LNL, as the NIM modules (Dylan, 25 Nov 2026)."
+    }
+   ],
    "place": [
     "lv"
    ],
    "tasks": [
     "M2"
    ],
-   "note": "4 FEUs at ~5 A + TCM ~5 A.",
-   "detail": "Ask CEA whether the LV comes with the DREAM loan.",
+   "note": "4 FEUs at ~5 A + TCM ~5 A. The same supply as at n_TOF keeps the noise conditions we know.",
+   "detail": "Model from nTof_x17_DAQ/weiner_ps_monitor.py (PL512, to confirm). Fallback price: x17_facility_search budget item 'lvfeu' (Datatec, 30 Oct 2026).",
    "cash": 0,
+   "fallback": 1850,
+   "tier": "loan",
+   "lo": 1700,
+   "hi": 2400,
+   "basis": "items.py lvfeu: Datatec, 30 Oct 2026"
+  },
+  {
+   "id": "cernrent",
+   "part": "CERN electronics-pool rental (NIM modules + LV)",
+   "qty": "~5 months",
+   "grp": "Power",
+   "status": "buy",
+   "org": "purchase",
+   "src": "CERN electronics pool",
+   "who": "Dylan",
+   "state": "to ask",
+   "need": "2027-05-01",
+   "b": "CERN pool rental fee: 2 N1081B, N93B, FIFOs, NIM bin, LV",
+   "place": [],
+   "tasks": [
+    "S3"
+   ],
+   "note": "The rental itself. The fee, and whether rented modules may leave CERN for LNL, are to ask the pool.",
+   "detail": "May (cosmic bench) to October 2027.",
+   "cash": 1000,
    "fallback": 0,
-   "tier": "",
-   "inv": []
+   "tier": "need",
+   "inv": [],
+   "lo": 0,
+   "hi": 3000,
+   "basis": "guess; the fee is to ask the CERN electronics pool"
   },
   {
    "id": "hv",
@@ -1742,11 +1901,19 @@
    "tier": "need"
   },
   {
-   "item": "Splitters, LEMO cables, adapters (2 arms)",
-   "c": 3800,
-   "lo": 2500,
-   "hi": 5000,
-   "basis": "items.py splitters €7.6k for 4 arms, halved",
+   "item": "Splitters and LEMO↔BNC adapters (2 arms)",
+   "c": 1300,
+   "lo": 700,
+   "hi": 2200,
+   "basis": "items.py splitters without the cables: ~20 resistive splitters €10–84 + ~20 adapters €24 (25 Nov: the LEMO cables and Ts are borrowed from n_TOF)",
+   "tier": "need"
+  },
+  {
+   "item": "CERN pool rental fee: 2 N1081B, N93B, FIFOs, NIM bin, LV",
+   "c": 1000,
+   "lo": 0,
+   "hi": 3000,
+   "basis": "guess; the fee is to ask the CERN electronics pool",
    "tier": "need"
   },
   {
@@ -1819,7 +1986,44 @@
    "lo": 13960,
    "hi": 13960,
    "basis": "CAEN offer, €6,980 each",
-   "tier": "loan"
+   "tier": "loan",
+   "conf": "hopefully"
+  },
+  {
+   "item": "If no FIFO rental: 3 × CAEN N625",
+   "c": 6870,
+   "lo": 6870,
+   "hi": 6870,
+   "basis": "CAEN offer, €2,290 each",
+   "tier": "loan",
+   "conf": "hopefully"
+  },
+  {
+   "item": "If no NIM bin rental: 1 × CAEN NIM8303",
+   "c": 5110,
+   "lo": 4390,
+   "hi": 5110,
+   "basis": "CAEN offer €5,110 (12 slots); GANIL tender €4,390",
+   "tier": "loan",
+   "conf": "hopefully"
+  },
+  {
+   "item": "If no LV rental: TDK-Lambda GEN6-100/LN",
+   "c": 1850,
+   "lo": 1700,
+   "hi": 2400,
+   "basis": "items.py lvfeu: Datatec, 30 Oct 2026",
+   "tier": "loan",
+   "conf": "hopefully"
+  },
+  {
+   "item": "If no n_TOF LEMO loan: ~110 LEMO cables + 20 Ts",
+   "c": 4500,
+   "lo": 3000,
+   "hi": 6000,
+   "basis": "items.py splitters: LEMO 00 cable €25–49 made up; T €12–30",
+   "tier": "loan",
+   "conf": "very likely"
   },
   {
    "item": "If no VME crate: VME8004B + A4818",
@@ -1835,7 +2039,8 @@
    "lo": 2720,
    "hi": 2720,
    "basis": "CAEN offer",
-   "tier": "loan"
+   "tier": "loan",
+   "conf": "hopefully"
   },
   {
    "item": "If the PMTs must be bought: 4–6 fast 2″ PMTs + bases",
@@ -1845,6 +2050,13 @@
    "basis": "guess; Hamamatsu Italia scale",
    "tier": "loan"
   }
+ ],
+ "loan_conf": [
+  "agreed",
+  "very likely",
+  "likely",
+  "hopefully",
+  "unknown"
  ],
  "questions": [
   {
@@ -1918,6 +2130,18 @@
   {
    "who": "CEA (Stephan, DREAM)",
    "q": "Repair B's drift window by April 2027 (and 2 new windows, if cheap)? Lend 4 FEUs + TCM for Jun–Oct 2027?"
+  },
+  {
+   "who": "CERN electronics pool",
+   "q": "Can rented modules go to LNL for ~5 months (May–Oct 2027): 2 × N1081B, the N93B, 3–4 linear FIFOs, a NIM bin and the Wiener PL512 LV? What is the fee?"
+  },
+  {
+   "who": "n_TOF",
+   "q": "Lend the LEMO cables (~60 × 16 ns, 60 × 5 ns, 20 × 2 ns, 20 × 1 ns) and ~30 LEMO Ts for May–Oct 2027, returned after the run?"
+  },
+  {
+   "who": "CEA (Stephan, DREAM)",
+   "q": "Is the large NIM module kept with DREAM a NIM bin with room for our trigger modules? Can 4 FEUs + 32 cables come out of the common pool for Jun–Oct 2027?"
   },
   {
    "who": "CAEN",

@@ -146,7 +146,7 @@ TASKS = [
     dict(id="M1", ws="mm", due="2027-01-15", who="Dylan", status="todo",
          t="Ask Stephan / CEA: repair B's drift window (needed); new aluminised-mylar windows for A and B (low-budget upgrade); dates"),
     dict(id="M2", ws="mm", due="2027-01-15", who="Dylan", status="todo",
-         t="Ask CEA for the DREAM loan for H2 2027: 4 FEUs + TCM + 32 cables + LV; solder the TCM busy LEMO"),
+         t="Ask CEA for the DREAM loan for H2 2027: 4 FEUs + 32 cables from CEA's common pool (the TCM, network card, NIM module and DAQ PC are kept for us at CEA); solder the TCM busy LEMO"),
     dict(id="M3", ws="mm", due="2027-04-30", who="Dylan", status="todo",
          t="Optional (high-budget upgrade): 4 CERN-design M1 cards for B. Slot 1 runs B with its existing Italian M1s"),
     dict(id="M4", ws="mm", due="2027-06-15", who="Dylan", status="todo",
@@ -157,7 +157,7 @@ TASKS = [
     dict(id="S2", ws="scint", due="2027-01-31", who="Pierfrancesco", status="todo",
          t="Digitizers: ~24 channels (16 wall + 4–6 PMT + trigger word) from LNL pool; else ask CAEN for a test loan"),
     dict(id="S3", ws="scint", due="2027-02-28", who="Dylan", status="todo",
-         t="Trigger logic: 2–3 N1081B, a dual timer, FIFOs/splitters, NIM bin — borrow list"),
+         t="Borrow list (25 Nov): LEMO cables + Ts from n_TOF (very likely, returned after the run); 2 N1081B, the N93B, 3–4 linear FIFOs, a NIM bin and the Wiener LV rented from the CERN electronics pool and taken to LNL (hopefully); splitters + adapters bought"),
     dict(id="S4", ws="scint", due="2027-05-31", who="Dylan", status="todo",
          t="Bench tests T1, T2, T4 (prescaler, busy lock 1:1, trigger word)"),
     dict(id="S5", ws="scint", due="2026-11-20", who="Dylan", status="done",
@@ -199,14 +199,17 @@ TASKS = [
 # ----------------------------------------------------------------------------------------------
 # Hardware for slot 1 (two arms): everything the run needs, owned, borrowed, bought or made (Hardware tab).
 #   status  what we must do: ready (in hand) | fix | borrow | find | buy | make | decide
-#   org     lender or source, for grouping: MX17 collaboration | CEA Saclay | INFN / LNL | purchase | our own work
+#   org     lender or source, for grouping: MX17 collaboration | CEA Saclay | INFN / LNL | CERN (n_TOF / pool) | purchase | our own work
 #   src     where it comes from, in words; who = our contact for it
 #   state   progress: in hand | agreed | to ask | asked | to find | to order | to make | to decide
 #   need    date it must be in hand (the cosmic bench starts May 2027, installation Aug 2027)
 #   b       the BUDGET line that prices it (cash, tier and the cost if a loan falls through come from there)
 #   place   where it sits on the Hardware tab's diagram (keys of PLACES in site/template.html)
 #   inv     ids in the central inventory (x17_facility_search/inventory/inventory.py): owner, location, condition
+#   conf    for a loan or rental: how sure we are to get it (LOAN_CONF); the fallback price is in its BUDGET line
 #   tasks   task ids; ids mmA, mmB, mmCD, walls, plast, ls are also the layers of the Set-up view.
+LOAN_CONF = ["agreed", "very likely", "likely", "hopefully", "unknown"]
+
 HARDWARE = [
     # --- Micromegas & DREAM
     dict(id="mmA", part="Micromegas A (det3)", qty="1", grp="Micromegas & DREAM", status="ready", org="MX17 collaboration", src="MX17 collaboration",
@@ -221,21 +224,22 @@ HARDWARE = [
          who="Stephan (CEA)", state="to ask", need="2027-04-30", b="New aluminised-mylar drift windows, A and B", inv=["mmA", "mmB"], place=["mmA", "mmB"], tasks=["M1"],
          note="Low-budget upgrade: aluminised mylar only (the aluminium is the cathode), dropping the 9 µm Cu that triples the material per crossing.",
          detail="x17_facility_search budget item 'windows': ~€2.5k for four (frames, glue, labour), so ~€1.25k for two. Not needed for the test."),
-    dict(id="mmCD", part="Micromegas C, D (spares)", qty="2", grp="Micromegas & DREAM", status="decide", org="CEA Saclay", src="CEA Saclay",
-         who="CEA", state="to decide", need="", inv=["mmC", "mmD"], place=[], tasks=[],
-         note="Spark-limited (57.8 %, 43.1 %); re-bulk needed. Not required for slot 1. C re-bulked would be the spare.",
+    dict(id="mmCD", part="Micromegas C, D, E (spares)", qty="3", grp="Micromegas & DREAM", status="decide", org="CEA Saclay", src="CEA Saclay",
+         who="CEA", state="to decide", need="", inv=["mmC", "mmD", "mmE"], place=[], tasks=[],
+         note="C and D are spark-limited (57.8 %, 43.1 %) and need a re-bulk; E (det4) amplifies on only 38 % of its area. Not required for slot 1. C re-bulked would be the spare. All five chambers are at CEA Saclay (25 Nov).",
          detail="Needed for slot 2 (four arms)."),
     dict(id="m1", part="M1 multiplex cards", qty="8 (4 per chamber)", grp="Micromegas & DREAM", status="ready", org="MX17 collaboration", src="MX17 collaboration (CERN + Italian cards)",
          who="Dylan", state="in hand", need="2027-05-01", inv=["m1cern", "m1ital"], place=["m1"], tasks=["M4"],
-         note="Clean CERN cards on A; B keeps its noisier Italian cards for slot 1.",
+         note="Clean CERN cards on A; B keeps its noisier Italian cards for slot 1. At CEA: 4 good and 20 bad M1 cards, plus 4 M4 and 16 M2 cards (25 Nov).",
          detail="The noise on B's cards was seen at n_TOF; the cosmic bench (M4) measures it with the LNL set-up."),
     dict(id="m1new", part="CERN-design M1 cards for B", qty="4", grp="Micromegas & DREAM", status="buy", org="purchase", src="CERN design, produced to order",
          who="Dylan", state="to decide", need="2027-04-30", b="4 CERN M1 cards for B (B runs its Italian M1s for the test)", inv=["m1ital"], place=["m1"], tasks=["M3"],
          note="High-budget upgrade toward slot 2 (~€2k each). Slot 1 runs B with its existing Italian cards.",
          detail="x17_facility_search budget item 'm1': 12 cards €24k."),
-    dict(id="dream", part="DREAM: FEUs + TCM + cables", qty="4 FEUs, 1 TCM, 32 cables", grp="Micromegas & DREAM", status="borrow", org="CEA Saclay", src="CEA Saclay",
-         who="Stephan (CEA)", state="to ask", need="2027-05-01", inv=["dream", "dreamcab"], place=["feu", "tcm"], tasks=["M2"],
-         note="Half the n_TOF system. Solder a LEMO on the TCM busy output before the run (daq_trigger/PLAN.md §4.2).",
+    dict(id="dream", part="DREAM: FEUs + TCM + cables", qty="4 FEUs, 32 cables; 1 TCM, network card, NIM module", grp="Micromegas & DREAM", status="borrow", org="CEA Saclay",
+         src="CEA Saclay: the TCM, network card and NIM module are kept for us; FEUs and cables from CEA's common pool",
+         who="Stephan (CEA)", state="to ask", need="2027-05-01", inv=["dream", "dream_feu", "dreamcab"], place=["feu", "tcm"], tasks=["M2"],
+         note="Half the n_TOF system. The TCM, the network card and the large NIM module are at CEA for us; the FEUs and cables went back into CEA's common pool, so they must be asked for (25 Nov). Solder a LEMO on the TCM busy output before the run (daq_trigger/PLAN.md §4.2).",
          detail="A loan with a liability (the full 8-FEU system was valued at €72k in the budget). At LNL rates DREAM is > 95 % live."),
     dict(id="busy", part="LEMO on the TCM busy output", qty="1", grp="Micromegas & DREAM", status="make", org="our own work", src="our own work",
          who="Dylan", state="to make", need="2027-05-31", inv=["dream"], place=["tcm"], tasks=["M2", "S4"],
@@ -266,23 +270,37 @@ HARDWARE = [
     dict(id="vme", part="VME crate + optical bridge", qty="VME8004B + A4818", grp="Trigger & DAQ", status="borrow", org="INFN / LNL", src="LNL pool",
          who="Pierfrancesco", state="to ask", need="2027-05-01", b="If no VME crate: VME8004B + A4818", place=["vme"], tasks=["S2"],
          note="Holds the digitizers; the A4818 links them to the DAQ PC over optical fibre.", detail="Price if bought: CAEN offer."),
-    dict(id="n1081", part="N1081B programmable logic units", qty="2", grp="Trigger & DAQ", status="borrow", org="INFN / LNL", src="LNL pool, else a CAEN loan",
-         who="Pierfrancesco / CAEN", state="to ask", need="2027-05-01", b="If no N1081B loan: 2 × N1081B", inv=["n1081b_cern"], place=["nim"], tasks=["S3", "S4"],
+    dict(id="n1081", part="N1081B programmable logic units", qty="2", grp="Trigger & DAQ", status="borrow", org="CERN (n_TOF / pool)",
+         src="CERN electronics pool: rent and take to LNL; else the LNL pool or a CAEN loan", conf="hopefully",
+         who="Dylan / Pierfrancesco / CAEN", state="to ask", need="2027-05-01", b="If no N1081B loan: 2 × N1081B", inv=["n1081b_cern"], place=["nim"], tasks=["S3", "S4"],
          note="The n_TOF trigger for two arms: legs per arm in 20 ns coincidence, PAIR never prescaled, SINGLE ÷P, 1 Hz clock, trigger word, scalers.",
          detail="Pierfrancesco suggested a CAEN test loan. Our n_TOF tooling (trigger_mode.py, poll_modules) runs on N1081Bs, the reason to stay with them."),
-    dict(id="timer", part="Dual timer", qty="1 (N93B)", grp="Trigger & DAQ", status="borrow", org="INFN / LNL", src="LNL pool",
-         who="Pierfrancesco", state="to ask", need="2027-05-01", b="If no dual timer: N93B", inv=["n93b_cern"], place=["nim"], tasks=["S3"],
+    dict(id="timer", part="Dual timer", qty="1 (N93B)", grp="Trigger & DAQ", status="borrow", org="CERN (n_TOF / pool)",
+         src="CERN electronics pool: rent and take to LNL; else the LNL pool", conf="hopefully",
+         who="Dylan / Pierfrancesco", state="to ask", need="2027-05-01", b="If no dual timer: N93B", inv=["n93b_cern"], place=["nim"], tasks=["S3"],
          note="Hold gate after each trigger, ORed with DREAM's busy.", detail="Price if bought: CAEN offer."),
-    dict(id="nimbin", part="NIM bin", qty="1–2", grp="Trigger & DAQ", status="borrow", org="INFN / LNL", src="LNL pool",
-         who="Pierfrancesco", state="to ask", need="2027-05-01", place=["nim"], tasks=["S3"],
-         note="For the N1081Bs, the timer and the linear FIFOs.", detail="Standard pool item (ask)."),
-    dict(id="split", part="Active splitters, LEMO cables, adapters", qty="for 2 arms", grp="Trigger & DAQ", status="buy", org="purchase", src="to order",
-         who="Dylan", state="to order", need="2027-05-01", b="Splitters, LEMO cables, adapters (2 arms)", place=["cables"], tasks=["S3"],
-         note="Every scintillator signal is split actively: one copy to the digitizer, one to the trigger. A passive split halved the plastic amplitude at n_TOF.",
-         detail="x17_facility_search budget item 'splitters' (€7.6k for 4 arms), halved."),
-    dict(id="pc", part="DAQ PC (DREAM + run control)", qty="1", grp="Trigger & DAQ", status="borrow", org="CEA Saclay", src="CEA Saclay",
-         who="Stephan (CEA)", state="to ask", need="2027-05-01", inv=["daqpc"], place=["pc"], tasks=["M2", "I1"],
-         note="Not Dylan's: borrow it from CEA with the DREAM loan (Dylan, 19 Nov 2026). Run control from n_TOF: DREAM + digitizers on one event list.",
+    dict(id="fifo", part="Linear fan-in/fan-outs (428F)", qty="3–4", grp="Trigger & DAQ", status="borrow", org="CERN (n_TOF / pool)",
+         src="CERN electronics pool: rent and take to LNL; else the LNL pool", conf="hopefully",
+         who="Dylan / Pierfrancesco", state="to ask", need="2027-05-01", b="If no FIFO rental: 3 × CAEN N625", inv=["fifo_cern"], place=["nim"], tasks=["S3"],
+         note="As at n_TOF: one per wall sums the top and bottom ends of each segment for the trigger; one fans the 4 plastic PMTs (+2 liquid cells) out to the digitizer and the trigger.",
+         detail="x17_facility_search budget item 'fifo': 6 at n_TOF for 4 arms, so 3 for two (4 with the liquid cells). The N625 is €2,290 (CAEN offer 26OFC.01101)."),
+    dict(id="nimbin", part="NIM bin", qty="1–2", grp="Trigger & DAQ", status="borrow", org="CERN (n_TOF / pool)",
+         src="CERN electronics pool with the modules (or the large NIM module kept at CEA, ask); else the LNL pool", conf="hopefully",
+         who="Dylan / Pierfrancesco", state="to ask", need="2027-05-01", b="If no NIM bin rental: 1 × CAEN NIM8303", place=["nim"], tasks=["S3"],
+         note="For the N1081Bs, the timer and the linear FIFOs: 2 × 2 + 1 + 3–4 = 8–9 slots, one 12-slot bin.",
+         detail="Is the 'large NIM module' kept with DREAM at CEA the NIM bin the budget counts on (ask Stephan)?"),
+    dict(id="lemo", part="LEMO cables + Ts (n_TOF's set)", qty="~110 cables + ~20 Ts needed", grp="Trigger & DAQ", status="borrow", org="CERN (n_TOF / pool)",
+         src="n_TOF: the cables and connectors of the 2026 set-up, returned after the run", conf="very likely",
+         who="n_TOF (Dylan)", state="to ask", need="2027-05-01", b="If no n_TOF LEMO loan: ~110 LEMO cables + 20 Ts", inv=["lemo_ntof", "lemo_t_ntof"], place=["cables"], tasks=["S3"],
+         note="n_TOF has about 60 × 16 ns, 60 × 5 ns, 20 × 2 ns and 20 × 1 ns LEMO cables and ~30 LEMO Ts (Dylan's estimate, 25 Nov). We can very likely borrow them if we return them.",
+         detail="The count agrees with the n_TOF set-up: ~120 N1081B inputs and outputs in use (n1081b_module_map.py) plus the wall, plastic and FIFO links, ~150 cables for 4 arms. Two arms need about 110: 16 wall channels to the splitters, digitizer and FIFOs (~50), the FIFO sums and plastics to the trigger and digitizer (~20), ~30 between the 2 N1081Bs, the timer and DREAM, the trigger word and the clock (~10). 16 ns ≈ 3.2 m, 5 ns ≈ 1 m at ~5 ns/m."),
+    dict(id="split", part="Splitters and LEMO↔BNC adapters", qty="for 2 arms", grp="Trigger & DAQ", status="buy", org="purchase", src="to order",
+         who="Dylan", state="to order", need="2027-05-01", b="Splitters and LEMO↔BNC adapters (2 arms)", place=["cables"], tasks=["S3"],
+         note="Every scintillator signal goes to the digitizer and to the trigger. A BNC-T split halved the plastic amplitude at n_TOF, so the PMTs go through the FIFOs and the wall channels through 50 Ω splitters. The LEMO cables and Ts come from n_TOF (line above).",
+         detail="x17_facility_search budget item 'splitters' without the cables: ~20 resistive splitters (€10–84) and ~20 LEMO↔BNC adapters (€24)."),
+    dict(id="pc", part="DAQ PC (DREAM + run control)", qty="1", grp="Trigger & DAQ", status="borrow", org="CEA Saclay", src="CEA Saclay (kept for us)",
+         who="Stephan (CEA)", state="agreed", need="2027-05-01", inv=["daqpc"], place=["pc"], tasks=["M2", "I1"],
+         note="Not Dylan's, but kept for MX17 at CEA with the DREAM core (Dylan, 25 Nov 2026). Run control from n_TOF: DREAM + digitizers on one event list.",
          detail="Network at LNL: ask (task L3)."),
     dict(id="switch", part="Network switch", qty="1", grp="Trigger & DAQ", status="ready", org="MX17 collaboration", src="Dylan's own",
          who="Dylan", state="in hand", need="2027-05-01", inv=["switch"], place=["pc"], tasks=[],
@@ -292,9 +310,15 @@ HARDWARE = [
          note="Low-budget upgrade. N1081B daemons wedge after dirty disconnects; at n_TOF there was no remote reboot.",
          detail="NETIO PowerPDU class (daq_trigger/PLAN.md §7)."),
     # --- Power
-    dict(id="lv", part="LV supply 5 V / ~25 A", qty="1", grp="Power", status="borrow", org="INFN / LNL", src="LNL / CERN pool",
-         who="Pierfrancesco", state="to ask", need="2027-05-01", place=["lv"], tasks=["M2"],
-         note="4 FEUs at ~5 A + TCM ~5 A.", detail="Ask CEA whether the LV comes with the DREAM loan."),
+    dict(id="lv", part="LV supply 5 V / ~25 A (DREAM)", qty="1", grp="Power", status="borrow", org="CERN (n_TOF / pool)",
+         src="CERN electronics pool: the Wiener PL512 that powered DREAM at n_TOF, rented and taken to LNL; else LNL", conf="hopefully",
+         who="Dylan", state="to ask", need="2027-05-01", b="If no LV rental: TDK-Lambda GEN6-100/LN", inv=["lv_dream"], place=["lv"], tasks=["M2"],
+         note="4 FEUs at ~5 A + TCM ~5 A. The same supply as at n_TOF keeps the noise conditions we know.",
+         detail="Model from nTof_x17_DAQ/weiner_ps_monitor.py (PL512, to confirm). Fallback price: x17_facility_search budget item 'lvfeu' (Datatec, 30 Oct 2026)."),
+    dict(id="cernrent", part="CERN electronics-pool rental (NIM modules + LV)", qty="~5 months", grp="Power", status="buy", org="purchase",
+         src="CERN electronics pool", who="Dylan", state="to ask", need="2027-05-01", b="CERN pool rental fee: 2 N1081B, N93B, FIFOs, NIM bin, LV", place=[], tasks=["S3"],
+         note="The rental itself. The fee, and whether rented modules may leave CERN for LNL, are to ask the pool.",
+         detail="May (cosmic bench) to October 2027."),
     dict(id="hv", part="HV: Micromegas drift + mesh, PMTs", qty="1 CAEN unit", grp="Power", status="borrow", org="INFN / LNL", src="LNL pool",
          who="Pierfrancesco", state="to ask", need="2027-05-01", place=["hv"], tasks=[],
          note="Micromegas ≤ 600 V; PMTs negative. Driven by caen_hv_py.", detail="SiPM bias from the walls' own supplies."),
@@ -349,7 +373,8 @@ TIERS = [
 BUDGET = [
     dict(item="Repair B's drift window", c=300, lo=0, hi=1000, basis="items.py driftfix (guess)", tier="need"),
     dict(item="Gas: premix bottles, regulators, panel", c=3000, lo=2000, hi=4500, basis="items.py gas", tier="need"),
-    dict(item="Splitters, LEMO cables, adapters (2 arms)", c=3800, lo=2500, hi=5000, basis="items.py splitters €7.6k for 4 arms, halved", tier="need"),
+    dict(item="Splitters and LEMO↔BNC adapters (2 arms)", c=1300, lo=700, hi=2200, basis="items.py splitters without the cables: ~20 resistive splitters €10–84 + ~20 adapters €24 (25 Nov: the LEMO cables and Ts are borrowed from n_TOF)", tier="need"),
+    dict(item="CERN pool rental fee: 2 N1081B, N93B, FIFOs, NIM bin, LV", c=1000, lo=0, hi=3000, basis="guess; the fee is to ask the CERN electronics pool", tier="need"),
     dict(item="New cans for the 2 liquid cells", c=1500, lo=600, hi=3000, basis="guess (ask PF: CFRP or Al, LNL workshop)", tier="need"),
     dict(item="Shipping CEA/CERN → LNL and back", c=2000, lo=1000, hi=4000, basis="guess", tier="need"),
     dict(item="New aluminised-mylar drift windows, A and B", c=1250, lo=500, hi=2500, basis="items.py windows €2.5k for 4, × 2/4", tier="low"),
@@ -359,6 +384,10 @@ BUDGET = [
     dict(item="4 CERN M1 cards for B (B runs its Italian M1s for the test)", c=8000, lo=6000, hi=10000, basis="items.py m1: 12 cards €24k → €2k/card", tier="high"),
     dict(item="If no digitizer loan: V1742 (32 ch)", c=9500, lo=9500, hi=9500, basis="CAEN offer 26OFC.01101", tier="loan"),
     dict(item="If no N1081B loan: 2 × N1081B", c=13960, lo=13960, hi=13960, basis="CAEN offer, €6,980 each", tier="loan"),
+    dict(item="If no FIFO rental: 3 × CAEN N625", c=6870, lo=6870, hi=6870, basis="CAEN offer, €2,290 each", tier="loan"),
+    dict(item="If no NIM bin rental: 1 × CAEN NIM8303", c=5110, lo=4390, hi=5110, basis="CAEN offer €5,110 (12 slots); GANIL tender €4,390", tier="loan"),
+    dict(item="If no LV rental: TDK-Lambda GEN6-100/LN", c=1850, lo=1700, hi=2400, basis="items.py lvfeu: Datatec, 30 Oct 2026", tier="loan"),
+    dict(item="If no n_TOF LEMO loan: ~110 LEMO cables + 20 Ts", c=4500, lo=3000, hi=6000, basis="items.py splitters: LEMO 00 cable €25–49 made up; T €12–30", tier="loan"),
     dict(item="If no VME crate: VME8004B + A4818", c=4760, lo=4760, hi=4760, basis="CAEN offer", tier="loan"),
     dict(item="If no dual timer: N93B", c=2720, lo=2720, hi=2720, basis="CAEN offer", tier="loan"),
     dict(item="If the PMTs must be bought: 4–6 fast 2″ PMTs + bases", c=12000, lo=6000, hi=24000, basis="guess; Hamamatsu Italia scale", tier="loan"),
@@ -385,6 +414,9 @@ QUESTIONS = [
     dict(who="Pierfrancesco", q="Body length: the template says 4 pages, the LNL submission page says 5. The draft keeps to 4: is that what people do?"),
     dict(who="LNL Accelerator Division", q="Flammable premix (Ar/iC₄H₁₀ 95/5) in the hall: rules, storage, exhaust."),
     dict(who="CEA (Stephan, DREAM)", q="Repair B's drift window by April 2027 (and 2 new windows, if cheap)? Lend 4 FEUs + TCM for Jun–Oct 2027?"),
+    dict(who="CERN electronics pool", q="Can rented modules go to LNL for ~5 months (May–Oct 2027): 2 × N1081B, the N93B, 3–4 linear FIFOs, a NIM bin and the Wiener PL512 LV? What is the fee?"),
+    dict(who="n_TOF", q="Lend the LEMO cables (~60 × 16 ns, 60 × 5 ns, 20 × 2 ns, 20 × 1 ns) and ~30 LEMO Ts for May–Oct 2027, returned after the run?"),
+    dict(who="CEA (Stephan, DREAM)", q="Is the large NIM module kept with DREAM a NIM bin with room for our trigger modules? Can 4 FEUs + 32 cables come out of the common pool for Jun–Oct 2027?"),
     dict(who="CAEN", q="A test loan of a V1742 or 2 × V1730 + 2 N1081B for the run (Pierfrancesco's suggestion)?"),
     dict(who="LNL ⁸Be group (Marchi)", q="Status of their 2023–24 AN2000 data; is a joint or complementary run welcome; is the AN2000 room free?"),
     dict(who="Plastics lender", q="Can we borrow the 4 small plastics' PMTs again (or which PMTs fit them)?"),
@@ -494,6 +526,7 @@ def hardware_rows() -> list[dict]:
     inv = inventory()
     rows = []
     for x in HARDWARE:
+        assert x.get("conf", "unknown") in LOAN_CONF, (x["id"], x.get("conf"))
         r = dict(x, cash=0, fallback=0, tier="")
         if inv:
             missing = [i for i in x.get("inv", []) if i not in inv]
@@ -504,6 +537,8 @@ def hardware_rows() -> list[dict]:
         if x.get("b"):
             bl = byname[x["b"]]
             r.update(tier=bl["tier"], lo=bl["lo"], hi=bl["hi"], basis=bl["basis"])
+            if x.get("conf"):
+                bl["conf"] = x["conf"]
             r["fallback" if bl["tier"] == "loan" else "cash"] = bl["c"]
         rows.append(r)
     return rows
@@ -514,7 +549,7 @@ def main() -> None:
     E.main()
     data = dict(
         updated=UPDATED, deadline=DEADLINE, pac=PAC, links=LINKS, tiers=TIERS, workstreams=WORKSTREAMS, phases=PHASES,
-        milestones=MILESTONES, tasks=TASKS, hardware=hardware_rows(), budget=BUDGET, questions=QUESTIONS,
+        milestones=MILESTONES, tasks=TASKS, hardware=hardware_rows(), budget=BUDGET, loan_conf=LOAN_CONF, questions=QUESTIONS,
         risks=RISKS, proposal=PROPOSAL, slot2=SLOT2, reach=reach_rows(), beam=beam_rows(),
         reach_model=dict(r_atomki=E.R_ATOMKI, r_megii=E.R_MEG2_90, days_on_res=E.DAYS_ON_RES,
                          sim_tag=E.SIM_TAG, cal_2arm_per_day=list(E.CAL_2ARM_PER_DAY)),
