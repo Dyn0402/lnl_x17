@@ -1,17 +1,46 @@
 # Handoff
 
-## Budget and inventory: loans from n_TOF and CERN, the hardware at CEA — 2026-11-25 (dylan-MS-7C84)
+## Budget and inventory: loans from n_TOF and CERN, the hardware at CEA — updated 2026-11-25 (dylan-MS-7C84)
 
-**Done:** central inventory (`x17_facility_search/inventory/inventory.py`): Micromegas A–E, 4 good + 20 bad M1, 4 M4, 16 M2
-cards, the DAQ PC and the DREAM core (TCM, network card, large NIM module) at CEA, "held for MX17"; FEUs + cables in CEA's
-common pool; n_TOF's LEMO cables (~60 × 16 ns, 60 × 5 ns, 20 × 2 ns, 20 × 1 ns, an estimate) and ~30 Ts; the Wiener PL512.
-`plan.py`: new `conf` field (LOAN_CONF) on loans, shown on the Hardware tab; LEMO from n_TOF very likely; 2 N1081B, N93B,
-3–4 FIFOs, NIM bin, LV hopefully rented from the CERN pool, with fallback lines and a €1k rental-fee guess. Critical cash
-€10.6k → €7.8k (cables, Ts, adapters from n_TOF; resistive splitters moved to the low tier); if every loan fails +€62k. items.py Lean €103k → €59k. `slot1_feasibility/PLAN.md` §7.
+**Resume:** LNL slot-1 budget/inventory; next: read the CERN epool items (rental costs) and replace the €1k rental-fee guess.
 
-**Next:** count the n_TOF cables by length; ask the CERN pool (off-site rental, fee), n_TOF (LEMO loan), CEA (is the large
-NIM module a NIM bin? FEUs from the pool); write down what the M2 and M4 cards are.
+**Goal:** a detailed slot-1 budget and the central hardware inventory: what we own, borrow or rent, how sure we are of each
+loan, and what it costs if a loan falls through.
 
+**Done:**
+- Central inventory (`x17_facility_search/inventory/inventory.py` → `INVENTORY.md`): Micromegas A–E (E = det4) at CEA;
+  4 good + 20 bad M1, 4 M4, 16 M2 cards; DAQ PC and DREAM core (TCM, network card, large NIM module) "held for MX17" at
+  CEA; FEUs + cables back in CEA's common pool; n_TOF's LEMO cables (~60 × 16 ns, 60 × 5 ns, 20 × 2 ns, 20 × 1 ns, Dylan's
+  estimate; ~150 connections in the n_TOF module map agree) and ~30 Ts; the Wiener PL512 (DREAM LV).
+- `planning/plan.py`: `conf` per loan (`LOAN_CONF`): LEMO cables, Ts and adapters from n_TOF **very likely**; 2 N1081B, N93B,
+  3–4 FIFOs, NIM bin, PL512 **hopefully** rented from the CERN pool and taken to LNL; walls, plastics, holder, DAQ PC agreed.
+  Fallback (loan-tier) lines for each. Critical €10.6k → **€7.8k** (incl. a €1k CERN rental-fee guess); resistive splitters
+  a low-tier upgrade (€0.8k); every loan fails +€62k.
+- Page: Hardware tab shows the confidence; Budget tab has a new "Borrowed, rented or provided by others" table + tiles.
+- `budget/items.py`: Lean rents the N1081Bs/FIFOs and borrows the LEMO set: €103k → €58.3k. All deployed.
+
+**In progress / where it stopped:**
+- Dylan asked to read his CERN epool issued items (rental costs) with Claude in Chrome. The extension did not connect:
+  this session runs on the Alexandra account (`~/.claude-alexandra`), the extension is probably on Dylan's. Nothing read.
+  URL: https://epool.cern.ch/?filter=%7B%22issuedTo%22%3A%7B%22cernId%22%3A%5B%22185607%22%5D%2C%22username%22%3A%22DNEFF%22%7D%2C%22status%22%3A%5B%22ISSUED%22%5D%2C%22supportCategory%22%3A%5B%22FULL%22%2C%22SPECIAL%22%5D%7D
+
+**Next steps:**
+1. Open the epool page (Chrome extension on the same account, or Dylan pastes the list); for each issued item record
+   type, rental cost; put them in the inventory (CERN pool items) and replace the €1k guess in `plan.py` BUDGET
+   ("CERN pool rental fee …") and the fallback lines' notes.
+2. Ask: CERN pool (off-site rental to LNL, fee), n_TOF (LEMO loan dates), CEA (is the large NIM module a NIM bin? 4 FEUs +
+   32 cables from the pool). Count the n_TOF cables by length. Write down what the M2 and M4 cards are.
+3. Rate the 9 loans still without a confidence (DREAM FEUs, PMTs, digitizers, VME, HV, Li films, line, stand, γ monitor).
+
+**Gotchas / decisions:**
+- Adapters and Ts come from n_TOF (Dylan, 25 Nov), so no connector line is critical; T-splitting the walls as at n_TOF.
+- `nTof_x17_DAQ/n1081b/n1081b_module_map.py` `_module1()` raises NameError (`sect`) when called alone (not fixed, other repo).
+- Another session works in `sim2arm/` here: commit by path only.
+
+**Key files & commands:**
+- `planning/plan.py` (HARDWARE, LOAN_CONF, BUDGET, QUESTIONS); `site/template.html` (`loans()`, budget tab)
+- `python3 site/build_page.py`, then in dylan-cern-site `python3 scripts/build.py && scripts/deploy-eos.sh`
+- x17_facility_search: `python3 inventory/inventory.py`, `python3 budget/build_budget.py` (copy `budget/out/budget.html` to the site)
 
 ## The CN instead of AN2000, 8 working days — updated 2026-11-25 (dylan-MS-7C84)
 
