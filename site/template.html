@@ -417,7 +417,13 @@ details summary { cursor: pointer; color: var(--ink-2); }
   <section class="pane" id="p-budget">
     <div class="tiles" id="b-tiles"></div>
     <div class="tscroll"><table id="b-table"></table></div>
-    <p class="note">For our planning; the proposal does not need it. Cash only: the Micromegas, walls, plastics, DREAM and most electronics
+    <h2>Borrowed, rented or provided by others (no cash)</h2>
+    <p class="small muted" style="margin:0 0 8px">Everything the run takes from a lender, sorted by how sure we are to get it. The last column is
+      what it costs to buy if that loan falls through (the "Only if a loan falls through" lines above). Our own hardware is on the
+      <a href="#hardware" data-go="hardware">Hardware</a> tab.</p>
+    <div class="tiles" id="b-ltiles"></div>
+    <div class="tscroll"><table id="b-loans" class="hwt"></table></div>
+    <p class="note">For our planning; the proposal does not need it. The first table is cash only: the Micromegas, walls, plastics, DREAM and most electronics
       are owned or borrowed. <b>Critical</b> items are what the test cannot run without (B runs with its existing Italian M1 cards).
       <b>Low-budget upgrades</b> make the run easier to operate; <b>high-budget upgrades</b> look toward the final measurement. Tick items to add
       them to the selected total. Prices scaled from the MX17 budget (<a href="budget.html?preset=lean">Lean preset</a>) and CAEN offer 26OFC.01101.</p>
@@ -1068,6 +1074,39 @@ function budget() {
    ["+ low-budget upgrade", "€" + (sumT(["need", "low"]) / 1e3).toFixed(1) + "k", "gas lines, sensors, remote power switch"],
    ["+ high-budget upgrade", "€" + (sumT(["need", "low", "high"]) / 1e3).toFixed(1) + "k", "adds 4 CERN M1 cards for B"],
    ["Selected total", "€" + (c / 1e3).toFixed(1) + "k", `range €${(lo / 1e3).toFixed(0)}–${(hi / 1e3).toFixed(0)}k`]].forEach(([k, v, s]) => tl.append(h("div", { class: "tile" }, h("div", { class: "k" }, k), h("div", { class: "v" }, v), h("div", { class: "s" }, s))));
+  loans();
+}
+
+function loans() {
+  const own = ["purchase", "our own work", "MX17 collaboration"];
+  const order = [...D.loan_conf, ""];
+  const cl = x => x.conf && x.conf !== "unknown" ? x.conf : "";
+  const rows = D.hardware.filter(x => !own.includes(x.org) && !x.cash &&
+    !((x.inv || []).length && x.inv.every(a => a.avail_l === "ours to take")))
+    .sort((a, b) => order.indexOf(cl(a)) - order.indexOf(cl(b)) || a.org.localeCompare(b.org));
+  const t = $("#b-loans"); t.innerHTML = "";
+  t.append(h("tr", {}, ...["item", "qty", "from · contact", "confidence", "state", "if it falls through"].map((k, i) => h("th", i === 5 ? { class: "num" } : {}, k))));
+  let g = null;
+  for (const x of rows) {
+    const k = cl(x) || "not yet rated";
+    if (k !== g) { g = k; const r = rows.filter(y => (cl(y) || "not yet rated") === k);
+      t.append(h("tr", { class: "tier" }, h("td", { colspan: 5 }, `${k[0].toUpperCase() + k.slice(1)} · ${r.length}`),
+        h("td", { class: "num" }, eur(r.reduce((s, y) => s + (y.fallback || 0), 0))))); }
+    t.append(h("tr", { class: "it", style: "cursor:pointer", on: { click: () => { go("hardware"); hwSelect(x.id, true); scrollTo(0, 0); } } },
+      h("td", {}, h("b", {}, x.part)), h("td", { class: "small" }, x.qty || ""),
+      h("td", { class: "small" }, x.src, h("span", { class: "q" }, x.who)),
+      h("td", { class: "small" }, cl(x) ? h("span", { class: "chip" }, cl(x)) : h("span", { class: "muted" }, "—")),
+      h("td", { class: "small" }, x.state),
+      h("td", { class: "num small" }, x.fallback ? (x.lo === x.hi ? `${eur(x.fallback)} (quoted)` : `${eur(x.fallback)} (${eur(x.lo)}–${eur(x.hi)})`) : h("span", { class: "muted" }, "no price"))));
+  }
+  const fb = ks => rows.filter(x => ks.includes(cl(x))).reduce((s, x) => s + (x.fallback || 0), 0);
+  const n = ks => rows.filter(x => ks.includes(cl(x))).length;
+  const tl = $("#b-ltiles"); tl.innerHTML = "";
+  [["Agreed or very likely", `${n(["agreed", "very likely"])} items`, `${eur(fb(["agreed", "very likely"]))} if they fall through`],
+   ["Hopefully (CERN pool rentals)", `${n(["likely", "hopefully"])} items`, `${eur(fb(["likely", "hopefully"]))} if they fall through`],
+   ["Not yet rated", `${n([""])} items`, `${eur(fb([""]))} if they fall through`],
+   ["Every loan fails", eur(rows.reduce((s, x) => s + (x.fallback || 0), 0)), "on top of the critical cash"]]
+    .forEach(([k, v, s]) => tl.append(h("div", { class: "tile" }, h("div", { class: "k" }, k), h("div", { class: "v" }, v), h("div", { class: "s" }, s))));
 }
 
 /* ---------- risks & questions ---------- */

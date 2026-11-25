@@ -1030,6 +1030,7 @@
    "org": "INFN / LNL",
    "src": "INFN (n_TOF set-up)",
    "who": "Pierfrancesco",
+   "conf": "agreed",
    "state": "agreed",
    "need": "2027-05-01",
    "inv": [
@@ -1065,6 +1066,7 @@
    "org": "INFN / LNL",
    "src": "INFN",
    "who": "Pierfrancesco",
+   "conf": "agreed",
    "state": "agreed",
    "need": "2027-05-01",
    "inv": [
@@ -1465,6 +1467,7 @@
    "status": "borrow",
    "org": "CEA Saclay",
    "src": "CEA Saclay (kept for us)",
+   "conf": "agreed",
    "who": "Stephan (CEA)",
    "state": "agreed",
    "need": "2027-05-01",
@@ -1756,6 +1759,7 @@
    "org": "INFN / LNL",
    "src": "LNL (already built)",
    "who": "Pierfrancesco",
+   "conf": "agreed",
    "state": "in hand",
    "need": "2027-08-31",
    "inv": [
