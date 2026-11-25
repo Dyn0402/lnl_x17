@@ -67,10 +67,10 @@ What we need from the CN:
 - Up to 0.5 µA of H₂⁺, which is 1 µA of protons, the current of every 441 keV number. The beam power is 0.44 W.
 - **The D⁺ admixture.** D⁺ has the same mass and charge as H₂⁺ (2.014 u against 2.016 u), so the analysing magnet passes
   it at the same voltage. A deuteron of 0.883 MeV on lithium makes neutrons in ⁷Li(d,n) (Q = +15 MeV). Natural hydrogen
-  has 1.5 × 10⁻⁴ deuterium, so the D⁺ fraction is small, but radioprotection will ask for it (ask).
+  has 1.5 × 10⁻⁴ deuterium, so the D⁺ fraction is small. The proposal says only that we expect some D⁺ (Dylan, 25 Nov);
+  its level is worth asking Pierfrancesco, but he may not know.
 
-The proposal therefore asks for 3 working days of H₂⁺ (one day of beam). It states that without H₂⁺ the request is
-17 working days at 1.10 MeV, and that the run then has no transition without an expected anomaly.
+The proposal asks, as a question, whether the CN can provide H₂⁺, and plans one working day (8 h) with it. It states that without H₂⁺ this day is also at 1.10 MeV, and that the run then has no transition without an expected anomaly.
 
 ### 2.3 Options considered and not proposed
 

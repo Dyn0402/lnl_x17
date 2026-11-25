@@ -380,7 +380,7 @@ QUESTIONS = [
     dict(who="Pierfrancesco", q="Author list: affiliations for Massimi, Mengoni, Gervino, Gustavino, Cosentino; anyone else (n_TOF, CEA, Torino)?"),
     dict(who="LNL Accelerator Division", q="A CN line (−15°, 0° or +15°, for the full current) ending in ~1.5 × 1.5 m of free floor; beam height; 1 µA at 1.10 MeV on a ~5 mm spot?"),
     dict(who="LNL Accelerator Division", q="CN hours: how many hours of beam per working day (the proposal assumes 8)? Nights or weekends with authorisation (8 × 24 h would give 5 days of beam at 1.10 MeV, as in the AN2000 plan)?"),
-    dict(who="LNL Accelerator Division", q="H₂⁺ from the CN source at 0.883 MV (two 0.441 MeV protons), up to 0.5 µA? How much D⁺ comes with it (same mass, makes neutrons in ⁷Li(d,n))? The 441 keV calibration depends on it; the proposal does not."),
+    dict(who="LNL Accelerator Division", q="H₂⁺ from the CN source at 0.883 MV (two 0.441 MeV protons), up to 0.5 µA? The proposal asks it as a question and says we expect some D⁺ (same mass); the D⁺ level is worth asking but may have no answer. The 441 keV calibration depends on H₂⁺; the proposal does not."),
     dict(who="Pierfrancesco", q="The call allocates 20 Feb – 30 Jul 2027 (the call page says 2026, a typo). We ask for the second half of 2027: say 'from July', or ask to be scheduled in the next period?"),
     dict(who="Pierfrancesco", q="Body length: the template says 4 pages, the LNL submission page says 5. The draft keeps to 4: is that what people do?"),
     dict(who="LNL Accelerator Division", q="Flammable premix (Ar/iC₄H₁₀ 95/5) in the hall: rules, storage, exhaust."),
