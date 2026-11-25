@@ -53,7 +53,8 @@ COS_SEL, COS_GLOB = ((R11_SEL, 'R11_cosmicdisk_dome300_lsf16_c*_sel.npz') if LAY
                      else (L15_SEL, 'L15_cosmicdisk_ta4arm_c*_sel.npz'))
 #: the target configuration of every two-arm number.  dome300 = the BUILT Cu hemisphere (R 11 mm, 300 µm wall, rim, grey
 #: flange; SHAPES_GEANT.md).  Until 20 Nov the study used ogCu200, the Cu ogive of Pierfrancesco's 27 Oct sketch (not built)
-#: under the name "Cu hemisphere": TA_CFG=ogCu200 reproduces those passes.
+#: under the name "Cu hemisphere": TA_CFG=ogCu200 reproduces those passes.  TA_CFG=ogAl300cu12r8m4 is the lighter
+#: Al ogive + Cu liner (task R10, 25 Nov; R10_AL_OGIVE.md).
 CFG = os.environ.get('TA_CFG', 'dome300')
 PAIR = None
 _COMBINE0 = G._combine
@@ -124,8 +125,15 @@ def set_pair(name):
     SN._TAB.clear()
     SN.RUNS['ogCu200'] = ['L11', 'L13']      # the dense as-built background MC of the Cu ogive (not built)
     SN.RUNS['dome300'] = ['L10', 'L18']      # the BUILT Cu hemisphere, R 11 mm, 300 µm (L18: lnl_x17, 20 Nov)
+    # R10 (2026-11-25), TA_CFG=ogAl300cu12r8m4: the Al ogive 300 µm + Cu 12 µm liner, Li mask r <= 4 (FEASIBILITY_SIM
+    # §19.3 "Al ogive + Cu liner").  L12 is its own run (5 x 100 k per IPC sample, 10 x 2 M γ: thin for one pair);
+    # L13 is the x30 as-built run of 10 Nov, combined only when its tables are in $L13_SEL (shapes_nd.files skips
+    # missing files).  A tag's fit cache does not notice new tables: use a new --tag after fetching L13.
+    SN.RUNS['ogAl300cu12r8m4'] = ['L12', 'L13']
     if LAYOUT == 'lsf16':
         SN.RUNS['dome300'] = ['R11']         # the same hemisphere, liquid right behind the SiPM wall (R11)
+    if os.environ.get('TA_RUNS'):            # MC-statistics tests (R10): TA_CFG's tables from these runs only, e.g. TA_RUNS=L11
+        SN.RUNS[SN.mc_tag(CFG)] = os.environ['TA_RUNS'].split(',')
 
 
 RESPS = ['LNL calibrated', 'n_TOF as is', 'LNL calibrated, LS off']

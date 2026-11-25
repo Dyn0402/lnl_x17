@@ -46,6 +46,17 @@ figure-heavy, get it close to ready.
   about (¹⁹F(p,αγ): 10⁻³ F per Li would add 20 % of the 17–18 MeV γ yield).
 - plan.py: P5 active, R8 done, three new questions (beam spot at 1 µA, the allocation period, 4 or 5 pages).
 
+- **R10 done (25 Nov, `sim2arm/R10_AL_OGIVE.md`): the lighter holder (Al ogive + Cu liner) simulated in two arms** from
+  its own tables (L12 + the ×30 L13, fetched from EOS): 21.1 d to 3σ and **0.88 × R(ATOMKI)** in 5 d with the liquid
+  working, 1.19 × as at n_TOF, 1.70 × without (11 µm, horizontal). The old scaling (10.4 d, 0.62 ×) was optimistic.
+  Four arms, same fit: 11.6 / 22.6 d (not the 4.5 / 8.5 d of §19.3, made on thin tables). `two_arm_estimates.py` now
+  reads these rows (`AL_TAGS`); proposal text, abstract and Fig. 3 use them ("0.9 to 1.2 ×", "about 20 days",
+  "about 12 days with four arms", "about a day with large plastics", the last one still a scaling).
+- **NOT yet propagated (the session hit its usage limit):** "0.6–0.8 × (estimate)" still stands in `site/template.html`
+  (three places), `plan.py` (risk text, T1), `slot1_feasibility/PLAN.md`, `sim2arm/TWO_ARM_STUDY.md` §0, `README.md`,
+  and x17_facility_search `lnl/FACILITY.md`, README and `survey/dashboard.py`. The site page was last deployed before
+  the 478 keV and R10 changes: run `python3 site/build_page.py`, then build and deploy the site. plan.py R10 → done.
+
 **Open items for Dylan / Pierfrancesco (red in the PDF)**
 1. GLIMOS, authors and affiliations; one sentence after talking to the LNL ⁸Be group.
 2. Is a beam day 24 h on AN2000 in self-service? All "per day" numbers assume 24 h.

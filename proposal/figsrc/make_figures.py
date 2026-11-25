@@ -268,6 +268,7 @@ def fig_reach():
     cu = {r["energy_stack"]: r for r in rows if r["target"].startswith("Cu")}
     al = {r["energy_stack"]: r for r in rows if r["target"].startswith("Al")}
     k_fix, k_ntof, k_off = "+ liquid working", "+ liquid as at n_TOF", "SiPM wall + small plastics (no liquid)"
+    al_sim = al[k_fix]["source"].startswith("Geant4")       # since R10 (2026-11-25) the lighter holder's rows are simulated
     fig, (ax, bx) = plt.subplots(1, 2, figsize=(W, 2.05), gridspec_kw=dict(width_ratios=[1.0, 1.0]))
     fig.subplots_adjust(left=0.062, right=0.985, bottom=0.19, top=0.885, wspace=0.62)
 
@@ -282,7 +283,7 @@ def fig_reach():
         ax.plot(days, [E.r90(c, d) / U for d in days], color=col, lw=1.5, label=lab)
     r = al[k_fix]
     ax.plot(days, [E.r90(float(r["d2_c"]), d) / U for d in days], color=AQUA, lw=1.5, ls=(0, (4, 2)),
-            label="lighter Al holder (estimate)")
+            label="lighter Al holder" + ("" if al_sim else " (estimate)"))
     ax.axhline(1.0, color=INK, lw=0.8)
     ax.text(9.9, 1.04, r"ATOMKI, $R = 5.8\times10^{-6}$", ha="right", va="bottom", fontsize=7)
     ax.axhline(E.R_MEG2_90 / U, color=INK, lw=0.8, ls=":")
@@ -306,13 +307,14 @@ def fig_reach():
     d_cu = (float(cu[k_fix]["d2_c"]), float(cu[k_fix]["d2_lo"]), float(cu[k_fix]["d2_hi"]))
     d_al2 = (float(al[k_fix]["d2_c"]), float(al[k_fix]["d2_lo"]), float(al[k_fix]["d2_hi"]))
     d_al4 = (float(al[k_fix]["d4_c"]), float(al[k_fix]["d4_lo"]), float(al[k_fix]["d4_hi"]))
-    # Large plastics: FEASIBILITY_SIM section 19.3, four arms, Al ogive + Cu liner, calibrated: 0.4 (0.35-0.5) d with the
-    # 20 um film as simulated, times the same film factor as the row above (d4 at 11 um / 4.5 d at 20 um): a scaling.
+    # Large plastics: FEASIBILITY_SIM section 19.3, four arms, Al ogive + Cu liner, calibrated: 0.4 (0.35-0.5) d, made with
+    # the 20 um film, a 0.3 ns time of flight and the L4 cosmics.  Scaled by this holder's four-arm days here (11 um,
+    # 0.6 ns, L15 cosmics) over its section 19.3 four-arm days (4.5 d): a scaling estimate, drawn as an open circle.
     film = d_al4[0] / E.FOUR_ARM[("Al ogive + Cu liner (lighter)", "fix")][0]
     d_big = tuple(v * film for v in (0.4, 0.35, 0.5))
     bars = [("this run: two arms,\nexisting Cu holder", d_cu, BLUE, False),
-            ("two arms,\nlighter Al holder", d_al2, AQUA, True),
-            ("four arms,\nlighter Al holder", d_al4, AQUA, True),
+            ("two arms,\nlighter Al holder", d_al2, AQUA, not al_sim),
+            ("four arms,\nlighter Al holder", d_al4, AQUA, not al_sim),
             ("four arms, lighter holder,\nlarge plastic scintillators", d_big, AQUA, True)]
     for i, (lab, (c, lo, hi), col, est) in enumerate(bars):
         y = len(bars) - 1 - i
@@ -326,12 +328,12 @@ def fig_reach():
     bx.tick_params(axis="y", length=0)
     bx.set_xscale("log")
     bx.set_xlim(0.1, 1000)
-    bx.set_ylim(-0.75, len(bars) - 0.45)
+    bx.set_ylim(-1.05, len(bars) - 0.45)
     bx.set_xticks([0.1, 1, 10, 100, 1000])
     bx.get_xaxis().set_major_formatter(matplotlib.ticker.FormatStrFormatter("%g"))
     bx.set_xlabel(r"days to a 3$\sigma$ test of $R_\mathrm{ATOMKI}$, 1 µA")
-    bx.plot([], [], "o", ms=6, mfc=BLUE, mec=BLUE, mew=1.4, label="Geant4, this study")
-    bx.plot([], [], "o", ms=6, mfc="white", mec=AQUA, mew=1.4, label="scaled from Geant4 (estimate)")
+    bx.plot([], [], "o", ms=6, mfc=INK, mec=INK, mew=1.4, label="Geant4")
+    bx.plot([], [], "o", ms=6, mfc="white", mec=INK, mew=1.4, label="scaled from Geant4 (estimate)")
     bx.grid(axis="x", color=GRID, lw=0.5, zorder=0)
     bx.set_axisbelow(True)
     bx.legend(frameon=False, loc="lower right", handlelength=1.4, borderaxespad=0.0, labelspacing=0.25, fontsize=6.5)

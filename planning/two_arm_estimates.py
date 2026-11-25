@@ -24,6 +24,9 @@ OUT.mkdir(exist_ok=True)
 SIM = HERE.parent / "sim2arm" / "out"
 SIM_TAG = "_pass4"          # dome300, the built hemisphere
 OG_TAG = "_pass3"           # ogCu200, the Cu ogive: the two-arm / four-arm ratio for the Al ogive rows
+#: the Al ogive + Cu liner's own two-arm tables (task R10, 2026-11-25, sim2arm/R10_AL_OGIVE.md), newest first.  When one
+#: exists its rows replace the scaling below; rows it does not hold (the vertical pair) are dropped, not scaled.
+AL_TAGS = ("_pass5al_l13", "_pass5al")
 #: (label, suffix of the summary table): the simulated 20 µm film and the review's 10–12 µm (yields of 11 µm)
 FILMS = [("11 µm Li (recommended)", "li11"), ("20 µm Li (as simulated)", "")]
 
@@ -99,11 +102,12 @@ def main() -> None:
     sim20 = sim_rows("")
     og20 = sim_rows("", OG_TAG)
     for film, suffix in FILMS:
-        rows += film_rows(film, sim_rows(suffix), sim20, sim_rows(suffix, OG_TAG), og20)
+        al, al_tag = next(((t, tag) for tag in AL_TAGS if (t := sim_rows(suffix, tag))), (None, None))
+        rows += film_rows(film, sim_rows(suffix), sim20, sim_rows(suffix, OG_TAG), og20, al, al_tag)
     write(rows)
 
 
-def film_rows(film, sim, sim20, og, og20):
+def film_rows(film, sim, sim20, og, og20, al=None, al_tag=None):
     """sim: this film's simulated table (the Cu hemisphere); sim20: its 20 µm one.  og, og20: the same for the Cu ogive
     (pass 3), whose ratios scale the Al ogive's four-arm §19.3 days: Al(4 arms, 20 µm) × Cu ogive(this row) /
     Cu ogive(4 arms, 20 µm)."""
@@ -114,6 +118,16 @@ def film_rows(film, sim, sim20, og, og20):
             for glab, pair in GEOMS:
                 for vlab, level in VETOES:
                     T, T20 = (sim, sim20) if tgt.startswith("Cu") else (og, og20)
+                    if tgt.startswith("Al") and al:              # R10: the holder's own tables, cut to the pair
+                        a2, a4 = al.get((pair, resp, level)), al.get(("all", resp, level))
+                        if a2 is None:
+                            continue
+                        d2 = (float(a2["days3_lo"]), float(a2["days3"]), float(a2["days3_hi"]))
+                        d4 = (float(a4["days3_lo"]), float(a4["days3"]), float(a4["days3_hi"])) if a4 else d2
+                        thin = "" if "l13" in al_tag else ", L12 tables only (thin Monte Carlo: interim)"
+                        src = src4 = f"Geant4, the Al ogive + Cu liner's own tables (sim2arm/R10_AL_OGIVE.md{thin})"
+                        rows.append(row(tgt, film, stack, glab, vlab, d2, d4, src, src4))
+                        continue
                     s = T.get((pair, resp, level)) if T else None
                     s4 = T.get(("all", resp, "MM 15° + TOF")) if T else None
                     s420 = T20.get(("all", resp, "MM 15° + TOF")) if T20 else None
@@ -141,19 +155,23 @@ def film_rows(film, sim, sim20, og, og20):
                         f4 = float(s4["days3"]) / float(s420["days3"]) if (s4 is not None and s420 is not None) else 1.0
                         d4 = (lo4 * f4, c4 * f4, hi4 * f4)
                         src4 = "FEASIBILITY_SIM §19.3" + (f" × {f4:.2f} (film)" if f4 != 1.0 else "")
-                    z = z_at_atomki(d2[1], DAYS_ON_RES)
-                    rows.append(dict(
-                        target=tgt, film=film, energy_stack=stack, geometry=glab, veto=vlab, four_arm_days=round(d4[1], 1),
-                        four_arm_range=f"{d4[0]:.0f}-{d4[2]:.0f}", d4_lo=round(d4[0], 2), d4_c=round(d4[1], 2),
-                        d4_hi=round(d4[2], 2), d2_lo=round(d2[0], 2), d2_c=round(d2[1], 2), d2_hi=round(d2[2], 2),
-                        four_arm_source=src4, two_arm_days=round(d2[1], 1),
-                        two_arm_range=f"{d2[0]:.0f}-{d2[2]:.0f}", z_in_5d=round(z, 2),
-                        z_in_5d_range=f"{z_at_atomki(d2[2], DAYS_ON_RES):.2f}-{z_at_atomki(d2[0], DAYS_ON_RES):.2f}",
-                        r90_5d=f"{r90(d2[1], DAYS_ON_RES):.2e}",
-                        r90_over_atomki=round(r90(d2[1], DAYS_ON_RES) / R_ATOMKI, 2),
-                        r90_over_megii=round(r90(d2[1], DAYS_ON_RES) / R_MEG2_90, 2),
-                        source=src))
+                    rows.append(row(tgt, film, stack, glab, vlab, d2, d4, src, src4))
     return rows
+
+
+def row(tgt, film, stack, glab, vlab, d2, d4, src, src4):
+    z = z_at_atomki(d2[1], DAYS_ON_RES)
+    return dict(
+        target=tgt, film=film, energy_stack=stack, geometry=glab, veto=vlab, four_arm_days=round(d4[1], 1),
+        four_arm_range=f"{d4[0]:.0f}-{d4[2]:.0f}", d4_lo=round(d4[0], 2), d4_c=round(d4[1], 2),
+        d4_hi=round(d4[2], 2), d2_lo=round(d2[0], 2), d2_c=round(d2[1], 2), d2_hi=round(d2[2], 2),
+        four_arm_source=src4, two_arm_days=round(d2[1], 1),
+        two_arm_range=f"{d2[0]:.0f}-{d2[2]:.0f}", z_in_5d=round(z, 2),
+        z_in_5d_range=f"{z_at_atomki(d2[2], DAYS_ON_RES):.2f}-{z_at_atomki(d2[0], DAYS_ON_RES):.2f}",
+        r90_5d=f"{r90(d2[1], DAYS_ON_RES):.2e}",
+        r90_over_atomki=round(r90(d2[1], DAYS_ON_RES) / R_ATOMKI, 2),
+        r90_over_megii=round(r90(d2[1], DAYS_ON_RES) / R_MEG2_90, 2),
+        source=src)
 
 
 def write(rows):
