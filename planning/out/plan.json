@@ -87,7 +87,7 @@
    "ws": "prop",
    "name": "Schedule the beam days with LNL",
    "start": "2027-02-01",
-   "end": "2027-03-31",
+   "end": "2027-02-28",
    "est": true
   },
   {
@@ -100,56 +100,56 @@
    "ws": "sim",
    "name": "Two-arm Geant4 config + run plan sim",
    "start": "2027-02-01",
-   "end": "2027-04-30",
+   "end": "2027-04-15",
    "est": true
   },
   {
    "ws": "sim",
    "name": "Online analysis + calibration chain",
-   "start": "2027-04-01",
-   "end": "2027-08-31",
+   "start": "2027-03-01",
+   "end": "2027-06-30",
    "est": true
   },
   {
    "ws": "mm",
    "name": "Repair B's drift window (CEA); new windows optional",
    "start": "2027-02-01",
-   "end": "2027-04-30",
+   "end": "2027-03-31",
    "est": true
   },
   {
    "ws": "mm",
    "name": "DREAM loan: 4 FEUs + TCM, busy LEMO",
-   "start": "2027-03-01",
-   "end": "2027-05-31",
+   "start": "2027-02-15",
+   "end": "2027-04-15",
    "est": true
   },
   {
    "ws": "mm",
    "name": "Cosmic bench: 2 MM + DREAM",
-   "start": "2027-05-01",
-   "end": "2027-06-15",
+   "start": "2027-04-01",
+   "end": "2027-05-14",
    "est": true
   },
   {
    "ws": "scint",
    "name": "Find PMTs, digitizers (~24 ch), N1081B",
    "start": "2026-12-01",
-   "end": "2027-03-31",
+   "end": "2027-02-28",
    "est": true
   },
   {
    "ws": "scint",
    "name": "Bench tests T1–T4 (trigger, prescale, busy lock)",
-   "start": "2027-03-01",
-   "end": "2027-05-31",
+   "start": "2027-02-15",
+   "end": "2027-04-15",
    "est": true
   },
   {
    "ws": "scint",
    "name": "SiPM walls + plastics on cosmics",
-   "start": "2027-04-15",
-   "end": "2027-06-15",
+   "start": "2027-03-15",
+   "end": "2027-05-14",
    "est": true
   },
   {
@@ -162,7 +162,7 @@
    "ws": "target",
    "name": "Build holder; Li films; LiOH test on the line",
    "start": "2027-02-01",
-   "end": "2027-06-30",
+   "end": "2027-05-31",
    "est": true
   },
   {
@@ -175,35 +175,35 @@
    "ws": "site",
    "name": "Floor plan, line, gas safety file, GLIMOS",
    "start": "2027-02-01",
-   "end": "2027-05-31",
+   "end": "2027-04-30",
    "est": true
   },
   {
    "ws": "run",
    "name": "Full chain, 2 arms, cosmics",
-   "start": "2027-06-15",
-   "end": "2027-07-31",
+   "start": "2027-05-17",
+   "end": "2027-06-11",
    "est": true
   },
   {
    "ws": "run",
    "name": "Ship + install at LNL, cosmic commissioning",
-   "start": "2027-08-23",
-   "end": "2027-09-17",
+   "start": "2027-06-14",
+   "end": "2027-07-02",
    "est": true
   },
   {
    "ws": "run",
-   "name": "8 CN working days of beam (H2 2027)",
-   "start": "2027-09-20",
-   "end": "2027-09-30",
+   "name": "8 CN working days of beam (June–July 2027; allocation ends 30 Jul)",
+   "start": "2027-07-05",
+   "end": "2027-07-14",
    "est": true
   },
   {
    "ws": "run",
    "name": "First results note",
-   "start": "2027-10-01",
-   "end": "2027-11-30",
+   "start": "2027-07-19",
+   "end": "2027-09-30",
    "est": true
   },
   {
@@ -262,13 +262,19 @@
    "hard": true
   },
   {
-   "date": "2027-06-15",
+   "date": "2027-05-14",
    "name": "Go/no-go: both arms work on cosmics",
    "ws": "run",
    "est": true
   },
   {
-   "date": "2027-09-20",
+   "date": "2027-07-30",
+   "name": "End of the call's allocation period (20 Feb – 30 Jul 2027)",
+   "ws": "run",
+   "hard": true
+  },
+  {
+   "date": "2027-07-05",
    "name": "Beam on target",
    "ws": "run",
    "est": true
@@ -289,7 +295,7 @@
    "due": "2026-11-20",
    "who": "Pierfrancesco",
    "status": "todo",
-   "t": "Informal contact with Anna Selva / the Accelerator Division: the CN (AN2000 probably not available, 25 Nov), 1.10 MeV at 1 µA and H₂⁺ at 0.883 MV, hours per working day, line and floor space, H2 2027"
+   "t": "Informal contact with Anna Selva / the Accelerator Division: the CN (AN2000 probably not available, 25 Nov), 1.10 MeV at 1 µA and H₂⁺ at 0.883 MV, hours per working day, line and floor space, June–July 2027 (the call's period ends 30 Jul)"
   },
   {
    "id": "P3",
@@ -405,7 +411,7 @@
   {
    "id": "R3",
    "ws": "sim",
-   "due": "2027-04-30",
+   "due": "2027-04-15",
    "who": "Dylan",
    "status": "todo",
    "t": "Geant4: two-arm geometry with the real target holder and stand (MX17_Full_Geant branch from lnl_target)"
@@ -413,7 +419,7 @@
   {
    "id": "R4",
    "ws": "sim",
-   "due": "2027-06-30",
+   "due": "2027-06-11",
    "who": "Dylan",
    "status": "todo",
    "t": "Timing on cosmics with the LNL readout (V1742/CFD): n_TOF beam-off muons give σ_t 0.52–0.64 ns per arm (walls), 0.95 (plastics) with the n_TOF readout (nTof_x17 ac_tof_beamoff, 19 Nov); decides the TOF cut"
@@ -494,12 +500,12 @@
    "due": "2027-01-15",
    "who": "Dylan",
    "status": "todo",
-   "t": "Ask CEA for the DREAM loan for H2 2027: 4 FEUs + 32 cables from CEA's common pool (the TCM, network card, NIM module and DAQ PC are kept for us at CEA); solder the TCM busy LEMO"
+   "t": "Ask CEA for the DREAM loan for Feb–Jul 2027 (bench from April, beam in July): 4 FEUs + 32 cables from CEA's common pool (the TCM, network card, NIM module and DAQ PC are kept for us at CEA); solder the TCM busy LEMO"
   },
   {
    "id": "M3",
    "ws": "mm",
-   "due": "2027-04-30",
+   "due": "2027-03-31",
    "who": "Dylan",
    "status": "todo",
    "t": "Optional (high-budget upgrade): 4 CERN-design M1 cards for B. Slot 1 runs B with its existing Italian M1s"
@@ -507,7 +513,7 @@
   {
    "id": "M4",
    "ws": "mm",
-   "due": "2027-06-15",
+   "due": "2027-05-14",
    "who": "Dylan",
    "status": "todo",
    "t": "Cosmic bench, 2 MM + DREAM: efficiency, segment angle (μ ≲ 3°), noise with B's existing M1s"
@@ -531,7 +537,7 @@
   {
    "id": "S3",
    "ws": "scint",
-   "due": "2027-02-28",
+   "due": "2027-02-15",
    "who": "Dylan",
    "status": "todo",
    "t": "Borrow list (25 Nov): LEMO cables + Ts from n_TOF (very likely, returned after the run); 2 N1081B, the N93B, 3–4 linear FIFOs, a NIM bin and the Delta SM3545-D LV rented from the CERN electronics pool and taken to LNL (hopefully); splitters + adapters bought"
@@ -539,7 +545,7 @@
   {
    "id": "S4",
    "ws": "scint",
-   "due": "2027-05-31",
+   "due": "2027-04-15",
    "who": "Dylan",
    "status": "todo",
    "t": "Bench tests T1, T2, T4 (prescaler, busy lock 1:1, trigger word)"
@@ -579,7 +585,7 @@
   {
    "id": "S9",
    "ws": "scint",
-   "due": "2027-05-01",
+   "due": "2027-04-01",
    "who": "Pierfrancesco",
    "status": "todo",
    "dep": [
@@ -598,7 +604,7 @@
   {
    "id": "T2",
    "ws": "target",
-   "due": "2027-06-30",
+   "due": "2027-05-31",
    "who": "Pierfrancesco",
    "status": "todo",
    "t": "Build the holder; make films; a week of LiOH-conversion test on the line"
@@ -614,7 +620,7 @@
   {
    "id": "L2",
    "ws": "site",
-   "due": "2027-05-31",
+   "due": "2027-04-30",
    "who": "Pierfrancesco",
    "status": "todo",
    "t": "Safety file: Ar/iC₄H₁₀ 95/5 bottles in the hall, gas panel and exhaust (flammable)"
@@ -622,7 +628,7 @@
   {
    "id": "L3",
    "ws": "site",
-   "due": "2027-03-31",
+   "due": "2027-02-28",
    "who": "Pierfrancesco",
    "status": "todo",
    "t": "Floor plan of the line: ~1.5 × 1.5 m around the target, beam height, cable path to the control room, network"
@@ -630,7 +636,7 @@
   {
    "id": "I1",
    "ws": "run",
-   "due": "2027-07-31",
+   "due": "2027-06-11",
    "who": "Dylan",
    "status": "todo",
    "t": "Full chain on cosmics: 2 arms, DREAM + digitizers on one event list, run control, slow control Tier 1"
@@ -638,7 +644,7 @@
   {
    "id": "I2",
    "ws": "run",
-   "due": "2027-09-17",
+   "due": "2027-07-02",
    "who": "all",
    "status": "todo",
    "t": "Ship, install, commission on cosmics at LNL: ≥ 3 nights with the arms VERTICAL (σ_t, μ segment angle, MIP gains, each cosmic veto), then roll to horizontal"
@@ -646,7 +652,7 @@
   {
    "id": "I3",
    "ws": "run",
-   "due": "2027-10-01",
+   "due": "2027-07-16",
    "who": "all",
    "status": "todo",
    "t": "8 CN working days of beam (8 h each, assumed) + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"
@@ -679,7 +685,7 @@
    "src": "MX17 collaboration",
    "who": "Dylan",
    "state": "in hand",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "inv": [
     {
      "id": "mmA",
@@ -714,7 +720,7 @@
    "src": "CEA Saclay",
    "who": "Stephan (CEA)",
    "state": "to ask",
-   "need": "2027-04-30",
+   "need": "2027-03-31",
    "b": "Repair B's drift window",
    "inv": [
     {
@@ -754,7 +760,7 @@
    "src": "CEA Saclay",
    "who": "Stephan (CEA)",
    "state": "to ask",
-   "need": "2027-04-30",
+   "need": "2027-03-31",
    "b": "New aluminised-mylar drift windows, A and B",
    "inv": [
     {
@@ -855,7 +861,7 @@
    "src": "MX17 collaboration (CERN + Italian cards)",
    "who": "Dylan",
    "state": "in hand",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "inv": [
     {
      "id": "m1cern",
@@ -900,7 +906,7 @@
    "src": "CERN design, produced to order",
    "who": "Dylan",
    "state": "to decide",
-   "need": "2027-04-30",
+   "need": "2027-03-31",
    "b": "4 CERN M1 cards for B (B runs its Italian M1s for the test)",
    "inv": [
     {
@@ -939,7 +945,7 @@
    "src": "CEA Saclay: the TCM, network card and NIM module are kept for us; FEUs and cables from CEA's common pool",
    "who": "Stephan (CEA)",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "inv": [
     {
      "id": "dream",
@@ -995,7 +1001,7 @@
    "src": "our own work",
    "who": "Dylan",
    "state": "to make",
-   "need": "2027-05-31",
+   "need": "2027-04-30",
    "inv": [
     {
      "id": "dream",
@@ -1032,7 +1038,7 @@
    "who": "Pierfrancesco",
    "conf": "agreed",
    "state": "agreed",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "inv": [
     {
      "id": "walls",
@@ -1068,7 +1074,7 @@
    "who": "Pierfrancesco",
    "conf": "agreed",
    "state": "agreed",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "inv": [
     {
      "id": "plast_small",
@@ -1103,7 +1109,7 @@
    "src": "lender to find (INFN / LNL pool)",
    "who": "Pierfrancesco",
    "state": "to find",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "If the PMTs must be bought: 4–6 fast 2″ PMTs + bases",
    "inv": [
     {
@@ -1142,7 +1148,7 @@
    "src": "liquid from the n_TOF set-up (~60 L, to confirm); cans remade",
    "who": "Pierfrancesco / Dylan",
    "state": "to make",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "New cans for the 2 liquid cells",
    "inv": [
     {
@@ -1185,7 +1191,7 @@
    "src": "LNL pool; else the CERN electronics pool (desktop CAEN DT5730SB); else a CAEN loan",
    "who": "Pierfrancesco / CAEN",
    "state": "to find",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "If no LNL digitizer loan: 4 × DT5730SB (32 ch) rented from the CERN pool",
    "place": [
     "vme"
@@ -1213,7 +1219,7 @@
    "src": "LNL pool",
    "who": "Pierfrancesco",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "If no VME crate: VME64x tower + bridge from the CERN pool",
    "place": [
     "vme"
@@ -1242,7 +1248,7 @@
    "conf": "hopefully",
    "who": "Dylan / Pierfrancesco / CAEN",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "If no N1081B loan: 2 × N1081B",
    "inv": [
     {
@@ -1283,7 +1289,7 @@
    "conf": "hopefully",
    "who": "Dylan / Pierfrancesco",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "If no dual timer: N93B",
    "inv": [
     {
@@ -1323,7 +1329,7 @@
    "conf": "hopefully",
    "who": "Dylan / Pierfrancesco",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "If no FIFO rental: 3 × CAEN N625",
    "inv": [
     {
@@ -1363,7 +1369,7 @@
    "conf": "hopefully",
    "who": "Dylan / Pierfrancesco",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "If no NIM bin rental: 1 × CAEN NIM8303",
    "place": [
     "nim"
@@ -1392,7 +1398,7 @@
    "conf": "very likely",
    "who": "n_TOF (Dylan)",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "If no n_TOF LEMO loan: ~110 LEMO cables, 20 Ts, 20 adapters",
    "inv": [
     {
@@ -1441,7 +1447,7 @@
    "src": "to order",
    "who": "Dylan",
    "state": "to decide",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "50 Ω resistive splitters for the 16 wall channels (instead of Ts)",
    "place": [
     "cables"
@@ -1470,7 +1476,7 @@
    "conf": "agreed",
    "who": "Stephan (CEA)",
    "state": "agreed",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "inv": [
     {
      "id": "daqpc",
@@ -1506,7 +1512,7 @@
    "src": "Dylan's own",
    "who": "Dylan",
    "state": "in hand",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "inv": [
     {
      "id": "switch",
@@ -1539,7 +1545,7 @@
    "src": "to order",
    "who": "Dylan",
    "state": "to order",
-   "need": "2027-05-31",
+   "need": "2027-04-30",
    "b": "Switched PDU (remote power switch)",
    "place": [
     "pdu"
@@ -1566,7 +1572,7 @@
    "conf": "hopefully",
    "who": "Dylan",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "If no LV rental: TDK-Lambda GEN6-100/LN",
    "inv": [
     {
@@ -1605,14 +1611,14 @@
    "src": "CERN electronics pool",
    "who": "Dylan",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "CERN pool rental fee: 2 N1081B, N93B, FIFOs, NIM bin, LV",
    "place": [],
    "tasks": [
     "S3"
    ],
-   "note": "The rental itself: about 285 CHF/month for the set in the CERN epool catalogue (25 Nov 2026), so ~€0.6k for the ~2 months of the LNL run (Dylan, 25 Nov 2026: shipping in late August to the return after the beam in September). Whether rented modules may leave CERN for LNL is still to ask the pool. This covers the feasibility study only. The physics measurement (hoped for winter 2027) will need its own plan for the hardware. The N1081B is a SPECIAL support-category item (5 in stock).",
-   "detail": "About mid-August to mid-October 2027. If the pool modules are also used in the full-chain cosmic test (15 Jun–31 Jul), the rental grows to ~4 months (the high end of the budget line).",
+   "note": "The rental itself: about 285 CHF/month for the set in the CERN epool catalogue (25 Nov 2026), so ~€0.6k for the ~2 months of the LNL run (Dylan, 25 Nov 2026; moved to the June–July run on 25 Nov: shipping in mid-June to the return after the beam in July). Whether rented modules may leave CERN for LNL is still to ask the pool. This covers the feasibility study only. The physics measurement (hoped for winter 2027) will need its own plan for the hardware. The N1081B is a SPECIAL support-category item (5 in stock).",
+   "detail": "About mid-June to mid-August 2027. If the pool modules are also used in the full-chain cosmic test (17 May–11 Jun), the rental grows to ~3 months; with the bench tests from February, ~6 months (the high end of the budget line).",
    "cash": 600,
    "fallback": 0,
    "tier": "need",
@@ -1631,7 +1637,7 @@
    "src": "LNL pool",
    "who": "Pierfrancesco",
    "state": "to ask",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "place": [
     "hv"
    ],
@@ -1653,7 +1659,7 @@
    "src": "to order (via LNL)",
    "who": "Dylan / LNL",
    "state": "to order",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "Gas: premix bottles, regulators, panel",
    "place": [
     "gas"
@@ -1681,7 +1687,7 @@
    "src": "to order",
    "who": "Dylan",
    "state": "to order",
-   "need": "2027-05-01",
+   "need": "2027-04-01",
    "b": "Low-permeation gas lines",
    "place": [
     "gaslines"
@@ -1707,7 +1713,7 @@
    "src": "to order",
    "who": "Dylan",
    "state": "to decide",
-   "need": "2027-05-31",
+   "need": "2027-04-30",
    "b": "Gas and environment sensors (slow control Tier 1)",
    "place": [
     "sensors"
@@ -1735,7 +1741,7 @@
    "src": "LNL CN target laboratory",
    "who": "Pierfrancesco",
    "state": "to make",
-   "need": "2027-08-31",
+   "need": "2027-06-01",
    "place": [
     "target"
    ],
@@ -1761,7 +1767,7 @@
    "who": "Pierfrancesco",
    "conf": "agreed",
    "state": "in hand",
-   "need": "2027-08-31",
+   "need": "2027-06-01",
    "inv": [
     {
      "id": "cu_hemi",
@@ -1796,7 +1802,7 @@
    "src": "LNL Accelerator Division",
    "who": "Pierfrancesco",
    "state": "to ask",
-   "need": "2027-09-01",
+   "need": "2027-06-14",
    "place": [
     "beamline"
    ],
@@ -1821,7 +1827,7 @@
    "src": "LNL mechanics (ask)",
    "who": "Pierfrancesco",
    "state": "to decide",
-   "need": "2027-08-01",
+   "need": "2027-06-01",
    "place": [
     "stand"
    ],
@@ -1846,7 +1852,7 @@
    "src": "LNL detector pool (ask)",
    "who": "Pierfrancesco",
    "state": "to ask",
-   "need": "2027-08-01",
+   "need": "2027-06-01",
    "place": [
     "target"
    ],
@@ -1870,7 +1876,7 @@
    "src": "to order",
    "who": "Dylan",
    "state": "to order",
-   "need": "2027-08-15",
+   "need": "2027-06-01",
    "b": "Shipping CEA/CERN → LNL and back",
    "place": [],
    "tasks": [
@@ -2089,7 +2095,7 @@
   },
   {
    "who": "Pierfrancesco",
-   "q": "The holder thesis: when would a student start, and could a lighter end piece exist before H2 2027?"
+   "q": "The holder thesis: when would a student start, and could a lighter end piece exist before the June–July 2027 run?"
   },
   {
    "who": "Pierfrancesco",
@@ -2098,10 +2104,6 @@
   {
    "who": "Pierfrancesco",
    "q": "'Commission II': which INFN commission, and when must the request be in? Results before that date?"
-  },
-  {
-   "who": "Pierfrancesco",
-   "q": "Is the H2-2027 window flexible to June–July, so that results exist before the funding requests?"
   },
   {
    "who": "Pierfrancesco",
@@ -2121,7 +2123,7 @@
   },
   {
    "who": "Pierfrancesco",
-   "q": "The call allocates 20 Feb – 30 Jul 2027 (the call page says 2026, a typo). We ask for the second half of 2027: say 'from July', or ask to be scheduled in the next period?"
+   "q": "Answered 25 Nov: the call allocates 20 Feb – 30 Jul 2027 (the call page prints 2026, a typo), so we aim for June or July 2027 (proposal changed). Still to ask: does LNL prefer June or July for the CN, and what happens if we are not ready by July (the next period, autumn 2027)?"
   },
   {
    "who": "Pierfrancesco",
@@ -2133,19 +2135,19 @@
   },
   {
    "who": "CEA (Stephan, DREAM)",
-   "q": "Repair B's drift window by April 2027 (and 2 new windows, if cheap)? Lend 4 FEUs + TCM for Jun–Oct 2027?"
+   "q": "Repair B's drift window by March 2027 (and 2 new windows, if cheap)? Lend 4 FEUs + TCM for Mar–Jul 2027?"
   },
   {
    "who": "CERN electronics pool",
-   "q": "Can rented modules go to LNL for ~2 months (mid-August to mid-October 2027): 2 × N1081B, the N93B, 3–4 linear FIFOs, a NIM bin and the Delta SM3545-D LV (and digitizers, if LNL has none)? Catalogue fees ~285 CHF/month for the set (epool, 25 Nov 2026)."
+   "q": "Can rented modules go to LNL for ~2 months (mid-June to mid-August 2027): 2 × N1081B, the N93B, 3–4 linear FIFOs, a NIM bin and the Delta SM3545-D LV (and digitizers, if LNL has none)? Catalogue fees ~285 CHF/month for the set (epool, 25 Nov 2026)."
   },
   {
    "who": "n_TOF",
-   "q": "Lend the LEMO cables (~60 × 16 ns, 60 × 5 ns, 20 × 2 ns, 20 × 1 ns) and ~30 LEMO Ts for May–Oct 2027, returned after the run?"
+   "q": "Lend the LEMO cables (~60 × 16 ns, 60 × 5 ns, 20 × 2 ns, 20 × 1 ns) and ~30 LEMO Ts for Mar–Jul 2027, returned after the run?"
   },
   {
    "who": "CEA (Stephan, DREAM)",
-   "q": "Is the large NIM module kept with DREAM a NIM bin with room for our trigger modules? Can 4 FEUs + 32 cables come out of the common pool for Jun–Oct 2027?"
+   "q": "Is the large NIM module kept with DREAM a NIM bin with room for our trigger modules? Can 4 FEUs + 32 cables come out of the common pool for Mar–Jul 2027?"
   },
   {
    "who": "CAEN",
@@ -2168,7 +2170,7 @@
    "m": "Likely just an electrical connection on the drift (Dylan, 19 Nov). A is ready now; C re-bulk as the spare; one-arm-plus-scintillator fallback still gives the 441 keV and background programme."
   },
   {
-   "r": "DREAM not available in H2 2027 (CEA's own use)",
+   "r": "DREAM not available in Mar–Jul 2027 (CEA's own use)",
    "l": "med",
    "i": "high",
    "m": "Ask now (M2); 4 FEUs is half the system; fix dates with CEA before the PAC talk."
@@ -2220,6 +2222,12 @@
    "l": "low",
    "i": "high",
    "m": "Run in 2027 is unaffected; follow the decision (x17_facility_search/lnl/NOTE_CN_AN2000_REPLACEMENT.md)."
+  },
+  {
+   "r": "Not ready by July: only ~5 months from the PAC (late Jan) to the end of the allocation period (30 Jul 2027)",
+   "l": "med",
+   "i": "high",
+   "m": "Moved from H2 2027 to June–July on 25 Nov (the call covers 20 Feb – 30 Jul). Go/no-go on cosmics by 14 May; B's window and the DREAM loan asked before the PAC (M1, M2); the hardware asks go out in December. If the go/no-go fails, ask LNL to move the 8 days to the next period (autumn 2027, after the August closure)."
   },
   {
    "r": "Proposal deadline missed (next call ~a year later)",

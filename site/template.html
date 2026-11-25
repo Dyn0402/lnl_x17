@@ -204,12 +204,15 @@ details summary { cursor: pointer; color: var(--ink-2); }
     <div>
       <p class="crumb"><a href="./">← Facility studies</a> · <a href="lnl.html">the LNL study</a> · <a href="budget.html">budget</a></p>
       <h1>LNL feasibility run: two MX17 arms on ⁷Li(p,e⁺e⁻)⁸Be</h1>
-      <p class="tagline">First beam slot at INFN Legnaro: an X17 feasibility study of 8 working days on the CN in H2 2027 (AN2000 probably not available, 25 Nov). The proposal goes to the
+      <p class="tagline">First beam slot at INFN Legnaro: an X17 feasibility study of 8 working days on the CN in June or July 2027 (AN2000 probably not available, 25 Nov). The proposal goes to the
         PAC by <b>10 Dec 2026</b>. Updated <span id="upd"></span>.</p>
     </div>
     <button class="themebtn" id="themebtn" type="button">Theme</button>
   </div>
 
+  <div class="note" style="border-left-color:var(--warning);background:var(--surface);margin:8px 0 6px"><b>25 Nov: June or July 2027.</b>
+    The January call allocates beam from 20 Feb to 30 Jul 2027 (Pierfrancesco, 25 Nov; the call page prints 2026). We therefore aim for
+    June or July, not the second half of 2027: both arms on cosmics by mid-May, installation at LNL from mid-June, beam from about 5 July.</div>
   <div class="note" style="border-left-color:var(--warning);background:var(--surface);margin:8px 0 6px"><b>25 Nov: the CN, 8 working days.</b>
     AN2000 is probably not available. The proposal asks 8 working days on the CN at 1 µA; with ~8 h of beam per day that is 46 h at
     1.10 MeV (3.8 × R(ATOMKI)), and the 441 keV point needs an H₂⁺ beam. The reach tables below are for 5 days of beam (24 h each).</div>
@@ -223,7 +226,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
   <section class="pane" id="p-overview">
     <div class="card intro">
       <div>
-        <p class="lead">An <b>X17 feasibility study of 8 working days</b> (8 h of beam each, assumed) with <b>two MX17 arms</b> on the CN at LNL, H2 2027.
+        <p class="lead">An <b>X17 feasibility study of 8 working days</b> (8 h of beam each, assumed) with <b>two MX17 arms</b> on the CN at LNL, June or July 2027.
           Proposal due <b>10 Dec 2026</b>.</p>
         <p class="small muted" style="margin:0">Background, the plan in a paragraph and the LNL call: <a href="#ov-details">at the bottom</a>.</p>
       </div>
@@ -549,8 +552,8 @@ function countdown() {
   const open = D.tasks.filter(t => t.ws === "prop" && !ticked(t.id) && t.status !== "done").length;
   $("#cd-sub").textContent = `${open} proposal tasks open · submit target 9 Dec (one day of margin) · PAC ${fmt(D.pac[0])}–${fmtY(D.pac[1])}`;
 }
-const STEPS = [["Proposal", "2026-11-18", "2026-12-10"], ["PAC", "2026-12-11", "2027-01-29"], ["Prepare", "2027-01-30", "2027-04-30"],
-  ["Bench", "2027-05-01", "2027-07-31"], ["Install", "2027-08-01", "2027-09-19"], ["8 beam days", "2027-09-20", "2027-10-01"], ["Results", "2027-10-02", "2027-12-31"]];
+const STEPS = [["Proposal", "2026-11-18", "2026-12-10"], ["PAC", "2026-12-11", "2027-01-29"], ["Prepare", "2027-01-30", "2027-03-31"],
+  ["Bench", "2027-04-01", "2027-06-11"], ["Install", "2027-06-12", "2027-07-04"], ["8 beam days", "2027-07-05", "2027-07-16"], ["Results", "2027-07-17", "2027-09-30"]];
 function overview() {
   countdown();
   const st = $("#stepper"); st.innerHTML = "";
@@ -566,7 +569,7 @@ function overview() {
    ["Beam", "protons 1.10 MeV ≤ 1 µA; H₂⁺ 0.883 MV ≤ 0.5 µA (0.441 MeV protons, if available); continuous"],
    ["Beam days", "8 working days (8 h of beam each, assumed): 1 scan + 1.10 MeV · 1 at 441 keV (H₂⁺, else 1.10 MeV) · 5 at 1.10 MeV · 1 adjacent; 46 h at 1.10 MeV opposite; cosmic nights before and between"],
    ["Set-up", "2 of the 4 MX17 arms (A ready, B after a drift-window repair), ~24 scintillator channels"],
-   ["When", "second half of 2027 (our plan, not an allocation)"],
+   ["When", "June or July 2027, inside the call's period (20 Feb – 30 Jul 2027); about 5–14 July is our plan, not an allocation"],
    ["Expected reach", "The 8-day CN run (46 h at 1.10 MeV, 8 h of beam per working day assumed): 3.8 × R(ATOMKI) with working liquid cells, 5.0 × as at n_TOF, 7.0 × without; the lighter Al holder 1.4–1.9 ×. With 24-hour days (5 days of beam): " + (rl ? rl.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL with two 2 cm liquid cells in new cans" + (rn ? `, ${rn.r90_over_atomki} × with the liquid as at n_TOF` : "") + (rm ? `, ${rm.r90_over_atomki} × without it` : "") + " (Geant4, two arms, horizontal pair, built Cu hemisphere, " + (rl ? rl.film.replace(/ \(.*\)/, "") : "") + "). An ATOMKI-size signal would show at " + (rl ? rl.z_in_5d : "–") + "σ. MEG II: 2.07 ×. A lighter Al end piece: 0.9–1.2 × (Geant4, R10)"],
   ].forEach(([k, v]) => fx.append(h("dt", {}, k), h("dd", {}, v)));
   const nx = $("#nextup"); nx.innerHTML = "";

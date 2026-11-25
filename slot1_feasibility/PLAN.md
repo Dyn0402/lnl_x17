@@ -12,7 +12,7 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 
 ## 0. Bottom line (2026-11-18; reach updated 2026-11-20: the Geant4 two-arm study with the built Cu hemisphere)
 
-- **What we ask for:** ~8 beam days on AN2000 (CN as fallback) in the second half of 2027, for an *X17 feasibility study*
+- **What we ask for:** ~8 beam days on AN2000 (CN as fallback) in the second half of 2027 (25 Nov: now 8 working days on the CN in **June or July 2027**, §5), for an *X17 feasibility study*
   with two arms of the n_TOF MX17 apparatus around a ⁷Li target. Pierfrancesco's framing, 18 Nov: a feasibility study of
   the X17 experiment rather than a detector test, 8 days, measurement in H2 2027. He handles the informal contact with LNL.
 - **Set-up:** the two best Micromegas (A ready; B needs a drift-window repair, by Stephan at CEA; new windows are optional), two SiPM walls, the
@@ -135,15 +135,19 @@ Horizontal pair:
 | 18 Nov – 9 Dec 2026 | proposal (§6); submit 9 Dec |
 | ~18 Jan 2027 | technical-review feedback |
 | 25–29 Jan 2027 | PAC (12 + 8 min talk) |
-| Feb – Apr 2027 | B repaired (new windows if funded); DREAM loan agreed; PMTs, digitizers, trigger modules found; target holder designed |
-| Mar – Jun 2027 | bench tests (trigger T1, T2, T4; MM + DREAM on cosmics; walls + plastics on cosmics) |
-| **15 Jun 2027** | **go/no-go: both arms work on cosmics** |
-| Jun – Jul 2027 | full chain, two arms, on cosmics; Li film conversion test on the line |
-| late Aug – mid Sep 2027 | ship, install, commission at LNL (LNL closes around mid-August: ask) |
-| late Sep 2027 | 8 beam days |
-| Oct – Nov 2027 | results note; full-experiment proposal to the next PAC |
+| Feb – Mar 2027 | B repaired (new windows if funded); DREAM loan agreed; PMTs, digitizers, trigger modules found; target holder designed |
+| mid Feb – mid May 2027 | bench tests (trigger T1, T2, T4; MM + DREAM on cosmics from April; walls + plastics on cosmics) |
+| **14 May 2027** | **go/no-go: both arms work on cosmics** |
+| 17 May – 11 Jun 2027 | full chain, two arms, on cosmics; Li film conversion test on the line (by end of May) |
+| 14 Jun – 2 Jul 2027 | ship, install, commission at LNL (≥ 3 vertical cosmic nights) |
+| ~5 – 14 Jul 2027 | 8 beam days (the call's period ends **30 Jul 2027**) |
+| Jul – Sep 2027 | results note; INFN commission request; full-experiment proposal to the next PAC |
 
-The beam window is a plan, not a fact. If the INFN commission requests are due before autumn (F1), ask for June–July.
+Changed 25 Nov 2026. The January call allocates beam from 20 Feb to 30 Jul 2027 (call page; it prints 2026, a typo), and
+Pierfrancesco confirmed on 25 Nov that the PAC schedules only up to July. The "second half of 2027" of 18 Nov is therefore outside
+the period, and we aim for June or July. The beam dates are still a plan, not an allocation. This leaves about five months
+from the PAC to the beam, so the loans (B's window, DREAM, PMTs, digitizers) must be asked in December and January. If the
+go/no-go of 14 May fails, we ask LNL to move the 8 days to the next period (autumn 2027, after the August closure).
 
 ## 6. The proposal, task by task (to 10 Dec)
 

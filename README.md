@@ -2,7 +2,7 @@
 
 Started 2026-11-18. Two beam slots at LNL, on ⁷Li(p,e⁺e⁻)⁸Be with the n_TOF MX17 apparatus:
 
-1. **Slot 1, the feasibility study** (`slot1_feasibility/`): two opposite arms, 8 working days on the CN in H2 2027 (was 8 days on AN2000 until 25 Nov). Proposal to the
+1. **Slot 1, the feasibility study** (`slot1_feasibility/`): two opposite arms, 8 working days on the CN in June or July 2027 (was 8 days on AN2000, and H2 2027, until 25 Nov). Proposal to the
    Jan 2027 PAC, **deadline 10 Dec 2026, 23:59 CET**.
 2. **Slot 2, the physics experiment** (`slot2_physics/`): four arms with big plastics, a later PAC.
 
@@ -14,11 +14,14 @@ and the page; it does not duplicate those studies.
 
 ## Read this first (2026-11-18, reach updated 2026-11-19)
 
+- **25 Nov: June or July 2027, not H2 2027.** The January call allocates beam from 20 Feb to 30 Jul 2027 (the call page prints
+  2026). Pierfrancesco confirmed it on 25 Nov. Plan: both arms on cosmics by 14 May, install at LNL from 14 Jun, beam ~5–14 Jul
+  (`slot1_feasibility/PLAN.md` §5, `correspondence/2026-11-25_mastinu_call_period.md`).
 - **25 Nov: the CN, not AN2000** (AN2000 probably not available). The allocation is 8 days. The proposal asks 8 working days at 1 µA,
   assuming 8 h of beam per working day: day 1 scan + 1.10 MeV, day 2 H₂⁺ at 0.883 MV for 441 keV (else 1.10 MeV), days 3–7
   at 1.10 MeV, day 8 adjacent. That is 46 h at 1.10 MeV: 3.8 × R(ATOMKI) (2.35 × needs 120 h). Implications and the 2/4 µA fits: `slot1_feasibility/CN_BEAM.md`.
 
-- Pierfrancesco (18 Nov): ask for an **X17 feasibility study**, ~8 days, measure in H2 2027; he does the informal contact;
+- Pierfrancesco (18 Nov): ask for an **X17 feasibility study**, ~8 days, measure in H2 2027 (changed 25 Nov to June–July, see above); he does the informal contact;
   co-proponents Massimi, Mengoni, Gervino, Gustavino, Cosentino (`correspondence/2026-11-18_mastinu_pac.md`).
 - Set-up: Micromegas A (ready) + B (drift fix by Stephan), 2 SiPM walls, 4 small plastics (PMTs to find), ~24 digitizer channels,
   half of DREAM. Cash ~€8k critical for the test (+€5k low-, +€8k high-budget upgrades) if every loan comes through. 25 Nov: LEMO cables + Ts

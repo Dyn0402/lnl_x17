@@ -1,5 +1,23 @@
 # Handoff
 
+## The run moves to June or July 2027 — updated 2026-11-25 (dylan-MS-7C84)
+
+**Resume:** LNL slot 1: the call allocates 20 Feb – 30 Jul 2027, so the proposal asks for June or July 2027 and the plan was moved forward ~10 weeks.
+
+**Done:**
+- Confirmed: the call page says "from February 20th to July 30th, 2026" (typo for 2027); the call PDF gives no period.
+  Pierfrancesco said the same in the 25 Nov call (`correspondence/2026-11-25_mastinu_call_period.md`).
+- Proposal: beam-time request "in June or July 2027, since both arms will be tested together on cosmic rays by the end of May
+  2027"; abstract table "CN, June or July 2027"; B's window repair "February and March 2027". Body still 4 pages. Pushed to Overleaf.
+- `planning/plan.py`: go/no-go 14 May; full chain 17 May – 11 Jun; install 14 Jun – 2 Jul; beam ~5–14 Jul; the 30 Jul end of
+  period as a hard milestone; task and hardware need-dates moved (bench hardware by 1 Apr); new risk "not ready by July"
+  (fallback: the next period, autumn 2027). Page, PLAN.md §5, README, STRUCTURE.md; x17_facility_search FACILITY.md,
+  lnl/README.md, dashboard. Site deployed.
+
+**Next steps:**
+1. Ask PF: June or July preferred for the CN; what happens if we slip past July.
+2. The loans now need answers in Dec–Jan (B's window by March, DREAM from mid-Feb, PMTs/digitizers by end Feb).
+
 ## Budget and inventory: loans from n_TOF and CERN, the hardware at CEA — updated 2026-11-25 (dylan-MS-7C84)
 
 **Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental 285 CHF/month × ~2 months → €0.6k; scintillator DAQ options in the pool (CERN_EPOOL.md §4); critical €7.4k. Next: ask the pool about LNL; choose the digitizer (LNL V1742 or 4 × DT5730SB).

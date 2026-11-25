@@ -12,7 +12,8 @@ pdf files".
 - CN and AN2000 are open; Tandem only on the +20 (AGATA) line. A limited number of pulsed-beam days on the CN.
 - Allocation period (call page, re-read 2026-11-25): "from February 20th to July 30th, 2026", which must mean 2027.
   Pierfrancesco (18 Nov): probably ~6 months; say in the proposal that we want to measure in the second half of 2027.
-  **Open (ask PF):** the second half of 2027 is outside this period except for July.
+  **Settled 25 Nov:** Pierfrancesco confirmed that the call schedules only up to July. The proposal now asks for **June or July 2027**
+  (body, beam-time request; abstract, beam table).
 - Beam questions: pacbeams@lnl.infn.it. CN/AN2000 coordinator: Anna Selva.
 
 ## 2. The document
