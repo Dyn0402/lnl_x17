@@ -213,7 +213,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
   <div class="note" style="border-left-color:var(--warning);background:var(--surface);margin:8px 0 6px"><b>Corrected 20 Nov.</b>
     The two-arm Geant4 numbers now use the Cu hemisphere that is built (R 11 mm, 300 µm wall; run L18). The 19 Nov version used the Cu
     ogive of the 27 Oct sketch by mistake. The hemisphere's wall costs ×6 in running time: five days give about MEG II's limit, not the
-    ATOMKI ratio. A lighter Al end piece would recover most of it (an estimate).</div>
+    ATOMKI ratio. A lighter Al end piece (Al ogive + Cu liner, simulated in two arms on 25 Nov) gives about the ATOMKI ratio, 0.9–1.2 × R(ATOMKI).</div>
   <nav class="tabs" role="tablist" id="tabs"></nav>
 
   <!-- OVERVIEW -->
@@ -351,7 +351,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
     <p class="note"><b>Geant4, two arms</b> (2026-11-19, <span class="kbd">lnl_x17/sim2arm/TWO_ARM_STUDY.md</span>): the FEASIBILITY_SIM §19 reference fit
       (θ × |y| × E_sum, background shape floating) run on one pair of arms of the built Cu hemisphere's tables (R 11 mm, 300 µm: L10 + L18, corrected 20 Nov; before that, the Cu ogive's L11 + L13), with cosmics from every zenith angle (run L15).
       Range: the two MC-safe estimators. Expected limit = 1.28 / Z(ATOMKI) × R(ATOMKI). The time of flight uses σ_t = 0.6 ns per arm, measured on n_TOF beam-off cosmics (0.52–0.64 ns) with the n_TOF readout.
-      The Al ogive has no two-arm simulation: its rows are the four-arm §19.3 days × the Cu ogive's simulated two-arm / four-arm ratio (an estimate).</p>
+      The Al ogive + Cu liner rows come from its own Geant4 tables (L12 + L13, ×30; <span class="kbd">sim2arm/R10_AL_OGIVE.md</span>, 25 Nov). The scaled estimate they replace was optimistic by ×1.3–2.1 in days.</p>
     <div class="tscroll"><table id="r-table"></table></div>
   </section>
 
@@ -393,7 +393,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
         measured with and without each veto, and the arm-to-arm time of flight. Accidentals and external pairs with beam.</div>
       <div class="card"><b>4 · A first look at 18.15 MeV.</b> Five days at 1.10 MeV, two opposite arms, the built Cu hemisphere: an expected 90 % CL limit of
         2.4 × R(ATOMKI) with the liquid cells working, 3.1 × as at n_TOF, 4.3 × without them; MEG II's limit is 2.07 ×. A lighter Al end piece:
-        ~0.6–0.8 × (estimate). Geant4; see <a href="#reach" data-go="reach">Beam &amp; reach</a>.</div>
+        0.9–1.2 × (Geant4, R10). Geant4; see <a href="#reach" data-go="reach">Beam &amp; reach</a>.</div>
     </div>
     <h2>Submission and after</h2>
     <div class="grid2">
@@ -558,7 +558,7 @@ function overview() {
    ["Beam days", "8: 1 set-up · 1 at 441 keV · 5 at 1.10 MeV · ½ adjacent + contingency; cosmic nights before the beam"],
    ["Set-up", "2 of the 4 MX17 arms (A ready, B after a drift-window repair), ~24 scintillator channels"],
    ["When", "second half of 2027 (our plan, not an allocation)"],
-   ["Expected reach", (rl ? rl.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL in 5 days with two 2 cm liquid cells in new cans" + (rn ? `, ${rn.r90_over_atomki} × with the liquid as at n_TOF` : "") + (rm ? `, ${rm.r90_over_atomki} × without it` : "") + " (Geant4, two arms, horizontal pair, built Cu hemisphere, " + (rl ? rl.film.replace(/ \(.*\)/, "") : "") + "). An ATOMKI-size signal would show at " + (rl ? rl.z_in_5d : "–") + "σ. MEG II: 2.07 ×. A lighter Al end piece: ~0.6–0.8 × (estimate)"],
+   ["Expected reach", (rl ? rl.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL in 5 days with two 2 cm liquid cells in new cans" + (rn ? `, ${rn.r90_over_atomki} × with the liquid as at n_TOF` : "") + (rm ? `, ${rm.r90_over_atomki} × without it` : "") + " (Geant4, two arms, horizontal pair, built Cu hemisphere, " + (rl ? rl.film.replace(/ \(.*\)/, "") : "") + "). An ATOMKI-size signal would show at " + (rl ? rl.z_in_5d : "–") + "σ. MEG II: 2.07 ×. A lighter Al end piece: 0.9–1.2 × (Geant4, R10)"],
   ].forEach(([k, v]) => fx.append(h("dt", {}, k), h("dd", {}, v)));
   const nx = $("#nextup"); nx.innerHTML = "";
   D.tasks.filter(t => t.status !== "done" && !ticked(t.id)).sort((a, b) => a.due.localeCompare(b.due)).slice(0, 6).forEach(t => {

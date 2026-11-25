@@ -52,10 +52,12 @@ figure-heavy, get it close to ready.
   Four arms, same fit: 11.6 / 22.6 d (not the 4.5 / 8.5 d of §19.3, made on thin tables). `two_arm_estimates.py` now
   reads these rows (`AL_TAGS`); proposal text, abstract and Fig. 3 use them ("0.9 to 1.2 ×", "about 20 days",
   "about 12 days with four arms", "about a day with large plastics", the last one still a scaling).
-- **NOT yet propagated (the session hit its usage limit):** "0.6–0.8 × (estimate)" still stands in `site/template.html`
-  (three places), `plan.py` (risk text, T1), `slot1_feasibility/PLAN.md`, `sim2arm/TWO_ARM_STUDY.md` §0, `README.md`,
-  and x17_facility_search `lnl/FACILITY.md`, README and `survey/dashboard.py`. The site page was last deployed before
-  the 478 keV and R10 changes: run `python3 site/build_page.py`, then build and deploy the site. plan.py R10 → done.
+- **R10 propagated (25 Nov, later session):** the 0.6–0.8 × estimate is replaced by the simulated 0.88–1.19 × in
+  `site/template.html`, `plan.py` (R10 done, risk text, T1), `slot1_feasibility/PLAN.md` (§1 and the §4 table, rebuilt
+  from `planning/out/two_arm_reach.csv`), `sim2arm/TWO_ARM_STUDY.md` (§0, §7, §9), and x17_facility_search
+  `lnl/FACILITY.md`, `lnl/README.md` (new read-first block) and `survey/dashboard.py` (EXTRA + LOG). Page and survey
+  rebuilt and deployed. Overleaf checked: identical to `proposal/latex/`.
+- The site repo's branch is `master` (origin also has a stale `main`): push `master`.
 
 **Open items for Dylan / Pierfrancesco (red in the PDF)**
 1. GLIMOS, authors and affiliations; one sentence after talking to the LNL ⁸Be group.

@@ -132,8 +132,8 @@ TASKS = [
          t="Proposal text from sim2arm: the 441 keV rate (~140 pairs/day above 90° with the built Cu hemisphere), the reach rows (2.35 × R(ATOMKI) in 5 d, liquid working), the vertical-cosmics test. Done 24 Nov: abstract + body rewritten in Dylan's style, beam request table on the abstract page; pushed to Overleaf"),
     dict(id="R6", ws="sim", due="2026-11-20", who="Dylan", status="done",
          t="More as-built MC for the Cu hemisphere: done 20 Nov (run L18, ×30 the L10 tables; the 19 Nov study had used the Cu ogive)"),
-    dict(id="R10", ws="sim", due="2026-12-05", who="Dylan", status="todo",
-         t="Two-arm Geant4 of the lighter Al end piece (Al ogive + Cu liner or the 45° Al cap), as L18 for the hemisphere: its slot-1 rows are scaled estimates now"),
+    dict(id="R10", ws="sim", due="2026-12-05", who="Dylan", status="done",
+         t="Two-arm Geant4 of the lighter Al end piece (Al ogive + Cu liner) from its own tables (L12 + the x30 L13): 21 d to 3 sigma and 0.88 x R(ATOMKI) in 5 d with the liquid working, 1.19 x as at n_TOF, 1.70 x without (11 µm). The old scaling (10 d, 0.62 x) was optimistic. Done 25 Nov (sim2arm/R10_AL_OGIVE.md); the 45° Al cap is not simulated in two arms"),
     dict(id="R11", ws="sim", due="2026-12-05", who="Dylan", status="done",
          t="Geant4 of the liquid cell right behind the SiPM wall (runs R11 + R11b, 21 Nov): no gain. Own MC (direct) 284 d to 3 sigma vs 189 d for the baseline; X17 acceptance x2.5 (toy x4.2), cosmics x3.5, gamma1 x7; the transplant (47 d) does not apply to this layout. Baseline kept (LIQUID_CELLS.md 4.1)"),
     dict(id="R7", ws="sim", due="2026-11-20", who="Dylan", status="done",
@@ -172,7 +172,7 @@ TASKS = [
          t="Remake 2 liquid-cell cans (45 × 45 × 2 cm baseline, or the S6/S7 design) and fill them"),
     # --- target
     dict(id="T1", ws="target", due="2026-12-01", who="Pierfrancesco", status="todo",
-         t="Target for the proposal: pressed Li on Cu (CN group), 10–12 µm; holder: the Cu hemisphere (already built: R 11 mm, 300 µm, rim; simulated as dome300 since 20 Nov, the 19 Nov numbers used the Cu ogive by mistake); a lighter Al end piece (Al ogive + Cu liner, or a flat Al end cap at 45°) would cut the days ×6–15 in simulation: ask whether one can be made for slot 1. PF (20 Nov): the hemisphere exists and works, 'at least for the forward angles'; he has asked for an engineering thesis on the holder"),
+         t="Target for the proposal: pressed Li on Cu (CN group), 10–12 µm; holder: the Cu hemisphere (already built: R 11 mm, 300 µm, rim; simulated as dome300 since 20 Nov, the 19 Nov numbers used the Cu ogive by mistake); a lighter Al end piece (Al ogive + Cu liner, or a flat Al end cap at 45°) would cut the days ×7 in simulation (R10: 21 d against 151 d to 3σ, liquid working): ask whether one can be made for slot 1. PF (20 Nov): the hemisphere exists and works, 'at least for the forward angles'; he has asked for an engineering thesis on the holder"),
     dict(id="T2", ws="target", due="2027-06-30", who="Pierfrancesco", status="todo",
          t="Build the holder; make films; a week of LiOH-conversion test on the line"),
     # --- site
@@ -399,7 +399,7 @@ RISKS = [
     dict(r="AN2000 room occupied (LNL ⁸Be spectrometer) or no free line", l="med", i="high",
          m="Talk to the Marchi group first; CN fallback (no 441 keV; 1.03–1.10 only)."),
     dict(r="The built Cu hemisphere limits the physics reach", l="high", i="high",
-         m="Simulated (sim2arm, 20 Nov, run L18): with the hemisphere's 300 µm wall five days give 2.4 × R(ATOMKI) (liquid working), about MEG II's limit; an ATOMKI-size signal shows at ~0.5σ. A lighter Al end piece gives ~0.6–0.8 × (estimate). Ask PF whether one can be made (T1, R10); otherwise sell the run as the feasibility test it is."),
+         m="Simulated (sim2arm, 20 Nov, run L18): with the hemisphere's 300 µm wall five days give 2.4 × R(ATOMKI) (liquid working), about MEG II's limit; an ATOMKI-size signal shows at ~0.5σ. A lighter Al end piece (Al ogive + Cu liner) gives 0.9–1.2 × (Geant4, R10, 25 Nov), about the ATOMKI ratio. Ask PF whether one can be made (T1); otherwise sell the run as the feasibility test it is."),
     dict(r="Cosmic veto weaker than simulated (σ_t > 0.4 ns, segments worse than 3°)", l="med", i="med",
          m="n_TOF beam-off muons: σ_t 0.52–0.64 ns per arm (19 Nov). Horizontal pair for the beam days: its days barely depend on σ_t (17.4 d with no TOF, 17.7 at any σ_t; sim2arm tof_scan); the vertical pair goes 17.1 → 18.7 d from 0.3 to 0.7 ns. R4 with the LNL readout."),
     dict(r="Liquid-cell cans not remade in time, or PMTs not found", l="med", i="med",

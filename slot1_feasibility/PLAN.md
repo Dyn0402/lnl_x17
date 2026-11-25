@@ -23,7 +23,7 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
   4. a first look at the 18.15 MeV pairs. **Geant4, two arms (`../sim2arm/TWO_ARM_STUDY.md`):** 5 days at 1.10 MeV,
      11 µm Li, horizontal pair, **the built Cu hemisphere** (R 11 mm, 300 µm; run L18): expected 90 % CL limit
      **2.35 × R(ATOMKI)** with the liquid cells working, **3.10 ×** as they ran at n_TOF, **4.32 ×** without them; MEG II's limit
-     is 2.07 ×. An ATOMKI-size signal would show at ~0.5σ. A lighter Al end piece would give ~0.6–0.8 × (estimate): the
+     is 2.07 ×. An ATOMKI-size signal would show at ~0.5σ. A lighter Al end piece (Al ogive + Cu liner, Geant4 run R10, 25 Nov) gives 0.88 × with the liquid working and 1.19 × as at n_TOF: the
      holder is now the decision that sets the physics reach. (The 19 Nov numbers, 0.93 / 1.19 / 1.78 ×, were for the Cu
      ogive of the 27 Oct sketch, simulated by mistake.)
 - **Why it matters:** a positive PAC answer lets us build the 2-branch full detector; results back the INFN commission
@@ -89,7 +89,7 @@ Pierfrancesco can find, plus a few.
 `../planning/out/two_arm_reach.csv`. The FEASIBILITY_SIM §19 reference fit (θ × |y| × E_sum, background shape floating)
 on one pair of arms of the built Cu hemisphere's Geant4 tables (R 11 mm, 300 µm: L10 + L18; until 20 Nov the Cu ogive's
 L11 + L13 by mistake), cosmics from every zenith angle (L15, 10 live days), 1 µA, 1.10 MeV. Range: the two MC-safe
-estimators. The Al ogive has no two-arm simulation: its rows are §19.3 × the Cu ogive's simulated ratio (estimate).
+estimators. The Al ogive + Cu liner rows are its own Geant4 tables (L12 + L13, ×30; `../sim2arm/R10_AL_OGIVE.md`, 25 Nov); until 25 Nov they were §19.3 × the Cu ogive's ratio, which was optimistic by ×1.3–2.1 in days.
 Horizontal pair:
 
 | film | target | energy stack | cosmic veto | 4 arms, d to 3σ | 2 arms, d to 3σ | Z at R(ATOMKI) in 5 d | 90 % limit / R(ATOMKI) | / MEG II |
@@ -100,24 +100,24 @@ Horizontal pair:
 | 11 µm Li | Cu hemisphere (built) | + liquid as at n_TOF | MM pointing only | 174.5 | 226.4 (182-282) | 0.45 | 2.87 | 1.39 |
 | 11 µm Li | Cu hemisphere (built) | + liquid working | MM pointing + 0.6 ns TOF | 147.6 | 151.0 (120-189) | 0.55 | 2.35 | 1.13 |
 | 11 µm Li | Cu hemisphere (built) | + liquid working | MM pointing only | 135.5 | 132.3 (97-180) | 0.58 | 2.2 | 1.06 |
-| 11 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing + 0.6 ns TOF | 42.3 | 58.8 (34-100) | 0.87 | 1.46 | 0.71 |
-| 11 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing only | 42.3 | 57.8 (34-97) | 0.88 | 1.45 | 0.7 |
-| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing + 0.6 ns TOF | 12.4 | 18.2 (11-30) | 1.57 | 0.81 | 0.39 |
-| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing only | 12.4 | 15.9 (10-24) | 1.68 | 0.76 | 0.37 |
-| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing + 0.6 ns TOF | 6.3 | 10.4 (8-13) | 2.08 | 0.62 | 0.3 |
-| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing only | 6.3 | 9.4 (7-12) | 2.18 | 0.59 | 0.28 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing + 0.6 ns TOF | 44.2 | 78.7 (61-101) | 0.76 | 1.7 | 0.82 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing only | 49.1 | 75.9 (56-102) | 0.77 | 1.66 | 0.8 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing + 0.6 ns TOF | 22.6 | 38.8 (33-45) | 1.08 | 1.19 | 0.57 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing only | 21.3 | 36.9 (30-45) | 1.1 | 1.16 | 0.56 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing + 0.6 ns TOF | 11.6 | 21.1 (20-22) | 1.46 | 0.88 | 0.42 |
+| 11 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing only | 10.1 | 18.7 (19-19) | 1.55 | 0.83 | 0.4 |
 | 20 µm Li | Cu hemisphere (built) | SiPM wall + small plastics (no liquid) | MM pointing + 0.6 ns TOF | 217.4 | 293.0 (277-310) | 0.39 | 3.27 | 1.58 |
 | 20 µm Li | Cu hemisphere (built) | SiPM wall + small plastics (no liquid) | MM pointing only | 186.4 | 259.5 (257-262) | 0.42 | 3.08 | 1.49 |
 | 20 µm Li | Cu hemisphere (built) | + liquid as at n_TOF | MM pointing + 0.6 ns TOF | 103.3 | 150.8 (128-178) | 0.55 | 2.35 | 1.13 |
 | 20 µm Li | Cu hemisphere (built) | + liquid as at n_TOF | MM pointing only | 94.1 | 130.2 (106-160) | 0.59 | 2.18 | 1.05 |
 | 20 µm Li | Cu hemisphere (built) | + liquid working | MM pointing + 0.6 ns TOF | 82.6 | 86.5 (68-110) | 0.72 | 1.78 | 0.86 |
 | 20 µm Li | Cu hemisphere (built) | + liquid working | MM pointing only | 78.6 | 77.6 (57-106) | 0.76 | 1.68 | 0.81 |
-| 20 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing + 0.6 ns TOF | 30.5 | 43.1 (25-73) | 1.02 | 1.25 | 0.61 |
-| 20 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing only | 30.5 | 41.0 (25-68) | 1.05 | 1.22 | 0.59 |
-| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing + 0.6 ns TOF | 8.5 | 13.5 (8-23) | 1.83 | 0.7 | 0.34 |
-| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing only | 8.5 | 11.6 (7-18) | 1.97 | 0.65 | 0.32 |
-| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing + 0.6 ns TOF | 4.5 | 7.5 (6-9) | 2.45 | 0.52 | 0.25 |
-| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing only | 4.5 | 7.0 (5-9) | 2.54 | 0.5 | 0.24 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing + 0.6 ns TOF | 31.2 | 53.3 (41-70) | 0.92 | 1.4 | 0.67 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | SiPM wall + small plastics (no liquid) | MM pointing only | 34.2 | 51.2 (37-70) | 0.94 | 1.37 | 0.66 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing + 0.6 ns TOF | 13.1 | 24.4 (21-28) | 1.36 | 0.94 | 0.46 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid as at n_TOF | MM pointing only | 13.1 | 23.7 (20-28) | 1.38 | 0.93 | 0.45 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing + 0.6 ns TOF | 6.9 | 13.5 (13-14) | 1.83 | 0.7 | 0.34 |
+| 20 µm Li | Al ogive + Cu liner (lighter) | + liquid working | MM pointing only | 6.2 | 12.0 (12-12) | 1.94 | 0.66 | 0.32 |
 
 - Not a discovery run: an ATOMKI-size signal shows at 1–1.5σ with the liquid cells. Quote the limit column as "sensitivity".
 - The liquid cells are the biggest lever (×3.4 in days with the hemisphere); the proposal assumes them (20 Nov). The 10–12 µm film (LiOH) costs ×1.3 against 20 µm.

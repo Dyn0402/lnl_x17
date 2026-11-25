@@ -25,9 +25,10 @@ Slide note: <https://dylan-neff.web.cern.ch/notes/lnl-two-arm-run.html>. This re
   151 (120–189) with the liquid working, 263 (215–321) as at n_TOF,
   511 without (the ogive: 25, 44, 94).
 - **The target holder is now the decision.** A lighter end piece changes the run from a feasibility test into a first limit:
-  the Al ogive + Cu liner (four-arm Geant4 × the two-arm ratio of the Cu ogive, an estimate) gives
-  0.62 / 0.81 / 1.46 × R(ATOMKI)
-  (liquid working / as at n_TOF / none) in the same five days. The 45° Al end cap of the target review is in the same class
+  the Al ogive + Cu liner (its own two-arm Geant4 tables, L12 + L13, R10_AL_OGIVE.md, 25 Nov) gives
+  0.88 / 1.19 / 1.70 × R(ATOMKI)
+  (liquid working / as at n_TOF / none) in the same five days, 21 / 39 / 79 days to 3σ. The earlier scaled estimate
+  (0.62 / 0.81 / 1.46 ×) was optimistic. The 45° Al end cap of the target review is in the same class
   (TARGET_REVIEW.md). Ask Pierfrancesco whether either can be made for slot 1 (task T1); otherwise the run is the feasibility
   test only, and says so.
 - **What the run still delivers with the hemisphere:** every rate, trigger and track fraction, the cosmic veto at full
@@ -358,7 +359,7 @@ the Cu hemisphere smears below 120°). What they see well:
 Everything that makes the feasibility case (rates, calibration, backgrounds, the veto) is front-loaded and takes
 three days at most; the X17 data fill the rest. If the apparatus misbehaves, the run is still a full feasibility study;
 if it works, the last five days give a first limit: with the built Cu hemisphere ~2.4 × R(ATOMKI) at best, about MEG II's
-level; with a lighter Al end piece ~0.6–0.8 × (estimate, §0). Nothing in the plan depends on a lucky signal.
+level; with a lighter Al end piece ~0.9–1.2 × (Geant4, R10_AL_OGIVE.md). Nothing in the plan depends on a lucky signal.
 
 ### 7.2 Before the beam: the cosmic veto test, vertical pair (installation week, ≥ 3 nights)
 
@@ -393,7 +394,7 @@ stacked vertically.
 |---|---|---|---|
 | 1 | 1.10 MeV | target conditioning; current scan 0.05 → 1 µA; γ-yield reference | singles and two-arm rates vs current, DREAM live time, MM occupancy; accidentals (≲ 0.02/day in the window at 2τ = 20 ns) |
 | 2 | 0.441 MeV | locate the 441 keV resonance on the arm singles; 17.64 MeV M1 IPC | ~140 pairs/day above 90° in the E_sum window with the built Cu hemisphere (~1,600 with no E_sum cut; the ogive gave ~600): the absolute IPC rate to ~8 % in a day, the θ shape and the E_sum peak against Geant4 |
-| 3–7 | 1.10 MeV | the 18.15 MeV region; 30 min yield check each day | the X17 data (§3): expected limit 2.4 / 3.1 × R(ATOMKI) with the liquid working / as at n_TOF (built Cu hemisphere); 0.6–0.8 × with a lighter Al end piece (estimate) |
+| 3–7 | 1.10 MeV | the 18.15 MeV region; 30 min yield check each day | the X17 data (§3): expected limit 2.4 / 3.1 × R(ATOMKI) with the liquid working / as at n_TOF (built Cu hemisphere); 0.9 / 1.2 × with a lighter Al end piece (Geant4, R10) |
 | 8 | 1.10 MeV | ½ day with the arms adjacent (90°), then contingency | external conversions and small-angle IPC at 25–90°, several × 10³/day (§6) |
 | beam off | — | cosmics in the physics geometry (horizontal) | the beam-off background template in the geometry of the data |
 
@@ -450,8 +451,8 @@ day 8) is optional and comes last.
 
 1. Proposal text (task R5): the reach rows of §3, the 441 keV rate of §2, the vertical-cosmics test of §7.2, Fig. from
    `planning/figures.py`. The sensitivity sentence with the built hemisphere: "expected 90 % CL limit 2.4 × R(ATOMKI) in
-   five days with liquid cells, about MEG II's; a lighter Al end piece would reach ~0.6–0.8 ×" (§0 numbers).
-2. A two-arm Geant4 run of the lighter Al end piece (Al ogive + Cu liner, or the 45° Al cap): its rows are scaled estimates (§0).
+   five days with liquid cells, about MEG II's; a lighter Al end piece would reach about R(ATOMKI) (0.9–1.2 ×)" (§0 numbers).
+2. ~~A two-arm Geant4 run of the lighter Al end piece~~: done 25 Nov for the Al ogive + Cu liner (R10_AL_OGIVE.md). The 45° Al cap is not simulated in two arms.
    The hemisphere's as-built MC (L10 + L18, ×30) is no longer the limitation.
 3. The muon segment smearing inside the Geant4 levels, not as a wrapper (FEASIBILITY_SIM §19.6 item 4).
 4. A roll angle for the stand and a 45° ("X") pair, if the mechanics prefer it (`x17_facility_search/mechanics/`):
