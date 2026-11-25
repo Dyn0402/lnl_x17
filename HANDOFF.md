@@ -2,7 +2,7 @@
 
 ## Budget and inventory: loans from n_TOF and CERN, the hardware at CEA — updated 2026-11-25 (dylan-MS-7C84)
 
-**Resume:** LNL slot-1 budget/inventory; next: read the CERN epool items (rental costs) and replace the €1k rental-fee guess.
+**Resume:** LNL slot-1 budget/inventory; epool read (25 Nov): pool rental ~285 CHF/month → €1.6k, critical €8.4k. Next: ask the pool about LNL, confirm the DREAM LV model.
 
 **Goal:** a detailed slot-1 budget and the central hardware inventory: what we own, borrow or rent, how sure we are of each
 loan, and what it costs if a loan falls through.
@@ -20,14 +20,12 @@ loan, and what it costs if a loan falls through.
 - `budget/items.py`: Lean rents the N1081Bs/FIFOs and borrows the LEMO set: €103k → €58.3k. All deployed.
 
 **In progress / where it stopped:**
-- Dylan asked to read his CERN epool issued items (rental costs) with Claude in Chrome. The extension did not connect:
-  this session runs on the Alexandra account (`~/.claude-alexandra`), the extension is probably on Dylan's. Nothing read.
-  URL: https://epool.cern.ch/?filter=%7B%22issuedTo%22%3A%7B%22cernId%22%3A%5B%22185607%22%5D%2C%22username%22%3A%22DNEFF%22%7D%2C%22status%22%3A%5B%22ISSUED%22%5D%2C%22supportCategory%22%3A%5B%22FULL%22%2C%22SPECIAL%22%5D%7D
+- Done 25 Nov: epool read with Claude in Chrome. Nothing is issued to Dylan now (14 rentals, all returned by 13 Aug). Catalogue fees
+  in `x17_facility_search/inventory/CERN_EPOOL.md`; budget line updated (€1.6k, was a €1k guess). No Wiener PL512 in the pool;
+  Dylan rented a Delta SM3545-D (35 V/45 A) 25 Mar–13 Aug on T299563: is that the DREAM LV? (ask)
 
 **Next steps:**
-1. Open the epool page (Chrome extension on the same account, or Dylan pastes the list); for each issued item record
-   type, rental cost; put them in the inventory (CERN pool items) and replace the €1k guess in `plan.py` BUDGET
-   ("CERN pool rental fee …") and the fallback lines' notes.
+1. (done 25 Nov) epool fees → inventory + BUDGET. Still to ask: may rented modules go to LNL; DREAM LV = SM3545-D or PL512?
 2. Ask: CERN pool (off-site rental to LNL, fee), n_TOF (LEMO loan dates), CEA (is the large NIM module a NIM bin? 4 FEUs +
    32 cables from the pool). Count the n_TOF cables by length. Write down what the M2 and M4 cards are.
 3. Rate the 9 loans still without a confidence (DREAM FEUs, PMTs, digitizers, VME, HV, Li films, line, stand, γ monitor).

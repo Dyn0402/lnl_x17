@@ -1253,7 +1253,7 @@
      "where": "CERN pool",
      "cond": "good",
      "avail_l": "returned, ask again",
-     "note": "Rented for n_TOF; none comes with us."
+     "note": "Rented for n_TOF; none comes with us. Dylan's rentals (CERN epool, read 25 Nov 2026): CEP-05940009 and CEP-05940016, 30 Jun–13 Aug 2026. Pool catalogue CEP-0594: 70.30 CHF/month, SPECIAL support category, 5 in stock."
     }
    ],
    "place": [
@@ -1264,7 +1264,7 @@
     "S4"
    ],
    "note": "The n_TOF trigger for two arms: legs per arm in 20 ns coincidence, PAIR never prescaled, SINGLE ÷P, 1 Hz clock, trigger word, scalers.",
-   "detail": "Pierfrancesco suggested a CAEN test loan. Our n_TOF tooling (trigger_mode.py, poll_modules) runs on N1081Bs, the reason to stay with them.",
+   "detail": "Pierfrancesco suggested a CAEN test loan. Our n_TOF tooling (trigger_mode.py, poll_modules) runs on N1081Bs, the reason to stay with them. CERN pool: CEP-0594, 70.30 CHF/month each, SPECIAL category, 5 in stock (epool, 25 Nov 2026).",
    "cash": 0,
    "fallback": 13960,
    "tier": "loan",
@@ -1294,7 +1294,7 @@
      "where": "CERN pool",
      "cond": "good",
      "avail_l": "returned, ask again",
-     "note": "Rented for n_TOF."
+     "note": "Rented for n_TOF: CEP-48690173, 30 Jun–13 Aug 2026 (CERN epool, 25 Nov 2026). Pool catalogue CEP-4869 14.96 CHF/month, 19 in stock."
     }
    ],
    "place": [
@@ -1304,7 +1304,7 @@
     "S3"
    ],
    "note": "Hold gate after each trigger, ORed with DREAM's busy.",
-   "detail": "Price if bought: CAEN offer.",
+   "detail": "CERN pool: CEP-4869, 14.96 CHF/month, 19 in stock (epool, 25 Nov 2026). Price if bought: CAEN offer.",
    "cash": 0,
    "fallback": 2720,
    "tier": "loan",
@@ -1334,7 +1334,7 @@
      "where": "CERN pool",
      "cond": "good",
      "avail_l": "returned, ask again",
-     "note": "Rented for n_TOF."
+     "note": "Rented for n_TOF. Dylan's rentals (CERN epool, 25 Nov 2026): 7 × LeCroy 428F (CEP-45460169, -207, -217, -227, -246, -313, -346) and 1 × LeCroy 628 (CEP-49000002), 30 Jun–13 Aug 2026; one 428F returned on 7 Jul. Pool catalogue: 428F CEP-4546 14.76 CHF/month, 16 in stock; 628 CEP-4900 1.08 CHF/month, none in stock."
     }
    ],
    "place": [
@@ -1344,7 +1344,7 @@
     "S3"
    ],
    "note": "As at n_TOF: one per wall sums the top and bottom ends of each segment for the trigger; one fans the 4 plastic PMTs (+2 liquid cells) out to the digitizer and the trigger.",
-   "detail": "x17_facility_search budget item 'fifo': 6 at n_TOF for 4 arms, so 3 for two (4 with the liquid cells). The N625 is €2,290 (CAEN offer 26OFC.01101).",
+   "detail": "x17_facility_search budget item 'fifo': 6 at n_TOF for 4 arms, so 3 for two (4 with the liquid cells). The N625 is €2,290 (CAEN offer 26OFC.01101). CERN pool: LeCroy 428F CEP-4546, 14.76 CHF/month, 16 in stock (epool, 25 Nov 2026).",
    "cash": 0,
    "fallback": 6870,
    "tier": "loan",
@@ -1372,7 +1372,7 @@
     "S3"
    ],
    "note": "For the N1081Bs, the timer and the linear FIFOs: 2 × 2 + 1 + 3–4 = 8–9 slots, one 12-slot bin.",
-   "detail": "Is the 'large NIM module' kept with DREAM at CEA the NIM bin the budget counts on (ask Stephan)?",
+   "detail": "Is the 'large NIM module' kept with DREAM at CEA the NIM bin the budget counts on (ask Stephan)? CERN pool (epool, 25 Nov 2026): bin UEN01 CEP-9432 12.18 CHF/month (66 in stock) + 300 W supply UEP22M CEP-9331 27.40 + fan tray UEL02M CEP-9643 6.09; or a compact 5-slot CAEN N8302P + N8315 supply, 7.57 + 15.14.",
    "cash": 0,
    "fallback": 5110,
    "tier": "loan",
@@ -1562,7 +1562,7 @@
    "grp": "Power",
    "status": "borrow",
    "org": "CERN (n_TOF / pool)",
-   "src": "CERN electronics pool: the Wiener PL512 that powered DREAM at n_TOF, rented and taken to LNL; else LNL",
+   "src": "CERN electronics pool: the DREAM LV from n_TOF (Wiener PL512 or the Delta SM3545-D Dylan rented, to confirm), rented and taken to LNL; else LNL",
    "conf": "hopefully",
    "who": "Dylan",
    "state": "to ask",
@@ -1577,7 +1577,7 @@
      "where": "(ask)",
      "cond": "good",
      "avail_l": "returned, ask again",
-     "note": "The low-voltage supply that powered DREAM at n_TOF (read by nTof_x17_DAQ/weiner_ps_monitor.py; model to confirm). To rent again from CERN and take to LNL, as the NIM modules (Dylan, 25 Nov 2026)."
+     "note": "The low-voltage supply that powered DREAM at n_TOF (read by nTof_x17_DAQ/weiner_ps_monitor.py; model to confirm). To rent again from CERN and take to LNL, as the NIM modules (Dylan, 25 Nov 2026). The CERN pool catalogue has no Wiener PL512 (epool, 25 Nov 2026), so the PL512 may not be a pool item (ask). Dylan's epool history has a Delta Elektronika SM3545-D (0–35 V, 45 A; CEP-01270008) rented 25 Mar–13 Aug 2026 on budget code T299563 and a TTi TSX3510P (35 V, 10 A) 30 Jun–17 Jul; the SM3545-D may be the DREAM supply (ask). Catalogue CEP-0127: 24.88 CHF/month, 3 in stock."
     }
    ],
    "place": [
@@ -1587,7 +1587,7 @@
     "M2"
    ],
    "note": "4 FEUs at ~5 A + TCM ~5 A. The same supply as at n_TOF keeps the noise conditions we know.",
-   "detail": "Model from nTof_x17_DAQ/weiner_ps_monitor.py (PL512, to confirm). Fallback price: x17_facility_search budget item 'lvfeu' (Datatec, 30 Oct 2026).",
+   "detail": "Model from nTof_x17_DAQ/weiner_ps_monitor.py (PL512, to confirm). The CERN pool catalogue has no Wiener PL512 (epool, 25 Nov 2026). Dylan's epool history shows a Delta Elektronika SM3545-D (0–35 V, 45 A; CEP-0127, 24.88 CHF/month) rented 25 Mar–13 Aug 2026 on budget code T299563: was that the DREAM LV (ask)? Fallback price: x17_facility_search budget item 'lvfeu' (Datatec, 30 Oct 2026).",
    "cash": 0,
    "fallback": 1850,
    "tier": "loan",
@@ -1611,15 +1611,15 @@
    "tasks": [
     "S3"
    ],
-   "note": "The rental itself. The fee, and whether rented modules may leave CERN for LNL, are to ask the pool.",
+   "note": "The rental itself: about 285 CHF/month for the set in the CERN epool catalogue (25 Nov 2026), so ~€1.6k for May–Oct 2027. Whether rented modules may leave CERN for LNL is still to ask the pool. The N1081B is a SPECIAL support-category item (5 in stock).",
    "detail": "May (cosmic bench) to October 2027.",
-   "cash": 1000,
+   "cash": 1600,
    "fallback": 0,
    "tier": "need",
    "inv": [],
-   "lo": 0,
-   "hi": 3000,
-   "basis": "guess; the fee is to ask the CERN electronics pool"
+   "lo": 1300,
+   "hi": 2500,
+   "basis": "CERN epool catalogue monthly fees (read 25 Nov 2026): 2 × N1081B 70.30 + N93B 14.96 + 4 × 428F 14.76 + NIM bin UEN01 12.18 + 300 W PS UEP22M 27.40 + fan tray 6.09 + Delta SM3545-D LV 24.88 = 285 CHF/month; × 5–6 months × 1.07 €/CHF. Low: 3 FIFOs, no LV, 5 months; high: 2 bins, 7 months. Whether the modules may go to LNL is still to ask"
   },
   {
    "id": "hv",
@@ -1906,10 +1906,10 @@
   },
   {
    "item": "CERN pool rental fee: 2 N1081B, N93B, FIFOs, NIM bin, LV",
-   "c": 1000,
-   "lo": 0,
-   "hi": 3000,
-   "basis": "guess; the fee is to ask the CERN electronics pool",
+   "c": 1600,
+   "lo": 1300,
+   "hi": 2500,
+   "basis": "CERN epool catalogue monthly fees (read 25 Nov 2026): 2 × N1081B 70.30 + N93B 14.96 + 4 × 428F 14.76 + NIM bin UEN01 12.18 + 300 W PS UEP22M 27.40 + fan tray 6.09 + Delta SM3545-D LV 24.88 = 285 CHF/month; × 5–6 months × 1.07 €/CHF. Low: 3 FIFOs, no LV, 5 months; high: 2 bins, 7 months. Whether the modules may go to LNL is still to ask",
    "tier": "need"
   },
   {
