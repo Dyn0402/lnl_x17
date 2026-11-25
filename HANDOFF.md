@@ -14,7 +14,7 @@ hours only, and request the 441 keV point with H₂⁺ without making the propos
   neutrons); full current only on −15°/0°/+15°; working days, mainly daytime.
 - **Fits at 2 and 4 µA** (`sim2arm/run_cn.sh`; `two_arm_nd.py` now reads `TA_IUA`; tags `_cn{2,4}[al]li11`, raw csvs in
   `sim2arm/out/two_arm_reach_cn*.csv`): built hemisphere, liquid working, 5 days of beam: 2.35 / 1.58 / 1.08 × R(ATOMKI)
-  at 1 / 2 / 4 µA (151 / 68 / 32 d to 3σ); Al ogive 0.88 / – / 0.42 × (21 / – / 4.8 d). Almost 1/I, since 91–94 % of the
+  at 1 / 2 / 4 µA (151 / 68 / 32 d to 3σ); Al ogive 0.88 / 0.60 / 0.42 × (21 / 10 / 4.8 d). Almost 1/I, since 91–94 % of the
   background is beam-induced. No summarize.py run on these tags (central = geometric mean of direct and transplant).
 - **Proposal:** "CN ACCELERATOR"; 20 working days (8 h of beam each, assumed) = 1 scan + 3 H₂⁺ (conditional) + 15 at
   1.10 MeV (= the 5 days of beam) + 1 adjacent; "days of beam" (24 h) defined in §II; Table I in working days; the cosmic

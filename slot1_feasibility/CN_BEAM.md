@@ -98,9 +98,9 @@ beam (24 h).
 | Cu hemisphere (built) | design response | 151 | 2.35 | 68 | 1.58 | 32 | **1.08** |
 | Cu hemisphere (built) | as at n_TOF | 263 | 3.10 | 117 | 2.06 | 53 | 1.39 |
 | Cu hemisphere (built) | none | 511 | 4.32 | 226 | 2.87 | 100 | 1.91 |
-| Al ogive + Cu liner | design response | 21.1 | 0.88 | AL2_C | AL2_R | 4.8 | **0.42** |
-| Al ogive + Cu liner | as at n_TOF | 38.8 | 1.19 | AL2_N | AL2_NR | 8.5 | 0.56 |
-| Al ogive + Cu liner | none | 78.7 | 1.70 | AL2_O | AL2_OR | 18.2 | 0.81 |
+| Al ogive + Cu liner | design response | 21.1 | 0.88 | 10.0 | 0.60 | 4.8 | **0.42** |
+| Al ogive + Cu liner | as at n_TOF | 38.8 | 1.19 | 17.9 | 0.81 | 8.5 | 0.56 |
+| Al ogive + Cu liner | none | 78.7 | 1.70 | 37.7 | 1.17 | 18.2 | 0.81 |
 
 MEG II's limit is 2.07 × R(ATOMKI). So at 4 µA the built hemisphere with working liquid cells would set a limit about
 half of MEG II's in 5 days of beam, and the run would no longer be only a feasibility test.
