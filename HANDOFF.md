@@ -1,5 +1,54 @@
 # Handoff
 
+## Proposal reframed as a test and calibration run; e-mail to Pierfrancesco — updated 2026-11-26 (dylan-MS-7C84)
+
+**Resume:** proposal is now a test/calibration run with Figs. 2 (acceptance) and 4 (road); next: fix Fig. 4, send PF e-mail.
+
+**Goal (Dylan, 26 Nov):** the run cannot compete with MEG II, so the proposal presents it as a test and calibration
+run. Its aim: the measured opening-angle distributions agree with Geant4, so that a four-arm physics run can be
+proposed for late 2027 with confidence. A coherent, easy read rather than everything we have worked on.
+
+**Done:**
+- Abstract and body rewritten (`proposal/latex/abstract_content.tex`, `body_content.tex`; abstract 1 page, body 4):
+  new title, "Aim of the run", n_TOF tracks as first evidence, measurements framed as tests of the simulation,
+  "What counts as success". Dropped: Li-thickness detail, liquid-cell variants, Al-holder claims in the text, Table I
+  (folded into "Use of the beam time"; the table is in commit 22e1f5f). Dylan's D+ sentence kept.
+- New Fig. 2 (`proposal/figsrc/acceptance.py` → `sim2arm/out/acceptance_geom.csv`, `acceptance_ipc441.csv`;
+  `fig_acceptance()` in make_figures.py): geometric acceptance vs opening angle, one lepton per arm (~12 % at
+  125–160°, 21 % near 180°) and both in one arm (below 90°); 441 keV M1 IPC reaching the TPCs per 8 h: 7e5 same arm,
+  1.6e4 opposite arms. GEOMETRY ONLY (straight leptons, no Cu scattering, no trigger). Needs the nTof_x17 venv
+  (pandas, ipc_born via x17_facility_search/lnl/lnl_rates.py).
+- New Fig. 4 "road to the physics run" (`fig_road()`): limit vs days and days to 3σ: this run 195 d, Al holder 21 d,
+  four arms 12 d, large plastics ~1 d (estimate), with what this run tests. Old fig_reach kept in the script, not used.
+- E-mail draft to Pierfrancesco in the CERN mailbox Drafts (hub draft id 2806, reply to the "LNL PAC Proposal Call
+  Dec 10" thread); copy in `correspondence/2026-11-26_DRAFT_email_mastinu_questions.md`. Dylan is rewriting it.
+  H2+ and 4 µA are in a "to confirm" section (PF already said both should be possible).
+
+**In progress / where it stopped:** nothing half-done. Not on Overleaf, site page not redeployed (the page still has
+the old framing).
+
+**Next steps:**
+1. Fig. 4 (Dylan): fix the arrow placement in panel (b); count days consistently as 8-hour days (46 h = 5.75 days,
+   not 1.92); linear x axis in panel (a). Re-check the 4-page fit after.
+2. Dylan sends the e-mail. Points discussed for it: CN lines (7 lines; full current only on −15°, 0°, +15°; PF's
+   Li targets run on 0°); the spot (LNL: 2–8 mm FWHM; our sims σ = 2 mm Gaussian; the Li disc is Ø 6–8 mm, so 13–32 %
+   of a σ = 2 mm beam misses it); "Commission II" (probably an INFN CSN; ask which and the deadline).
+3. When PF confirms H2+ and 4 µA: mark both answered in `planning/plan.py` QUESTIONS, decide whether the proposal asks
+   up to 4 µA (2.0 × instead of 4.3 × in the 46 h), rebuild page and redeploy.
+4. Same-arm pairs: a Geant4 selection with the holder and a single-arm trigger (red to-do in the text); check the DREAM
+   live time (298 µs per event) with a single-arm trigger at 441 keV (218 Hz legs per arm).
+5. R13 still open: Fig. 4's Al-holder steps rest on 2 simulated holder conversions; run it or mark them estimates.
+6. Push to Overleaf (re-clone, diff first; Overleaf = commit 7320379 text before this rewrite), then site page.
+
+**Gotchas / decisions:**
+- Body is exactly 4 pages in draft mode; any added sentence needs a cut. Fig. heights: Fig. 1 4.25 cm, Fig. 2 1.6 in,
+  Fig. 3 1.75 in, Fig. 4 1.8 in.
+- `make_figures.py road` prints the days and the "beats MEG II / excludes ATOMKI" days (this run: 8.3 / 35.6 d of 24 h).
+
+**Key files & commands:**
+- `~/PycharmProjects/nTof_x17/.venv/bin/python proposal/figsrc/acceptance.py` (Fig. 2 inputs)
+- `python3 proposal/figsrc/make_figures.py [event acc pred road photos]`, then `make -C proposal/latex && make -C proposal/latex zip`
+
 ## Micromegas gas study for LNL — updated 2026-11-26 (dylan-MS-7C84)
 
 **Resume:** `gas/GAS_STUDY.md` is done; the choice waits on the bench test M5 and on how dry the gas can be kept.
