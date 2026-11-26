@@ -10,6 +10,12 @@ Sources: the LNL beam sheet (`x17_facility_search/lnl/refs/LNL_Beams_AN2000_CN.t
 (arXiv:2605.12005, same folder), `x17_facility_search/lnl/FACILITY.md`, and the two-arm fits of `sim2arm/` (new tags
 `_cn2li11`, `_cn4li11`, `_cn2alli11`, `_cn4alli11`, made by `sim2arm/run_cn.sh`).
 
+> **Update 2026-11-26:** with the external conversions of run L19 (`sim2arm/EPC_L19.md`, 100 times the simulated
+> statistics) the limits for the 46 h at 1.10 MeV are 4.3 / 5.5 / 7.2 × R(ATOMKI) (liquid working / as at n_TOF / none)
+> instead of 3.8 / 5.0 / 7.0 ×, and 2.66 × instead of 2.35 × for 5 days of beam. The 441 keV day has about 70 beam pairs
+> in 8 h, a third of them external conversions. The Li film thickness (±50 %) moves the 4.3 × between 6.9 × and 3.55 ×
+> (`LI_THICKNESS.md`). The tables below are the 25 Nov numbers.
+
 ## 0. Result in short
 
 1. **The 441 keV calibration is not necessarily lost.** The CN cannot run below 0.8 MV, so it cannot accelerate protons

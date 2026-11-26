@@ -1,5 +1,9 @@
 # What the two-arm run should see: Geant4 predictions, observable by observable
 
+> **Update 2026-11-26 (EPC_L19.md):** the selected external conversions now come from run L19 (×100 L18): 74 per day
+> at 441 keV (L18: 1.4) and 21 per day at 1.10 MeV (L18: 17). Their opening-angle shape is signal-like, so the
+> reach becomes 195 days to 3σ (was 151) and 2.66 × R(ATOMKI) in 5 days of beam (was 2.35 ×).
+
 Written 2026-11-20; **target corrected the same day** (the first version used the Cu ogive of the 27 Oct sketch, which
 is not built: every beam number below is now the built Cu hemisphere, R 11 mm, 300 µm wall, config `dome300`). Shown on
 the page's **Predictions** tab
@@ -73,7 +77,7 @@ Per day, horizontal pair. "Both tracks" = a leg and an MM track in both arms, an
 | M1 IPC (17.64 / 18.15) | 2,030 | 133 | 128 | 8 |
 | E1 IPC (18.15) | 58 | 5 | 512 | 42 |
 | 15.1 / 14.6 MeV IPC | 971 | 2 | 972 | 2 |
-| external conversions | 5,960 (258 MC) | 1 (2 MC) | 1,670 | 17 (4 MC) |
+| external conversions | 5,960 (258 MC) | ~~1 (2 MC)~~ **74 (352 MC, L19)** | 1,670 | ~~17 (4 MC)~~ **21 (352 MC, L19)** |
 | cosmics | 5,930 | 68 | 5,930 | 68 |
 | X17 at R(ATOMKI) | 3 | 0.4 | 33 | **2.7** |
 | **beam total** | **9,020** | **141** | **3,280** | **69** |

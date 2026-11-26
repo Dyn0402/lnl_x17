@@ -35,6 +35,8 @@ import numpy as np  # noqa: E402
 HERE = Path(__file__).resolve().parent
 OUT = HERE / 'out' / 'li_thickness'
 OUT.mkdir(parents=True, exist_ok=True)
+#: TA_EPC_RUN=L19: the external conversions of run L19 (x100) in the fit; outputs reach_l19*.csv, parts_l19/
+SFX = '_' + os.environ['TA_EPC_RUN'].lower() if os.environ.get('TA_EPC_RUN') else ''
 FS = Path(os.environ.get('X17FS', Path.home() / 'PycharmProjects' / 'x17_facility_search'))
 sys.path.insert(0, str(FS / 'lnl' / 'target'))
 sys.path.insert(0, str(FS / 'lnl'))
@@ -226,7 +228,7 @@ def cmd_reach(a):
     import pandas as pd
     resps = ['LNL calibrated', 'n_TOF as is', 'LNL calibrated, LS off']
     tasks = [(s, r, m) for s in (a.scen or SCEN_D) for r in resps for m in ('direct', 'transplant')]
-    pdir = OUT / 'parts'
+    pdir = OUT / f'parts{SFX}'
     pdir.mkdir(exist_ok=True)
 
     def key(t):
@@ -239,8 +241,8 @@ def cmd_reach(a):
                 key(t).write_bytes(pickle.dumps(r))
     rows = [pickle.loads(key(t).read_bytes()) for t in tasks]
     df = pd.DataFrame(rows)
-    df.to_csv(OUT / 'reach.csv', index=False)
-    print('->', OUT / 'reach.csv')
+    df.to_csv(OUT / f'reach{SFX}.csv', index=False)
+    print('->', OUT / f'reach{SFX}.csv')
     summarize(df)
 
 
@@ -252,7 +254,7 @@ def r90(days3, T):
 def summarize(df=None):
     import pandas as pd
     if df is None:
-        df = pd.read_csv(OUT / 'reach.csv')
+        df = pd.read_csv(OUT / f'reach{SFX}.csv')
     g = df.pivot_table(index=['scen', 'resp'], columns='mc', values='days_floor1')
     g['central'] = np.sqrt(g['direct'] * g['transplant'])
     g = g.reset_index()
@@ -265,7 +267,7 @@ def summarize(df=None):
     g = g.merge(m.reset_index(), on=['scen', 'resp'])
     order = {s[0]: i for i, s in enumerate(SCEN)}
     g = g.sort_values(['resp', 'scen'], key=lambda c: c.map(order) if c.name == 'scen' else c)
-    g.to_csv(OUT / 'reach_summary.csv', index=False)
+    g.to_csv(OUT / f'reach_summary{SFX}.csv', index=False)
     pd.set_option('display.width', 220)
     print(g.round(3).to_string(index=False))
     return g
@@ -295,7 +297,7 @@ def cmd_figs(_a):
     fig.tight_layout()
     fig.savefig(OUT / 'yields_vs_thickness.png', dpi=130)
     print('->', OUT / 'yields_vs_thickness.png')
-    f = OUT / 'reach_summary.csv'
+    f = OUT / f'reach_summary{SFX}.csv'
     if f.exists():
         g = pd.read_csv(f)
         u = g[g.scen.str.match(r'^t[0-9.]+$')].copy()
@@ -312,8 +314,8 @@ def cmd_figs(_a):
         ax[0].legend(frameon=False, fontsize=8)
         ax[1].set_ylabel('expected 90 % limit, 46 h [× R(ATOMKI)]')
         fig.tight_layout()
-        fig.savefig(OUT / 'reach_vs_thickness.png', dpi=130)
-        print('->', OUT / 'reach_vs_thickness.png')
+        fig.savefig(OUT / f'reach_vs_thickness{SFX}.png', dpi=130)
+        print('->', OUT / f'reach_vs_thickness{SFX}.png')
 
 
 def main():

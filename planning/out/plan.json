@@ -614,8 +614,8 @@
    "ws": "sim",
    "due": "2026-11-27",
    "who": "Dylan",
-   "status": "active",
-   "t": "External conversions at x100 statistics: run L19 (3e10 ⁸Be γ, analog, the built Cu hemisphere; lnl_twoarm 07bea64 records the γ's first interaction), cluster 4762099; refit with TA_EPC_RUN=L19 (sim2arm/EPC_L19.md)"
+   "status": "done",
+   "t": "External conversions at x100 statistics (sim2arm/EPC_L19.md, 26 Nov): run L19, 3e10 ⁸Be γ in the built Cu hemisphere, 6,000 clean jobs. Selected EPC pairs on 352 MC events (was 2): 21/day at 1.10 MeV (was 17), 74/day at 441 keV (was 1.4); signal-like θ shape, so 195 d to 3σ (was 151) and 4.3 × R(ATOMKI) in the 46 h (was 3.8 ×; 5.5 / 7.2 × as at n_TOF / no liquid). Proposal numbers to update (P5)"
   },
   {
    "id": "T2",
@@ -2241,7 +2241,7 @@
    "r": "Li film thickness and homogeneity known only to ~50 % (whatever film is made)",
    "l": "high",
    "i": "med",
-   "m": "slot1_feasibility/LI_THICKNESS.md (25 Nov): the γ rate follows the mean thickness, so the 46 h limit spans 6.2 × (0.5 × 11 µm) to 3.1 × (1.5 ×) around 3.8 × R(ATOMKI); an uneven film with the right mean costs 3–18 % in days. The danger is unevenness plus LiOH: thick spots reach 441 keV (36 % of γ₀ from 17.64 MeV at ±50 % spread and half the Li converted; days × 2.3–3.7). Measure the film on day 1 (γ₀ yield ratio 1.10 MeV / 441 keV, which does not depend on the film; 478 keV PIGE), watch 17.64/18.15 with the LaBr₃, bring spare films, map films by IBA before the run if LNL can. R stays normalised to the γ monitor, so the thickness changes only the statistics."
+   "m": "slot1_feasibility/LI_THICKNESS.md (25 Nov): the γ rate follows the mean thickness, so the 46 h limit spans 6.9 × (0.5 × 11 µm) to 3.55 × (1.5 ×) around 4.3 × R(ATOMKI) (with the L19 external conversions); an uneven film with the right mean costs 3–18 % in days. The danger is unevenness plus LiOH: thick spots reach 441 keV (36 % of γ₀ from 17.64 MeV at ±50 % spread and half the Li converted; days × 2.3–3.7). Measure the film on day 1 (γ₀ yield ratio 1.10 MeV / 441 keV, which does not depend on the film; 478 keV PIGE), watch 17.64/18.15 with the LaBr₃, bring spare films, map films by IBA before the run if LNL can. R stays normalised to the γ monitor, so the thickness changes only the statistics."
   },
   {
    "r": "Machine-future decision (one machine to replace AN2000 + CN)",

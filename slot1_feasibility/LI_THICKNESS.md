@@ -16,7 +16,9 @@ Outputs: `sim2arm/out/li_thickness/` (`yields_vs_thickness.csv`, `yields_441.csv
    film gains.
 2. **For the 46 hours at 1.10 MeV, the expected limit with the liquid working moves from 3.8 × R(ATOMKI) to 6.2 ×
    (film 0.5 × nominal) or 3.1 × (film 1.5 × nominal).** The days of beam to 3σ change by × 2.7 and × 0.67.
-   The proposal should quote 3.8 × with this range, or state the thickness it assumes.
+   The proposal should quote 3.8 × with this range, or state the thickness it assumes. **Update 26 Nov:** with the
+   external conversions of run L19 (sim2arm/EPC_L19.md) every limit is ~13 % higher: 6.9 × / 4.3 × / 3.55 × at
+   0.5 / 1 / 1.5 × nominal. The relative effects of this note do not change (§8).
 3. **An uneven film with the right mean thickness costs little.** The spot-averaged yield depends almost only on the
    mean thickness. A ±50 % spread across the beam spot changes the days to 3σ by 3 to 8 %. If half of the spot sits on
    bare copper (and the rest is twice as thick), the days increase by 18 %.
@@ -186,3 +188,25 @@ Table: days of beam to 3σ at R(ATOMKI) and the expected 90 % CL limit after the
   a beam spot that moves would also make the rate drift during the run. The γ monitor follows that.
 - The Geant4 events are those of the 20 µm run. The vertex depth in the film changes by less than 20 µm, and the energy
   loss of the leptons in the film is negligible, so we expect no effect on the shapes.
+
+## 8. Update 2026-11-26: with the external conversions of run L19
+
+The tables of §5 used the L18 external conversions, which rested on 2 simulated events in the window. Run L19
+(sim2arm/EPC_L19.md) has 100 times more, and the fit then needs 195 days to 3σ instead of 151 for the nominal film. We
+repeated the scan with L19 (`TA_EPC_RUN=L19 python sim2arm/li_thickness.py reach`; `out/li_thickness/reach_summary_l19.csv`,
+`reach_vs_thickness_l19.png`).
+
+| film | days to 3σ, liquid working (relative) | R₉₀ (46 h), liquid working | R₉₀ (46 h), as at n_TOF | R₉₀ (46 h), no liquid | R₉₀ (5 d), liquid working |
+|---|---|---|---|---|---|
+| uniform 0.5 × | 501 (× 2.57) | 6.9 × | 9.0 × | 11.6 × | 4.3 × |
+| uniform 0.75 × | 275 (× 1.41) | 5.1 × | 6.6 × | 8.6 × | 3.2 × |
+| **uniform 1.0 ×** | **195** | **4.3 ×** | **5.5 ×** | **7.2 ×** | **2.66 ×** |
+| uniform 1.25 × | 156 (× 0.80) | 3.85 × | 4.9 × | 6.4 × | 2.4 × |
+| uniform 1.5 × | 133 (× 0.68) | 3.55 × | 4.5 × | 5.9 × | 2.2 × |
+| mean 1 ×, Gaussian rms 50 % | 206 (× 1.06) | 4.4 × | 5.7 × | 7.5 × | 2.7 × |
+| mean 1 ×, half the spot bare | 229 (× 1.17) | 4.7 × | 6.0 × | 7.9 × | 2.9 × |
+| mean 1 ×, Gaussian 50 %, 75 % LiOH | 461 (× 2.37) | 6.6 × | 8.2 × | 10.6 × | 4.1 × |
+| uniform 1.5 ×, 75 % LiOH | 868 (× 4.45) | 9.1 × | 10.3 × | 13.9 × | 5.6 × |
+
+The conclusions of §0 stand. The thickness moves the limit by the same factors as before, and the combination of an
+uneven film with LiOH remains the case to avoid.

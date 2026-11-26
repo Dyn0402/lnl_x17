@@ -1,5 +1,43 @@
 # Handoff
 
+## External conversions at ×100 (L19) and the Li film's ±50 % — updated 2026-11-26 (dylan-MS-7C84)
+
+**Resume:** both studies are done and written up. Next: Dylan decides the proposal wording (suggestions in
+`sim2arm/EPC_L19.md` §7, not applied because the proposal is also being edited on Overleaf and in another session), then
+redraw Fig. 2 from `sim2arm/out/two_arm_spectra_pass4li11_l19.csv` and replace the limits.
+
+**Goal (Dylan, 25 Nov):** a better simulation of the external conversions, which rested on 2 MC events; and the
+implications of a Li film whose thickness and homogeneity are known only to ~50 %.
+
+**Done:**
+- **Run L19** (`sim2arm/EPC_L19.md`): 3.0e10 ⁸Be γ in the built hemisphere (×100 L18, analog), MX17_Full_Geant
+  `lnl_twoarm` 07bea64 (records the γ's first interaction; `--gamma-kill-escape` exists but is not used). Cluster 4762099:
+  6,000 jobs × 10 sub-runs of 5e5, all exit 0, no holds or retries, 97 % CPU, 2.3 GB peak, ~4,800 core-h. Per-job pair
+  tables on EOS `lnl/L19/gam_8Be_dome300_asb/sel/`; merged `$WORK_DATA/x17_facility_search/sel_l19/` (`combine_l19.py`).
+  - L19 agrees with L18 at every step. Selected EPC: 21/day at 1.10 MeV (L18 17), **74/day at 441 keV (L18 1.4)**;
+    signal-like θ shape (peaks 140–160°). Fit (`TA_EPC_RUN=L19`, `run_l19.sh`): 195 d to 3σ (was 151), **46 h: 4.3 / 5.5 /
+    7.2 × R(ATOMKI)** (was 3.8 / 5.0 / 7.0), 5 d: 2.66 ×. 87 % of the opposite pairs start in the Cu dome, 10 % the rim.
+- **Li thickness** (`slot1_feasibility/LI_THICKNESS.md`, `sim2arm/li_thickness.py`): yields ∝ t; 46 h limit (with L19)
+  6.9 / 4.3 / 3.55 × at 0.5 / 1 / 1.5 × 11 µm; unevenness at the right mean +3–18 % in days; unevenness + LiOH reaches
+  441 keV (36 % of γ₀ from 17.64 at ±50 % spread and half converted; days ×2.3–4.5). In-situ thickness from the
+  1.10 MeV / 441 keV γ₀ yield ratio (441 yield independent of t above ~4 µm) and 478 keV PIGE. Kept 10–12 µm nominal.
+- plan.py (risk, 2 questions, T3, R12), PREDICTIONS.md and CN_BEAM.md banners, page headline, x17_facility_search
+  FACILITY / README / dashboard; page and survey deployed.
+
+**Next steps:**
+1. Proposal: limits 3.8/5.0/7.0 → 4.3/5.5/7.2 ×; "about 35 ... large uncertainty" → "about 40"; Fig. 2 caption and
+   redraw; the 441 keV day (~70 beam pairs in 8 h, a third EPC); one sentence on the film thickness (EPC_L19 §7).
+2. `planning/two_arm_estimates.py` and the page tables still read pass 4 (L18 EPC). A full L19 pass (all pairs, all
+   vetoes: `two_arm_nd.py reach` with `TA_EPC_RUN=L19`, then `summarize.py`) would make them consistent.
+3. Questions to PF/LNL (in plan.py): IBA mapping of the films, film-change time, LaBr₃ for 17.64/18.15 and 478 keV.
+4. The Al ogive's EPC was not rerun (R10 rests on 2 events); ~5,000 core-h if the Al holder becomes the plan.
+
+**Gotchas:**
+- `lnl_reduce.py` needs ~2 GB per 5e5 γ (it reads the whole ROOT file): keep sub-runs ≤ 5e5 per 3 GB core.
+- `li_thickness.py` must pin BLAS threads before numpy (fixed); `TA_EPC_RUN=L19` gives `reach*_l19` outputs.
+- L19's tables have no singles (`DROP_SG`); `two_arm_nd` combines only common keys and keeps L18 for singles.
+- Test outputs of removed clusters remain on EOS: `lnl/L19t`, `L19t2` (partial), `L19t3` (12 jobs). Safe to delete.
+
 ## The run moves to June or July 2027 — updated 2026-11-25 (dylan-MS-7C84)
 
 **Resume:** LNL slot 1: the call allocates 20 Feb – 30 Jul 2027, so the proposal asks for June or July 2027 and the plan was moved forward ~10 weeks.
