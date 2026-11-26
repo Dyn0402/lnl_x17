@@ -282,11 +282,14 @@ def fig_acceptance():
     fig.subplots_adjust(left=0.065, right=0.985, bottom=0.23, top=0.86, wspace=0.22)
     ax = axs[0]
     ax.axvspan(125, 160, color=GRID, alpha=0.6, lw=0, zorder=0)
-    ax.text(142.5, 26.8, "X17\nregion", ha="center", va="top", fontsize=6.5, color=MUTED)
+    ax.text(142.5, 30.5, "X17 region", ha="center", va="top", fontsize=6.5, color=MUTED)
+    # the emitted distribution (flat in theta), drawn at an arbitrary scale as in panel (b) (Dylan, 26 Nov)
+    ax.stairs(np.full(len(A), 25.0), ea, color="#b9b8b2", fill=True, alpha=0.45, lw=0, zorder=0.5,
+              label="emitted (flat, arb. scale)")
     ax.stairs([100 * float(r["acc_same"]) for r in A], ea, color=ORANGE, lw=1.4, label="both leptons in one arm")
     ax.stairs([100 * float(r["acc_opposite"]) for r in A], ea, color=BLUE, lw=1.4, label="one lepton in each arm")
     ax.set_xlim(0, 180)
-    ax.set_ylim(0, 28)
+    ax.set_ylim(0, 31)
     ax.set_xticks([0, 30, 60, 90, 120, 150, 180])
     ax.set_xlabel(r"opening angle $\theta$ (deg)")
     ax.set_ylabel("pair acceptance (%)")
