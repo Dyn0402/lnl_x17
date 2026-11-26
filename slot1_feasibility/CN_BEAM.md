@@ -10,6 +10,29 @@ Sources: the LNL beam sheet (`x17_facility_search/lnl/refs/LNL_Beams_AN2000_CN.t
 (arXiv:2605.12005, same folder), `x17_facility_search/lnl/FACILITY.md`, and the two-arm fits of `sim2arm/` (new tags
 `_cn2li11`, `_cn4li11`, `_cn2alli11`, `_cn4alli11`, made by `sim2arm/run_cn.sh`).
 
+> **Update 2026-11-26 (evening): beam days, not working days.** Pierfrancesco answered that the CN can run 24 hours a
+> day, weekends included. Dylan: assume 80 % operator efficiency as a safety factor. A **beam day** is therefore 24 h with
+> 19.2 h of beam, and every day count in the plan, the page and the proposal is now in beam days. The 8 beam days give
+> about 150 h of beam. With the same day plan (scan 2 h on day 1, H₂⁺ on day 2, arms at 90° on day 8) the run has
+> **113 h = 5.9 beam days at 1.10 MeV** with the arms opposite (46 h before). The limits scale as 1/√hours (× 0.64):
+>
+> | | 8 beam days (113 h at 1.10 MeV) | was: 8 working days (46 h) |
+> |---|---|---|
+> | Cu hemisphere, liquid working | **2.75 ×** | 4.3 × |
+> | Cu hemisphere, liquid as at n_TOF | 3.5 × | 5.5 × |
+> | Cu hemisphere, no liquid | 4.6 × | 7.2 × |
+> | Al ogive + Cu liner, liquid working / as at n_TOF | 0.90 / 1.22 × | 1.4 / 1.9 × |
+> | Cu hemisphere, liquid working, 4 µA | ~1.3 × (below MEG II) | 2.0 × |
+> | Li film 0.5 × / 1.5 × as thick | 4.4 × / 2.3 × | 6.9 × / 3.55 × |
+> | cosmic rate × 2.5 | 3.0 × | 4.7 × |
+>
+> Days to 3σ in beam days (= days of 24 h / 0.8): Cu hemisphere 244 (was 195 d of 24 h), Al holder 26, four arms 14,
+> large plastics ~1.3 (estimate). The 441 keV beam day: ~170 selected beam pairs + 54 cosmic, rate to ~9 %. The 1.10 MeV
+> days: ~340 beam pairs (about 200 E1, 100 external conversions) + 320 cosmic, rate to ~8 %; X17 at R(ATOMKI) adds 13.
+> Day 8 (arms at 90°): ~1,200 pairs. There are no cosmic nights during the beam block any more; the cosmic nights with the
+> arms vertical stay in the installation weeks. Sections 0–4 below keep the working-day numbers of 25–26 Nov as a record.
+> Code: `planning/two_arm_estimates.py` (OPER_EFF, BEAM_DAY_H, H110), `proposal/figsrc/make_figures.py`.
+
 > **Update 2026-11-26:** with the external conversions of run L19 (`sim2arm/EPC_L19.md`, 100 times the simulated
 > statistics) the limits for the 46 h at 1.10 MeV are 4.3 / 5.5 / 7.2 × R(ATOMKI) (liquid working / as at n_TOF / none)
 > instead of 3.8 / 5.0 / 7.0 ×, and 2.66 × instead of 2.35 × for 5 days of beam. The 441 keV day has about 70 beam pairs

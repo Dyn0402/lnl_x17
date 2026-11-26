@@ -58,10 +58,13 @@ def tag(ax, s, x=0.0, y=1.03):
     ax.text(x, y, s, transform=ax.transAxes, ha="left", va="bottom", fontsize=8, fontweight="bold")
 
 
-# The request (2026-11-25, slot1_feasibility/CN_BEAM.md): 8 CN working days, ~8 h of beam each.  Day 1 scan (~2 h) +
-# 6 h at 1.10 MeV, day 2 H2+ (441 keV), days 3-7 at 1.10 MeV, day 8 arms at 90 deg: 46 h at 1.10 MeV with the opposite arms.
-H441, H110 = 8.0, 46.0
-REQ_DAYS = H110 / 24.0
+# The request (26 Nov, two_arm_estimates.py): 8 BEAM DAYS on the CN, each 24 h at 80 % operator efficiency (19.2 h of beam).
+# Day 1 scan (~2 h) + 1.10 MeV, day 2 H2+ (441 keV), days 3-7 at 1.10 MeV, day 8 arms at 90 deg: 113 h = 5.9 beam days at
+# 1.10 MeV with the opposite arms.  (Until 26 Nov: 8 working days of 8 h, 46 h.)
+H441, H110 = E.H441, E.H110
+REQ_DAYS = E.RUN_DAYS24              # days of 24 h of beam, the unit of E.r90
+REQ_BD = E.RUN_BEAM_DAYS             # the same in beam days
+BD = E.OPER_EFF                      # one beam day = BD days of 24 h of beam
 
 # --------------------------------------------------------------------------------------------------------- Fig. 1c
 def fig_event():
@@ -256,10 +259,10 @@ def fig_predictions():
         print(f"{title}: IPC {ipc.sum():.0f} (M1 {h['M1'].sum():.0f}, E1 {h['E1'].sum():.0f}, 15 MeV {h['g1'].sum():.0f}), EPC {h['epc'].sum():.0f}, cosmics {h['cos'].sum():.0f}, "
               f"X17 {h['sig'].sum():.1f} in {days} d")
 
-    stack(axs[1], 441.0, H441 / 24, r"(b) $E_p$ = 441 keV (H$_2^+$), 8 hours of beam", 0)
+    stack(axs[1], 441.0, H441 / 24, r"(b) $E_p$ = 441 keV (H$_2^+$), 1 beam day", 0)
     d_fix = float(next(r for r in reach_rows() if r["target"].startswith("Cu") and r["energy_stack"] == "+ liquid working")["d2_c"])
     r_lim = E.r90(d_fix, REQ_DAYS) / E.R_ATOMKI
-    stack(axs[2], 1100.0, REQ_DAYS, rf"(c) $E_p$ = 1.10 MeV, {H110:.0f} hours of beam", r_lim)
+    stack(axs[2], 1100.0, REQ_DAYS, rf"(c) $E_p$ = 1.10 MeV, {REQ_BD:.1f} beam days", r_lim)
     fig.savefig(FIG / "fig_predictions.pdf")
     fig.savefig(FIG / "fig_predictions.png", dpi=200)
     plt.close(fig)
@@ -291,22 +294,23 @@ def fig_acceptance():
     tag(ax, "(a) isotropic pairs, flat in opening angle")
     strip(ax)
     bx = axs[1]
-    tot = np.array([float(r["emitted_per_8h"]) for r in B])
-    sm = np.array([float(r["same_per_8h"]) for r in B])
-    op = np.array([float(r["opposite_per_8h"]) for r in B])
-    bx.stairs(tot, eb, color="#b9b8b2", fill=True, alpha=0.6, lw=0, label=f"emitted ({tot.sum():.1e})".replace("e+06", r"$\times10^6$"))
+    k = E.BEAM_DAY_H / 8.0                     # the table is per 8 h of beam; the figure shows one beam day (19.2 h)
+    tot = np.array([float(r["emitted_per_8h"]) for r in B]) * k
+    sm = np.array([float(r["same_per_8h"]) for r in B]) * k
+    op = np.array([float(r["opposite_per_8h"]) for r in B]) * k
+    bx.stairs(tot, eb, color="#b9b8b2", fill=True, alpha=0.6, lw=0, label="emitted ({0}$\\times10^{{{1}}}$)".format(*f"{tot.sum():.1e}".split("e+0")))
     bx.stairs(sm, eb, color=ORANGE, lw=1.4, label=f"in one arm ({round(sm.sum(), -4):,.0f})")
     bx.stairs(op, eb, color=BLUE, lw=1.4, label=f"one in each arm ({round(op.sum(), -3):,.0f})")
     bx.set_yscale("log")
-    bx.set_ylim(50, 3e6)
+    bx.set_ylim(100, 8e6)
     bx.set_xlim(0, 180)
     bx.set_xticks([0, 30, 60, 90, 120, 150, 180])
     bx.set_xlabel(r"opening angle $\theta$ (deg)")
     bx.set_ylabel(r"pairs per 5$^\circ$")
     bx.legend(frameon=False, loc="upper right", handlelength=1.3, borderaxespad=0.1, labelspacing=0.25)
-    tag(bx, r"(b) M1 internal pairs, $E_p$ = 441 keV, 8 hours, 1 µA")
+    tag(bx, r"(b) M1 internal pairs, $E_p$ = 441 keV, 1 beam day, 1 µA")
     strip(bx)
-    print(f"Fig 2: IPC 441 emitted {tot.sum():.3g}, one arm {sm.sum():.0f}, each arm {op.sum():.0f} per 8 h (geometry)")
+    print(f"Fig 2: IPC 441 emitted {tot.sum():.3g}, one arm {sm.sum():.0f}, each arm {op.sum():.0f} per beam day (geometry)")
     fig.savefig(FIG / "fig_acceptance.pdf")
     fig.savefig(FIG / "fig_acceptance.png", dpi=200)
     plt.close(fig)
@@ -420,42 +424,46 @@ def road_steps():
 
 
 def fig_road():
+    """Days are BEAM DAYS (19.2 h of beam, E.OPER_EFF); the fits' days of 24 h are converted with E.beam_days."""
     steps = road_steps()
     U = E.R_ATOMKI
     fig, (ax, bx) = plt.subplots(1, 2, figsize=(W, 1.8), gridspec_kw=dict(width_ratios=[1.0, 1.0]))
     fig.subplots_adjust(left=0.075, right=0.985, bottom=0.2, top=0.88, wspace=0.62)
 
-    # (a) expected 90 % CL limit against the days of beam at 1.10 MeV, one line per step
-    days = np.geomspace(0.2, 100, 200)
+    # (a) expected 90 % CL limit against the beam days at 1.10 MeV, one line per step (linear days, Dylan 26 Nov)
+    XMAX = 30
+    days = np.linspace(0.25, XMAX, 240)              # beam days
     for name, _, (c, lo, hi), col, est in steps:
-        ax.fill_between(days, [E.r90(hi, d) / U for d in days], [E.r90(lo, d) / U for d in days], color=col, alpha=0.15, lw=0)
-        ax.plot(days, [E.r90(c, d) / U for d in days], color=col, lw=1.5, ls=(0, (4, 2)) if est else "-",
+        ax.fill_between(days, [E.r90(hi, d * BD) / U for d in days], [E.r90(lo, d * BD) / U for d in days], color=col,
+                        alpha=0.15, lw=0)
+        ax.plot(days, [E.r90(c, d * BD) / U for d in days], color=col, lw=1.5, ls=(0, (4, 2)) if est else "-",
                 label=name + (" (estimate)" if est else ""))
     ax.axhline(1.0, color=INK, lw=0.8)
-    ax.text(98, 1.06, "ATOMKI", ha="right", va="bottom", fontsize=7)
+    ax.text(XMAX * 0.98, 0.93, "ATOMKI", ha="right", va="top", fontsize=7)
     ax.axhline(E.R_MEG2_90 / U, color=INK, lw=0.8, ls=":")
-    ax.text(98, E.R_MEG2_90 / U * 1.06, "MEG II, 90 % CL", ha="right", va="bottom", fontsize=7)
+    ax.text(XMAX * 0.98, E.R_MEG2_90 / U * 1.06, "MEG II, 90 % CL", ha="right", va="bottom", fontsize=7)
     c0 = steps[0][2][0]
-    ax.plot([REQ_DAYS], [E.r90(c0, REQ_DAYS) / U], "o", ms=4.5, mfc="white", mec=BLUE, mew=1.2, zorder=5)
-    ax.annotate("this run, 46 h", (REQ_DAYS, E.r90(c0, REQ_DAYS) / U), xytext=(4.0, 11.0), fontsize=7, color=INK,
-                arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.5, shrinkA=1, shrinkB=3))
-    ax.set_xscale("log")
+    y0 = E.r90(c0, REQ_DAYS) / U
+    ax.plot([REQ_BD], [y0], "o", ms=4.5, mfc="white", mec=BLUE, mew=1.2, zorder=5)
+    ax.annotate(f"this run, {REQ_BD:.1f} beam days", (REQ_BD, y0), xytext=(REQ_BD + 3.0, y0 * 2.2), fontsize=7,
+                color=INK, va="center", arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.5, shrinkA=1, shrinkB=3))
     ax.set_yscale("log")
-    ax.set_xlim(0.2, 100)
-    ax.set_ylim(0.03, 20)
-    ax.set_xticks([0.3, 1, 3, 10, 30, 100])
-    ax.set_yticks([0.03, 0.1, 0.3, 1, 3, 10])
-    for a_ in (ax.xaxis, ax.yaxis):
-        a_.set_major_formatter(matplotlib.ticker.FormatStrFormatter("%g"))
-        a_.set_minor_formatter(matplotlib.ticker.NullFormatter())
-    ax.set_xlabel(r"days of beam (24 h) at $E_p$ = 1.10 MeV, 1 µA")
+    ax.set_xlim(0, XMAX)
+    ax.set_ylim(0.01, 20)
+    ax.set_xticks([0, 5, 10, 15, 20, 25, 30])
+    ax.set_yticks([0.01, 0.03, 0.1, 0.3, 1, 3, 10])
+    ax.yaxis.set_major_formatter(matplotlib.ticker.FormatStrFormatter("%g"))
+    ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
+    ax.set_xlabel(r"beam days at $E_p$ = 1.10 MeV, 1 µA")
     ax.set_ylabel(r"90 % CL limit / $R_\mathrm{ATOMKI}$")
-    ax.legend(frameon=False, loc="lower left", handlelength=1.8, borderaxespad=0.1, labelspacing=0.2, fontsize=6.5)
+    ax.legend(frameon=False, loc="lower center", ncol=2, handlelength=1.8, borderaxespad=0.1, labelspacing=0.2,
+              columnspacing=1.0, fontsize=6.5)
     tag(ax, "(a) expected limit, one change at a time")
     strip(ax)
 
-    # (b) days to a 3 sigma test of R_ATOMKI for each step
-    for i, (name, lab, (c, lo, hi), col, est) in enumerate(steps):
+    # (b) beam days to a 3 sigma test of R_ATOMKI for each step
+    for i, (name, lab, d24, col, est) in enumerate(steps):
+        c, lo, hi = (E.beam_days(v) for v in d24)
         y = len(steps) - 1 - i
         bx.plot([lo, hi], [y, y], color=col, lw=2.2, solid_capstyle="butt", zorder=3)
         bx.plot([c], [y], "o", ms=6, mfc="white" if est else col, mec=col, mew=1.4, zorder=4)
@@ -464,20 +472,22 @@ def fig_road():
                 "not tested in this run")[i]
         bx.text(-0.04, y - 0.3, note, transform=bx.get_yaxis_transform(), ha="right", va="center", fontsize=6.3,
                 color=MUTED, style="italic")
-        if i:
-            bx.annotate("", xy=(c * 1.0, y + 0.22), xytext=(steps[i - 1][2][0], y + 0.78),
-                        arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=0.6, mutation_scale=6, shrinkA=4, shrinkB=4))
-        print(f"road {name}: {c:.2f} ({lo:.2f}-{hi:.2f}) d; beats MEG II after {E_days(c, E.R_MEG2_90):.1f} d, "
-              f"excludes ATOMKI after {E_days(c, U):.1f} d{' (estimate)' if est else ''}")
+        if i:   # arrow from the previous step's point down to this one, between the two rows
+            cp = E.beam_days(steps[i - 1][2][0])
+            bx.annotate("", xy=(c, y + 0.16), xytext=(cp, y + 0.84),
+                        arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=0.6, mutation_scale=6, shrinkA=0, shrinkB=0))
+        print(f"road {name}: {c:.2f} ({lo:.2f}-{hi:.2f}) beam days; beats MEG II after "
+              f"{E.beam_days(E_days(d24[0], E.R_MEG2_90)):.1f} beam days, excludes ATOMKI after "
+              f"{E.beam_days(E_days(d24[0], U)):.1f}{' (estimate)' if est else ''}")
     bx.set_yticks(range(len(steps))[::-1])
     bx.set_yticklabels([s_[1] for s_ in steps], fontsize=7.5, linespacing=1.1, va='bottom')
     bx.tick_params(axis="y", length=0, pad=4)
     bx.set_xscale("log")
-    bx.set_xlim(0.2, 1000)
+    bx.set_xlim(0.3, 3000)
     bx.set_ylim(-0.65, len(steps) - 0.45)
     bx.set_xticks([1, 10, 100, 1000])
     bx.get_xaxis().set_major_formatter(matplotlib.ticker.FormatStrFormatter("%g"))
-    bx.set_xlabel(r"days of beam to a 3$\sigma$ test of $R_\mathrm{ATOMKI}$, 1 µA")
+    bx.set_xlabel(r"beam days to a 3$\sigma$ test of $R_\mathrm{ATOMKI}$, 1 µA")
     bx.grid(axis="x", color=GRID, lw=0.5, zorder=0)
     bx.set_axisbelow(True)
     tag(bx, "(b) from this run to the physics run", x=-0.62)

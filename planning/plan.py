@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 OUT.mkdir(exist_ok=True)
 
-UPDATED = "2026-11-25"
+UPDATED = "2026-11-26"
 DEADLINE = "2026-12-10T23:59:00+01:00"   # PAC proposal deadline, CET
 PAC = ("2027-01-25", "2027-01-29")
 
@@ -72,7 +72,7 @@ PHASES = [
     # integration
     dict(ws="run", name="Full chain, 2 arms, cosmics", start="2027-05-17", end="2027-06-11", est=True),
     dict(ws="run", name="Ship + install at LNL, cosmic commissioning", start="2027-06-14", end="2027-07-02", est=True),
-    dict(ws="run", name="8 CN working days of beam (June–July 2027; allocation ends 30 Jul)", start="2027-07-05", end="2027-07-14", est=True),
+    dict(ws="run", name="8 CN beam days (24 h, ~19 h of beam each) (June–July 2027; allocation ends 30 Jul)", start="2027-07-05", end="2027-07-14", est=True),
     dict(ws="run", name="First results note", start="2027-07-19", end="2027-09-30", est=True),
     # funding
     dict(ws="fund", name="INFN commission request (preventivi; dates: ask)", start="2027-06-01", end="2027-09-30", est=True),
@@ -99,7 +99,7 @@ TASKS = [
     dict(id="P1", ws="prop", due="2026-11-20", who="Dylan", status="active",
          t="Send Pierfrancesco the outline, the two-arm numbers and the questions (spokesperson, GLIMOS, author list)"),
     dict(id="P2", ws="prop", due="2026-11-20", who="Pierfrancesco", status="todo",
-         t="Informal contact with Anna Selva / the Accelerator Division: the CN (AN2000 probably not available, 25 Nov), 1.10 MeV at 1 µA and H₂⁺ at 0.883 MV, hours per working day, line and floor space, June–July 2027 (the call's period ends 30 Jul)"),
+         t="Informal contact with Anna Selva / the Accelerator Division: the CN (AN2000 probably not available, 25 Nov), 1.10 MeV at 1 µA and H₂⁺ at 0.883 MV, beam hours (PF, 26 Nov: the CN can run 24/24 incl. weekends), line and floor space, June–July 2027 (the call's period ends 30 Jul)"),
     dict(id="P3", ws="prop", due="2026-11-23", who="Dylan", status="todo",
          t="Get the INFN-AAI account + 'Risorse IT' (needed to submit on Indico)"),
     dict(id="P3b", ws="prop", due="2026-11-18", who="Dylan", status="done",
@@ -142,7 +142,7 @@ TASKS = [
     dict(id="R8", ws="sim", due="2026-11-27", who="Dylan", status="done", dep=["R7"],
          t="Proposal: the Geant4 event as Fig. 1c (drawn from sim2arm/out/events3d.json by proposal/figsrc/make_figures.py, 25 Nov), the predictions as Fig. 2 and the rates in Table I"),
     dict(id="R9", ws="sim", due="2027-03-31", who="Dylan", status="todo",
-         t="n_TOF beam-off A–C wall coincidences: 0.84 Hz measured vs 0.34 Hz in the cosmic toy MC; explain before quoting absolute cosmic rates (the chamber-level factor 2.5 is the reconstruction gate). Impact checked 26 Nov (TA_COS_SCALE=2.5, L19): 195 → 230 d to 3σ, 46 h limit 4.3 → 4.7 × R(ATOMKI), since the beam background dominates the fit region (825 beam vs 72 cosmic pairs per day)"),
+         t="n_TOF beam-off A–C wall coincidences: 0.84 Hz measured vs 0.34 Hz in the cosmic toy MC; explain before quoting absolute cosmic rates (the chamber-level factor 2.5 is the reconstruction gate). Impact checked 26 Nov (TA_COS_SCALE=2.5, L19): 195 → 230 d to 3σ (days of 24 h), the run's limit 2.75 → 3.0 × R(ATOMKI) in beam days, since the beam background dominates the fit region (825 beam vs 72 cosmic pairs per day)"),
     # --- MM
     dict(id="M1", ws="mm", due="2027-01-15", who="Dylan", status="todo",
          t="Ask Stephan / CEA: repair B's drift window (needed); new aluminised-mylar windows for A and B (low-budget upgrade); dates"),
@@ -168,9 +168,9 @@ TASKS = [
     dict(id="S6", ws="scint", due="2027-01-31", who="Dylan", status="todo",
          t="Thicker liquid cells: Geant4 scan 2 / 2+2 in series / 4 / 5 cm (PF: '4 cm in parallel or 2 cm in series'); expose the LS dimensions on the MX17_Full_Geant command line (slot1_feasibility/LIQUID_CELLS.md §2)"),
     dict(id="S7", ws="scint", due="2027-02-28", who="Dylan", status="todo",
-         t="Wider liquid cells to replace the big plastics, within ~60 L: oversized-cell Geant4 run at 35/41/47 cm (60–80 cm sides need 27–56 L for 2 arms, ~53 L for 4 arms at 60 × 60 × 3 cm); trigger leg, light collection, PMTs (LIQUID_CELLS.md §3)"),
+         t="Wider liquid cells to replace the big plastics, within the 70 L (PF, 26 Nov): oversized-cell Geant4 run at 35/41/47 cm (60–80 cm sides need 27–56 L for 2 arms, ~53 L for 4 arms at 60 × 60 × 3 cm); trigger leg, light collection, PMTs (LIQUID_CELLS.md §3)"),
     dict(id="S8", ws="scint", due="2026-12-05", who="Dylan", status="todo",
-         t="Ask PF: how much liquid (~60 L?), which liquid, who remakes the cans and when, how many PMTs; '4 cm in parallel / 2 cm in series': per arm or in total?"),
+         t="Ask PF: how much liquid (70 L, PF 26 Nov), which liquid, who remakes the cans and when, how many PMTs; '4 cm in parallel / 2 cm in series': per arm or in total?"),
     dict(id="S9", ws="scint", due="2027-04-01", who="Pierfrancesco", status="todo", dep=["S8"],
          t="Remake 2 liquid-cell cans (45 × 45 × 2 cm baseline, or the S6/S7 design) and fill them"),
     # --- target
@@ -181,11 +181,11 @@ TASKS = [
     dict(id="R12", ws="sim", due="2026-11-27", who="Dylan", status="done",
          t="External conversions at x100 statistics (sim2arm/EPC_L19.md, 26 Nov): run L19, 3e10 ⁸Be γ in the built Cu hemisphere, 6,000 clean jobs. Selected EPC pairs on 352 MC events (was 2): 21/day at 1.10 MeV (was 17), 74/day at 441 keV (was 1.4); signal-like θ shape, so 195 d to 3σ (was 151) and 4.3 × R(ATOMKI) in the 46 h (was 3.8 ×; 5.5 / 7.2 × as at n_TOF / no liquid). Proposal numbers updated 26 Nov (P5). Follow-ups 26 Nov: the full reach grid with L19 (sim2arm/run_l19_full.sh, run_l19_all.sh: tags _pass4{,li11}_l19, now read by two_arm_estimates and the page); the reference row reproduced (195 / 320 / 551 d); muon segments at 3° instead of 15° gain only 6 % (184 d); 4 µA gives 2.0 × in the 46 h (was 1.7 ×)"),
     dict(id="R13", ws="sim", due="2026-12-05", who="Dylan", status="todo",
-         t="External conversions of the lighter Al holder (Al ogive + Cu liner) at L19 statistics (~5,000 core-h, test cluster first): R10's 21 days to 3σ and the proposal's 'factor of 9' and '1.4–1.9 × in 46 h' rest on 2 simulated EPC events, and L19 showed the EPC shape is signal-like (Cu: 151 → 195 d). Needed before the text freeze (P8) if the Al holder stays in the proposal"),
+         t="External conversions of the lighter Al holder (Al ogive + Cu liner) at L19 statistics (~5,000 core-h, test cluster first): R10's 21 days to 3σ (26 beam days) and Fig. 4's Al-holder steps rest on 2 simulated EPC events, and L19 showed the EPC shape is signal-like (Cu: 151 → 195 d). Needed before the text freeze (P8) if the Al holder stays in the proposal"),
     dict(id="R14", ws="sim", due="2027-03-31", who="Dylan", status="todo",
          t="How well does Geant4 predict the external conversions that reach two OPPOSITE arms? They need a large-angle scatter in the 300 µm Cu wall (87 % start in the dome, 15 % of the window pairs in the arms' own scintillators/PCBs) and are the largest beam component in the fit region (308 of 825 per day). Day 8 (arms at 90°) measures the dome conversion rate, not this tail; the 441 keV day measures it directly (25 of ~70 pairs) only if H₂⁺ exists. Check: a second EM physics option and the wall-thickness tolerance on an L19-size subsample; ask PF for the measured wall thickness"),
     dict(id="T4", ws="target", due="2027-05-31", who="Dylan", status="todo",
-         t="Day-1 film check procedure (LI_THICKNESS.md §6): γ₀ yield per µC at 1.10 MeV vs 441 keV with the LaBr₃ (the ratio gives the thickness in the spot), 478 keV PIGE as the fallback without H₂⁺, the 17.64/18.15 share as the LiOH alarm; replace a film below ~0.7 × nominal or above a few % 17.64 share. Write the thresholds into the run plan; needs the LaBr₃ efficiency at 478 keV and 17–18 MeV"),
+         t="Day-1 film check procedure (LI_THICKNESS.md §6): γ₀ yield per µC at 1.10 MeV vs 441 keV with the γ monitor (BaF₂ 2 cm or NaI(Tl) from PF, 26 Nov; the ratio gives the thickness in the spot), 478 keV PIGE as the fallback without H₂⁺, the 17.64/18.15 share as the LiOH alarm; replace a film below ~0.7 × nominal or above a few % 17.64 share. Write the thresholds into the run plan; needs the monitor's efficiency at 478 keV and 17–18 MeV"),
     dict(id="T2", ws="target", due="2027-05-31", who="Pierfrancesco", status="todo",
          t="Build the holder; make films; a week of LiOH-conversion test on the line"),
     # --- site
@@ -201,7 +201,7 @@ TASKS = [
     dict(id="I2", ws="run", due="2027-07-02", who="all", status="todo",
          t="Ship, install, commission on cosmics at LNL: ≥ 3 nights with the arms VERTICAL (σ_t, μ segment angle, MIP gains, each cosmic veto), then roll to horizontal"),
     dict(id="I3", ws="run", due="2027-07-16", who="all", status="todo",
-         t="8 CN working days of beam (8 h each, assumed) + beam-off cosmic nights; shift list sent to RP ≥ 3 days ahead"),
+         t="8 CN beam days (24 h with 80 % efficiency, ~19 h of beam each; PF 26 Nov: 24/24 incl. weekends); shift list sent to RP ≥ 3 days ahead"),
     # --- funding
     dict(id="F1", ws="fund", due="2026-12-15", who="Pierfrancesco", status="todo",
          t="Which commission and when are the requests due? (Pierfrancesco wrote 'commission II'; INFN preventivi are usually prepared in summer: ask)"),
@@ -271,7 +271,7 @@ HARDWARE = [
          who="Pierfrancesco", state="to find", need="2027-04-01", b="If the PMTs must be bought: 4–6 fast 2″ PMTs + bases", inv=["pmt_small"], place=["plast"], tasks=["S1"],
          note="The n_TOF PMTs went back to their lender. Borrow again or find others that fit; buying is the expensive fallback.",
          detail="Fast 2″ tubes. Ask whether the original lender can lend them again (question for Pierfrancesco)."),
-    dict(id="ls", part="Liquid cells 45 × 45 × 2 cm, new cans", qty="2", grp="Scintillators", status="make", org="MX17 collaboration", src="liquid from the n_TOF set-up (~60 L, to confirm); cans remade",
+    dict(id="ls", part="Liquid cells 45 × 45 × 2 cm, new cans", qty="2", grp="Scintillators", status="make", org="MX17 collaboration", src="liquid from the n_TOF set-up (70 L, PF 26 Nov); cans remade",
          who="Pierfrancesco / Dylan", state="to make", need="2027-04-01", b="New cans for the 2 liquid cells", inv=["ls"], place=["ls"], tasks=["S5", "S6", "S7", "S8", "S9"],
          note="In the proposal (PF, 20 Nov: 'the liquid we have, the cans have to be remade'). Without them the days to 3σ go up ×3.4. 67–76 % pile-up at n_TOF (γ-flash); LNL rates are far lower.",
          detail="2 PMTs and 2 digitizer channels. Thicker (4 cm, or 2 + 2 in series) and wider cells (in place of the big plastics) to study: slot1_feasibility/LIQUID_CELLS.md."),
@@ -362,7 +362,7 @@ HARDWARE = [
          who="Pierfrancesco", state="to decide", need="2027-06-01", place=["stand"], tasks=["L3", "R3"],
          note="Two opposite arms, faces at ±204 mm from the beam axis. It should roll 90° about the beam: vertical for the cosmic nights, horizontal for the beam days (sim2arm, 19 Nov).",
          detail="Opposite arms are best (turning them toward 140° costs ×1.1–2.5 in days, run L16). Its material goes into the Geant4 geometry (R3)."),
-    dict(id="gmon", part="γ-yield monitor (LaBr₃ or NaI)", qty="1", grp="Target & beam line", status="borrow", org="INFN / LNL", src="LNL detector pool (ask)",
+    dict(id="gmon", part="γ-yield monitor (BaF₂ 2 cm or NaI(Tl))", qty="1", grp="Target & beam line", status="borrow", org="INFN / LNL", src="Pierfrancesco: a 2 cm BaF₂, or a NaI(Tl) if not too thick (26 Nov)",
          who="Pierfrancesco", state="to ask", need="2027-06-01", place=["target"], tasks=["I3"],
          note="The target's daily health (LiOH conversion) and a γ₀ cross-check, independent of the arms. Not in the set-up so far (sim2arm §7.5).",
          detail="One spare digitizer channel."),
@@ -410,20 +410,20 @@ BUDGET = [
 # ----------------------------------------------------------------------------------------------
 # Open questions, by who answers.
 QUESTIONS = [
-    dict(who="Pierfrancesco", q="Spokesperson(s) and GLIMOS for the abstract page? (GLIMOS is normally local.)"),
-    dict(who="Pierfrancesco", q="CN instead of AN2000 (25 Nov): the proposal asks 8 working days on the CN at 1 µA (the 8-day allocation), 8 h of beam per working day: 7 at 1.10 MeV + 1 with H₂⁺ for 441 keV (else also 1.10 MeV). Is that how the CN works (hours per day, nights, weekends)? (slot1_feasibility/CN_BEAM.md)"),
-    dict(who="Pierfrancesco", q="Can the CN give more than 1 µA at 1.10 MeV? The beam sheet says 1 µA at 0.8–2 MeV; the CN paper's ~4 µA limit is set by neutrons, and ⁷Li(p,n) makes none below 1.88 MeV. With the 46 h at 1.10 MeV, 4 µA would bring the limit from 4.3 to 2.0 × R(ATOMKI) (L19, 26 Nov; CN_BEAM.md §3); nights would bring 4.3 to 2.66 ×."),
+    dict(who="Pierfrancesco", q="Spokesperson(s) and GLIMOS for the abstract page? 26 Nov: PF has no idea who the GLIMOS is and asks where we saw it: tell him it is a field of the LNL proposal template (abstract page; normally a local safety contact)."),
+    dict(who="Pierfrancesco", q="Answered 26 Nov: the CN can run 24/24, weekends included. We count beam days of 24 h with 80 % operator efficiency (19.2 h of beam): 8 beam days = ~150 h, 113 h (5.9 beam days) at 1.10 MeV with the arms opposite: 2.75 × R(ATOMKI) (was 4.3 × for 8 working days of 8 h). Still open: which CN line (−15°, 0°, +15°)? PF did not answer that one."),
+    dict(who="Pierfrancesco", q="Can the CN give more than 1 µA at 1.10 MeV? The beam sheet says 1 µA at 0.8–2 MeV; the CN paper's ~4 µA limit is set by neutrons, and ⁷Li(p,n) makes none below 1.88 MeV. In the 5.9 beam days at 1.10 MeV, 4 µA would bring the limit from 2.75 to ~1.3 × R(ATOMKI), below MEG II (2.07 ×; scaled from the L19 4 µA fit, CN_BEAM.md §3). 26 Nov: PF says the spot is smaller than 5 mm FWHM ('5 mm diameter is even more than the FWHM'), so our σ = 2 mm Gaussian is conservative; the current itself not yet answered."),
     dict(who="Pierfrancesco", q="Target for the proposal: pressed Li on Cu in the existing Cu hemisphere: confirm it fits the CN line end?"),
     dict(who="Pierfrancesco", q="Can the stand roll 90° about the beam? Plan (sim2arm): vertical pair for the cosmic nights before the beam, horizontal for the beam days."),
-    dict(who="Pierfrancesco", q="Liquid scintillator: how many litres (~60 L?), which liquid, who remakes the cans and by when, how many PMTs? '4 cm in parallel or 2 cm in series': per arm or in total? Wider cells could replace the big plastics (LIQUID_CELLS.md)."),
+    dict(who="Pierfrancesco", q="Liquid scintillator: 70 L (PF, 26 Nov). Still open: which liquid, who remakes the cans and by when, how many PMTs? '4 cm in parallel or 2 cm in series': per arm or in total? Wider cells could replace the big plastics (LIQUID_CELLS.md)."),
     dict(who="Pierfrancesco", q="The holder thesis: when would a student start, and could a lighter end piece exist before the June–July 2027 run?"),
-    dict(who="Pierfrancesco", q="A γ-yield monitor (LaBr₃ or NaI) from the LNL pool for the target's daily check? A LaBr₃ is preferred: it separates 17.64 from 18.15 MeV (the alarm for a film that reaches 441 keV) and sees the 478 keV line (the Li content, PIGE)."),
+    dict(who="Pierfrancesco", q="γ-yield monitor: PF (26 Nov) has a BaF₂, 2 cm thick, or can get a NaI(Tl) if it need not be too thick; he asks the γ energies. Answer him: 17.64 and 18.15 MeV (γ₀ yield and the 17.64/18.15 share, the alarm for a film that reaches 441 keV) and 478 keV (Li content, PIGE); ~10⁴ γ/s of 17–18 MeV at 1 µA, so a thin crystal at a few tens of cm is enough for the yield, but 2 cm BaF₂ will not separate 17.64 from 18.15 MeV (a ≥ 3″ NaI helps). Decide which (T4)."),
     dict(who="Pierfrancesco", q="Li films (LI_THICKNESS.md, 25 Nov): can LNL measure each film's thickness and uniformity before the run (RBS / NRA / PIGE at a few spots, or weighing)? How long does a film change take on the CN line, and how many spare films can we have?"),
     dict(who="Pierfrancesco", q="'Commission II': which INFN commission, and when must the request be in? Results before that date?"),
     dict(who="Pierfrancesco", q="Author list: affiliations for Massimi, Mengoni, Gervino, Gustavino, Cosentino; anyone else (n_TOF, CEA, Torino)?"),
-    dict(who="LNL Accelerator Division", q="A CN line (−15°, 0° or +15°, for the full current) ending in ~1.5 × 1.5 m of free floor; beam height; 1 µA at 1.10 MeV on a ~5 mm spot?"),
-    dict(who="LNL Accelerator Division", q="CN hours: how many hours of beam per working day (the proposal assumes 8)? Nights or weekends with authorisation (8 × 24 h would give 5 days of beam at 1.10 MeV, as in the AN2000 plan)?"),
-    dict(who="LNL Accelerator Division", q="H₂⁺ from the CN source at 0.883 MV (two 0.441 MeV protons), up to 0.5 µA? The proposal asks it as a question and says we expect some D⁺ (same mass); the D⁺ level is worth asking but may have no answer. The 441 keV calibration depends on H₂⁺; the proposal does not."),
+    dict(who="LNL Accelerator Division", q="A CN line (−15°, 0° or +15°, for the full current) ending in ~1.5 × 1.5 m of free floor; beam height; 1 µA at 1.10 MeV? (Spot: PF 26 Nov, FWHM below 5 mm.)"),
+    dict(who="LNL Accelerator Division", q="Answered 26 Nov (PF): the CN runs 24/24 including weekends. The plan counts beam days of 24 h with 80 % efficiency (safety factor, Dylan). Confirm the shift / access rules for night running."),
+    dict(who="LNL Accelerator Division", q="H₂⁺ from the CN source at 0.883 MV (two 0.441 MeV protons), up to 0.5 µA? 26 Nov: PF says a small D⁺ contamination is possible and he will ask the machine people for a number. The 441 keV calibration depends on H₂⁺; the proposal does not."),
     dict(who="Pierfrancesco", q="Answered 25 Nov: the call allocates 20 Feb – 30 Jul 2027 (the call page prints 2026, a typo), so we aim for June or July 2027 (proposal changed). Still to ask: does LNL prefer June or July for the CN, and what happens if we are not ready by July (the next period, autumn 2027)?"),
     dict(who="Pierfrancesco", q="Body length: the template says 4 pages, the LNL submission page says 5. The draft keeps to 4: is that what people do?"),
     dict(who="LNL Accelerator Division", q="Gas: we plan a non-flammable argon premix (Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4; ISO 10156 non-flammable). Does LNL agree with the classification, what does it need for bottles in the hall (storage, exhaust, O₂ monitor), and does LNL stock argon premixes?"),
@@ -446,19 +446,19 @@ RISKS = [
     dict(r="Too few digitizer channels", l="low", i="med",
          m="Two arms need ~24, PM can find 10–20; CAEN loan; ganged walls keep it at 8 per wall."),
     dict(r="No H₂⁺ beam on the CN, so no 441 keV calibration", l="med", i="med",
-         m="Without it the H₂⁺ day is also at 1.10 MeV (the request stays 8 working days). The energy scale then comes from the 18.15 MeV pairs; the run loses its transition without an expected anomaly, the in-beam film thickness from the 1.10 MeV / 441 keV yield ratio (fallback: 478 keV PIGE, T4) and the direct test of the holder's opposite-arm conversions at 17.64 MeV (a third of the 441 keV pairs, R14)."),
-    dict(r="CN gives fewer beam hours than assumed (8 h per working day) or a shorter block", l="med", i="high",
-         m="With 8 working days of 8 h the run has 46 h at 1.10 MeV: 4.3 × R(ATOMKI) (2.66 × with 24 h days; L19, 26 Nov). The reach scales as the square root of the hours. Ask for night running (P2); nights are cosmic data in any case."),
+         m="Without it the H₂⁺ day is also at 1.10 MeV (the request stays 8 beam days). The energy scale then comes from the 18.15 MeV pairs; the run loses its transition without an expected anomaly, the in-beam film thickness from the 1.10 MeV / 441 keV yield ratio (fallback: 478 keV PIGE, T4) and the direct test of the holder's opposite-arm conversions at 17.64 MeV (a third of the 441 keV pairs, R14)."),
+    dict(r="CN gives fewer beam hours than assumed (80 % of 24 h per beam day) or a shorter block", l="low", i="med",
+         m="PF (26 Nov): the CN can run 24/24 incl. weekends; the plan already takes 80 % efficiency as a safety factor. 8 beam days give 113 h at 1.10 MeV: 2.75 × R(ATOMKI) (L19). The reach scales as the square root of the hours: at 8 h per working day (the old assumption) it would be 4.3 ×."),
     dict(r="The built Cu hemisphere limits the physics reach", l="high", i="high",
-         m="Simulated (sim2arm; external conversions from run L19, 26 Nov): with the hemisphere's 300 µm wall five days give 2.7 × R(ATOMKI) (liquid working), above MEG II's limit, and the 46 h give 4.3 ×; the holder's conversions are signal-like. A lighter Al end piece (Al ogive + Cu liner) gives 0.9–1.2 × in five days (Geant4, R10, 25 Nov; its conversions rest on 2 MC events: R13). Ask PF whether one can be made (T1); otherwise sell the run as the feasibility test it is."),
+         m="Simulated (sim2arm; external conversions from run L19, 26 Nov): with the hemisphere's 300 µm wall five days give 2.7 × R(ATOMKI) (liquid working), above MEG II's limit, and the run's 5.9 beam days give 2.75 ×; the holder's conversions are signal-like. A lighter Al end piece (Al ogive + Cu liner) gives 0.9–1.2 × in five days (Geant4, R10, 25 Nov; its conversions rest on 2 MC events: R13). Ask PF whether one can be made (T1); otherwise sell the run as the feasibility test it is."),
     dict(r="Cosmic veto weaker than simulated (σ_t > 0.4 ns, segments worse than 3°)", l="med", i="med",
          m="n_TOF beam-off muons: σ_t 0.52–0.64 ns per arm (19 Nov). Horizontal pair for the beam days: its days barely depend on σ_t (17.4 d with no TOF, 17.7 at any σ_t; sim2arm tof_scan); the vertical pair goes 17.1 → 18.7 d from 0.3 to 0.7 ns. R4 with the LNL readout."),
     dict(r="Liquid-cell cans not remade in time, or PMTs not found", l="med", i="med",
-         m="The proposal assumes them (4.3 × R(ATOMKI) in the 46 h; 2.66 × in 5 d); without them 7.2 × (4.5 × in 5 d), the run stays a feasibility test. Ask now (S8); the n_TOF cans as a fallback if they can be reused."),
+         m="The proposal assumes them (2.75 × R(ATOMKI) in the 5.9 beam days at 1.10 MeV); without them 4.6 ×, the run stays a feasibility test. Ask now (S8); the n_TOF cans as a fallback if they can be reused."),
     dict(r="Li film degrades (LiOH) under beam", l="med", i="med",
          m="10–12 µm films; γ-yield monitor each day; a spare film; a week's conversion test before the run."),
     dict(r="Li film thickness and homogeneity known only to ~50 % (whatever film is made)", l="high", i="med",
-         m="slot1_feasibility/LI_THICKNESS.md (25 Nov): the γ rate follows the mean thickness, so the 46 h limit spans 6.9 × (0.5 × 11 µm) to 3.55 × (1.5 ×) around 4.3 × R(ATOMKI) (with the L19 external conversions); an uneven film with the right mean costs 3–18 % in days. The danger is unevenness plus LiOH: thick spots reach 441 keV (36 % of γ₀ from 17.64 MeV at ±50 % spread and half the Li converted; days × 2.3–3.7). Measure the film on day 1 (γ₀ yield ratio 1.10 MeV / 441 keV, which does not depend on the film; 478 keV PIGE), watch 17.64/18.15 with the LaBr₃, bring spare films, map films by IBA before the run if LNL can. R stays normalised to the γ monitor, so the thickness changes only the statistics."),
+         m="slot1_feasibility/LI_THICKNESS.md (25 Nov): the γ rate follows the mean thickness, so the run's limit (5.9 beam days at 1.10 MeV) spans 4.4 × (0.5 × 11 µm) to 2.3 × (1.5 ×) around 2.75 × R(ATOMKI) (with the L19 external conversions); an uneven film with the right mean costs 3–18 % in days. The danger is unevenness plus LiOH: thick spots reach 441 keV (36 % of γ₀ from 17.64 MeV at ±50 % spread and half the Li converted; days × 2.3–3.7). Measure the film on day 1 (γ₀ yield ratio 1.10 MeV / 441 keV, which does not depend on the film; 478 keV PIGE), watch 17.64/18.15 with the γ monitor, bring spare films, map films by IBA before the run if LNL can. R stays normalised to the γ monitor, so the thickness changes only the statistics."),
     dict(r="Machine-future decision (one machine to replace AN2000 + CN)", l="low", i="high",
          m="Run in 2027 is unaffected; follow the decision (x17_facility_search/lnl/NOTE_CN_AN2000_REPLACEMENT.md)."),
     dict(r="Not ready by July: only ~5 months from the PAC (late Jan) to the end of the allocation period (30 Jul 2027)", l="med", i="high",
@@ -495,7 +495,7 @@ SLOT2 = dict(
     when="2028 (next PAC call, est. late 2027)",
     setup=[
         "Four arms: A, B + re-bulked C and D, new windows on all",
-        "Big plastics (4 × ~78 × 80 × 5 cm in-house plates) behind the SiPM walls: ×13–15 in running time; or wide liquid cells from the ~60 L we have (~60 × 60 × 3 cm for 4 arms; S7, LIQUID_CELLS.md)",
+        "Big plastics (4 × ~78 × 80 × 5 cm in-house plates) behind the SiPM walls: ×13–15 in running time; or wide liquid cells from the 70 L we have (~60 × 60 × 3 cm for 4 arms; S7, LIQUID_CELLS.md)",
         "SiPM walls per bar end (FERS, 160 ch) in the Upgrade preset; ganged in Self",
         "Own trigger/DAQ (architecture B or D), DREAM still from CEA",
         "Target from the slot-1 experience (flat Al end cap / Cu ogive, 10–12 µm Li)",
@@ -571,7 +571,8 @@ def main() -> None:
         updated=UPDATED, deadline=DEADLINE, pac=PAC, links=LINKS, tiers=TIERS, workstreams=WORKSTREAMS, phases=PHASES,
         milestones=MILESTONES, tasks=TASKS, hardware=hardware_rows(), budget=BUDGET, loan_conf=LOAN_CONF, questions=QUESTIONS,
         risks=RISKS, proposal=PROPOSAL, slot2=SLOT2, reach=reach_rows(), beam=beam_rows(),
-        reach_model=dict(r_atomki=E.R_ATOMKI, r_megii=E.R_MEG2_90, days_on_res=E.DAYS_ON_RES,
+        reach_model=dict(r_atomki=E.R_ATOMKI, r_megii=E.R_MEG2_90, days_on_res=E.DAYS_ON_RES, oper_eff=E.OPER_EFF,
+                         beam_day_h=E.BEAM_DAY_H, run_beam_days=E.RUN_BEAM_DAYS,
                          sim_tag=E.SIM_TAG, cal_2arm_per_day=list(E.CAL_2ARM_PER_DAY)),
     )
     (OUT / "plan.json").write_text(json.dumps(data, ensure_ascii=False, indent=1), encoding="utf-8")

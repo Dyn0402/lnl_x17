@@ -31,7 +31,7 @@ total; question in `planning/plan.py`).
 
 The full experiment was planned with four big plastics (4 × ~78 × 80 × 5 cm, worth ×13–15 in running time,
 `FEASIBILITY_SIM.md` §9: mostly acceptance, a leg in both arms ×7, and calorimetry ×1.5). Since the cans are remade
-anyway, they could be made wide enough to play that role, within the liquid we have (**~60 L, to confirm**).
+anyway, they could be made wide enough to play that role, within the liquid we have (**70 L**, Pierfrancesco 26 Nov; ~60 L assumed before).
 
 **Acceptance saturates** (the §9 geometric toy, 5 cm plates, relative days; it is an estimate calibrated on Geant4):
 
@@ -153,5 +153,5 @@ cell in front) would grow the cosmics in the same way and is not expected to do 
 - **S7** Geant4 run with an oversized liquid cell (like `--big-plastic`; cut smaller squares offline) at 35, 41 and 47 cm:
   replaces the toy above; decides whether wide cells replace the big plastics for slot 2.
 - **R11** done 21 Nov (§4.1): layout C needs 1.5 × more days than the baseline in Geant4. The baseline stays.
-- **S8** Ask Pierfrancesco: how much liquid (~60 L?), which liquid, who remakes the cans, how many PMTs exist, and what he
+- **S8** Ask Pierfrancesco: how much liquid (answered 26 Nov: 70 L), which liquid, who remakes the cans, how many PMTs exist, and what he
   means by "in parallel / in series".

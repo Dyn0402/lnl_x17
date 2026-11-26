@@ -14,6 +14,12 @@ and the page; it does not duplicate those studies.
 
 ## Read this first (2026-11-18, reach updated 2026-11-19)
 
+- **26 Nov (evening): beam days.** Pierfrancesco: the CN can run 24/24, weekends included. We count **beam days** of 24 h
+  with 80 % operator efficiency (19.2 h of beam). The request stays 8 days, now 8 beam days (~150 h): 5.9 beam days at
+  1.10 MeV with the arms opposite give **2.75 × R(ATOMKI)** (3.5 / 4.6 × as at n_TOF / no liquid), 244 beam days to 3σ.
+  Also from PF: beam spot FWHM below 5 mm, 70 L of liquid scintillator, a γ monitor from a 2 cm BaF₂ or a NaI(Tl), a D⁺
+  number to come, GLIMOS unknown to him. `correspondence/2026-11-26_mastinu_cn_answers.md`, `slot1_feasibility/CN_BEAM.md` top.
+  Older entries below count working days of 8 h (46 h at 1.10 MeV).
 - **26 Nov (later): proposal reframed as a test and calibration run** (Dylan): not competitive with MEG II, so the aim is
   that the measured opening-angle distributions agree with Geant4 before a four-arm physics run proposed for late 2027.
   New Fig. 2: geometric pair acceptance against the opening angle, one lepton per arm and both in one arm, and the

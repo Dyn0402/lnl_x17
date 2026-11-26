@@ -1,5 +1,7 @@
 """Two-arm feasibility run at LNL: what 8 beam days can show.
 
+Updated 2026-11-26 (evening): days are BEAM DAYS (24 h at 80 % operator efficiency = 19.2 h of beam); see OPER_EFF.
+
 Updated 2026-11-20: the two-arm numbers for the BUILT Cu hemisphere (R 11 mm, 300 µm, rim, grey flange; Geant4 dome300)
 come from the SIMULATION (sim2arm/TWO_ARM_STUDY.md): the FEASIBILITY_SIM §19 reference fit run on one pair of arms of the
 L10 + L18 Geant4 tables, with the L15 cosmics (every zenith angle). sim2arm/out/summary_reach<SIM_TAG>.csv holds them.
@@ -56,25 +58,45 @@ FOUR_ARM = {
     ("Al ogive + Cu liner (lighter)", "fix"): (4.5, 3.6, 5.5),
 }
 
-# The request (2026-11-25, slot1_feasibility/CN_BEAM.md): 8 working days on the CN (the allocation), 1 µA, ~8 h of beam
-# per working day (assumed; ask): 46 h at 1.10 MeV with the arms opposite.  Day 2 needs H2+ at 0.883 MV (else 1.10 MeV).
-# Until 25 Nov: 8 days of 24 h on AN2000 (sim2arm/TWO_ARM_STUDY.md section 7).
+# Beam days (2026-11-26, Pierfrancesco): the CN can run 24 h a day, weekends included.  We assume an 80 % operator
+# efficiency, so a BEAM DAY is a calendar day with 19.2 h of beam on target.  Every day count shown on the page and in the
+# proposal is in beam days; the simulation's days to 3 sigma (d2_*, d4_* below) stay in days of 24 h of beam.
+# Until 26 Nov: 8 working days of ~8 h (46 h at 1.10 MeV); before 25 Nov: 8 days of 24 h on AN2000.
+OPER_EFF = 0.8
+BEAM_DAY_H = 24.0 * OPER_EFF        # 19.2 h of beam per beam day
+
+
+def beam_days(days24: float) -> float:
+    """Days of 24 h of beam -> beam days (19.2 h of beam each)."""
+    return days24 / OPER_EFF
+
+
+# The request: 8 beam days on the CN (the allocation) at 1 µA.  Day 1: current scan (~2 h) then 1.10 MeV; day 2: H2+ at
+# 0.883 MV for 441 keV (else 1.10 MeV); days 3-7: 1.10 MeV; day 8: arms adjacent.
+N_BEAM_DAYS = 8
+H_SCAN = 2.0
+H441 = BEAM_DAY_H                   # one beam day at 441 keV
+H110 = 6 * BEAM_DAY_H - H_SCAN      # days 1 and 3-7 with the arms opposite: 113.2 h
+H_ADJ = BEAM_DAY_H
+RUN_DAYS24 = H110 / 24.0            # the same in days of 24 h of beam (the unit of r90 / z_at_atomki)
+RUN_BEAM_DAYS = H110 / BEAM_DAY_H   # 5.9 beam days
+
+
 BEAM_PLAN = [
     # (day, E_p, what, beam)
     ("before", "—", "Installation weeks, VERTICAL pair: ≥ 3 nights of cosmics with the full trigger. Measures the arm-to-arm "
                     "time of flight (σ_t), each arm's MIP gain and the rejection of every cosmic veto, in the worst geometry", "off"),
     ("1", "1.10 MeV", "Roll to the HORIZONTAL pair. Beam on target at low current; current scan 0.05 → 1 µA (~2 h): trigger "
-                      "rates, DREAM live time, Micromegas occupancy, singles; γ-yield reference; then ~6 h in the 18.15 MeV region", "on"),
-    ("2", "0.441 MeV", "H₂⁺ at 0.883 MV (two 0.441 MeV protons), IF the CN can provide it: 17.64 MeV M1 IPC, ~70 selected beam "
-                       "pairs in 8 h (44 M1, 25 external conversions, run L19; rate to ~14 %), opening-angle shape, energy scale "
-                       "and the holder's conversions at 17.64 MeV; the 1.10 MeV / 441 keV γ₀ yield ratio gives the film thickness. "
-                       "Otherwise this day is at 1.10 MeV", "on"),
-    ("3–7", "1.10 MeV", "18.15 MeV region: IPC spectrum, X17 window (40 h; 46 h with day 1 = 1.9 days of beam); γ-yield check each day", "on"),
-    ("8", "1.10 MeV", "Arms ADJACENT (90°): small-angle IPC and external conversions (~500 pairs in 8 h)", "on"),
-    ("nights", "—", "Every night and the weekend without beam: cosmics with the full trigger in the physics geometry "
-                    "(~45 selected pairs per 16-hour night)", "off"),
+                      "rates, DREAM live time, Micromegas occupancy, singles; γ-yield reference; then ~17 h in the 18.15 MeV region", "on"),
+    ("2", "0.441 MeV", "H₂⁺ at 0.883 MV (two 0.441 MeV protons), IF the CN can provide it: 17.64 MeV M1 IPC, ~170 selected beam "
+                       "pairs in the beam day (a third external conversions, run L19; rate to ~9 %), opening-angle shape, energy "
+                       "scale and the holder's conversions at 17.64 MeV; the 1.10 MeV / 441 keV γ₀ yield ratio gives the film "
+                       "thickness. Otherwise this day is at 1.10 MeV", "on"),
+    ("3–7", "1.10 MeV", f"18.15 MeV region: IPC spectrum, X17 window ({5 * BEAM_DAY_H:.0f} h; {H110:.0f} h = "
+                        f"{RUN_BEAM_DAYS:.1f} beam days with day 1); γ-yield check each day", "on"),
+    ("8", "1.10 MeV", "Arms ADJACENT (90°): small-angle IPC and external conversions (~1,200 pairs in the beam day)", "on"),
 ]
-DAYS_ON_RES = 5.0          # days 3-7 at 1.10 MeV
+DAYS_ON_RES = RUN_DAYS24   # the run's 1.10 MeV exposure in days of 24 h (was 5.0 until 26 Nov)
 LIVE = 0.95                # inside the fit numbers
 
 # 441 keV: two arms, selected M1 pairs per day above 90° (sim2arm spectra, MM 15° + TOF, liquid working)
@@ -164,13 +186,13 @@ def film_rows(film, sim, sim20, og, og20, al=None, al_tag=None):
 def row(tgt, film, stack, glab, vlab, d2, d4, src, src4):
     z = z_at_atomki(d2[1], DAYS_ON_RES)
     return dict(
-        target=tgt, film=film, energy_stack=stack, geometry=glab, veto=vlab, four_arm_days=round(d4[1], 1),
-        four_arm_range=f"{d4[0]:.0f}-{d4[2]:.0f}", d4_lo=round(d4[0], 2), d4_c=round(d4[1], 2),
+        target=tgt, film=film, energy_stack=stack, geometry=glab, veto=vlab, four_arm_days=round(beam_days(d4[1]), 1),
+        four_arm_range=f"{beam_days(d4[0]):.0f}-{beam_days(d4[2]):.0f}", d4_lo=round(d4[0], 2), d4_c=round(d4[1], 2),
         d4_hi=round(d4[2], 2), d2_lo=round(d2[0], 2), d2_c=round(d2[1], 2), d2_hi=round(d2[2], 2),
-        four_arm_source=src4, two_arm_days=round(d2[1], 1),
-        two_arm_range=f"{d2[0]:.0f}-{d2[2]:.0f}", z_in_5d=round(z, 2),
-        z_in_5d_range=f"{z_at_atomki(d2[2], DAYS_ON_RES):.2f}-{z_at_atomki(d2[0], DAYS_ON_RES):.2f}",
-        r90_5d=f"{r90(d2[1], DAYS_ON_RES):.2e}",
+        four_arm_source=src4, two_arm_days=round(beam_days(d2[1]), 1),
+        two_arm_range=f"{beam_days(d2[0]):.0f}-{beam_days(d2[2]):.0f}", z_run=round(z, 2),
+        z_run_range=f"{z_at_atomki(d2[2], DAYS_ON_RES):.2f}-{z_at_atomki(d2[0], DAYS_ON_RES):.2f}",
+        r90_run=f"{r90(d2[1], DAYS_ON_RES):.2e}",
         r90_over_atomki=round(r90(d2[1], DAYS_ON_RES) / R_ATOMKI, 2),
         r90_over_megii=round(r90(d2[1], DAYS_ON_RES) / R_MEG2_90, 2),
         source=src)
@@ -185,11 +207,12 @@ def write(rows):
         w = csv.writer(f)
         w.writerow(["day", "E_p", "what", "beam"])
         w.writerows(BEAM_PLAN)
+    print(f"beam day = {BEAM_DAY_H} h; run at 1.10 MeV opposite = {H110:.1f} h = {RUN_BEAM_DAYS:.2f} beam days")
     print(f"441 keV calibration, two arms: {CAL_2ARM_PER_DAY[0]}-{CAL_2ARM_PER_DAY[1]} M1 pairs/day above 90 deg")
-    print(f"{'film':24s} {'target':30s} {'stack':40s} {'geometry':16s} {'veto':25s} 2arm (range)  Z(5d) R90/ATOMKI R90/MEGII")
+    print(f"{'film':24s} {'target':30s} {'stack':40s} {'geometry':16s} {'veto':25s} 2arm beam days (range)  Z(run) R90/ATOMKI R90/MEGII")
     for r in rows:
         print(f"{r['film']:24s} {r['target']:30s} {r['energy_stack']:40s} {r['geometry']:16s} {r['veto']:25s} {r['two_arm_days']:6} "
-              f"({r['two_arm_range']:>7s})  {r['z_in_5d']:4}  {r['r90_over_atomki']:5}  {r['r90_over_megii']}")
+              f"({r['two_arm_range']:>7s})  {r['z_run']:4}  {r['r90_over_atomki']:5}  {r['r90_over_megii']}")
 
 
 if __name__ == "__main__":

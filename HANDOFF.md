@@ -1,5 +1,36 @@
 # Handoff
 
+## Pierfrancesco's answers: the CN runs 24/24, all numbers in beam days — updated 2026-11-26 (dylan-MS-7C84)
+
+**Resume:** everything now counts beam days (24 h at 80 % efficiency, 19.2 h of beam); next: answer PF's γ-energy and GLIMOS questions.
+
+**Done:**
+- PF's reply (CERN thread "LNL PAC Proposal Call Dec 10", 26 Nov) summarised in `correspondence/2026-11-26_mastinu_cn_answers.md`:
+  24/24 incl. weekends; spot FWHM below 5 mm; 70 L liquid; γ monitor = a 2 cm BaF₂ or a NaI(Tl); D⁺ number to come;
+  GLIMOS unknown to him; CN line and 4 µA not answered.
+- Beam days (Dylan: 80 % operator efficiency as a safety factor): `planning/two_arm_estimates.py` OPER_EFF, BEAM_DAY_H,
+  H441/H110/RUN_BEAM_DAYS (single source; the fits' days of 24 h are converted with `beam_days()`). Day plan unchanged:
+  113 h = 5.9 beam days at 1.10 MeV opposite. Limits 2.75 / 3.5 / 4.6 × (was 4.3 / 5.5 / 7.2), Al 0.90 / 1.22 ×,
+  244 beam days to 3σ; 441 keV beam day ~170 beam + 54 cosmic pairs (9 %); 1.10 MeV ~340 + 320 (8 %); X17 adds 13.
+- Proposal: abstract (8 beam days, 2.7–4.6 ×, table footnote), body (one-sentence definition in "Use of the beam time",
+  all counts, request "8 beam days (about 150 hours of beam)", γ-monitor todo). Body still exactly 4 pages.
+- Figures: Fig. 2(b) per beam day; Fig. 3 (b)/(c) "1 beam day" / "5.9 beam days"; Fig. 4 in beam days with a LINEAR x
+  axis in (a) (0–30), legend moved, arrows in (b) redrawn between rows (HANDOFF item 1 of the entry below).
+- plan.py: questions (hours answered, liquid, γ monitor, D⁺, GLIMOS, spot), risk "fewer beam hours" lowered to low/med,
+  risks and tasks re-numbered; page template in beam days (reach table, slider default 5.9, chart, banner).
+- CN_BEAM.md top update with the old/new table; PLAN.md banner; README read-first; LIQUID_CELLS 70 L.
+- x17_facility_search FACILITY.md + dashboard (EXTRA + LOG), site rebuilt and deployed (dylan-cern-site 9f33507).
+
+**Not touched:** dated study records (`sim2arm/TWO_ARM_STUDY.md`, `EPC_L19.md`, `LI_THICKNESS.md`) keep their days of 24 h.
+Not pushed to Overleaf. The uncommitted gas files (`gas/voltage_plots.py`, `gas/figures/*_vs_Vdrift*`, `mixtures.py`) are
+another session's and were left alone.
+
+**Next steps:**
+1. Reply to PF: γ energies (17.64 / 18.15 MeV and 478 keV) for the monitor choice; GLIMOS is a field of the LNL template;
+   still ask the line and 4 µA.
+2. Dylan proof-reads the changed sentences (`git diff HEAD~1 -- proposal/latex/`), then Overleaf (re-clone, diff first).
+3. With 4 µA the run would reach ~1.3 × (below MEG II): decide whether the proposal mentions it.
+
 ## Proposal reframed as a test and calibration run; e-mail to Pierfrancesco — updated 2026-11-26 (dylan-MS-7C84)
 
 **Resume:** proposal is now a test/calibration run with Figs. 2 (acceptance) and 4 (road); next: fix Fig. 4, send PF e-mail.
@@ -29,7 +60,7 @@ the old framing).
 
 **Next steps:**
 1. Fig. 4 (Dylan): fix the arrow placement in panel (b); count days consistently as 8-hour days (46 h = 5.75 days,
-   not 1.92); linear x axis in panel (a). Re-check the 4-page fit after.
+   not 1.92); linear x axis in panel (a). [Done 26 Nov evening, in beam days of 19.2 h instead: see the entry above.] Re-check the 4-page fit after.
 2. Dylan sends the e-mail. Points discussed for it: CN lines (7 lines; full current only on −15°, 0°, +15°; PF's
    Li targets run on 0°); the spot (LNL: 2–8 mm FWHM; our sims σ = 2 mm Gaussian; the Li disc is Ø 6–8 mm, so 13–32 %
    of a σ = 2 mm beam misses it); "Commission II" (probably an INFN CSN; ask which and the deadline).
