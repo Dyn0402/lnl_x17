@@ -10,7 +10,7 @@ TEMP_K = 293.15
 E_MIN, E_MAX, N_GRID = 40.0, 600.0, 16
 NCOLL = 5
 
-TCI = {'ic4h10': 3.4, 'ch4': 8.7}
+TCI = {'ic4h10': 3.4, 'ch4': 8.7, 'c2h6': 7.6}   # c2h6: ISO 10156 Table 2 value as recalled, CHECK
 KK = {'ar': 0.55, 'co2': 1.5, 'cf4': 2.0, 'n2': 1.0}
 
 # label -> (dry composition, role)
@@ -31,6 +31,14 @@ BASES = {
     'ArCH4CO2_91_5_4':   ([('ar', 91.0), ('ch4', 5.0), ('co2', 4.0)], 'methane + CO2, non-flammable'),
     'ArCO2Iso_96.5_2_1.5': ([('ar', 96.5), ('co2', 2.0), ('ic4h10', 1.5)], 'ternary, low quencher (added 26 Nov)'),
     'ArCH4CO2_94_4_2':   ([('ar', 94.0), ('ch4', 4.0), ('co2', 2.0)], 'methane + a little CO2 (added 26 Nov)'),
+    # CERN-store premixes (cern_gases.csv scrape 2026-09-29), added 26 Nov for the voltage plots
+    'ArCH4_95_5':        ([('ar', 95.0), ('ch4', 5.0)], 'CERN store premix (P5), 61.02.05.018.7'),
+    'ArCH4CO2_93_5_2':   ([('ar', 93.0), ('ch4', 5.0), ('co2', 2.0)], 'CERN store premix, 61.00.05.001.2'),
+    'ArIso_98_2':        ([('ar', 98.0), ('ic4h10', 2.0)], 'CERN store premix, 61.02.05.020.3'),
+    'ArCH4_90_10':       ([('ar', 90.0), ('ch4', 10.0)], 'P10, CERN store premix 61.01.05.007.6 (flammable)'),
+    'ArCO2Eth_93_5_2':   ([('ar', 93.0), ('co2', 5.0), ('c2h6', 2.0)], 'ethane version of the NSW gas (added 26 Nov)'),
+    'ArCO2Eth_92_4_4':   ([('ar', 92.0), ('co2', 4.0), ('c2h6', 4.0)], 'more ethane, non-flammable if Tci 7.6 (added 26 Nov)'),
+    'ArCO2Iso_86_10_4':  ([('ar', 86.0), ('co2', 10.0), ('ic4h10', 4.0)], 'CERN store premix, 61.03.05.003.8 (more quencher)'),
     'ArCF4Iso_95_3_2':   ([('ar', 95.0), ('cf4', 3.0), ('ic4h10', 2.0)], 'reference: T2K TPC gas (CF4, high GWP)'),
     'ArCF4Iso_88_10_2':  ([('ar', 88.0), ('cf4', 10.0), ('ic4h10', 2.0)], 'reference: SPS CF4 epoch (CF4, high GWP)'),
 }
@@ -38,7 +46,9 @@ WATER_PCT = [0.0, 0.25, 0.5, 1.0, 1.5]
 # second pass (26 Nov): finer water steps where the velocity peak crosses the window
 FINE_WATER = [0.1, 0.375, 0.75]
 FINE_BASES = ['ArCH4_96_4', 'ArIso_98.2_1.8', 'ArCO2_97_3', 'ArCO2Iso_93_5_2', 'ArIso_95_5', 'ArIso_90_10',
-              'ArCF4Iso_95_3_2', 'ArCO2Iso_95.5_3_1.5', 'ArCO2Iso_96.5_2_1.5', 'ArCH4CO2_94_4_2']
+              'ArCF4Iso_95_3_2', 'ArCO2Iso_95.5_3_1.5', 'ArCO2Iso_96.5_2_1.5', 'ArCH4CO2_94_4_2',
+              'ArCH4_95_5', 'ArCH4CO2_93_5_2', 'ArIso_98_2', 'ArCO2Iso_86_10_4', 'ArCH4_90_10', 'ArCO2Eth_93_5_2', 'ArCO2Eth_92_4_4',
+              'ArCO2Iso_94_4_2', 'ArCO2Iso_90_8_2', 'ArCO2Iso_88_10_2', 'ArCH4CO2_91_5_4']
 O2_PPM_AT = (0.5, 200.0)      # one attachment point: 0.5 % water + 200 ppm O2 (n_TOF/SPS fits: 130-400 ppm)
 T_CHECK = ['ArIso_95_5', 'ArCO2Iso_93_5_2', 'ArCO2_93_7']   # dry at 303.15 K: tests the E/N scaling
 

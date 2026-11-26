@@ -202,3 +202,85 @@ The recommendation depends on how dry we can keep the gas, which we do not know 
 | `out/ranking.csv`, `out/summary.json` | every candidate's numbers per band and voltage limit |
 | `out/metrics.csv` | v and D_T at 150 / 200 / 224 / 256 V/cm for every gas and water level |
 | `figures/` | `v_vs_E`, `DT_vs_E`, `peak_vs_water`, `v_vs_water`, `tradeoff` |
+| `voltage_plots.py` | §12: v, D_T and the water spread against the drift voltage (400–1200 V), every gas with ≥ 3 % quencher |
+| `compare_gases.py` | §12: the hydrocarbon-quenched gases overlaid, at 0.25–1 % water |
+| `hv_history/` | §11: the drift HV history of every chamber (`HV_HISTORY.md`, `scan_drift_hv.py`, CSVs) |
+| `out/vdrift_table.csv` | v (gap range) and D_T at 500–1200 V for every gas and water fraction |
+
+## 10. Which premixes can be ordered (added 2026-11-26)
+
+The CERN store lists argon premixes with a code (SCEM), a price and a lead time. We took them from Dylan's scrape of
+the store catalogue (`~/PycharmProjects/Misc/cern_catalogue_scraper/cern_gases.csv`, 29 Sep 2026, CHF).
+
+| premix | SCEM | per bottle | CHF | lead time | ISO 10156 |
+|---|---|---|---|---|---|
+| Ar/iC₄H₁₀ 98/2 | 61.02.05.020.3 | 5.45 m³ | 288 | 30 wd | flammable, just (56.8 > 53.9) |
+| Ar/iC₄H₁₀ 97.7/2.3 | 61.03.05.009.2 | 5.0 m³ | 287 | 30 wd | flammable |
+| Ar/iC₄H₁₀ 95/5, 90/10 | 61.02.05.027.6, 61.01.05.013.8 | 2.15, 1.05 m³ | 263, 169 | 30 wd | flammable |
+| Ar/CH₄ 95/5 (P5) | 61.02.05.018.7 | 7.5 m³ | 197 | 30 wd | at the limit (52.5 against 52.3) |
+| Ar/CH₄ 90/10 (P10) | 61.01.05.007.6 | 7.5 m³ | 169 | 30 wd | flammable |
+| **Ar/CH₄/CO₂ 93/5/2** | 61.00.05.001.2 | 10 m³ | 582 | 25 wd | **non-flammable** (52.5 ≤ 54.2) |
+| **Ar/CO₂/iC₄H₁₀ 93/5/2** (NSW) | 61.03.05.309.8 | 5.5 m³ | 547 | 35 wd | **non-flammable** |
+| Ar/CO₂/iC₄H₁₀ 86/10/4 | 61.03.05.003.8 | 2.35 m³ | 346 | 30 wd | flammable |
+| Ar/CF₄/iC₄H₁₀ 95/3/2, 88/10/2 | 61.02.05.029.4, 61.01.05.035.2 | 2.5, 7.2 m³ | 302, 263 | 16, 11 wd | non-flammable (CF₄) |
+| Ar/CO₂ 97.5/2.5 (10 L), 93/7, 90/10, 80/20, 70/30 | several | | 45–300 | 2–30 wd | non-flammable |
+
+What this shows:
+
+- **The non-flammable gases with a hydrocarbon that are in stock are Ar/CO₂/iC₄H₁₀ 93/5/2 and Ar/CH₄/CO₂ 93/5/2.**
+  Every other mixture of §6 (96.5/2/1.5, 95.5/3/1.5, 94/4/2, Ar/CH₄/CO₂ 94/4/2, Ar/iC₄H₁₀ 98.2/1.8, Ar/CH₄ 96/4) would
+  be a custom order.
+- Outside CERN, the public catalogues list only P10 and P5 as standard detector gases (Air Liquide, Linde, Air
+  Products). SIAD publishes no list, but its laboratory makes custom mixtures. A custom mixture is therefore a quote
+  request to SIAD, Sapio or Air Liquide **(ask)**.
+- We added the store premixes that were not yet simulated (98/2, P5, P10, Ar/CH₄/CO₂ 93/5/2, 86/10/4) to
+  `mixtures.py`, together with two ethane mixtures (Ar/CO₂/C₂H₆ 93/5/2 and 92/4/4). The ethane T_ci of 7.6 % is
+  recalled, not read from the standard **(check ISO 10156 Table 2)**.
+
+## 11. The drift voltage our chambers can hold (added 2026-11-26)
+
+`hv_history/HV_HISTORY.md` reads every CAEN monitor log on EOS (14,923 chamber sub-runs). The present chambers have
+held **1200 V**: A on the bench on 26 June (4.2 h, Ar/iC₄H₁₀ 95/5) and A and C at n_TOF on 3 July (1.9 h, Ar/CO₂
+70/30, with an ohmic 0.36 µA). D held 1200 V but leaked 8–25 µA. At 1000 V, A ran about 20 h and B 13 h with almost
+no discharges. Nobody tried more than 1200 V on these chambers.
+
+At n_TOF, with 800 V on the drift, the drift current spiked above 2 µA only in Ar/iC₄H₁₀ 95/5: 0.39 per hour on A and
+2.2 per hour on D. There were none in 88/10/2 CF₄, 80/20 or 90/10, and 0.11 per hour on D in 90/10. The spikes came back
+when the gas returned to 95/5 on 16–17 July. **Therefore, in the n_TOF beam, the least quenched gas we ran was the one
+that made the drift discharge.** This supports keeping at least about 5 % quencher, or testing the drift to 1200 V on
+the bench in every candidate gas (task M5).
+
+For these reasons the plots of §12 run from 400 to 1200 V. Green marks the design limit (≤ 700 V), orange 700–800 V,
+and purple 800–1200 V, which assumes that A's July problem and B's drift can be repaired.
+
+## 13. What the n_TOF temperature dependence tells us (added 2026-11-26)
+
+At n_TOF the drift velocity followed both the humidity and the hall temperature (nTof_x17 `rerun/ntof/vt/README.md`).
+The outdoor water vapour alone correlates with chamber C's v at r = −0.84 (−1.9 % per hPa). A hall thermometer adds
+−0.8 %/K on A, −2.4 %/K on C and −2.2 %/K on D, with a response time of about 2 hours. The gas mixer is not the cause:
+its log shows 9.999 % isobutane and a constant flow.
+
+**The direct effect of temperature is small and has the opposite sign.** A warmer gas is less dense, so E/N rises. In
+Ar/iC₄H₁₀ 90/10 at about 230 V/cm this makes v faster by about +0.4 %/K (§3: S × 0.34 %/K, S ≈ 1.2). The measured
+slope is about six times larger and negative. For the gases near their velocity peak the direct effect is only about
+0.02–0.1 %/K.
+
+**Temperature acts through the water.** Two facts point to this.
+
+1. The temperature slopes scale along the gas chain like the water swings (A 1, C 3.0, D 2.9). A gas-density effect
+   would be the same in every chamber. Water that enters at each chamber and adds up down the line gives this pattern.
+2. The size is reasonable. At n_TOF 0.1 % of water changes v by about 9 %, so −2.4 %/K on C is about +0.025 % of water
+   per kelvin, which is about +5 % per kelvin of C's water inflow. A thermally activated process with an activation
+   energy near 35 kJ/mol gives about 5 %/K at room temperature. This is typical of water diffusing through polymers and
+   leaving surfaces (from memory, not checked).
+
+Condensation inside the chamber is unlikely. With 0.5 % of water the gas has a dew point near −2 °C, and the chambers
+were at 20–25 °C. The likely mechanisms are permeation through the 60 µm Mylar window or the tubing, which rises with
+temperature at a fixed outside vapour pressure, and water released by the chamber materials (FR4, epoxy, photoresist,
+the resistive layer) as they warm. The data cannot tell these apart. We also had no hygrometer in the hall, so part of
+the temperature term may be the hall's own humidity cycle.
+
+What this means for LNL: choosing a gas at its velocity peak removes the direct temperature effect, but not the
+effect through the water. Keeping the water low (metal lines, parallel feeds, an aluminised or double window) also
+makes it swing less. A hygrometer at the inlet and outlet, and a thermometer and hygrometer in the hall, would separate
+the mechanisms. The bench test M5 should log them through a day–night cycle.

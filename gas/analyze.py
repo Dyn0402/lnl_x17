@@ -35,9 +35,9 @@ L_CM = 3.0
 # slowest acceptable drift: B's 31.3 mm in 32 samples x 60 ns = 1.92 us (n_TOF production read 20 samples)
 V_MIN = 16.5
 FAMILY = {'ArIso': 'Ar/iC4H10', 'ArCO2Iso': 'Ar/CO2/iC4H10', 'ArCO2': 'Ar/CO2', 'ArCH4': 'Ar/CH4 (+CO2)',
-          'ArCH4CO2': 'Ar/CH4 (+CO2)', 'ArCF4Iso': 'Ar/CF4/iC4H10 (reference)'}
+          'ArCH4CO2': 'Ar/CH4 (+CO2)', 'ArCO2Eth': 'Ar/CO2/C2H6', 'ArCF4Iso': 'Ar/CF4/iC4H10 (reference)'}
 FAM_COLOR = {'Ar/iC4H10': '#257de0', 'Ar/CO2/iC4H10': '#f47230', 'Ar/CO2': '#00b894',
-             'Ar/CH4 (+CO2)': '#f2a600', 'Ar/CF4/iC4H10 (reference)': '#ee7fac'}
+             'Ar/CH4 (+CO2)': '#f2a600', 'Ar/CO2/C2H6': '#6c4bd1', 'Ar/CF4/iC4H10 (reference)': '#ee7fac'}
 WATER_COLOR = {0.0: '#0e3d7e', 0.25: '#1b64be', 0.5: '#338ced', 1.0: '#84b9f3', 1.5: '#b6d5f8'}
 
 
@@ -59,12 +59,12 @@ def load():
     return T
 
 
-def curves(d, smooth=True):
+def curves(d, smooth=True, e_max=450.0):
     """E, v, dT, dL, eta from the table nodes, resampled on a fine log grid with a smoothing fit in ln E."""
     n = d['nodes']
     E = np.array([p['E_Vcm'] for p in n])
     lnE = np.log(E)
-    Ef = np.logspace(np.log10(60), np.log10(450), 200)
+    Ef = np.logspace(np.log10(60), np.log10(e_max), 200)
     out = dict(E=Ef)
     for k, key in (('v', 'v_um_per_ns'), ('dT', 'dT_sqrtcm'), ('dL', 'dL_sqrtcm')):
         y = np.log(np.array([p[key] for p in n]))

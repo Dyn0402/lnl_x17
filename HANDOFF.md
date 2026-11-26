@@ -1,5 +1,30 @@
 # Handoff
 
+## Gas follow-up: premixes, drift HV history, plots against drift voltage — updated 2026-11-27 (dylan-MS-7C84)
+
+**Resume:** `gas/GAS_STUDY.md` §10–13 written; waiting for 30 Magboltz tables (ethane, extra water) to finish §12.
+
+**Done**
+- §10 premixes: the CERN store's non-flammable hydrocarbon premixes are Ar/CO₂/iC₄H₁₀ 93/5/2 and Ar/CH₄/CO₂ 93/5/2;
+  every other candidate is a custom order (SIAD / Sapio / Air Liquide quote **(ask)**).
+- §11 + `gas/hv_history/HV_HISTORY.md`: every CAEN monitor log on EOS. A held 1200 V (bench 26 Jun 4.2 h; n_TOF 3 Jul
+  1.9 h), C 1200 V at n_TOF, D leaky at 1200 V, A and B clean at 1000 V. At n_TOF the drift current spiked only in
+  Ar/iC₄H₁₀ 95/5 (A 0.39/h, D 2.2/h; none in 88/10/2, 80/20, 90/10): less quencher → drift discharges.
+- §13: the n_TOF −2.4 %/K is the water (chain pattern A:C:D = 1:3:3, ~5 %/K of the inflow), not gas density (+0.4 %/K).
+- Plots against drift voltage, 400–1200 V, only non-flammable, no-F, ≥ 3 % quencher gases (Dylan 26 Nov):
+  `gas/voltage_plots.py` (v, D_T, water spread 0.1–0.5 and 0.5–1 %), `gas/compare_gases.py` (hydrocarbon gases overlaid).
+- New Magboltz tables: store premixes (98/2, P5, P10, Ar/CH₄/CO₂ 93/5/2, 86/10/4).
+
+**Next**
+1. When the ethane + 0.1/0.375/0.75 % tables finish (`$WORK_DATA/lnl_x17/gas_logs/run_eth.txt`): rerun
+   `python3 gas/voltage_plots.py && python3 gas/compare_gases.py`, write GAS_STUDY §12 with the numbers, commit.
+2. Ethane T_ci 7.6 % is recalled; check ISO 10156 Table 2.
+3. Bench test M5: drift scan to 1000–1200 V in each candidate gas; log the water and the temperature through a day.
+
+**Gotchas**
+- A wait loop `while pgrep -f run_local.sh` matches itself and never ends; use a PID instead.
+- Per-table Magboltz logs go to `$WORK_DATA/lnl_x17/gas_logs` (`LOGDIR=` for `run_local.sh`), not the repo.
+
 ## Pierfrancesco's answers: the CN runs 24/24, all numbers in beam days — updated 2026-11-26 (dylan-MS-7C84)
 
 **Resume:** everything now counts beam days (24 h at 80 % efficiency, 19.2 h of beam); next: answer PF's γ-energy and GLIMOS questions.
