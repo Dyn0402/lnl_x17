@@ -281,15 +281,14 @@ def fig_acceptance():
     fig, axs = plt.subplots(1, 2, figsize=(W, 1.6))
     fig.subplots_adjust(left=0.065, right=0.985, bottom=0.23, top=0.86, wspace=0.22)
     ax = axs[0]
-    ax.axvspan(125, 160, color=GRID, alpha=0.6, lw=0, zorder=0)
-    ax.text(142.5, 30.5, "X17 region", ha="center", va="top", fontsize=6.5, color=MUTED)
-    # the emitted distribution (flat in theta), drawn at an arbitrary scale as in panel (b) (Dylan, 26 Nov)
-    ax.stairs(np.full(len(A), 25.0), ea, color="#b9b8b2", fill=True, alpha=0.45, lw=0, zorder=0.5,
-              label="emitted (flat, arb. scale)")
+    ax.axvspan(125, 160, color="#d63a2f", alpha=0.08, lw=0, zorder=0)
+    for x_ in (125, 160):
+        ax.axvline(x_, color="#d63a2f", lw=0.5, alpha=0.45, ls=(0, (3, 2)), zorder=0.6)
+    ax.text(142.5, 26.8, "X17\nregion", ha="center", va="top", fontsize=6.5, color="#a8322a")
     ax.stairs([100 * float(r["acc_same"]) for r in A], ea, color=ORANGE, lw=1.4, label="both leptons in one arm")
     ax.stairs([100 * float(r["acc_opposite"]) for r in A], ea, color=BLUE, lw=1.4, label="one lepton in each arm")
     ax.set_xlim(0, 180)
-    ax.set_ylim(0, 31)
+    ax.set_ylim(0, 28)
     ax.set_xticks([0, 30, 60, 90, 120, 150, 180])
     ax.set_xlabel(r"opening angle $\theta$ (deg)")
     ax.set_ylabel("pair acceptance (%)")
@@ -301,6 +300,10 @@ def fig_acceptance():
     tot = np.array([float(r["emitted_per_8h"]) for r in B]) * k
     sm = np.array([float(r["same_per_8h"]) for r in B]) * k
     op = np.array([float(r["opposite_per_8h"]) for r in B]) * k
+    bx.axvspan(125, 160, color="#d63a2f", alpha=0.08, lw=0, zorder=0)
+    bx.axvline(125, color="#d63a2f", lw=0.5, alpha=0.45, ls=(0, (3, 2)), zorder=0.6)
+    bx.axvline(160, color="#d63a2f", lw=0.5, alpha=0.45, ls=(0, (3, 2)), zorder=0.6)
+    bx.text(142.5, 1.4e2, "X17\nregion", ha="center", va="bottom", fontsize=6.5, color="#a8322a")
     bx.stairs(tot, eb, color="#b9b8b2", fill=True, alpha=0.6, lw=0, label="emitted ({0}$\\times10^{{{1}}}$)".format(*f"{tot.sum():.1e}".split("e+0")))
     bx.stairs(sm, eb, color=ORANGE, lw=1.4, label=f"in one arm ({round(sm.sum(), -4):,.0f})")
     bx.stairs(op, eb, color=BLUE, lw=1.4, label=f"one in each arm ({round(op.sum(), -3):,.0f})")
