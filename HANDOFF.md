@@ -2,8 +2,10 @@
 
 ## Plan and proposal reworked for L19 and the Li film; loose threads — updated 2026-11-26 (dylan-MS-7C84)
 
-**Resume:** the proposal (repo + Overleaf), plan, page and survey carry the L19 / Li-film numbers. Next: decide R13 (Al
-holder EPC at L19 statistics, ~5,000 core-h) before the text freeze on 8 Dec.
+**Resume:** proposal/plan/page reworked for L19 + Li film; next: decide R13 (Al-holder EPC run) before the 8 Dec freeze.
+
+**Goal (Dylan, 26 Nov):** rework the plan and the affected parts of the proposal with what runs L19 (external
+conversions ×100) and the Li-thickness study taught us, and list the other loose threads to study more carefully.
 
 **Done:**
 - Full L19 reach grid (`sim2arm/run_l19_full.sh`, `run_l19_all.sh`; tags `_pass4li11_l19`, `_pass4_l19`): horizontal,
@@ -30,10 +32,39 @@ holder EPC at L19 statistics, ~5,000 core-h) before the text freeze on 8 Dec.
 3. **T4, day-1 film check** — thresholds and the LaBr₃ efficiency at 478 keV and 17–18 MeV.
 4. Small: R9 cosmic normalisation (now shown to cost ≤ 18 % in days); the LiOH conversion rate is unknown (T2's test).
 
+**In progress / where it stopped:** nothing half-done. No jobs running (local or condor). Dylan has not yet read the
+tightened proposal text: the phrases shortened to keep 4 pages are listed in the commit diff of cb517b3
+(`git show cb517b3 -- proposal/latex/body_content.tex`), e.g. the Fig. 3 caption, "We estimate about a day …",
+"(45 selected pairs)", "with a 25 times lower cosmic-ray trigger rate".
+
+**Next steps:**
+1. Dylan: proof-read body §II (2)–(3), §III (rates paragraph, Expected sensitivity) and Fig. 2/3 in Overleaf.
+2. R13: Dylan to say yes/no. If yes: L19-style run of `ogAl300cu12r8m4` with the `condor-campaign` skill (test
+   cluster, `sim2arm/lxplus/submit_l19.sh` as the template, ~5,000 core-h), then `TA_CFG=ogAl300cu12r8m4 TA_EPC_RUN=…`
+   fits (see `run_r10.sh`) and `two_arm_estimates.py` (`AL_TAGS`). If no: soften the Al sentences (Target ¶ "factor of
+   9", Expected sensitivity "about 20 days", "1.4 to 1.9 ×", abstract "1.4–1.9 ×").
+3. Send PF the questions already in plan.py (film IBA mapping, film change time, LaBr₃, 4 µA → 2.0 ×, nights → 2.66 ×).
+4. R14 and T4 before the run (not for the proposal).
+
 **Gotchas:**
+- Body page budget: exactly 4 pages in draft mode (red todos shown) with no slack; any added sentence needs a cut.
+  Figures are now 1.85 in (Fig. 2) and 1.9 in (Fig. 3) tall in `make_figures.py`; Fig. 3(a) ylim goes to 30 to clear
+  the legend.
+- `make_figures.py` Fig. 2(a) still takes the vertical cosmic rows from `two_arm_spectra_pass4li11.csv` (the L19 spectra
+  have no vertical pair); cosmics do not depend on the γ run.
 - `two_arm_nd` with `-j 14` on the 'all' pair died silently once while the gas session ran 16 Magboltz jobs; `-j 6` worked.
 - Overleaf clone for this session was `$CLAUDE_JOB_DIR/tmp/overleaf` (temporary): re-clone next time, diff first.
 - `gas/` is another session's (untracked); not touched.
+
+**Key files & commands:**
+- `proposal/latex/body_content.tex`, `abstract_content.tex`; `make -C proposal/latex && make -C proposal/latex zip`
+- `proposal/figsrc/make_figures.py` (Fig. 2 from `sim2arm/out/two_arm_spectra_pass4li11_l19.csv`, Fig. 3 from
+  `planning/out/two_arm_reach.csv`)
+- `planning/two_arm_estimates.py` (`SIM_TAG = "_pass4{film}_l19"`), `planning/plan.py` (R13, R14, T4)
+- `sim2arm/EPC_L19.md` §8, `slot1_feasibility/LI_THICKNESS.md` §8, `slot1_feasibility/CN_BEAM.md` §4
+- Refit: `sim2arm/run_l19_full.sh 12 && sim2arm/run_l19_all.sh 6` (~15 min), then `python3 planning/two_arm_estimates.py`,
+  `python3 proposal/figsrc/make_figures.py`, `python3 site/build_page.py`, site `scripts/build.py && scripts/deploy-eos.sh`
+- Overleaf: `git clone https://git.overleaf.com/6afdf0e8d237ac71ebb14b1f`; last push e7c1990 (= repo cb517b3 text)
 
 ## External conversions at ×100 (L19) and the Li film's ±50 % — updated 2026-11-26 (dylan-MS-7C84)
 

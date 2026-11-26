@@ -14,6 +14,11 @@ and the page; it does not duplicate those studies.
 
 ## Read this first (2026-11-18, reach updated 2026-11-19)
 
+- **26 Nov: external conversions at ×100 (run L19) and the Li film known to ±50 %.** The 46 h at 1.10 MeV give
+  **4.3 / 5.5 / 7.2 × R(ATOMKI)** (liquid working / as at n_TOF / none; 3.8 / 5.0 / 7.0 × before), ~200 days to 3σ;
+  6.9 × to 3.6 × for a film 0.5 to 1.5 × as thick. The proposal, plan and page carry these numbers. Open: R13 (the Al
+  holder's conversions rest on 2 MC events), R14 (Geant4 model of the opposite-arm conversions), T4 (day-1 film check).
+  `sim2arm/EPC_L19.md`, `slot1_feasibility/LI_THICKNESS.md`, HANDOFF.md.
 - **25 Nov: June or July 2027, not H2 2027.** The January call allocates beam from 20 Feb to 30 Jul 2027 (the call page prints
   2026). Pierfrancesco confirmed it on 25 Nov. Plan: both arms on cosmics by 14 May, install at LNL from 14 Jun, beam ~5–14 Jul
   (`slot1_feasibility/PLAN.md` §5, `correspondence/2026-11-25_mastinu_call_period.md`).
@@ -43,12 +48,14 @@ and the page; it does not duplicate those studies.
 |---|---|
 | `slot1_feasibility/PLAN.md` | the feasibility study: set-up, beam days, reach, timeline, budget, risks |
 | `slot1_feasibility/LIQUID_CELLS.md` | the liquid cells: 2 × 2 cm baseline (20 Nov), thicker or wider ones from ~60 L |
+| `slot1_feasibility/LI_THICKNESS.md` | the Li film known to ±50 % (25 Nov): yields, LiOH, reach for 17 film scenarios (§8 with L19), the in-beam thickness from the 1.10 MeV / 441 keV yield ratio; `sim2arm/li_thickness.py` |
 | `slot2_physics/PLAN.md` | the full experiment, outline and hand-over |
 | `proposal/STRUCTURE.md` | how an LNL PAC proposal is built (rules, submission, review) |
 | `proposal/latex/` | the draft in the LNL template: `main.tex` (both parts), text in `abstract_content.tex` + `body_content.tex` (`make`, `make zip`); on [Overleaf](https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f) |
 | `proposal/lnl_template/` | the official LNL templates from Indico 50487 |
 | `planning/plan.py` | **single source** of tasks, phases, milestones, hardware, budget, questions, risks → `planning/out/plan.json` |
 | `sim2arm/` | the Geant4 two-arm study: `TWO_ARM_STUDY.md`, the fit cut to one arm pair, L15/L16 condor jobs, the slide note |
+| `sim2arm/EPC_L19.md` | external conversions at ×100 statistics (run L19, 26 Nov): 21/day at 1.10 MeV, 74/day at 441 keV, signal-like; 195 d to 3σ, 4.3 × in 46 h; §8 the follow-up checks (cosmics ×2.5, μ 3°, 4 µA). Fits: `run_l19.sh`, `run_l19_full.sh`, `run_l19_all.sh` (the reach grid the page reads), `run_l19_checks.sh` |
 | `sim2arm/PREDICTIONS.md` | Geant4 predictions of every observable of the run and the 3D event view (page tab "Predictions"): `predictions.py`, `events3d.py`, run L17 |
 | `planning/two_arm_estimates.py` | the two-arm reach rows from `sim2arm/out/summary_reach_pass2*.csv` → `planning/out/two_arm_reach.csv`, `beam_days.csv` |
 | `proposal/figsrc/make_figures.py` | the proposal figures at print size (`proposal/latex/figures/fig_event`, `fig_predictions`, `fig_reach`, the n_TOF photo); `make_ntof_fans.py` redraws the n_TOF run-145 tracks |

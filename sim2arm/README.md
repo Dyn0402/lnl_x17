@@ -7,6 +7,10 @@ what to measure. Write-up: [`TWO_ARM_STUDY.md`](TWO_ARM_STUDY.md).
 |---|---|
 | `two_arm_nd.py` | the FEASIBILITY_SIM §19 reference fit (x17_facility_search `lnl/target/shapes/shapes_nd.py`) cut to one arm pair; tasks `reach`, `spectra` |
 | `summarize.py` | tables (`out/summary_*.csv`) and figures (`out/figures/`) |
+| `EPC_L19.md`, `epc_l19.py`, `combine_l19.py` | run L19: the external conversions at ×100 L18 (26 Nov); `TA_EPC_RUN=L19` adds its table to the fit |
+| `run_l19.sh`, `run_l19_full.sh`, `run_l19_all.sh` | the L19 fits: reference rows + spectra; the full reach grid (tags `_pass4li11_l19`, `_pass4_l19`, read by `planning/two_arm_estimates.py`) |
+| `run_l19_checks.sh` | cosmic rate × 2.5 (`TA_COS_SCALE`, tag `_pass4li11_l19_cos2p5`) and 4 µA (`_cn4li11_l19`) |
+| `li_thickness.py` | the Li film scan (slot1_feasibility/LI_THICKNESS.md) |
 | `lxplus/` | copies of lxplus `/afs/cern.ch/work/d/dneff/git/x17_lnl/analysis/l15/`: the condor jobs of runs L15 (`submit_l15.sh` + `run_l15.sh`, cosmics, disk generator) and L16 (`submit_ta.sh`, arms rotated about the beam), the merge scripts, the Geant4 patch notes; `TWOARM_BIN` names the binary (MX17_Full_Geant branch `lnl_twoarm`) |
 | `out/` | CSVs and figures |
 
