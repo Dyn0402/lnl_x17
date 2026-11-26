@@ -25,7 +25,7 @@
 - A wait loop `while pgrep -f run_local.sh` matches itself and never ends; use a PID instead.
 - Per-table Magboltz logs go to `$WORK_DATA/lnl_x17/gas_logs` (`LOGDIR=` for `run_local.sh`), not the repo.
 
-## Pierfrancesco's answers: the CN runs 24/24, all numbers in beam days — updated 2026-11-26 (dylan-MS-7C84)
+## Pierfrancesco's answers: the CN runs 24/24, all numbers in beam days — updated 2026-11-27 (dylan-MS-7C84)
 
 **Resume:** everything now counts beam days (24 h at 80 % efficiency, 19.2 h of beam); next: answer PF's γ-energy and GLIMOS questions.
 
@@ -45,6 +45,8 @@
   risks and tasks re-numbered; page template in beam days (reach table, slider default 5.9, chart, banner).
 - CN_BEAM.md top update with the old/new table; PLAN.md banner; README read-first; LIQUID_CELLS 70 L.
 - x17_facility_search FACILITY.md + dashboard (EXTRA + LOG), site rebuilt and deployed (dylan-cern-site 9f33507).
+- Fig. 2 (Dylan, later): the X17 region 125–160° as a light red band with dashed edges in BOTH panels (caption says so).
+  An 'emitted, flat' grey area in (a) was tried and removed at Dylan's request. Site redeployed (82a06bc).
 
 **Not touched:** dated study records (`sim2arm/TWO_ARM_STUDY.md`, `EPC_L19.md`, `LI_THICKNESS.md`) keep their days of 24 h.
 Not pushed to Overleaf. The uncommitted gas files (`gas/voltage_plots.py`, `gas/figures/*_vs_Vdrift*`, `mixtures.py`) are
