@@ -152,6 +152,8 @@ TASKS = [
          t="Optional (high-budget upgrade): 4 CERN-design M1 cards for B. Slot 1 runs B with its existing Italian M1s"),
     dict(id="M4", ws="mm", due="2027-05-14", who="Dylan", status="todo",
          t="Cosmic bench, 2 MM + DREAM: efficiency, segment angle (μ ≲ 3°), noise with B's existing M1s"),
+    dict(id="M5", ws="mm", due="2027-04-30", who="Dylan", status="todo",
+         t="Gas choice (gas/GAS_STUDY.md §8, 26 Nov): bench test of chamber A on cosmics in a non-flammable low-quencher premix (Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4 at ~175 V/cm, ~550 V on B) against Ar/CO₂/iC₄H₁₀ 96.5/2/1.5 at ~220 V/cm: gain + spark scan, drift scan 100–250 V/cm, angle resolution and efficiency against the June 95/5 runs, with the water measured. Decide the gas from it; ~2 bottles, ~1 week (ask CEA)"),
     # --- scint / trigger
     dict(id="S1", ws="scint", due="2027-01-31", who="Pierfrancesco", status="todo",
          t="Find PMTs for the 4 small plastics + 2 for the liquid cells (PF, 20 Nov: PMTs are short)"),
@@ -190,7 +192,7 @@ TASKS = [
     dict(id="L1", ws="site", due="2027-03-31", who="Dylan", status="todo",
          t="LNL access: registration ≥ 15 d ahead, RP training certificate, dosimeters, responsibility declaration"),
     dict(id="L2", ws="site", due="2027-04-30", who="Pierfrancesco", status="todo",
-         t="Safety file: Ar/iC₄H₁₀ 95/5 bottles in the hall, gas panel and exhaust (flammable)"),
+         t="Safety file: non-flammable argon premix bottles in the hall (ISO 10156; the 95/5 plan was flammable), gas panel, exhaust, O₂-deficiency check (gas/GAS_STUDY.md §2)"),
     dict(id="L3", ws="site", due="2027-02-28", who="Pierfrancesco", status="todo",
          t="Floor plan of the line: ~1.5 × 1.5 m around the target, beam height, cable path to the control room, network"),
     # --- run
@@ -334,12 +336,13 @@ HARDWARE = [
          who="Pierfrancesco", state="to ask", need="2027-04-01", place=["hv"], tasks=[],
          note="Micromegas ≤ 600 V; PMTs negative. Driven by caen_hv_py.", detail="SiPM bias from the walls' own supplies. CERN pool fallback (epool, 25 Nov 2026): CAEN N1470, 4 channels up to 8 kV, CEP-0422, 43.26 CHF/month, 15 in stock; N470 37.16 (21 in stock)."),
     # --- Gas & slow control
-    dict(id="gas", part="Gas: Ar/iC₄H₁₀ 95/5 premix bottles, regulators, panel", qty="1 panel", grp="Gas & slow control", status="buy", org="purchase", src="to order (via LNL)",
+    dict(id="gas", part="Gas: non-flammable argon premix bottles (baseline Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4), regulators, panel", qty="1 panel", grp="Gas & slow control", status="buy", org="purchase", src="to order (via LNL)",
          who="Dylan / LNL", state="to order", need="2027-04-01", b="Gas: premix bottles, regulators, panel", place=["gas"], tasks=["L2"],
-         note="No mixer comes from n_TOF. Flammable-gas rules at LNL: ask.", detail="~1 L/h with exhaust. Bottles in the hall need the safety file (L2)."),
+         note="No mixer comes from n_TOF. Gas study 26 Nov (gas/GAS_STUDY.md): with the drift ≤ 700 V (A sparked at 800 V at n_TOF) and 0.1–0.5 % water, the low-quencher non-flammable premixes keep v within 7–8 % at ~175 V/cm; NSW 93/5/2 spreads 39 % (its peak is above 450 V/cm) and 95/5 is flammable. Final choice after the bench test (M5). The 1.8 % isobutane premix must be certified below the 1.9 % ISO 10156 limit: ask the supplier.",
+         detail="Non-flammable (ISO 10156): no flammable-gas file, ADR class 2.2 shipping. Bottles in the hall still need the safety file (L2). Flow high enough to flush water; the water level matters more than the mixture (GAS_STUDY.md §6)."),
     dict(id="gaslines", part="Low-permeation gas lines", qty="2 arms", grp="Gas & slow control", status="buy", org="purchase", src="to order",
          who="Dylan", state="to order", need="2027-04-01", b="Low-permeation gas lines", place=["gaslines"], tasks=[],
-         note="Low-budget upgrade (Synflex type); slot 1 can run on standard lines.", detail=""),
+         note="Critical since 26 Nov (Synflex type or metal): at 0.5–1 % water no candidate gas is stable within the 700–800 V drift limit (gas/GAS_STUDY.md §6). n_TOF and the SPS ran with ~1.5 % water.", detail=""),
     dict(id="slow", part="Gas and environment sensors (slow control Tier 1)", qty="1 set", grp="Gas & slow control", status="buy", org="purchase", src="to order",
          who="Dylan", state="to decide", need="2027-04-30", b="Gas and environment sensors (slow control Tier 1)", place=["sensors"], tasks=["I1"],
          note="Low-budget upgrade: T/p/RH, SHT85 cells on the gas line, logger.", detail="x17_facility_search slow_control/SENSOR_OPTIONS.md §6."),
@@ -388,7 +391,7 @@ BUDGET = [
     dict(item="New cans for the 2 liquid cells", c=1500, lo=600, hi=3000, basis="guess (ask PF: CFRP or Al, LNL workshop)", tier="need"),
     dict(item="Shipping CEA/CERN → LNL and back", c=2000, lo=1000, hi=4000, basis="guess", tier="need"),
     dict(item="New aluminised-mylar drift windows, A and B", c=1250, lo=500, hi=2500, basis="items.py windows €2.5k for 4, × 2/4", tier="low"),
-    dict(item="Low-permeation gas lines", c=400, lo=250, hi=700, basis="items.py gaslines", tier="low"),
+    dict(item="Low-permeation gas lines", c=400, lo=250, hi=700, basis="items.py gaslines; critical since 26 Nov (gas/GAS_STUDY.md §8)", tier="need"),
     dict(item="Gas and environment sensors (slow control Tier 1)", c=2500, lo=2000, hi=3200, basis="items.py slowctl", tier="low"),
     dict(item="50 Ω resistive splitters for the 16 wall channels (instead of Ts)", c=800, lo=200, hi=1700, basis="items.py splitters: 20 × €10–84; n_TOF's Ts do the job for the test", tier="low"),
     dict(item="Switched PDU (remote power switch)", c=290, lo=290, hi=400, basis="items.py pdu", tier="low"),
@@ -423,7 +426,7 @@ QUESTIONS = [
     dict(who="LNL Accelerator Division", q="H₂⁺ from the CN source at 0.883 MV (two 0.441 MeV protons), up to 0.5 µA? The proposal asks it as a question and says we expect some D⁺ (same mass); the D⁺ level is worth asking but may have no answer. The 441 keV calibration depends on H₂⁺; the proposal does not."),
     dict(who="Pierfrancesco", q="Answered 25 Nov: the call allocates 20 Feb – 30 Jul 2027 (the call page prints 2026, a typo), so we aim for June or July 2027 (proposal changed). Still to ask: does LNL prefer June or July for the CN, and what happens if we are not ready by July (the next period, autumn 2027)?"),
     dict(who="Pierfrancesco", q="Body length: the template says 4 pages, the LNL submission page says 5. The draft keeps to 4: is that what people do?"),
-    dict(who="LNL Accelerator Division", q="Flammable premix (Ar/iC₄H₁₀ 95/5) in the hall: rules, storage, exhaust."),
+    dict(who="LNL Accelerator Division", q="Gas: we plan a non-flammable argon premix (Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4; ISO 10156 non-flammable). Does LNL agree with the classification, what does it need for bottles in the hall (storage, exhaust, O₂ monitor), and does LNL stock argon premixes?"),
     dict(who="CEA (Stephan, DREAM)", q="Repair B's drift window by March 2027 (and 2 new windows, if cheap)? Lend 4 FEUs + TCM for Mar–Jul 2027?"),
     dict(who="CERN electronics pool", q="Can rented modules go to LNL for ~2 months (mid-June to mid-August 2027): 2 × N1081B, the N93B, 3–4 linear FIFOs, a NIM bin and the Delta SM3545-D LV (and digitizers, if LNL has none)? Catalogue fees ~285 CHF/month for the set (epool, 25 Nov 2026)."),
     dict(who="n_TOF", q="Lend the LEMO cables (~60 × 16 ns, 60 × 5 ns, 20 × 2 ns, 20 × 1 ns) and ~30 LEMO Ts for Mar–Jul 2027, returned after the run?"),
@@ -434,6 +437,8 @@ QUESTIONS = [
 ]
 
 RISKS = [
+    dict(r="Drift cathodes do not hold the field the gas needs (A sparked at 800 V at n_TOF), or water in the gas above 0.5 %", l="med", i="med",
+         m="Gas chosen for ≤ 700 V on B (≤ 224 V/cm): the low-quencher premixes peak at ~175 V/cm with 0.1–0.5 % water (gas/GAS_STUDY.md). Low-permeation lines, a dryer and a water sensor are critical; above 0.5 % water every candidate's v moves by > 30 %, so v is then calibrated in situ from the cathode edge of the drift-time distribution."),
     dict(r="Micromegas B not repaired in time", l="low", i="high",
          m="Likely just an electrical connection on the drift (Dylan, 19 Nov). A is ready now; C re-bulk as the spare; one-arm-plus-scintillator fallback still gives the 441 keV and background programme."),
     dict(r="DREAM not available in Mar–Jul 2027 (CEA's own use)", l="med", i="high",

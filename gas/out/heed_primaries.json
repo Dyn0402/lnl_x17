@@ -1,0 +1,92 @@
+{
+ "ArIso_95_5": {
+  "clusters_per_cm": 32.7295,
+  "electrons_per_cm": 94.22883333333334,
+  "role": "reference: current LNL plan, flammable"
+ },
+ "ArIso_90_10": {
+  "clusters_per_cm": 36.5795,
+  "electrons_per_cm": 98.74891666666667,
+  "role": "reference: n_TOF production gas, flammable"
+ },
+ "ArIso_98.2_1.8": {
+  "clusters_per_cm": 30.380499999999998,
+  "electrons_per_cm": 89.9255,
+  "role": "the most isobutane Ar/iC4H10 can hold and stay non-flammable"
+ },
+ "ArCO2_97_3": {
+  "clusters_per_cm": 29.42533333333333,
+  "electrons_per_cm": 85.45308333333332,
+  "role": "binary, no hydrocarbon"
+ },
+ "ArCO2_95_5": {
+  "clusters_per_cm": 29.56058333333333,
+  "electrons_per_cm": 84.42941666666667,
+  "role": "binary, no hydrocarbon"
+ },
+ "ArCO2_93_7": {
+  "clusters_per_cm": 29.736,
+  "electrons_per_cm": 89.3685,
+  "role": "NSW backup gas"
+ },
+ "ArCO2_90_10": {
+  "clusters_per_cm": 30.00425,
+  "electrons_per_cm": 87.57966666666665,
+  "role": "binary, no hydrocarbon"
+ },
+ "ArCO2Iso_95.5_3_1.5": {
+  "clusters_per_cm": 30.536083333333334,
+  "electrons_per_cm": 87.61825,
+  "role": "ternary, low CO2"
+ },
+ "ArCO2Iso_94_4_2": {
+  "clusters_per_cm": 31.097416666666664,
+  "electrons_per_cm": 89.28075,
+  "role": "ternary, least CO2 at 2 % isobutane"
+ },
+ "ArCO2Iso_93_5_2": {
+  "clusters_per_cm": 31.15625,
+  "electrons_per_cm": 89.59541666666667,
+  "role": "ATLAS NSW gas (SPS CO2 epoch)"
+ },
+ "ArCO2Iso_90_8_2": {
+  "clusters_per_cm": 31.31658333333333,
+  "electrons_per_cm": 90.03133333333334,
+  "role": "ternary, more CO2"
+ },
+ "ArCO2Iso_88_10_2": {
+  "clusters_per_cm": 31.584999999999997,
+  "electrons_per_cm": 91.57133333333333,
+  "role": "ternary, most CO2"
+ },
+ "ArCH4_96_4": {
+  "clusters_per_cm": 29.216083333333334,
+  "electrons_per_cm": 83.97658333333334,
+  "role": "P10-like, below the methane limit (~5 %)"
+ },
+ "ArCH4CO2_91_5_4": {
+  "clusters_per_cm": 29.6765,
+  "electrons_per_cm": 84.33241666666667,
+  "role": "methane + CO2, non-flammable"
+ },
+ "ArCO2Iso_96.5_2_1.5": {
+  "clusters_per_cm": 30.54225,
+  "electrons_per_cm": 88.95100000000001,
+  "role": "ternary, low quencher (added 26 Nov)"
+ },
+ "ArCH4CO2_94_4_2": {
+  "clusters_per_cm": 29.516750000000002,
+  "electrons_per_cm": 86.93983333333334,
+  "role": "methane + a little CO2 (added 26 Nov)"
+ },
+ "ArCF4Iso_95_3_2": {
+  "clusters_per_cm": 31.44525,
+  "electrons_per_cm": 89.38841666666667,
+  "role": "reference: T2K TPC gas (CF4, high GWP)"
+ },
+ "ArCF4Iso_88_10_2": {
+  "clusters_per_cm": 33.533,
+  "electrons_per_cm": 96.42791666666666,
+  "role": "reference: SPS CF4 epoch (CF4, high GWP)"
+ }
+}

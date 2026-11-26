@@ -58,7 +58,7 @@ is <https://dylan-neff.web.cern.ch/facilities/lnl-feasibility.html>.
 | liquid cells × 2 | make (new cans) | 45 × 45 × 2 cm, one PMT each; the liquid exists, the cans are remade (PF, 20 Nov). Thicker/wider cells to study: `LIQUID_CELLS.md` |
 | digitizers ~24 ch | find | 16 wall + 4 PMT (+2 LS) + trigger word; one V1742 (32 ch) covers it |
 | trigger | borrow | n_TOF logic for two arms: 2 N1081B, a dual timer, 3–4 FIFOs, NIM bin, rented from the CERN pool (hopefully); LEMO cables + Ts from n_TOF (very likely) |
-| gas | buy | Ar/iC₄H₁₀ 95/5 premix and panel; flammable-gas rules at LNL (ask) |
+| gas | buy | non-flammable premix and panel: baseline Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4 at ~175 V/cm (drift ≤ 700 V), chosen after a bench test; low-permeation lines now critical (`gas/GAS_STUDY.md`, 26 Nov) |
 | target | decide | LNL's pressed Li on Cu, 10–12 µm; holder: the Cu hemisphere, already built (R 11 mm, 300 µm; the 'Cu hemisphere' rows of §4 since 20 Nov); a lighter Al end piece (Al ogive + Cu liner, or a flat 45° Al cap) would cut the days ×6–15: ask PF whether one can be made |
 
 **Geometry (Geant4, 19 Nov, `../sim2arm/TWO_ARM_STUDY.md`).** The two arms face each other across the beam (faces at

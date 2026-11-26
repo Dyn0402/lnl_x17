@@ -519,6 +519,14 @@
    "t": "Cosmic bench, 2 MM + DREAM: efficiency, segment angle (μ ≲ 3°), noise with B's existing M1s"
   },
   {
+   "id": "M5",
+   "ws": "mm",
+   "due": "2027-04-30",
+   "who": "Dylan",
+   "status": "todo",
+   "t": "Gas choice (gas/GAS_STUDY.md §8, 26 Nov): bench test of chamber A on cosmics in a non-flammable low-quencher premix (Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4 at ~175 V/cm, ~550 V on B) against Ar/CO₂/iC₄H₁₀ 96.5/2/1.5 at ~220 V/cm: gain + spark scan, drift scan 100–250 V/cm, angle resolution and efficiency against the June 95/5 runs, with the water measured. Decide the gas from it; ~2 bottles, ~1 week (ask CEA)"
+  },
+  {
    "id": "S1",
    "ws": "scint",
    "due": "2027-01-31",
@@ -663,7 +671,7 @@
    "due": "2027-04-30",
    "who": "Pierfrancesco",
    "status": "todo",
-   "t": "Safety file: Ar/iC₄H₁₀ 95/5 bottles in the hall, gas panel and exhaust (flammable)"
+   "t": "Safety file: non-flammable argon premix bottles in the hall (ISO 10156; the 95/5 plan was flammable), gas panel, exhaust, O₂-deficiency check (gas/GAS_STUDY.md §2)"
   },
   {
    "id": "L3",
@@ -1691,7 +1699,7 @@
   },
   {
    "id": "gas",
-   "part": "Gas: Ar/iC₄H₁₀ 95/5 premix bottles, regulators, panel",
+   "part": "Gas: non-flammable argon premix bottles (baseline Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4), regulators, panel",
    "qty": "1 panel",
    "grp": "Gas & slow control",
    "status": "buy",
@@ -1707,8 +1715,8 @@
    "tasks": [
     "L2"
    ],
-   "note": "No mixer comes from n_TOF. Flammable-gas rules at LNL: ask.",
-   "detail": "~1 L/h with exhaust. Bottles in the hall need the safety file (L2).",
+   "note": "No mixer comes from n_TOF. Gas study 26 Nov (gas/GAS_STUDY.md): with the drift ≤ 700 V (A sparked at 800 V at n_TOF) and 0.1–0.5 % water, the low-quencher non-flammable premixes keep v within 7–8 % at ~175 V/cm; NSW 93/5/2 spreads 39 % (its peak is above 450 V/cm) and 95/5 is flammable. Final choice after the bench test (M5). The 1.8 % isobutane premix must be certified below the 1.9 % ISO 10156 limit: ask the supplier.",
+   "detail": "Non-flammable (ISO 10156): no flammable-gas file, ADR class 2.2 shipping. Bottles in the hall still need the safety file (L2). Flow high enough to flush water; the water level matters more than the mixture (GAS_STUDY.md §6).",
    "cash": 3000,
    "fallback": 0,
    "tier": "need",
@@ -1733,15 +1741,15 @@
     "gaslines"
    ],
    "tasks": [],
-   "note": "Low-budget upgrade (Synflex type); slot 1 can run on standard lines.",
+   "note": "Critical since 26 Nov (Synflex type or metal): at 0.5–1 % water no candidate gas is stable within the 700–800 V drift limit (gas/GAS_STUDY.md §6). n_TOF and the SPS ran with ~1.5 % water.",
    "detail": "",
    "cash": 400,
    "fallback": 0,
-   "tier": "low",
+   "tier": "need",
    "inv": [],
    "lo": 250,
    "hi": 700,
-   "basis": "items.py gaslines"
+   "basis": "items.py gaslines; critical since 26 Nov (gas/GAS_STUDY.md §8)"
   },
   {
    "id": "slow",
@@ -1987,8 +1995,8 @@
    "c": 400,
    "lo": 250,
    "hi": 700,
-   "basis": "items.py gaslines",
-   "tier": "low"
+   "basis": "items.py gaslines; critical since 26 Nov (gas/GAS_STUDY.md §8)",
+   "tier": "need"
   },
   {
    "item": "Gas and environment sensors (slow control Tier 1)",
@@ -2175,7 +2183,7 @@
   },
   {
    "who": "LNL Accelerator Division",
-   "q": "Flammable premix (Ar/iC₄H₁₀ 95/5) in the hall: rules, storage, exhaust."
+   "q": "Gas: we plan a non-flammable argon premix (Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4; ISO 10156 non-flammable). Does LNL agree with the classification, what does it need for bottles in the hall (storage, exhaust, O₂ monitor), and does LNL stock argon premixes?"
   },
   {
    "who": "CEA (Stephan, DREAM)",
@@ -2207,6 +2215,12 @@
   }
  ],
  "risks": [
+  {
+   "r": "Drift cathodes do not hold the field the gas needs (A sparked at 800 V at n_TOF), or water in the gas above 0.5 %",
+   "l": "med",
+   "i": "med",
+   "m": "Gas chosen for ≤ 700 V on B (≤ 224 V/cm): the low-quencher premixes peak at ~175 V/cm with 0.1–0.5 % water (gas/GAS_STUDY.md). Low-permeation lines, a dryer and a water sensor are critical; above 0.5 % water every candidate's v moves by > 30 %, so v is then calibrated in situ from the cathode edge of the drift-time distribution."
+  },
   {
    "r": "Micromegas B not repaired in time",
    "l": "low",

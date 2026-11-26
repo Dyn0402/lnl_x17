@@ -1,5 +1,27 @@
 # Handoff
 
+## Micromegas gas study for LNL — updated 2026-11-26 (dylan-MS-7C84)
+
+**Resume:** `gas/GAS_STUDY.md` is done; the choice waits on the bench test M5 and on how dry the gas can be kept.
+
+**Done**
+- Drift limit from the n_TOF run configs: A (det3) sparked at 800 V (run_51, 17 Jul), ran 550–600 V, then 700 V for all four
+  in production (runs 77–162). Design ≤ 700 V on B (31.3 mm gap) = 224 V/cm; 800 V = 256 V/cm stretch.
+- ISO 10156:2017 (Tci iC₄H₁₀ 3.4, CH₄ 8.7; K Ar 0.55, CO₂ 1.5, CF₄ 2): Ar/iso ≤ 1.9 % (98/2 flammable), NSW 93/5/2 just non-flammable, P10 flammable.
+- Magboltz, 141 tables on the desktop (18 mixtures × water 0–1.5 %, 200 ppm O₂ point, 303 K check), HEED primaries.
+  Result: water moves the v peak up; only Ar/iC₄H₁₀ 98.2/1.8 and Ar/CH₄ 96/4 peak inside the window at 0.1–0.5 % water
+  (spread 7–8 % at ~175 V/cm), at the cost of D_T ~520–570 µm/√cm. 93/5/2 spreads 39 %. No gas is stable at 0.5–1 % water.
+- plan.py: gas item, L2, LNL question, gas lines → critical, new task M5 (bench test), new risk (drift limit / water).
+
+**Next**
+1. M5: ask CEA whether the bench can run our premix; gain/spark + drift scans in 98.2/1.8 (or CH₄ 96/4) and 96.5/2/1.5.
+2. Simulate the effect of D_T 250 vs 550 µm/√cm on the angle resolution (MX17 response sim).
+3. Supplier quote for a certified 98.2/1.8 premix (below the 1.9 % limit) and Ar/CH₄ 96/4.
+
+**Gotchas**
+- `gas/magboltz/run_local.sh` needs nTof_x17 `garfield_sim/setup_garfield.sh`; it skips tables already in `gas/out/tables`.
+- The operating field in `analyze.py` minimises the spread over a water band, with v ≥ 16.5 µm/ns (32 DREAM samples).
+
 ## Plan and proposal reworked for L19 and the Li film; loose threads — updated 2026-11-26 (dylan-MS-7C84)
 
 **Resume:** proposal/plan/page reworked for L19 + Li film; next: decide R13 (Al-holder EPC run) before the 8 Dec freeze.

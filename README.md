@@ -31,6 +31,10 @@ and the page; it does not duplicate those studies.
   assuming 8 h of beam per working day: day 1 scan + 1.10 MeV, day 2 H₂⁺ at 0.883 MV for 441 keV (else 1.10 MeV), days 3–7
   at 1.10 MeV, day 8 adjacent. That is 46 h at 1.10 MeV: 4.3 × R(ATOMKI) with the L19 external conversions of 26 Nov (2.66 × needs 120 h; 3.8 / 2.35 × before L19). Implications and the 2/4 µA fits: `slot1_feasibility/CN_BEAM.md`.
 
+- **Gas (26 Nov, `gas/GAS_STUDY.md`):** the drift is limited to ≤ 700 V (A sparked at 800 V at n_TOF), so ≤ 224 V/cm on B.
+  Water moves the drift-velocity peak up; only low-quencher non-flammable premixes (Ar/iC₄H₁₀ 98.2/1.8, Ar/CH₄ 96/4) peak in
+  that window with 0.1–0.5 % water (v within 7–8 % at ~175 V/cm, D_T ~520–570 µm/√cm). NSW 93/5/2 spreads 39 % (peak above
+  450 V/cm); 95/5 is flammable. Keep the water below 0.5 % (lines now critical); bench test M5 decides.
 - Pierfrancesco (18 Nov): ask for an **X17 feasibility study**, ~8 days, measure in H2 2027 (changed 25 Nov to June–July, see above); he does the informal contact;
   co-proponents Massimi, Mengoni, Gervino, Gustavino, Cosentino (`correspondence/2026-11-18_mastinu_pac.md`).
 - Set-up: Micromegas A (ready) + B (drift fix by Stephan), 2 SiPM walls, 4 small plastics (PMTs to find), ~24 digitizer channels,
@@ -59,6 +63,7 @@ and the page; it does not duplicate those studies.
 | `proposal/latex/` | the draft in the LNL template: `main.tex` (both parts), text in `abstract_content.tex` + `body_content.tex` (`make`, `make zip`); on [Overleaf](https://www.overleaf.com/project/6afdf0e8d237ac71ebb14b1f) |
 | `proposal/lnl_template/` | the official LNL templates from Indico 50487 |
 | `planning/plan.py` | **single source** of tasks, phases, milestones, hardware, budget, questions, risks → `planning/out/plan.json` |
+| `gas/GAS_STUDY.md` | the Micromegas gas: Magboltz study of 18 mixtures × water at ≤ 700–800 V drift, ISO 10156 flammability, recommendation (26 Nov) |
 | `sim2arm/` | the Geant4 two-arm study: `TWO_ARM_STUDY.md`, the fit cut to one arm pair, L15/L16 condor jobs, the slide note |
 | `sim2arm/EPC_L19.md` | external conversions at ×100 statistics (run L19, 26 Nov): 21/day at 1.10 MeV, 74/day at 441 keV, signal-like; 195 d to 3σ, 4.3 × in 46 h; §8 the follow-up checks (cosmics ×2.5, μ 3°, 4 µA). Fits: `run_l19.sh`, `run_l19_full.sh`, `run_l19_all.sh` (the reach grid the page reads), `run_l19_checks.sh` |
 | `sim2arm/PREDICTIONS.md` | Geant4 predictions of every observable of the run and the 3D event view (page tab "Predictions"): `predictions.py`, `events3d.py`, run L17 |
