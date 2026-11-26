@@ -14,6 +14,11 @@ and the page; it does not duplicate those studies.
 
 ## Read this first (2026-11-18, reach updated 2026-11-19)
 
+- **26 Nov (later): proposal reframed as a test and calibration run** (Dylan): not competitive with MEG II, so the aim is
+  that the measured opening-angle distributions agree with Geant4 before a four-arm physics run proposed for late 2027.
+  New Fig. 2: geometric pair acceptance against the opening angle, one lepton per arm and both in one arm, and the
+  441 keV M1 internal pairs reaching the TPCs (`proposal/figsrc/acceptance.py`, geometry only; the same-arm Geant4
+  selection and a single-arm trigger are still to do). The reach figure is out of the proposal. Not yet on Overleaf.
 - **26 Nov: external conversions at ×100 (run L19) and the Li film known to ±50 %.** The 46 h at 1.10 MeV give
   **4.3 / 5.5 / 7.2 × R(ATOMKI)** (liquid working / as at n_TOF / none; 3.8 / 5.0 / 7.0 × before), ~200 days to 3σ;
   6.9 × to 3.6 × for a film 0.5 to 1.5 × as thick. The proposal, plan and page carry these numbers. Open: R13 (the Al

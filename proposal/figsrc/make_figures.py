@@ -199,8 +199,8 @@ def fig_predictions():
         C = [x for x in csv.DictReader(f) if x["sample"] == "L15 disk"]
     e5 = np.arange(0, 181, 5.0)
     e10 = np.arange(0, 181, 10.0)
-    fig, axs = plt.subplots(1, 3, figsize=(W, 1.85))
-    fig.subplots_adjust(left=0.062, right=0.985, bottom=0.195, top=0.88, wspace=0.27)
+    fig, axs = plt.subplots(1, 3, figsize=(W, 1.75))
+    fig.subplots_adjust(left=0.062, right=0.985, bottom=0.205, top=0.875, wspace=0.27)
 
     # (a) cosmic nights: two-arm coincidences against the reconstructed opening angle
     ax = axs[0]
@@ -262,6 +262,53 @@ def fig_predictions():
     stack(axs[2], 1100.0, REQ_DAYS, rf"(c) $E_p$ = 1.10 MeV, {H110:.0f} hours of beam", r_lim)
     fig.savefig(FIG / "fig_predictions.pdf")
     fig.savefig(FIG / "fig_predictions.png", dpi=200)
+    plt.close(fig)
+
+
+# ---------------------------------------------------------------------------------------------------------- Fig. 2 (new)
+def fig_acceptance():
+    """Geometric pair acceptance against the opening angle (proposal/figsrc/acceptance.py, 26 Nov): (a) isotropic pairs
+    flat in theta, one lepton per arm or both in one arm; (b) the M1 internal pairs of the 441 keV day reaching the TPCs."""
+    with open(SIM / "acceptance_geom.csv") as f:
+        A = list(csv.DictReader(f))
+    with open(SIM / "acceptance_ipc441.csv") as f:
+        B = list(csv.DictReader(f))
+    ea = np.r_[[float(r["th_lo"]) for r in A], float(A[-1]["th_hi"])]
+    eb = np.r_[[float(r["th_lo"]) for r in B], float(B[-1]["th_hi"])]
+    fig, axs = plt.subplots(1, 2, figsize=(W, 1.6))
+    fig.subplots_adjust(left=0.065, right=0.985, bottom=0.23, top=0.86, wspace=0.22)
+    ax = axs[0]
+    ax.axvspan(125, 160, color=GRID, alpha=0.6, lw=0, zorder=0)
+    ax.text(142.5, 26.8, "X17\nregion", ha="center", va="top", fontsize=6.5, color=MUTED)
+    ax.stairs([100 * float(r["acc_same"]) for r in A], ea, color=ORANGE, lw=1.4, label="both leptons in one arm")
+    ax.stairs([100 * float(r["acc_opposite"]) for r in A], ea, color=BLUE, lw=1.4, label="one lepton in each arm")
+    ax.set_xlim(0, 180)
+    ax.set_ylim(0, 28)
+    ax.set_xticks([0, 30, 60, 90, 120, 150, 180])
+    ax.set_xlabel(r"opening angle $\theta$ (deg)")
+    ax.set_ylabel("pair acceptance (%)")
+    ax.legend(frameon=False, loc="upper center", bbox_to_anchor=(0.43, 1.0), handlelength=1.3, borderaxespad=0.1, labelspacing=0.25)
+    tag(ax, "(a) isotropic pairs, flat in opening angle")
+    strip(ax)
+    bx = axs[1]
+    tot = np.array([float(r["emitted_per_8h"]) for r in B])
+    sm = np.array([float(r["same_per_8h"]) for r in B])
+    op = np.array([float(r["opposite_per_8h"]) for r in B])
+    bx.stairs(tot, eb, color="#b9b8b2", fill=True, alpha=0.6, lw=0, label=f"emitted ({tot.sum():.1e})".replace("e+06", r"$\times10^6$"))
+    bx.stairs(sm, eb, color=ORANGE, lw=1.4, label=f"in one arm ({round(sm.sum(), -4):,.0f})")
+    bx.stairs(op, eb, color=BLUE, lw=1.4, label=f"one in each arm ({round(op.sum(), -3):,.0f})")
+    bx.set_yscale("log")
+    bx.set_ylim(50, 3e6)
+    bx.set_xlim(0, 180)
+    bx.set_xticks([0, 30, 60, 90, 120, 150, 180])
+    bx.set_xlabel(r"opening angle $\theta$ (deg)")
+    bx.set_ylabel(r"pairs per 5$^\circ$")
+    bx.legend(frameon=False, loc="upper right", handlelength=1.3, borderaxespad=0.1, labelspacing=0.25)
+    tag(bx, r"(b) M1 internal pairs, $E_p$ = 441 keV, 8 hours, 1 µA")
+    strip(bx)
+    print(f"Fig 2: IPC 441 emitted {tot.sum():.3g}, one arm {sm.sum():.0f}, each arm {op.sum():.0f} per 8 h (geometry)")
+    fig.savefig(FIG / "fig_acceptance.pdf")
+    fig.savefig(FIG / "fig_acceptance.png", dpi=200)
     plt.close(fig)
 
 
@@ -377,9 +424,11 @@ def photos():
 if __name__ == "__main__":
     import matplotlib.ticker  # noqa: F401
     FIG.mkdir(parents=True, exist_ok=True)
-    what = sys.argv[1:] or ["event", "pred", "reach", "photos"]
+    what = sys.argv[1:] or ["event", "acc", "pred", "reach", "photos"]
     if "event" in what:
         fig_event()
+    if "acc" in what:
+        fig_acceptance()
     if "pred" in what:
         fig_predictions()
     if "reach" in what:
