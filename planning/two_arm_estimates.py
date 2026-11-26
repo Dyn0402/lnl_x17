@@ -22,7 +22,8 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 OUT.mkdir(exist_ok=True)
 SIM = HERE.parent / "sim2arm" / "out"
-SIM_TAG = "_pass4"          # dome300, the built hemisphere
+SIM_TAG = "_pass4{film}_l19"  # dome300, the built hemisphere; since 26 Nov with the L19 external conversions (x100 L18,
+                              # sim2arm/EPC_L19.md; sim2arm/run_l19_full.sh + run_l19_all.sh). Was "_pass4" (L18).
 OG_TAG = "_pass3"           # ogCu200, the Cu ogive: the two-arm / four-arm ratio for the Al ogive rows
 #: the Al ogive + Cu liner's own two-arm tables (task R10, 2026-11-25, sim2arm/R10_AL_OGIVE.md), newest first.  When one
 #: exists its rows replace the scaling below; rows it does not hold (the vertical pair) are dropped, not scaled.
@@ -64,8 +65,10 @@ BEAM_PLAN = [
                     "time of flight (σ_t), each arm's MIP gain and the rejection of every cosmic veto, in the worst geometry", "off"),
     ("1", "1.10 MeV", "Roll to the HORIZONTAL pair. Beam on target at low current; current scan 0.05 → 1 µA (~2 h): trigger "
                       "rates, DREAM live time, Micromegas occupancy, singles; γ-yield reference; then ~6 h in the 18.15 MeV region", "on"),
-    ("2", "0.441 MeV", "H₂⁺ at 0.883 MV (two 0.441 MeV protons), IF the CN can provide it: 17.64 MeV M1 IPC, ~46 selected pairs "
-                       "in 8 h (rate to ~18 %), opening-angle shape and energy scale. Otherwise this day is at 1.10 MeV", "on"),
+    ("2", "0.441 MeV", "H₂⁺ at 0.883 MV (two 0.441 MeV protons), IF the CN can provide it: 17.64 MeV M1 IPC, ~70 selected beam "
+                       "pairs in 8 h (44 M1, 25 external conversions, run L19; rate to ~14 %), opening-angle shape, energy scale "
+                       "and the holder's conversions at 17.64 MeV; the 1.10 MeV / 441 keV γ₀ yield ratio gives the film thickness. "
+                       "Otherwise this day is at 1.10 MeV", "on"),
     ("3–7", "1.10 MeV", "18.15 MeV region: IPC spectrum, X17 window (40 h; 46 h with day 1 = 1.9 days of beam); γ-yield check each day", "on"),
     ("8", "1.10 MeV", "Arms ADJACENT (90°): small-angle IPC and external conversions (~500 pairs in 8 h)", "on"),
     ("nights", "—", "Every night and the weekend without beam: cosmics with the full trigger in the physics geometry "
@@ -88,7 +91,8 @@ def r90(days_to_3sigma: float, days: float) -> float:
 
 
 def sim_rows(suffix="", tag=None):
-    f = SIM / f"summary_reach{tag or SIM_TAG}{suffix}.csv"
+    t = tag or SIM_TAG
+    f = SIM / (f"summary_reach{t.format(film=suffix)}.csv" if "{film}" in t else f"summary_reach{t}{suffix}.csv")
     if not f.exists():
         return None
     with open(f) as fh:

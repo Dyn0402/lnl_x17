@@ -14,7 +14,8 @@ Sources: the LNL beam sheet (`x17_facility_search/lnl/refs/LNL_Beams_AN2000_CN.t
 > statistics) the limits for the 46 h at 1.10 MeV are 4.3 / 5.5 / 7.2 × R(ATOMKI) (liquid working / as at n_TOF / none)
 > instead of 3.8 / 5.0 / 7.0 ×, and 2.66 × instead of 2.35 × for 5 days of beam. The 441 keV day has about 70 beam pairs
 > in 8 h, a third of them external conversions. The Li film thickness (±50 %) moves the 4.3 × between 6.9 × and 3.55 ×
-> (`LI_THICKNESS.md`). The tables below are the 25 Nov numbers.
+> (`LI_THICKNESS.md`). The limit table of §4 is updated to L19 (26 Nov); the other tables are the 25 Nov numbers. At 4 µA
+> the 46 h give 2.0 × with L19 (1.7 × before; `sim2arm/run_l19_checks.sh`, tag `_cn4li11_l19`).
 
 ## 0. Result in short
 
@@ -154,19 +155,22 @@ The run has 46 hours at 1.10 MeV with the arms opposite (54 without H₂⁺). In
 selected pairs from the beam (80 E1, 35 external conversions, 16 M1) and 130 cosmic pairs, so the pair rate in the
 signal region is measured to about 12 %. An X17 at R(ATOMKI) would add 5 pairs.
 
-Expected 90 % CL limit (two arms, horizontal pair, 11 µm Li; R90 ∝ 1/√hours):
+Expected 90 % CL limit (two arms, horizontal pair, 11 µm Li; R90 ∝ 1/√hours; Cu rows with the L19 external
+conversions, 26 Nov: 195 / 320 / 551 days to 3σ; in brackets the 25 Nov L18 values):
 
 | | 46 h (the request) | 54 h (no H₂⁺) | 120 h (24-hour days) |
 |---|---|---|---|
-| Cu hemisphere, liquid working | 3.8 × | 3.5 × | 2.35 × |
-| Cu hemisphere, liquid as at n_TOF | 5.0 × | 4.6 × | 3.1 × |
-| Cu hemisphere, no liquid | 7.0 × | 6.4 × | 4.3 × |
+| Cu hemisphere, liquid working | 4.3 × (3.8) | 4.0 × (3.5) | 2.66 × (2.35) |
+| Cu hemisphere, liquid as at n_TOF | 5.5 × (5.0) | 5.1 × (4.6) | 3.4 × (3.1) |
+| Cu hemisphere, no liquid | 7.2 × (7.0) | 6.7 × (6.4) | 4.5 × (4.3) |
 | Al ogive + Cu liner, liquid working | 1.4 × | 1.3 × | 0.88 × |
 | Al ogive + Cu liner, as at n_TOF | 1.9 × | 1.8 × | 1.19 × |
 
 We considered dropping the day with the arms at 90° to gain 8 hours at 1.10 MeV (3.8 → 3.5 ×). We kept it, because the
 external conversions in the window rest on 2 simulated events (±70 %), and that day measures them at six times the rate
-of the opposite pair. For a feasibility test that measurement is worth more than a 10 % better limit.
+of the opposite pair. For a feasibility test that measurement is worth more than a 10 % better limit. **26 Nov:** L19 confirms the choice. The
+external conversions now rest on 352 simulated events, but they are signal-like (140–160°) and the largest beam
+component in the fit region (308 of 825 pairs per day), so their rate in data matters more than before (EPC_L19 §6).
 
 ## 5. What changed in the proposal (25 Nov)
 

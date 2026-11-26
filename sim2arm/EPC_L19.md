@@ -128,7 +128,7 @@ estimators now differ by × 1.5, as for the other components.
    events. Because the shape here turned out signal-like, an L19-size run of that holder (~5,000 core-hours) would be
    the next check if the Al holder becomes the plan.
 
-## 7. Proposal text (suggested, not applied: the proposal is being edited in another session and on Overleaf)
+## 7. Proposal text (applied 26 Nov, with Fig. 2 redrawn from the L19 spectra)
 
 1. §III (3), "external conversions ... (about 35, with a large uncertainty from the simulation statistics)" →
    "external conversions, which are γ rays that convert in the target holder (about 40)".
@@ -138,3 +138,24 @@ estimators now differ by × 1.5, as for the other components.
    wherever they appear (abstract, Fig. 3, Table I, CN_BEAM.md §4).
 4. The 441 keV day: "46 + 23 pairs in 8 h" → "about 70 beam pairs (a third of them external conversions) and 23
    cosmic pairs".
+
+## 8. Follow-up checks (2026-11-26, afternoon)
+
+1. **The full reach grid now uses L19.** `run_l19_full.sh` and `run_l19_all.sh` refit every row that
+   `planning/two_arm_estimates.py` reads (horizontal, vertical and four arms; both cosmic-veto levels; three responses;
+   direct and transplant; 11 µm and 20 µm), with tags `_pass4li11_l19` and `_pass4_l19`. The reference row is
+   reproduced: 195 / 320 / 551 days to 3σ. The page tables and Fig. 3 of the proposal now read these rows. The Al-holder
+   rows still come from R10's own tables, whose external conversions rest on 2 simulated events.
+2. **The muon segment resolution matters little.** The reference level smears the cosmic muons by 15°, like the
+   electrons. With the muon segments at 3° (level "MM 15° point, μ 3°") the days to 3σ go from 195 to 184. The reason
+   is that the beam background dominates the fit region: 825 beam pairs per day against 72 cosmic pairs.
+3. **A cosmic-ray rate 2.5 times the simulation costs 18 % in days.** At n_TOF the beam-off wall coincidences were 2.5
+   times the toy MC (task R9). With the simulated cosmic rate multiplied by 2.5 (`TA_COS_SCALE=2.5`,
+   `run_l19_checks.sh`, tag `_pass4li11_l19_cos2p5`) the days to 3σ go from 195 to 230, and the 46 h limit from 4.3 to
+   4.7 × R(ATOMKI).
+4. **At 4 µA** the 46 h give 2.0 × R(ATOMKI) with L19 (43 days to 3σ; tag `_cn4li11_l19`). The 25 Nov value was 1.7 ×.
+5. **The largest beam component in the fit region is now the external conversions** (308 of 825 pairs per day; E1 213,
+   15 MeV lines 254, M1 50). They reach two opposite arms only after a large-angle scattering in the Cu wall, so their
+   rate in the opposite pair depends on how well Geant4 models that tail. Day 8 (arms at 90°) measures the conversion rate
+   in the dome, but not this tail. The 441 keV day measures the tail directly (25 of ~70 pairs), if H₂⁺ is available.
+   A second EM physics option on a subsample of L19 is the open check (task R14).

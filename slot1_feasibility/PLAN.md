@@ -1,7 +1,7 @@
 # Slot 1: the two-arm X17 feasibility study at LNL
 
 > **2026-11-25: the machine is now the CN** (AN2000 probably not available). The request is 8 working days (the allocation) at
-> 1 µA with ~8 h of beam each (day 2 with H₂⁺ for 441 keV, else 1.10 MeV): 46 h at 1.10 MeV, 3.8 × R(ATOMKI). §3 below is the old 8-day AN2000 plan; the new one is in
+> 1 µA with ~8 h of beam each (day 2 with H₂⁺ for 441 keV, else 1.10 MeV): 46 h at 1.10 MeV, 4.3 × R(ATOMKI) (26 Nov, external conversions from run L19; 3.8 × before; 6.9–3.6 × for a Li film 0.5–1.5 × as thick, `LI_THICKNESS.md`). §3 below is the old 8-day AN2000 plan; the new one is in
 > `CN_BEAM.md` and `planning/two_arm_estimates.py` BEAM_PLAN.
 
 Started 2026-11-18. The first beam request to the LNL PAC (call deadline **10 Dec 2026, 23:59 CET**, PAC 25–29 Jan 2027).

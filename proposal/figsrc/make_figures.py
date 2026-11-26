@@ -6,7 +6,7 @@
     fig_event.pdf        Fig. 1c: two real Geant4 events in the two-arm set-up (an X17 pair, a cosmic muon), seen along the
                          beam, with a zoom on the Cu hemisphere.        Input: sim2arm/out/events3d.json (run L17d)
     fig_predictions.pdf  Fig. 2: what the run should see (Geant4): cosmic nights, the 441 keV day, the 1.10 MeV days.
-                         Inputs: sim2arm/out/cosmic_theta.csv (L15), sim2arm/out/two_arm_spectra_pass4li11.csv (pass 4)
+                         Inputs: sim2arm/out/cosmic_theta.csv (L15), sim2arm/out/two_arm_spectra_pass4li11_l19.csv (pass 4 + L19)
     fig_reach.pdf        Fig. 3: expected limit against days, and the days to a 3 sigma test from this run to the full
                          experiment.                                    Input: planning/out/two_arm_reach.csv
     fig1a_ntof_photo.jpg, fig1b_ntof_fans.png   copied / cropped from figsrc/ (photo of MX17 at n_TOF EAR2, 2026-08-10;
@@ -176,8 +176,13 @@ def fig_event():
 
 # ---------------------------------------------------------------------------------------------------------- Fig. 2
 def spectra():
+    """The horizontal-pair spectra with the L19 external conversions (x100 L18, 26 Nov, sim2arm/EPC_L19.md); the vertical
+    cosmic rows of panel (a) are not in that table and come from pass 4 (cosmics do not depend on the γ-ray run)."""
+    with open(SIM / "two_arm_spectra_pass4li11_l19.csv") as f:
+        rows = list(csv.DictReader(f))
     with open(SIM / "two_arm_spectra_pass4li11.csv") as f:
-        return list(csv.DictReader(f))
+        rows += [x for x in csv.DictReader(f) if x["pair"] == "vert"]
+    return rows
 
 
 def hist(rows, ep, pair, ewin, comp, rebin=2):
@@ -194,7 +199,7 @@ def fig_predictions():
         C = [x for x in csv.DictReader(f) if x["sample"] == "L15 disk"]
     e5 = np.arange(0, 181, 5.0)
     e10 = np.arange(0, 181, 10.0)
-    fig, axs = plt.subplots(1, 3, figsize=(W, 1.98))
+    fig, axs = plt.subplots(1, 3, figsize=(W, 1.85))
     fig.subplots_adjust(left=0.062, right=0.985, bottom=0.195, top=0.88, wspace=0.27)
 
     # (a) cosmic nights: two-arm coincidences against the reconstructed opening angle
@@ -222,9 +227,7 @@ def fig_predictions():
     # (b), (c) selected pairs, horizontal arms: 441 keV for one day, 1.10 MeV for five days
     def stack(ax, ep, days, title, sig_scale):
         h = {c: hist(S, ep, "horiz", "win", c)[0] * days for c in ("M1", "E1", "g1", "epc", "cos", "sig")}
-        # external conversions: 2 simulated events pass the E_sum window. Draw their yield with the shape before that cut.
-        shp = hist(S, ep, "horiz", "none", "epc")[0]
-        h["epc"] = shp / shp.sum() * h["epc"].sum()
+        # external conversions: since L19 (352 simulated events in the window) drawn with their own shape after the cut
         ipc = h["M1"] + h["E1"] + h["g1"]
         parts = [("cosmic rays", h["cos"], "#b9b8b2"), ("external conversions", h["epc"], YELLOW),
                  ("IPC, E1 and 15 MeV lines", h["E1"] + h["g1"], AQUA), ("IPC, M1", h["M1"], BLUE)]
@@ -242,7 +245,7 @@ def fig_predictions():
                       label=rf"X17 at {sig_scale:.2f}$\,R_\mathrm{{ATOMKI}}$")
         ax.set_xlim(90, 180)
         ax.set_xticks([90, 120, 150, 180])
-        ax.set_ylim(0, (base + np.sqrt(base)).max() * (1.62 if sig_scale else 1.42))
+        ax.set_ylim(0, (base + np.sqrt(base)).max() * (1.8 if sig_scale else 1.42))
         ax.set_xlabel(r"opening angle $\theta$ (deg)")
         ax.set_ylabel(r"selected pairs per 10$^\circ$")
         handles, labels = ax.get_legend_handles_labels()
@@ -275,7 +278,7 @@ def fig_reach():
     al = {r["energy_stack"]: r for r in rows if r["target"].startswith("Al")}
     k_fix, k_ntof, k_off = "+ liquid working", "+ liquid as at n_TOF", "SiPM wall + small plastics (no liquid)"
     al_sim = al[k_fix]["source"].startswith("Geant4")       # since R10 (2026-11-25) the lighter holder's rows are simulated
-    fig, (ax, bx) = plt.subplots(1, 2, figsize=(W, 2.05), gridspec_kw=dict(width_ratios=[1.0, 1.0]))
+    fig, (ax, bx) = plt.subplots(1, 2, figsize=(W, 1.9), gridspec_kw=dict(width_ratios=[1.0, 1.0]))
     fig.subplots_adjust(left=0.062, right=0.985, bottom=0.19, top=0.885, wspace=0.62)
 
     # (a) expected 90 % CL limit against the days at 1.10 MeV, in units of R_ATOMKI
@@ -298,8 +301,8 @@ def fig_reach():
     ax.axvline(REQ_DAYS, color=GRID, lw=0.8, zorder=0)
     ax.text(REQ_DAYS + 0.12, 0.345, "requested", fontsize=7, color=MUTED, va="bottom")
     ax.set_yscale("log")
-    ax.set_ylim(0.33, 14)
-    ax.set_yticks([0.5, 1, 2, 5, 10])
+    ax.set_ylim(0.33, 30)       # 26 Nov: headroom for the legend above the L19 curves
+    ax.set_yticks([0.5, 1, 2, 5, 10, 20])
     ax.get_yaxis().set_major_formatter(matplotlib.ticker.FormatStrFormatter("%g"))
     ax.yaxis.set_minor_formatter(matplotlib.ticker.NullFormatter())
     ax.set_xlim(0.5, 10)

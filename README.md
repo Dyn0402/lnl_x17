@@ -19,7 +19,7 @@ and the page; it does not duplicate those studies.
   (`slot1_feasibility/PLAN.md` §5, `correspondence/2026-11-25_mastinu_call_period.md`).
 - **25 Nov: the CN, not AN2000** (AN2000 probably not available). The allocation is 8 days. The proposal asks 8 working days at 1 µA,
   assuming 8 h of beam per working day: day 1 scan + 1.10 MeV, day 2 H₂⁺ at 0.883 MV for 441 keV (else 1.10 MeV), days 3–7
-  at 1.10 MeV, day 8 adjacent. That is 46 h at 1.10 MeV: 3.8 × R(ATOMKI) (2.35 × needs 120 h). Implications and the 2/4 µA fits: `slot1_feasibility/CN_BEAM.md`.
+  at 1.10 MeV, day 8 adjacent. That is 46 h at 1.10 MeV: 4.3 × R(ATOMKI) with the L19 external conversions of 26 Nov (2.66 × needs 120 h; 3.8 / 2.35 × before L19). Implications and the 2/4 µA fits: `slot1_feasibility/CN_BEAM.md`.
 
 - Pierfrancesco (18 Nov): ask for an **X17 feasibility study**, ~8 days, measure in H2 2027 (changed 25 Nov to June–July, see above); he does the informal contact;
   co-proponents Massimi, Mengoni, Gervino, Gustavino, Cosentino (`correspondence/2026-11-18_mastinu_pac.md`).

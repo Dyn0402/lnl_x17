@@ -1,5 +1,40 @@
 # Handoff
 
+## Plan and proposal reworked for L19 and the Li film; loose threads — updated 2026-11-26 (dylan-MS-7C84)
+
+**Resume:** the proposal (repo + Overleaf), plan, page and survey carry the L19 / Li-film numbers. Next: decide R13 (Al
+holder EPC at L19 statistics, ~5,000 core-h) before the text freeze on 8 Dec.
+
+**Done:**
+- Full L19 reach grid (`sim2arm/run_l19_full.sh`, `run_l19_all.sh`; tags `_pass4li11_l19`, `_pass4_l19`): horizontal,
+  vertical, four arms, both veto levels, 11 and 20 µm. `planning/two_arm_estimates.py` reads it (`SIM_TAG`), so the page
+  tables and Fig. 3 are on L19. Reference row reproduced (195 / 320 / 551 d).
+- Checks (`sim2arm/run_l19_checks.sh`, `TA_COS_SCALE` knob added to `two_arm_nd.py`): cosmic rate × 2.5 → 230 d, 4.7 ×
+  in the 46 h (beam background dominates the fit region, 825 vs 72 pairs/day); muon segments 3° instead of 15° → 184 d
+  (closes the old Fig. 2 "which level" gotcha: it costs 6 %); 4 µA → 2.0 × (was 1.7 ×). `sim2arm/EPC_L19.md` §8.
+- Proposal: 4.3 / 5.5 / 7.2 ×; ~200 d to 3σ; 441 keV day ~70 beam pairs (a third external conversions), rate to 14 %;
+  1.10 MeV: ~140 beam pairs, EPC ~40 and signal-like, day 8 measures them; rates "for a film of 11 µm, known to ~50 %",
+  thickness from the 1.10 MeV / 441 keV yield ratio; 6.9 / 3.6 × for a film 0.5 / 1.5 × as thick; Al holder "about a
+  factor of 9"; Table I; abstract 4.3–7.2 ×. Fig. 2 from the L19 spectra (EPC drawn with its own shape), Fig. 3 legend
+  headroom; both figures ~0.15 in shorter and several phrases tightened to keep the body at 4 pages.
+- plan.py: R13, R14, T4 new; R9, R12, P5, the H₂⁺ / hours / hemisphere / liquid-cell risks and the 4 µA question updated.
+  CN_BEAM.md §4 table on L19, PLAN.md banner, README; x17_facility_search FACILITY.md + dashboard (LOG line). Site deployed.
+
+**Loose threads (Dylan asked):**
+1. **R13, Al holder EPC** — the proposal's "factor of 9", "about 20 days", "1.4–1.9 ×" rest on 2 simulated conversions;
+   L19 showed the Cu conversions are signal-like. An L19-size run of `ogAl300cu12r8m4` (~5,000 core-h, test cluster
+   first, condor-campaign skill) before 8 Dec, or soften the Al claims.
+2. **R14, Geant4 model of opposite-arm conversions** — now the largest beam component in the fit region (308/825 per
+   day); they need a large-angle scatter in the 300 µm Cu. Day 8 checks the dome rate, not that tail; the 441 keV day
+   checks it only with H₂⁺. Not needed for the proposal; before the run.
+3. **T4, day-1 film check** — thresholds and the LaBr₃ efficiency at 478 keV and 17–18 MeV.
+4. Small: R9 cosmic normalisation (now shown to cost ≤ 18 % in days); the LiOH conversion rate is unknown (T2's test).
+
+**Gotchas:**
+- `two_arm_nd` with `-j 14` on the 'all' pair died silently once while the gas session ran 16 Magboltz jobs; `-j 6` worked.
+- Overleaf clone for this session was `$CLAUDE_JOB_DIR/tmp/overleaf` (temporary): re-clone next time, diff first.
+- `gas/` is another session's (untracked); not touched.
+
 ## External conversions at ×100 (L19) and the Li film's ±50 % — updated 2026-11-26 (dylan-MS-7C84)
 
 **Resume:** both studies are done and written up. Next: Dylan decides the proposal wording (suggestions in

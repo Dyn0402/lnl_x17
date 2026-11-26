@@ -86,6 +86,9 @@ def combine_pair(zs):
 MU_LIVE_PLANE = 60.0 / (300.0 * 300.0)
 MU_LIVE_DISK = 60.0 / (4 * np.pi / 3 * 90.0 ** 2)
 COSMICS = os.environ.get('COSMICS', 'disk')      # 'disk' (L15, when merged) or 'L4'
+#: TA_COS_SCALE (2026-11-26): multiply the simulated cosmic-ray rate (R9: n_TOF beam-off wall coincidences are 2.5 x the
+#: toy MC). It divides the cosmic table's n_generated, so every cosmic rate and weight scales, the MC counts do not.
+COS_SCALE = float(os.environ.get('TA_COS_SCALE', '1.0'))
 
 
 def load_cos(run, sample, hw):
@@ -107,7 +110,7 @@ def load_cos(run, sample, hw):
                 zs.append(zc)
             z = _COMBINE0(zs)
             f = fl[0]
-            z['cnt_n_generated'] = np.array(int(round(int(z['cnt_n_generated']) * MU_LIVE_DISK / MU_LIVE_PLANE)))
+            z['cnt_n_generated'] = np.array(int(round(int(z['cnt_n_generated']) * MU_LIVE_DISK / MU_LIVE_PLANE / COS_SCALE)))
             z['ngen'] = int(z['cnt_n_generated'])
             z['name'] = f.stem + ('|noLS' if hw in G.NO_LS else '')
             z['Esum'] = z['E_sipm2'] + z['E_plast2'] if hw in G.NO_LS else z['E1'] + z['E2']
