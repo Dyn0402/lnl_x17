@@ -2,7 +2,7 @@
 # make      -> abstract.pdf, body.pdf (separately, for the Indico upload), main.pdf (both in one, as Overleaf shows it)
 # make zip  -> ../out/lnl_x17_pac_proposal.zip (for Overleaf)
 # Needs revtex4 (Overleaf has it; locally: texlive-publishers, or revtex4/ + revtex/ in ~/texmf/tex/latex).
-FIGS = figures/fig1a_ntof_photo.jpg figures/fig1b_ntof_fans.png figures/fig_event.pdf figures/fig_acceptance.pdf figures/fig_predictions.pdf
+FIGS = figures/fig1a_ntof_photo.jpg figures/fig1b_ntof_fans.png figures/fig_event.pdf figures/fig_acceptance.pdf figures/fig_predictions.pdf figures/fig_road.pdf
 TEX = pdflatex -interaction=nonstopmode -halt-on-error
 all: proposal.pdf main.pdf
 %.pdf: %.tex preamble.tex macros.tex abstract_content.tex body_content.tex $(FIGS)

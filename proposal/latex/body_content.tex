@@ -100,15 +100,12 @@ selection are not included.}
 \end{figure}
 
 \textbf{Acceptance.} Figure~\ref{fig:acc}(a) shows the geometric acceptance of the two arms. Pairs with one lepton in
-each arm have opening angles above $100^\circ$, and their acceptance rises to 21\,\% near $180^\circ$. It is about 12\,\%
-in the \Xs{} region (125--$160^\circ$). Pairs with both leptons in the same arm have opening angles below $90^\circ$, and
-their acceptance is largest at small angles. The two configurations together therefore cover the full range of opening
-angles. The same-arm pairs are useful because the IPC pairs are concentrated at small angles. Figure~\ref{fig:acc}(b)
-shows that in 8 hours at 441~keV about $7\times10^5$ internal pairs reach a single arm, against $1.6\times10^4$ in
-opposite arms. The same-arm pairs therefore measure the IPC shape where it is largest, and the opposite-arm pairs measure
-it where the \Xs{} signal is expected. To record the same-arm pairs we add a single-arm trigger with a high energy
-threshold, prescaled if needed. This also tests the reconstruction of two close tracks in one TPC
-(4~cm apart at $\theta = 10^\circ$). \todo{Geant4 selection of same-arm pairs, with
+each arm have opening angles above $100^\circ$, with an acceptance of about 12\,\% in the \Xs{} region (125--$160^\circ$).
+Pairs with both leptons in the same arm have opening angles below $90^\circ$. Together the two cover the full range of
+opening angles. The same-arm pairs are useful because the IPC pairs are concentrated at small angles.
+Figure~\ref{fig:acc}(b) shows that in 8 hours at 441~keV about $7\times10^5$ internal pairs reach a single arm, against
+$1.6\times10^4$ in opposite arms. To record them we add a single-arm trigger with a high energy threshold, prescaled if
+needed. This also tests the reconstruction of two close tracks in one TPC (4~cm apart at $\theta = 10^\circ$). \todo{Geant4 selection of same-arm pairs, with
 the holder and the trigger: in progress}
 
 \begin{figure}[t]
@@ -153,42 +150,33 @@ measures them directly (about 500 pairs). An \Xs{} signal at \Ratk{} would add 5
 \textbf{What counts as success.} For each measurement we compare the measured opening-angle distribution with the
 Geant4 prediction, in shape and in absolute rate. The rate is normalised to the $\gamma$-ray yield, which a $\gamma$ detector
 monitors. The test succeeds if data and simulation agree within the statistical uncertainties given
-above. The run also measures the cosmic-ray rejection, the trigger rates and live time at
-1~\si{\micro\ampere}, and the external conversions in the target holder, which are inputs of the physics run.
+above.
 
 \section{Rate Estimates and Beam Time Request}
 
-\begin{table}[b]
-\caption{Use of the beam time, in working days with 8 hours of beam \todo{confirm with the CN}, and Geant4 estimates at 1~\si{\micro\ampere}
-(0.441~MeV: 1~\si{\micro\ampere} of protons). The track fractions include the chamber
-efficiency of 92\%. The pair rates assume fully efficient chambers and a live time of 95\,\%.}
-\label{tab:days}
-\centering\footnotesize
-% Only l columns: revtex4 (2001) breaks on p{} and @{} with the array package of current TeX Live (Overleaf).
-\newcommand{\cellA}[1]{\parbox[t]{0.315\textwidth}{\raggedright #1\strut}}
-\newcommand{\cellB}[1]{\parbox[t]{0.45\textwidth}{\raggedright #1\strut}}
-\begin{tabular}{llll}
-\hline\hline
-day & $E_p$ (MeV) & measurement & Geant4 estimate \\
-\hline
-nights before & beam off & \cellA{arms vertical: cosmic rays, vetoes} & \cellB{1.9~Hz of PAIR triggers, 84\,\% with two tracks} \\
-1 & 1.10 & \cellA{current scan, then 18.15~MeV region} & \cellB{leg rate 67~Hz per arm, 71\,\% with a track} \\
-2 & 0.441 & \cellA{17.64~MeV calibration (H$_2^+$), one-arm and two-arm pairs} & \cellB{leg rate 218~Hz per arm; 70 selected two-arm pairs} \\
-3--7 & 1.10 & \cellA{18.15~MeV region} & \cellB{per day: 24 beam, 23 cosmic, 0.9 \Xs{} at \Ratk} \\
-8 & 1.10 & \cellA{arms at $90^\circ$: external conversions} & \cellB{about 500 pairs, mostly external conversions} \\
-\hline\hline
-\end{tabular}
-\end{table}
+% 2026-11-26: Table I (use of the days with Geant4 rates) removed for Fig. 4; its rates are in the text below and in
+% Section II. It is in git history (22e1f5f) if it should come back.
+\textbf{Use of the beam time.} We count working days with 8 hours of beam. \todo{confirm with the CN} On day 1 we scan
+the beam current from 0.05 to 1~\si{\micro\ampere}, measure the trigger rates, the live time and the Micromegas occupancy,
+and then take data at 1.10~MeV. Day 2 is the calibration at 441~keV, days 3--7 are at 1.10~MeV, and on day 8 the arms are
+at $90^\circ$ to each other for the external conversions. At 1~\si{\micro\ampere} the target emits $5.4\times10^{4}$
+ground-state $\gamma$ rays per second at 441~keV and $8.5\times10^{3}$ at 1.10~MeV (11~\si{\micro\metre} film). Geant4
+predicts a leg rate of 218~Hz per arm at 441~keV and 67~Hz at 1.10~MeV, and 1.9~Hz of PAIR triggers from cosmic rays
+with the arms vertical. \todo{$\gamma$ monitor: LaBr$_3$ or NaI from the LNL pool}
 
-Table~\ref{tab:days} shows how the 8 working days are used, with the rate that Geant4 predicts for each measurement. At
-1~\si{\micro\ampere} the target emits $5.4\times10^{4}$ ground-state $\gamma$ rays (17.6--18.2~MeV) per second at
-441~keV, and $8.5\times10^{3}$ at 1.10~MeV, for a film of 11~\si{\micro\metre}. On the first day we scan the beam current
-from 0.05 to 1~\si{\micro\ampere} and measure the trigger rates, the live time and the Micromegas occupancy. \todo{LaBr$_3$ or NaI from the LNL pool}
+\begin{figure}[t]
+\centering
+\includegraphics[width=0.92\textwidth]{figures/fig_road.pdf}
+\caption{The road to the physics run in the Geant4 simulation (liquid cells at their design response). (a) Expected
+90\,\% CL limit on $R$ as a function of the days of beam at 1.10~MeV, for this run and after each change. (b) Days of beam to a $3\sigma$ test of \Ratk{} for each step, with
+the inputs that this run tests. The open circle is a scaling estimate.}
+\label{fig:road}
+\end{figure}
 
-\textbf{From this run to the physics run.} In the simulation, the 46 hours at 1.10~MeV give an expected 90\,\% CL
-limit of 4.3 to $7.2\times\Ratk$, and a $3\sigma$ test of \Ratk{} would need about 200 days with this set-up. The physics run will therefore use four arms, a lighter target holder
-and larger scintillators. These changes reduce the beam time for a $3\sigma$ test to the order of
-days. These numbers come from the simulation that this run tests.
+\textbf{From this run to the physics run.} Figure~\ref{fig:road} shows what the simulation predicts, one change at a
+time. With this set-up a $3\sigma$ test of \Ratk{} would need about 200 days. A lighter aluminium holder brings it to
+about 21 days, four arms to about 12 days, and large plastic scintillators that absorb the full energy of the leptons to
+about one day. These numbers rest on the parts of the simulation that this run tests, which is why the test comes first.
 
 \textbf{Beam time request.} We request \textbf{8 working days of beam on the CN} (about 64 hours), in June or July 2027.
 Both arms will be tested together on cosmic rays by the end of May 2027.

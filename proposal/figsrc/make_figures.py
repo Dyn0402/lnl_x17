@@ -400,6 +400,99 @@ def fig_reach():
     plt.close(fig)
 
 
+# ---------------------------------------------------------------------------------------------------------- Fig. 4 (new)
+def road_steps():
+    """The road from this run to the physics run (11 um Li, liquid cells at their design response, MM pointing + TOF):
+    days of beam to a 3 sigma test of R_ATOMKI, each step adding one change. Same inputs as the old Fig. 3 (b)."""
+    rows = reach_rows()
+    k = "+ liquid working"
+    cu = next(r for r in rows if r["target"].startswith("Cu") and r["energy_stack"] == k)
+    al = next(r for r in rows if r["target"].startswith("Al") and r["energy_stack"] == k)
+    t = lambda r, n: (float(r[f"{n}_c"]), float(r[f"{n}_lo"]), float(r[f"{n}_hi"]))
+    d_al4 = t(al, "d4")
+    film = d_al4[0] / E.FOUR_ARM[("Al ogive + Cu liner (lighter)", "fix")][0]   # see fig_reach: a scaling estimate
+    al_sim = al["source"].startswith("Geant4")
+    return [("this run", "this run: two arms, Cu holder", t(cu, "d2"), BLUE, False),
+            ("+ lighter holder", "two arms, Al holder", t(al, "d2"), AQUA, not al_sim),
+            ("+ four arms", "four arms, Al holder", d_al4, GREEN, not al_sim),
+            ("+ large plastics", "four arms, Al holder, large plastics", tuple(v * film for v in (0.4, 0.35, 0.5)),
+             VIOLET, True)]
+
+
+def fig_road():
+    steps = road_steps()
+    U = E.R_ATOMKI
+    fig, (ax, bx) = plt.subplots(1, 2, figsize=(W, 1.8), gridspec_kw=dict(width_ratios=[1.0, 1.0]))
+    fig.subplots_adjust(left=0.075, right=0.985, bottom=0.2, top=0.88, wspace=0.62)
+
+    # (a) expected 90 % CL limit against the days of beam at 1.10 MeV, one line per step
+    days = np.geomspace(0.2, 100, 200)
+    for name, _, (c, lo, hi), col, est in steps:
+        ax.fill_between(days, [E.r90(hi, d) / U for d in days], [E.r90(lo, d) / U for d in days], color=col, alpha=0.15, lw=0)
+        ax.plot(days, [E.r90(c, d) / U for d in days], color=col, lw=1.5, ls=(0, (4, 2)) if est else "-",
+                label=name + (" (estimate)" if est else ""))
+    ax.axhline(1.0, color=INK, lw=0.8)
+    ax.text(98, 1.06, "ATOMKI", ha="right", va="bottom", fontsize=7)
+    ax.axhline(E.R_MEG2_90 / U, color=INK, lw=0.8, ls=":")
+    ax.text(98, E.R_MEG2_90 / U * 1.06, "MEG II, 90 % CL", ha="right", va="bottom", fontsize=7)
+    c0 = steps[0][2][0]
+    ax.plot([REQ_DAYS], [E.r90(c0, REQ_DAYS) / U], "o", ms=4.5, mfc="white", mec=BLUE, mew=1.2, zorder=5)
+    ax.annotate("this run, 46 h", (REQ_DAYS, E.r90(c0, REQ_DAYS) / U), xytext=(4.0, 11.0), fontsize=7, color=INK,
+                arrowprops=dict(arrowstyle="-", color=MUTED, lw=0.5, shrinkA=1, shrinkB=3))
+    ax.set_xscale("log")
+    ax.set_yscale("log")
+    ax.set_xlim(0.2, 100)
+    ax.set_ylim(0.03, 20)
+    ax.set_xticks([0.3, 1, 3, 10, 30, 100])
+    ax.set_yticks([0.03, 0.1, 0.3, 1, 3, 10])
+    for a_ in (ax.xaxis, ax.yaxis):
+        a_.set_major_formatter(matplotlib.ticker.FormatStrFormatter("%g"))
+        a_.set_minor_formatter(matplotlib.ticker.NullFormatter())
+    ax.set_xlabel(r"days of beam (24 h) at $E_p$ = 1.10 MeV, 1 µA")
+    ax.set_ylabel(r"90 % CL limit / $R_\mathrm{ATOMKI}$")
+    ax.legend(frameon=False, loc="lower left", handlelength=1.8, borderaxespad=0.1, labelspacing=0.2, fontsize=6.5)
+    tag(ax, "(a) expected limit, one change at a time")
+    strip(ax)
+
+    # (b) days to a 3 sigma test of R_ATOMKI for each step
+    for i, (name, lab, (c, lo, hi), col, est) in enumerate(steps):
+        y = len(steps) - 1 - i
+        bx.plot([lo, hi], [y, y], color=col, lw=2.2, solid_capstyle="butt", zorder=3)
+        bx.plot([c], [y], "o", ms=6, mfc="white" if est else col, mec=col, mew=1.4, zorder=4)
+        bx.text(hi * 1.35, y, f"{c:.0f} days" if c >= 2 else f"{c:.1f} days", ha="left", va="center", fontsize=7.5)
+        note = ("measures the inputs below", "tests: holder scattering, conversions", "tests: acceptance, cosmic rejection",
+                "not tested in this run")[i]
+        bx.text(-0.04, y - 0.3, note, transform=bx.get_yaxis_transform(), ha="right", va="center", fontsize=6.3,
+                color=MUTED, style="italic")
+        if i:
+            bx.annotate("", xy=(c * 1.0, y + 0.22), xytext=(steps[i - 1][2][0], y + 0.78),
+                        arrowprops=dict(arrowstyle="-|>", color=MUTED, lw=0.6, mutation_scale=6, shrinkA=4, shrinkB=4))
+        print(f"road {name}: {c:.2f} ({lo:.2f}-{hi:.2f}) d; beats MEG II after {E_days(c, E.R_MEG2_90):.1f} d, "
+              f"excludes ATOMKI after {E_days(c, U):.1f} d{' (estimate)' if est else ''}")
+    bx.set_yticks(range(len(steps))[::-1])
+    bx.set_yticklabels([s_[1] for s_ in steps], fontsize=7.5, linespacing=1.1, va='bottom')
+    bx.tick_params(axis="y", length=0, pad=4)
+    bx.set_xscale("log")
+    bx.set_xlim(0.2, 1000)
+    bx.set_ylim(-0.65, len(steps) - 0.45)
+    bx.set_xticks([1, 10, 100, 1000])
+    bx.get_xaxis().set_major_formatter(matplotlib.ticker.FormatStrFormatter("%g"))
+    bx.set_xlabel(r"days of beam to a 3$\sigma$ test of $R_\mathrm{ATOMKI}$, 1 µA")
+    bx.grid(axis="x", color=GRID, lw=0.5, zorder=0)
+    bx.set_axisbelow(True)
+    tag(bx, "(b) from this run to the physics run", x=-0.62)
+    strip(bx)
+    fig.savefig(FIG / "fig_road.pdf")
+    fig.savefig(FIG / "fig_road.png", dpi=200)
+    plt.close(fig)
+
+
+def E_days(d3, r_target):
+    """Days of beam for the expected 90 % CL limit to reach r_target (E.r90 scales as 1/sqrt(days))."""
+    ref = 1.0
+    return ref * (E.r90(d3, ref) / r_target) ** 2
+
+
 def photos():
     """Fig. 1a, 1b: the n_TOF photo (cropped to 3:4, 1100 px wide) and the run-145 fans (make_ntof_fans.py)."""
     try:
@@ -424,7 +517,7 @@ def photos():
 if __name__ == "__main__":
     import matplotlib.ticker  # noqa: F401
     FIG.mkdir(parents=True, exist_ok=True)
-    what = sys.argv[1:] or ["event", "acc", "pred", "reach", "photos"]
+    what = sys.argv[1:] or ["event", "acc", "pred", "road", "photos"]
     if "event" in what:
         fig_event()
     if "acc" in what:
@@ -433,6 +526,8 @@ if __name__ == "__main__":
         fig_predictions()
     if "reach" in what:
         fig_reach()
+    if "road" in what:
+        fig_road()
     if "photos" in what:
         photos()
     print("figures in", FIG)
