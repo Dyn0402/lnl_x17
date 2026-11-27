@@ -18,7 +18,7 @@ HERE = Path(__file__).resolve().parent
 OUT = HERE / "out"
 OUT.mkdir(exist_ok=True)
 
-UPDATED = "2026-11-26"
+UPDATED = "2026-11-27"
 DEADLINE = "2026-12-10T23:59:00+01:00"   # PAC proposal deadline, CET
 PAC = ("2027-01-25", "2027-01-29")
 
@@ -96,8 +96,8 @@ MILESTONES = [
 # Tasks. due ISO; who = owner (initials or role); dep = ids it waits on.
 TASKS = [
     # --- proposal (now → 10 Dec)
-    dict(id="P1", ws="prop", due="2026-11-20", who="Dylan", status="active",
-         t="Send Pierfrancesco the outline, the two-arm numbers and the questions (spokesperson, GLIMOS, author list)"),
+    dict(id="P1", ws="prop", due="2026-11-20", who="Dylan", status="done",
+         t="Send Pierfrancesco the outline, the two-arm numbers and the questions (spokesperson, GLIMOS, author list). Done 26 Nov (the short version); his answers in correspondence/2026-11-26_mastinu_cn_answers.md"),
     dict(id="P2", ws="prop", due="2026-11-20", who="Pierfrancesco", status="todo",
          t="Informal contact with Anna Selva / the Accelerator Division: the CN (AN2000 probably not available, 25 Nov), 1.10 MeV at 1 µA and H₂⁺ at 0.883 MV, beam hours (PF, 26 Nov: the CN can run 24/24 incl. weekends), line and floor space, June–July 2027 (the call's period ends 30 Jul)"),
     dict(id="P3", ws="prop", due="2026-11-23", who="Dylan", status="todo",
@@ -106,10 +106,10 @@ TASKS = [
          t="Download the LNL LaTeX template from Indico; move the draft into it; upload to Overleaf"),
     dict(id="P4", ws="prop", due="2026-11-24", who="Dylan", status="todo",
          t="Ask the co-proponents (Massimi, Mengoni, Gervino, Gustavino, Cosentino) to join; collect names + affiliations"),
-    dict(id="P5", ws="prop", due="2026-11-27", who="Dylan", status="active", dep=["R1"],
-         t="Draft v1 in Overleaf: abstract page + body of at most 4 pages (LNL template, 12 pt, figures and references included). 25 Nov: audited against the call and rebuilt around three figures (apparatus + n_TOF data + Geant4 event; the Geant4 predictions; reach and the path to the full experiment), template sections, one rates table; Dylan to proof-read. 26 Nov: reworked for run L19 (limits 4.3 / 5.5 / 7.2 ×, ~200 d to 3σ, the 441 keV day ~70 beam pairs of which a third external conversions, Fig. 2 from the L19 spectra) and the Li film known to ±50 % (rates for 11 µm, thickness from the 1.10 MeV / 441 keV yield ratio, 6.9 / 3.6 × for a film 0.5 / 1.5 × as thick)"),
-    dict(id="P6", ws="prop", due="2026-11-30", who="Dylan", status="todo", dep=["P5"],
-         t="Draft to Pierfrancesco; agree the beam-day table and the machine"),
+    dict(id="P5", ws="prop", due="2026-11-27", who="Dylan", status="done", dep=["R1"],
+         t="Done 27 Nov: draft v1 sent to Pierfrancesco (abstract page + 5-page body since 27 Nov; 18 h beam days, the BaF₂ γ monitor, checked references). History: draft v1 in Overleaf, abstract page + body of at most 4 pages (LNL template, 12 pt, figures and references included). 25 Nov: audited against the call and rebuilt around three figures (apparatus + n_TOF data + Geant4 event; the Geant4 predictions; reach and the path to the full experiment), template sections, one rates table; Dylan to proof-read. 26 Nov: reworked for run L19 (limits 4.3 / 5.5 / 7.2 ×, ~200 d to 3σ, the 441 keV day ~70 beam pairs of which a third external conversions, Fig. 2 from the L19 spectra) and the Li film known to ±50 % (rates for 11 µm, thickness from the 1.10 MeV / 441 keV yield ratio, 6.9 / 3.6 × for a film 0.5 / 1.5 × as thick)"),
+    dict(id="P6", ws="prop", due="2026-11-30", who="Dylan", status="active", dep=["P5"],
+         t="Draft to Pierfrancesco; agree the beam-day table and the machine. Sent 27 Nov (Dylan): waiting for his comments"),
     dict(id="P7", ws="prop", due="2026-12-03", who="Dylan", status="todo", dep=["P6"],
          t="Circulate to co-proponents; comments by 7 Dec"),
     dict(id="P8", ws="prop", due="2026-12-08", who="Dylan", status="todo", dep=["P7"],
@@ -123,8 +123,10 @@ TASKS = [
     # --- simulation
     dict(id="R1", ws="sim", due="2026-11-27", who="Dylan", status="done",
          t="Two-arm re-reduction of the L11–L13 tables, every pair geometry, new cosmics (L15) and rotated arms (L16): sim2arm/TWO_ARM_STUDY.md (19 Nov)"),
-    dict(id="R2", ws="sim", due="2026-11-27", who="Dylan", status="todo",
-         t="Proposal figures: two-arm acceptance vs θ, expected spectra (441 keV and 1.10 MeV), rates table"),
+    dict(id="R2", ws="sim", due="2026-11-27", who="Dylan", status="done",
+         t="Proposal figures: two-arm acceptance vs θ (Fig. 2), expected spectra at 441 keV and 1.10 MeV (Fig. 3), the road to the physics run (Fig. 4); the rates table folded into the text (26 Nov). Done 27 Nov, full text width"),
+    dict(id="R15", ws="sim", due="2026-12-05", who="Dylan", status="active",
+         t="Same-arm pairs at 441 keV (run L20, 27 Nov: M1 IPC 17.64 MeV and the 441 keV γ rays, every arm track kept; sim2arm/same_arm.py): selected IPC vs external-conversion background per beam day, θ resolution (Cu scattering ~12° per lepton). First look: conversions ~20× the IPC. Decides the proposal's same-arm sentence (red to-do)"),
     dict(id="R3", ws="sim", due="2027-04-15", who="Dylan", status="todo",
          t="Geant4: two-arm geometry with the real target holder and stand (MX17_Full_Geant branch from lnl_target)"),
     dict(id="R4", ws="sim", due="2027-06-11", who="Dylan", status="todo",
@@ -153,7 +155,7 @@ TASKS = [
     dict(id="M4", ws="mm", due="2027-05-14", who="Dylan", status="todo",
          t="Cosmic bench, 2 MM + DREAM: efficiency, segment angle (μ ≲ 3°), noise with B's existing M1s"),
     dict(id="M5", ws="mm", due="2027-04-30", who="Dylan", status="todo",
-         t="Gas choice (gas/GAS_STUDY.md §8, 26 Nov): bench test of chamber A on cosmics in a non-flammable low-quencher premix (Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4 at ~175 V/cm, ~550 V on B) against Ar/CO₂/iC₄H₁₀ 96.5/2/1.5 at ~220 V/cm: gain + spark scan, drift scan 100–250 V/cm, angle resolution and efficiency against the June 95/5 runs, with the water measured. Decide the gas from it; ~2 bottles, ~1 week (ask CEA)"),
+         t="Gas choice (gas/GAS_STUDY.md §11–12, 27 Nov): bench test of chamber A on cosmics in the two CERN-store premixes, Ar/CO₂/iC₄H₁₀ 93/5/2 (in the proposal) and Ar/CH₄/CO₂ 93/5/2, with the drift at 1000–1200 V: drift HV hold and discharge rate, gain + spark scan, angle resolution and efficiency against the June 95/5 runs, with the water measured. Decide the gas from it; ~2 bottles, ~1 week (ask CEA)"),
     # --- scint / trigger
     dict(id="S1", ws="scint", due="2027-01-31", who="Pierfrancesco", status="todo",
          t="Find PMTs for the 4 small plastics + 2 for the liquid cells (PF, 20 Nov: PMTs are short)"),
@@ -183,9 +185,11 @@ TASKS = [
     dict(id="R13", ws="sim", due="2026-12-05", who="Dylan", status="todo",
          t="External conversions of the lighter Al holder (Al ogive + Cu liner) at L19 statistics (~5,000 core-h, test cluster first): R10's 21 days to 3σ (26 beam days) and Fig. 4's Al-holder steps rest on 2 simulated EPC events, and L19 showed the EPC shape is signal-like (Cu: 151 → 195 d). Needed before the text freeze (P8) if the Al holder stays in the proposal"),
     dict(id="R14", ws="sim", due="2027-03-31", who="Dylan", status="todo",
-         t="How well does Geant4 predict the external conversions that reach two OPPOSITE arms? They need a large-angle scatter in the 300 µm Cu wall (87 % start in the dome, 15 % of the window pairs in the arms' own scintillators/PCBs) and are the largest beam component in the fit region (308 of 825 per day). Day 8 (arms at 90°) measures the dome conversion rate, not this tail; the 441 keV day measures it directly (25 of ~70 pairs) only if H₂⁺ exists. Check: a second EM physics option and the wall-thickness tolerance on an L19-size subsample; ask PF for the measured wall thickness"),
+         t="How well does Geant4 predict the external conversions that reach two OPPOSITE arms? They need a large-angle scatter in the 300 µm Cu wall (87 % start in the dome, 15 % of the window pairs in the arms' own scintillators/PCBs) and are the largest beam component in the fit region (308 of 825 per 24 h of beam). Day 8 (arms at 90°) measures the dome conversion rate, not this tail; the 441 keV day measures it directly (25 of ~70 pairs) only if H₂⁺ exists. Check: a second EM physics option and the wall-thickness tolerance on an L19-size subsample; ask PF for the measured wall thickness"),
     dict(id="T4", ws="target", due="2027-05-31", who="Dylan", status="todo",
          t="Day-1 film check procedure (LI_THICKNESS.md §6): γ₀ yield per µC at 1.10 MeV vs 441 keV with the γ monitor (PF's BaF₂ 2 cm, 26 Nov; the ratio gives the thickness in the spot), 478 keV PIGE as the fallback without H₂⁺, the γ₀ yield per µC and γ₁/γ₀ as the LiOH alarm (a 2 cm BaF₂ cannot separate 17.64 from 18.15 MeV, GAMMA_MONITOR.md); replace a film below ~0.7 × nominal or whose yield per µC jumps. Write the thresholds into the run plan; needs the monitor's efficiency at 478 keV and 17–18 MeV"),
+    dict(id="T5", ws="target", due="2027-03-31", who="Dylan", status="todo",
+         t="Geant4 model of the γ monitor (PF's 2 cm BaF₂, or a NaI ≥ 3″×3″): efficiency above threshold for 17.64 / 18.15 / 14.6 MeV and at 478 keV, cosmic-muon rate, mounting (axis horizontal, ~20 cm). Replaces the hand estimates of slot1_feasibility/GAMMA_MONITOR.md; needs the crystal's diameter (ask PF)"),
     dict(id="T2", ws="target", due="2027-05-31", who="Pierfrancesco", status="todo",
          t="Build the holder; make films; a week of LiOH-conversion test on the line"),
     # --- site
@@ -253,7 +257,7 @@ HARDWARE = [
          src="CEA Saclay: the TCM, network card and NIM module are kept for us; FEUs and cables from CEA's common pool",
          who="Stephan (CEA)", state="to ask", need="2027-04-01", inv=["dream", "dream_feu", "dreamcab"], place=["feu", "tcm"], tasks=["M2"],
          note="Half the n_TOF system. The TCM, the network card and the large NIM module are at CEA for us; the FEUs and cables went back into CEA's common pool, so they must be asked for (25 Nov). Solder a LEMO on the TCM busy output before the run (daq_trigger/PLAN.md §4.2).",
-         detail="A loan with a liability (the full 8-FEU system was valued at €72k in the budget). At LNL rates DREAM is > 95 % live."),
+         detail="A loan with a liability (the full 8-FEU system was valued at €72k in the budget). DREAM is busy 298 µs per event: with every single-arm trigger at 1 µA it is 96 % live at 1.10 MeV and 88 % on the 441 keV day (a SINGLE prescale is kept ready, daq_trigger/PLAN.md)."),
     dict(id="busy", part="LEMO on the TCM busy output", qty="1", grp="Micromegas & DREAM", status="make", org="our own work", src="our own work",
          who="Dylan", state="to make", need="2027-04-30", inv=["dream"], place=["tcm"], tasks=["M2", "S4"],
          note="The TCM has a busy output but its LEMO is not fitted. It vetoes the trigger so both systems keep one event list.",
@@ -273,7 +277,7 @@ HARDWARE = [
          detail="Fast 2″ tubes. Ask whether the original lender can lend them again (question for Pierfrancesco)."),
     dict(id="ls", part="Liquid cells 45 × 45 × 2 cm, new cans", qty="2", grp="Scintillators", status="make", org="MX17 collaboration", src="liquid from the n_TOF set-up (70 L, PF 26 Nov); cans remade",
          who="Pierfrancesco / Dylan", state="to make", need="2027-04-01", b="New cans for the 2 liquid cells", inv=["ls"], place=["ls"], tasks=["S5", "S6", "S7", "S8", "S9"],
-         note="In the proposal (PF, 20 Nov: 'the liquid we have, the cans have to be remade'). Without them the days to 3σ go up ×3.4. 67–76 % pile-up at n_TOF (γ-flash); LNL rates are far lower.",
+         note="In the proposal (PF, 20 Nov: 'the liquid we have, the cans have to be remade'). Without them the days to 3σ go up ×2.8 (260 → 735 beam days). 67–76 % pile-up at n_TOF (γ-flash); LNL rates are far lower.",
          detail="2 PMTs and 2 digitizer channels. Thicker (4 cm, or 2 + 2 in series) and wider cells (in place of the big plastics) to study: slot1_feasibility/LIQUID_CELLS.md."),
     # --- Trigger & DAQ
     dict(id="dig", part="Digitizers, ~24 channels", qty="1 V1742 or 2 × V1730", grp="Trigger & DAQ", status="find", org="INFN / LNL", src="LNL pool; else the CERN electronics pool (desktop CAEN DT5730SB); else a CAEN loan",
@@ -336,9 +340,9 @@ HARDWARE = [
          who="Pierfrancesco", state="to ask", need="2027-04-01", place=["hv"], tasks=[],
          note="Micromegas ≤ 600 V; PMTs negative. Driven by caen_hv_py.", detail="SiPM bias from the walls' own supplies. CERN pool fallback (epool, 25 Nov 2026): CAEN N1470, 4 channels up to 8 kV, CEP-0422, 43.26 CHF/month, 15 in stock; N470 37.16 (21 in stock)."),
     # --- Gas & slow control
-    dict(id="gas", part="Gas: non-flammable argon premix bottles (baseline Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4), regulators, panel", qty="1 panel", grp="Gas & slow control", status="buy", org="purchase", src="to order (via LNL)",
+    dict(id="gas", part="Gas: non-flammable argon premix bottles (Ar/CO₂/iC₄H₁₀ 93/5/2 or Ar/CH₄/CO₂ 93/5/2, CERN store), regulators, panel", qty="1 panel", grp="Gas & slow control", status="buy", org="purchase", src="to order (via LNL)",
          who="Dylan / LNL", state="to order", need="2027-04-01", b="Gas: premix bottles, regulators, panel", place=["gas"], tasks=["L2"],
-         note="No mixer comes from n_TOF. Gas study 26 Nov (gas/GAS_STUDY.md): with the drift ≤ 700 V (A sparked at 800 V at n_TOF) and 0.1–0.5 % water, the low-quencher non-flammable premixes keep v within 7–8 % at ~175 V/cm; NSW 93/5/2 spreads 39 % (its peak is above 450 V/cm) and 95/5 is flammable. Final choice after the bench test (M5). The 1.8 % isobutane premix must be certified below the 1.9 % ISO 10156 limit: ask the supplier.",
+         note="No mixer comes from n_TOF. Gas (gas/GAS_STUDY.md §10–12, 26–27 Nov): the chambers have held 1200 V on the drift (A on the bench, A and C at n_TOF), so the two non-flammable premixes in the CERN store bracket the choice at 1000–1200 V: Ar/CO₂/iC₄H₁₀ 93/5/2 (more quencher, less diffusion; named in the proposal) and Ar/CH₄/CO₂ 93/5/2 (steady v). Both need the water below 0.5 %. Until 26 Nov the plan was a low-quencher premix at ≤ 700 V; 95/5 is flammable. Final choice after the bench test (M5).",
          detail="Non-flammable (ISO 10156): no flammable-gas file, ADR class 2.2 shipping. Bottles in the hall still need the safety file (L2). Flow high enough to flush water; the water level matters more than the mixture (GAS_STUDY.md §6)."),
     dict(id="gaslines", part="Low-permeation gas lines", qty="2 arms", grp="Gas & slow control", status="buy", org="purchase", src="to order",
          who="Dylan", state="to order", need="2027-04-01", b="Low-permeation gas lines", place=["gaslines"], tasks=[],
@@ -425,9 +429,9 @@ QUESTIONS = [
     dict(who="LNL Accelerator Division", q="Answered 26 Nov (PF): the CN runs 24/24 including weekends. The plan counts beam days of 18 h of beam (safety factor, Dylan). Confirm the shift / access rules for night running."),
     dict(who="LNL Accelerator Division", q="H₂⁺ from the CN source at 0.883 MV (two 0.441 MeV protons), up to 0.5 µA? 26 Nov: PF says a small D⁺ contamination is possible and he will ask the machine people for a number. The 441 keV calibration depends on H₂⁺; the proposal does not."),
     dict(who="Pierfrancesco", q="Answered 25 Nov: the call allocates 20 Feb – 30 Jul 2027 (the call page prints 2026, a typo), so we aim for June or July 2027 (proposal changed). Still to ask: does LNL prefer June or July for the CN, and what happens if we are not ready by July (the next period, autumn 2027)?"),
-    dict(who="Pierfrancesco", q="Body length: the template says 4 pages, the LNL submission page says 5. The draft keeps to 4: is that what people do?"),
-    dict(who="LNL Accelerator Division", q="Gas: we plan a non-flammable argon premix (Ar/iC₄H₁₀ 98.2/1.8 or Ar/CH₄ 96/4; ISO 10156 non-flammable). Does LNL agree with the classification, what does it need for bottles in the hall (storage, exhaust, O₂ monitor), and does LNL stock argon premixes?"),
-    dict(who="CEA (Stephan, DREAM)", q="Repair B's drift window by March 2027 (and 2 new windows, if cheap)? Lend 4 FEUs + TCM for Mar–Jul 2027?"),
+    dict(who="Pierfrancesco", q="Body length: the template says 4 pages, the LNL submission page says 5. Since 27 Nov the draft uses 5 (Dylan): fine with him?"),
+    dict(who="LNL Accelerator Division", q="Gas: we plan a non-flammable argon premix from the CERN store (Ar/CO₂/iC₄H₁₀ 93/5/2, or Ar/CH₄/CO₂ 93/5/2; ISO 10156 non-flammable). Does LNL agree with the classification, what does it need for bottles in the hall (storage, exhaust, O₂ monitor), and does LNL stock argon premixes?"),
+    dict(who="CEA (Stephan, DREAM)", q="Repair B's drift window in February 2027, as the proposal says (and 2 new windows, if cheap)? Lend 4 FEUs + TCM for Mar–Jul 2027?"),
     dict(who="CERN electronics pool", q="Can rented modules go to LNL for ~2 months (mid-June to mid-August 2027): 2 × N1081B, the N93B, 3–4 linear FIFOs, a NIM bin and the Delta SM3545-D LV (and digitizers, if LNL has none)? Catalogue fees ~285 CHF/month for the set (epool, 25 Nov 2026)."),
     dict(who="n_TOF", q="Lend the LEMO cables (~60 × 16 ns, 60 × 5 ns, 20 × 2 ns, 20 × 1 ns) and ~30 LEMO Ts for Mar–Jul 2027, returned after the run?"),
     dict(who="CEA (Stephan, DREAM)", q="Is the large NIM module kept with DREAM a NIM bin with room for our trigger modules? Can 4 FEUs + 32 cables come out of the common pool for Mar–Jul 2027?"),
@@ -438,7 +442,7 @@ QUESTIONS = [
 
 RISKS = [
     dict(r="Drift cathodes do not hold the field the gas needs (A sparked at 800 V at n_TOF), or water in the gas above 0.5 %", l="med", i="med",
-         m="Gas chosen for ≤ 700 V on B (≤ 224 V/cm): the low-quencher premixes peak at ~175 V/cm with 0.1–0.5 % water (gas/GAS_STUDY.md). Low-permeation lines, a dryer and a water sensor are critical; above 0.5 % water every candidate's v moves by > 30 %, so v is then calibrated in situ from the cathode edge of the drift-time distribution."),
+         m="The chambers held 1200 V on the drift in June–July 2026 (GAS_STUDY.md §11); at n_TOF the drift discharged only in the least quenched gas (95/5), so we keep ≥ 5 % quencher and test the drift to 1200 V on the bench in each candidate (M5). At 700 V (the old design limit) the store premixes are too slow. Low-permeation lines, a dryer and a water sensor are critical: above 0.5 % water no gas keeps v steady, so v is then calibrated in situ from the cathode edge of the drift-time distribution."),
     dict(r="Micromegas B not repaired in time", l="low", i="high",
          m="Likely just an electrical connection on the drift (Dylan, 19 Nov). A is ready now; C re-bulk as the spare; one-arm-plus-scintillator fallback still gives the 441 keV and background programme."),
     dict(r="DREAM not available in Mar–Jul 2027 (CEA's own use)", l="med", i="high",
@@ -472,7 +476,7 @@ PROPOSAL = dict(
     rules=[
         "Use the LNL templates (abstract + body, LaTeX or Word); submit PDF only. Abstract: one page (not counted in the body)",
         "Abstract fields: title, accelerator, set-up, spokesperson(s), GLIMOS, all authors + affiliations, short summary",
-        "Body: max 4 pages per the official template (the LNL web page says 'strictly' 5; re-read 25 Nov), 12 pt, tables + figures + references included. We keep to 4",
+        "Body: max 5 pages per the LNL submission page ('strictly'; the template text says 4; re-read 25 Nov), 12 pt, tables + figures + references included. We use 5 since 27 Nov",
         "Template sections: Scientific Motivation / Proposed Experiment / Rate Estimates and Beam Time Request; the request lists beam (ion, intensity, energy, pulsed or continuous), target (isotope, thickness, backing), set-up, days; figure captions below, table captions above",
         "Allocation period of this call: 20 Feb – 30 Jul 2027 (call page, read 25 Nov; it prints 2026)",
         "Body must contain: scientific motivation; technical details (instrumentation, quantities measured, precision); beam days from count-rate estimates",
@@ -503,7 +507,7 @@ SLOT2 = dict(
     programme=[
         "441 keV calibration (17.64 MeV, no anomaly expected)",
         "3σ at R(ATOMKI) at 1.10 MeV, then 0.80 and 1.225 MeV off-resonance (clean points need 5–10 µm films)",
-        "Big plastics: 4.4 d (Al + Cu liner) to 12 d (Cu ogive) for the programme; as built 23–80 d",
+        "The road (proposal Fig. 4, beam days to 3σ at R(ATOMKI), 27 Nov): two arms as built 260; + lighter Al holder 28; + four arms 15; + large plastics ~1.4 (scaling estimate)",
     ],
     budget="Self-sufficient €223k, Upgrade €279k (x17_facility_search budget, 17 Nov 2026); Lean €103k",
 )

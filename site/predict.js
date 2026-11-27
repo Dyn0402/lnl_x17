@@ -133,8 +133,8 @@ function prTiles() {
   [["Cosmic pair triggers, arms vertical", nf(c.vert.trig_per_night), `per 10 h night (${nf(c.vert.trig_hz)} Hz); ${pct(c.vert.frac2_eps)} with both tracks × ε`],
    ["Same, arms horizontal", nf(c.horiz.trig_per_night), `per night: ${nf(c.vert.trig_hz / c.horiz.trig_hz, 2)}× fewer`],
    ["Beam legs per arm, 1 µA", nf(s["1100"].beam_leg_hz_per_uA) + " Hz", `at 1.10 MeV (${nf(s["441"].beam_leg_hz_per_uA)} Hz at 441 keV) + ${nf(P.singles.cos_side_leg_hz)} Hz cosmics`],
-   ["441 keV calibration pairs", nf(sel441) + " / day", "selected, θ > 90°, E_sum window"],
-   ["X17 at R(ATOMKI), 1.10 MeV", nf(b11.sig.per_day_win_gt90) + " / day", `on ${nf(["M1", "E1", "g1", "epc", "cos"].reduce((a, k) => a + b11[k].per_day_win_gt90, 0))} background pairs/day`]]
+   ["441 keV calibration pairs", nf(sel441) + " / beam day", "selected, θ > 90°, E_sum window"],
+   ["X17 at R(ATOMKI), 1.10 MeV", nf(b11.sig.per_day_win_gt90) + " / beam day", `on ${nf(["M1", "E1", "g1", "epc", "cos"].reduce((a, k) => a + b11[k].per_day_win_gt90, 0))} background pairs per beam day`]]
     .forEach(([k, v, sub]) => T.append(h("div", { class: "tile" }, h("div", { class: "k" }, k), h("div", { class: "v" }, v), h("div", { class: "s" }, sub))));
 }
 
@@ -160,17 +160,17 @@ function prTable() {
     ["C1", "Beam trigger legs per side arm", "1.10 MeV / 441 keV", `${nf(s.ep["1100"].beam_leg_hz_per_uA)} / ${nf(s.ep["441"].beam_leg_hz_per_uA)} Hz per µA`,
       "γ yield × leg probability: the film's Li content; linear in current", `${nf(s.lines_gamma_per_line)} γ per line`],
     ["C2", "Beam legs with a Micromegas track", "1 µA", `${pct(s.ep["1100"].frac_track_eps)}`, `vs ${pct(P.cosmics.arms[0].frac_track_eps)} for cosmics: the γ conversions in the Cu hemisphere`, ""],
-    ["C3", "Accidental two-arm coincidences (20 ns)", "1 µA, before cuts", `${nf(s.ep["1100"].accidental_pairs_per_day_1uA)} / ${nf(s.ep["441"].accidental_pairs_per_day_1uA)} per day`, "1.10 MeV / 441 keV; negligible after the cuts", ""],
+    ["C3", "Accidental two-arm coincidences (20 ns)", "1 µA, before cuts", `${nf(s.ep["1100"].accidental_pairs_per_day_1uA)} / ${nf(s.ep["441"].accidental_pairs_per_day_1uA)} per beam day`, "1.10 MeV / 441 keV; negligible after the cuts", ""],
     ["Pairs at 441 keV (day 2)"],
-    ["D1", "Two-arm events with both tracks (any θ, any E)", "1 µA", `${nf(sum(b4.trigger, BEAM, "per_day"))} / day`, `+ ${nf(b4.trigger.cos.per_day)} cosmics/day`, ""],
-    ["D2", "Selected pairs, θ > 90°, E_sum window", "pointing + TOF", `${nf(sum(b4.ref, ["M1", "E1", "g1", "epc"], "per_day_win_gt90"))} / day`,
+    ["D1", "Two-arm events with both tracks (any θ, any E)", "1 µA", `${nf(sum(b4.trigger, BEAM, "per_day"))} / beam day`, `+ ${nf(b4.trigger.cos.per_day)} cosmics per beam day`, ""],
+    ["D2", "Selected pairs, θ > 90°, E_sum window", "pointing + TOF", `${nf(sum(b4.ref, ["M1", "E1", "g1", "epc"], "per_day_win_gt90"))} / beam day`,
       `M1 IPC ${nf(b4.ref.M1.per_day_win_gt90)}, conversions ${nf(b4.ref.epc.per_day_win_gt90)}, 14.6/15.1 IPC ${nf(b4.ref.g1.per_day_win_gt90)}; cosmics ${nf(b4.ref.cos.per_day_win_gt90)}`, `MC ${nf(b4.ref.M1.n_mc_win_gt90)} (M1)`],
     ["D3", "Selected pairs per beam leg", "441 keV", `${(P.ratio_pairs_per_leg_441 * 1e6).toFixed(1)}×10⁻⁶`, "independent of the film's Li content", ""],
     ["D4", "Opening-angle shape, E_sum peak, |y|", "441 keV", "§5 plots", "angular response and energy scale on a transition with no anomaly", ""],
     ["Pairs at 1.10 MeV (days 3–7)"],
-    ["E1", "Selected background pairs", "pointing + TOF", `${nf(sum(b11.ref, ["M1", "E1", "g1", "epc", "cos"], "per_day_win_gt90"))} / day`,
+    ["E1", "Selected background pairs", "pointing + TOF", `${nf(sum(b11.ref, ["M1", "E1", "g1", "epc", "cos"], "per_day_win_gt90"))} / beam day`,
       `E1 IPC ${nf(b11.ref.E1.per_day_win_gt90)}, 15.1 IPC ${nf(b11.ref.g1.per_day_win_gt90)}, M1 ${nf(b11.ref.M1.per_day_win_gt90)}, cosmics ${nf(b11.ref.cos.per_day_win_gt90)}`, `MC ${nf(b11.ref.E1.n_mc_win_gt90)} (E1)`],
-    ["E2", "X17 at R(ATOMKI)", "θ > 90°, window", `${nf(b11.ref.sig.per_day_win_gt90)} / day`, "the reach (Beam & reach tab)", ""],
+    ["E2", "X17 at R(ATOMKI)", "θ > 90°, window", `${nf(b11.ref.sig.per_day_win_gt90)} / beam day`, "the reach (Beam & reach tab)", ""],
   ];
   const t = $("#pr-table"); t.innerHTML = "";
   t.append(h("thead", {}, h("tr", {}, ["#", "Observable", "Condition", "Geant4", "What it checks", "MC"].map((x, i) => h("th", { class: i === 3 ? "num" : "" }, x)))));
@@ -215,7 +215,7 @@ function prCharts() {
   const tt = h("table", {}, h("thead", {}, h("tr", {}, h("th", {}, ""), h("th", { class: "num" }, "441 keV"), h("th", { class: "num" }, "1.10 MeV"))));
   const body = h("tbody");
   [["γ₀ at the target (17.64 + 18.15)", "g0_per_s", " /s"], ["beam legs per arm", "beam_leg_hz_per_uA", " Hz"], ["… with a Micromegas track (× ε)", "frac_track_eps", "", pct],
-   ["legs per arm incl. cosmics", "total_leg_hz_1uA_side", " Hz"], ["beam / cosmic legs", "beam_over_cosmic_side", "×"], ["accidental pairs, 20 ns", "accidental_pairs_per_day_1uA", " /day"]]
+   ["legs per arm incl. cosmics", "total_leg_hz_1uA_side", " Hz"], ["beam / cosmic legs", "beam_over_cosmic_side", "×"], ["accidental pairs, 20 ns", "accidental_pairs_per_day_1uA", " /beam day"]]
     .forEach(([k, f, u, fm]) => body.append(h("tr", {}, h("td", {}, k), ...["441", "1100"].map(ep => h("td", { class: "num" }, fm ? fm(s[ep][f]) : nf(s[ep][f]) + u)))));
   tt.append(body); tb.append(tt);
   tb.append(h("p", { class: "prcap" }, "Per-γ leg probability ", nf(P.singles.p_leg_per_gamma["18.15"] * 1e3, 2), "×10⁻³ per arm (18.15 MeV), the same for the four lines within 5 %. The 478 keV ⁷Li line never makes a leg."));
@@ -227,16 +227,16 @@ function prCharts() {
   prLegend("p4-th-l", ORD4.map(k => [P.comp_names[k], CC[k]]));
   const r4 = P.pairs["441"].ref;
   prHist("p4-th", { edges: r4.M1.theta_win.edges, series: stack(r4, ORD4, win ? "theta_win" : "theta_all"), stacked: true, errbars: true, days: dd, xr: [90, 180],
-    band: [125, 160], xlab: "opening angle θ (°)", ylab: "pairs per 5° per day", xstep: 15, unit: "per day, 441 keV", xunit: "°", H: 250 });
+    band: [125, 160], xlab: "opening angle θ (°)", ylab: "pairs per 5° per beam day", xstep: 15, unit: "per beam day, 441 keV", xunit: "°", H: 250 });
   prLegend("p4-E-l", ORD4.map(k => [P.comp_names[k], CC[k]]));
-  prHist("p4-E", { edges: r4.M1.Esum_gt90.edges, series: stack(r4, ORD4, "Esum_gt90"), stacked: true, xr: [5, 25], xlab: "E_sum (MeV)", ylab: "per 0.5 MeV per day", xstep: 5,
-    unit: "θ > 90°, per day", xunit: "MeV", band: P.pairs.ewin, H: 200 });
-  prHist("p4-y", { edges: r4.M1.y_win_gt90.edges, series: stack(r4, ORD4, "y_win_gt90"), stacked: true, xlab: "|y| energy sharing", ylab: "per 0.05 per day", xstep: 0.2,
-    unit: "θ > 90°, window, per day", H: 170 });
+  prHist("p4-E", { edges: r4.M1.Esum_gt90.edges, series: stack(r4, ORD4, "Esum_gt90"), stacked: true, xr: [5, 25], xlab: "E_sum (MeV)", ylab: "per 0.5 MeV per beam day", xstep: 5,
+    unit: "θ > 90°, per beam day", xunit: "MeV", band: P.pairs.ewin, H: 200 });
+  prHist("p4-y", { edges: r4.M1.y_win_gt90.edges, series: stack(r4, ORD4, "y_win_gt90"), stacked: true, xlab: "|y| energy sharing", ylab: "per 0.05 per beam day", xstep: 0.2,
+    unit: "θ > 90°, window, per beam day", H: 170 });
   const r11 = P.pairs["1100"].ref, ORD11 = ["E1", "g1", "M1", "epc", "cos", "sig"];
   prLegend("p11-th-l", ORD11.map(k => [P.comp_names[k], CC[k]]));
   prHist("p11-th", { edges: r11.E1.theta_win.edges, series: stack(r11, ORD11, win ? "theta_win" : "theta_all"), stacked: true, errbars: true, days: dd, xr: [90, 180],
-    band: [125, 160], xlab: "opening angle θ (°)", ylab: "pairs per 5° per day", xstep: 15, unit: "per day, 1.10 MeV", xunit: "°", H: 250 });
+    band: [125, 160], xlab: "opening angle θ (°)", ylab: "pairs per 5° per beam day", xstep: 15, unit: "per beam day, 1.10 MeV", xunit: "°", H: 250 });
   const t11 = $("#p11-txt"); t11.innerHTML = "";
   [["Rates", "Every absolute rate (A1–A2, B1–B2, C1, D1–D2) tests the flux, the γ yields and the trigger thresholds together. Ratios (D3, A2/B2) cancel the yield or the flux."],
    ["Chamber efficiency", "A3/B3: a cosmic PAIR trigger with one track instead of two is a chamber that missed it. The simulation is 100 % efficient, so the measured 1-track fraction gives ε for each chamber in situ, per night."],

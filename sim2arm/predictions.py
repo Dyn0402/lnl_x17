@@ -19,7 +19,9 @@ Definitions (lnl_merge.py): a trigger LEG is SiPM bar >= 0.5 MIP AND plastic >= 
 Micromegas segment (dominant track, >= 3 steps) with its charge centroid in the active area.  The simulation's
 chambers are 100 % efficient: the "× ε" numbers apply the bench efficiency EPS_MM per chamber.
 
-    WORK_DATA=/media/ucla/work ~/PycharmProjects/nTof_x17/.venv/bin/python sim2arm/predictions.py
+    WORK_DATA=/media/ucla/work TA_EPC_RUN=L19 ~/PycharmProjects/nTof_x17/.venv/bin/python sim2arm/predictions.py
+
+27 Nov: external conversions from run L19 (TA_EPC_RUN=L19, as the reach fits); beam rates per beam day of 18 h of beam.
 """
 from __future__ import annotations
 
@@ -36,6 +38,12 @@ sys.path.insert(0, str(HERE))
 import numpy as np            # noqa: E402
 
 import two_arm_nd as T        # noqa: E402
+
+sys.path.insert(0, str(HERE.parent / 'planning'))
+import two_arm_estimates as TAE  # noqa: E402
+
+#: beam rates are per BEAM DAY (TAE.BEAM_DAY_H = 18 h of CN beam, 27 Nov); cosmic nights stay per night, cosmic day rates per 24 h
+BD = TAE.BEAM_DAY_H / 24.0
 
 SN, G = T.SN, T.G
 W = Path(os.environ['WORK_DATA']) / 'x17_facility_search'
@@ -192,7 +200,7 @@ def singles(cos):
             frac_track_eps=r3(trks / legs * EPS_MM),
             total_leg_hz_1uA_side=r3(legs + cos_side), total_leg_hz_1uA_top=r3(legs + cos_top),
             beam_over_cosmic_side=r3(legs / cos_side), E_hist=hs,
-            accidental_pairs_per_day_1uA=r3(G.TWO_TAU_S * (legs + cos_side) ** 2 * 86400))
+            accidental_pairs_per_day_1uA=r3(G.TWO_TAU_S * (legs + cos_side) ** 2 * 3600 * TAE.BEAM_DAY_H))
         if ep == 1100.0:
             per_ep[str(int(ep))]['scan'] = [dict(I_uA=I, leg_hz=r3(legs * I + cos_side),
                                                  track_frac=r3((trks * I + cos_side_trk) / (legs * I + cos_side)))
@@ -236,7 +244,7 @@ def beam_pairs(pair='horiz'):
     for ep in (441.0, 1100.0):
         d = {}
         for lev in ('trigger', LEVEL):
-            ev = SN.collect(TGT, 'asb', ep, RESP, level=lev, I_uA=1.0, live=SN.LIVE_S2, li_ug=LI_UG,
+            ev = SN.collect(TGT, 'asb', ep, RESP, level=lev, I_uA=1.0, live=SN.LIVE_S2 * BD, li_ug=LI_UG,
                             erange=(3.0, 40.0))
             th, E, yy, w, comp = ev['v0']['th'], ev['v0']['E'], np.abs(ev['v0']['y']), ev['w'], ev['comp']
             win = (E > ec[0]) & (E < ec[1])
@@ -262,7 +270,7 @@ def main():
     cos = cosmics()
     sg = singles(cos)
     bp = beam_pairs('horiz')
-    res = dict(made='2026-11-20', target=TGT, target_name=SN.SG.SHAPES.get(TGT, (TGT,))[0], li_ug=LI_UG, eps_mm=EPS_MM, sigma_t_ns=SIG_T, night_h=NIGHT_H,
+    res = dict(made='2026-11-27', beam_day_h=TAE.BEAM_DAY_H, epc_run=os.environ.get('TA_EPC_RUN', ''), target=TGT, target_name=SN.SG.SHAPES.get(TGT, (TGT,))[0], li_ug=LI_UG, eps_mm=EPS_MM, sigma_t_ns=SIG_T, night_h=NIGHT_H,
                seg_D_15=r3(G.seg_D(15.0)), seg_D_3=r3(G.seg_D(3.0)),
                cosmics=cos, singles=sg, pairs=bp, comp_names=COMP)
     # cosmics after the full analysis (E_sum window, pointing + 0.6 ns TOF): the reach pass's own numbers
@@ -279,7 +287,7 @@ def main():
     # yield-free ratio: selected 441 keV pairs per beam single-arm leg (cancels the film's Li content)
     e441 = bp['441']['ref']
     sel441 = sum(e441[c]['per_day_win_gt90'] or 0 for c in ('M1', 'E1', 'g1', 'epc'))
-    legs441 = sg['ep']['441']['beam_leg_hz_per_uA'] * 86400 * SN.LIVE_S2
+    legs441 = sg['ep']['441']['beam_leg_hz_per_uA'] * 3600 * TAE.BEAM_DAY_H * SN.LIVE_S2
     res['ratio_pairs_per_leg_441'] = r3(sel441 / legs441)
     (OUT / 'predictions.json').write_text(json.dumps(res, ensure_ascii=False, indent=0), encoding='utf-8')
     print('wrote', OUT / 'predictions.json')
