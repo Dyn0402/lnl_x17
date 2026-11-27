@@ -102,7 +102,7 @@ histogram shows all emitted pairs, and the lines show the pairs that reach the T
 each arm have opening angles above $100^\circ$, with an acceptance of about 12\,\% in the \Xs{} region (125--$160^\circ$).
 Pairs with both leptons in the same arm have opening angles below $90^\circ$. Together, the two cover much of the full opening angle spectrum. The same-arm pairs are useful because IPC pairs are concentrated at small angles.
 Figure~\ref{fig:acc}(b) shows that in one beam day at 441~keV about $1.6\times10^6$ internal pairs reach a single arm, against
-$3.6\times10^4$ in opposite arms. The single-arm trigger records them. This also tests the reconstruction of two close tracks in one TPC (4~cm apart at $\theta = 10^\circ$). \todo{Geant4 selection of same-arm pairs, with
+$3.6\times10^4$ in opposite arms. This also tests the reconstruction of two close tracks in one TPC (4~cm apart at $\theta = 10^\circ$). \todo{Geant4 selection of same-arm pairs, with
 the holder and the trigger: in progress}
 
 \begin{figure}[t]
@@ -126,34 +126,35 @@ reconstructed as a pair with an opening angle below $180^\circ$. Figure~\ref{fig
 coincidences fall at 125--$160^\circ$, where the \Xs{} signal is expected. MX17 recognises a muon in two ways. The two track segments lie on one straight line that misses
 the target, and the muon reaches the second arm 2.3~ns after the first. In the simulation these two vetoes reject 96\,\% of the cosmic-ray pairs (99.5\,\% with the
 energy-sum window). We measure the opening-angle distribution of the cosmic rays and the rejection during at least
-three nights before the beam days, with the two arms stacked vertically, where the cosmic-ray rate is highest. About 1000
+three nights before the beam days at another lab at LNL, with the two arms stacked vertically, where the cosmic-ray rate is highest. About 1000
 pairs should survive the selection, so the rejection is measured to about 3\,\%.
 
 \emph{(2) Calibration at $E_p = 441$~keV.} This narrow resonance populates the 17.64~MeV state, which decays by an M1
 transition. ATOMKI saw no anomaly here. The opening-angle distribution of the IPC pairs of this transition is therefore known,
 and it tests the acceptance and the angular response of the simulation. In opposite arms, Figure~\ref{fig:pred}(b) shows about 160 selected pairs from the beam and 51 cosmic-ray pairs in
-one beam day, so we measure the pair rate to about 9\,\%. The energy sum fixes the energy scale. The CN cannot accelerate
-protons to 441~keV, so we ask for an H$_2^+$ beam at 0.883~MV, which gives two protons of 0.441~MeV each, as in part of
+one beam day, so we measure the pair rate to about 9\,\%. The energy sum of these IPC pairs calibrates our setup's energy scale. The CN cannot accelerate
+protons to 441~keV, so we propose an H$_2^+$ beam at 0.883~MV, which gives two protons of 0.441~MeV each, as in part of
 the MEG~II beam~\cite{MEG24}. We expect such a beam to contain some D$^+$, which has the same mass, and its
-contamination will have to be studied. Without H$_2^+$, the run has no calibration transition.
+contamination will have to be studied. 
+%Without H$_2^+$, the run has no calibration transition.
 
 \emph{(3) The 18.15~MeV region at $E_p = 1.10$~MeV.} ATOMKI also measured at this energy~\cite{Kra16}.
 Figure~\ref{fig:pred}(c) shows the expected spectrum after 5.9 beam days. It contains about 320 selected pairs from the
 beam and 300 cosmic-ray pairs, so we measure the pair rate in the signal region to about 8\,\%. Most beam pairs are E1
 pairs from direct capture (about 180) and external conversions in the copper (about 90). Like the signal, the
 external conversions peak at 140--$160^\circ$. For this reason the last day, with the arms at $90^\circ$ to each other,
-measures them directly (about 1100 pairs). An \Xs{} signal at \Ratk{} would add 12 pairs, so we do not expect to see it.
+measures them directly (about 1100 pairs). An \Xs{} signal at \Ratk{} would add 12 pairs, so we do not expect to see it in this run.
 
 \textbf{What counts as success.} For each measurement we compare the measured opening-angle distribution with the
 Geant4 prediction, in shape and in absolute rate. The rate is normalised to the $\gamma$-ray yield, which a $\gamma$ detector
-monitors. The test succeeds if data and simulation agree within the statistical uncertainties given
-above.
+monitors. 
+The goal of this measurement is to validate our simulation expectations and demonstrate the feasibility of this setup for the subsequent physics measurement. 
 
 \section{Rate Estimates and Beam Time Request}
 
 % 2026-11-26: Table I (use of the days with Geant4 rates) removed for Fig. 4; its rates are in the text below and in
 % Section II. It is in git history (22e1f5f) if it should come back.
-\textbf{Use of the beam time.} A \emph{beam day} is 18 hours of CN beam. On day 1 we scan
+\textbf{Use of the beam time.} We define a \emph{beam day} as 18 hours of CN beam. On day 1 we scan
 the beam current from 0.05 to 1~\si{\micro\ampere}, measure the trigger rates, the live time and the Micromegas occupancy,
 and then take data at 1.10~MeV. Day 2 is the calibration at 441~keV, days 3--7 are at 1.10~MeV, and on day 8 the arms are
 at $90^\circ$ to each other for the external conversions. At 1~\si{\micro\ampere} the target emits $5.4\times10^{4}$
