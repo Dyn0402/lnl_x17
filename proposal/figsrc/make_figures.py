@@ -313,7 +313,9 @@ def fig_acceptance():
     bx.set_xticks([0, 30, 60, 90, 120, 150, 180])
     bx.set_xlabel(r"opening angle $\theta$ (deg)")
     bx.set_ylabel(r"pairs per 5$^\circ$")
-    bx.legend(frameon=False, loc="upper right", handlelength=1.3, borderaxespad=0.1, labelspacing=0.25)
+    lg = bx.legend(frameon=True, fancybox=True, framealpha=0.8, facecolor="white", edgecolor="none", loc="upper right",
+                   handlelength=1.3, borderaxespad=0.1, labelspacing=0.25)  # 27 Nov: white box over the X17 band
+    lg.get_frame().set_boxstyle("round", pad=0.2, rounding_size=0.4)
     tag(bx, r"(b) M1 internal pairs, $E_p$ = 441 keV, 1 beam day, 1 µA")
     strip(bx)
     print(f"Fig 2: IPC 441 emitted {tot.sum():.3g}, one arm {sm.sum():.0f}, each arm {op.sum():.0f} per beam day (geometry)")
