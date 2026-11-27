@@ -98,9 +98,9 @@ in `abstract_content.tex` and `body_content.tex`; `abstract.tex` and `body.tex` 
 Overleaf's TeX Live is newer than the desktop's (2023): revtex4 (2001) breaks there on `p{}` and `@{}` tabular columns
 ("Extra \or"), so tables use `l` columns with `\parbox` cells.
 
-The five figure files in `latex/figures/` (`fig1a_ntof_photo.jpg`, `fig1b_ntof_fans.png`, `fig_event.pdf`,
-`fig_predictions.pdf`, `fig_reach.pdf`) are uploaded to Overleaf with the git push; `limit_vs_days.*` is no longer used
-by the proposal (the page still shows it).
+The six figure files in `latex/figures/` (`fig1a_ntof_photo.jpg`, `fig1b_ntof_fans.png`, `fig_event.pdf`,
+`fig_acceptance.pdf`, `fig_predictions.pdf`, `fig_road.pdf`) are uploaded to Overleaf with the git push; `fig_reach.pdf`
+and `limit_vs_days.*` are no longer used by the proposal (the page still shows the latter).
 
 Floats in revtex4: a `[b]` figure goes on the current page if it fits and a `[t]` figure to the top of the next page, so
 each figure is declared about a page before where it should appear. `make` prints the body's page count.
@@ -109,7 +109,8 @@ each figure is declared about a page before where it should appear. `make` print
 `~/texmf/tex/latex/` on the desktop, from Ubuntu's texlive-publishers). `make zip` rebuilds the upload zip. Overleaf and the
 repo were identical on 2026-11-19 (no edits had been made on Overleaf). From now on they can drift: pick one as the master
 (Overleaf's Git integration can be added as a remote here). 2026-11-24: synced by `git push` to
-`https://git.overleaf.com/6afdf0e8d237ac71ebb14b1f` (diff Overleaf against the repo before each push: Dylan edits there).
+`https://git.overleaf.com/6afdf0e8d237ac71ebb14b1f` (diff Overleaf against the repo before each push: Dylan edits there). Last push 2026-11-27: Overleaf fe77111 = repo
+2e22ca1 `proposal/latex/`.
 
 ## Sources
 
