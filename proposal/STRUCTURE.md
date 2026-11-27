@@ -23,7 +23,7 @@ pdf files".
 2. accelerator (AN2000, or CN);
 3. experimental set-up (here: MX17, two-arm configuration);
 4. spokesperson(s);
-5. GLIMOS (Group Leader In Matter Of Safety);
+5. GLIMOS (Group Leader In Matter Of Safety): from the "Details for submission" web page; the .tex template does not ask for it;
 6. all authors and affiliations;
 7. a short summary.
 

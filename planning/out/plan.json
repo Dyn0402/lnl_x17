@@ -2119,7 +2119,7 @@
  "questions": [
   {
    "who": "Pierfrancesco",
-   "q": "Spokesperson(s) and GLIMOS for the abstract page? 26 Nov: PF has no idea who the GLIMOS is and asks where we saw it: tell him it is a field of the LNL proposal template (abstract page; normally a local safety contact)."
+   "q": "Spokesperson(s) and GLIMOS for the abstract page? 26 Nov: PF has no idea who the GLIMOS is and asks where we saw it: the abstract must give 'the names of the Group Leader In Matter of Safety (GLIMOS)', on LNL's 'Details for submission' page (lnl.infn.it/en/details-for-submissions), not in the .tex template. Who it should be is not stated: ask LNL (pacbeams@lnl.infn.it)."
   },
   {
    "who": "Pierfrancesco",

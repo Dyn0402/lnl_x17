@@ -54,7 +54,7 @@ Not pushed to Overleaf. The uncommitted gas files (`gas/voltage_plots.py`, `gas/
 another session's and were left alone.
 
 **Next steps:**
-1. Reply to PF: γ energies (17.64 / 18.15 MeV and 478 keV) for the monitor choice; GLIMOS is a field of the LNL template;
+1. Reply to PF: γ energies (17.64 / 18.15 MeV and 478 keV) for the monitor choice; the GLIMOS is asked for on LNL's "Details for submission" page (not in the .tex template);
    still ask the line and 4 µA.
 2. Dylan proof-reads the changed sentences (`git diff HEAD~1 -- proposal/latex/`), then Overleaf (re-clone, diff first).
 3. With 4 µA the run would reach ~1.3 × (below MEG II): decide whether the proposal mentions it.

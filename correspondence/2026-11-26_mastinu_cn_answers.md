@@ -14,8 +14,8 @@ that Dylan sent at 15:49 (the long draft in `2026-11-26_DRAFT_email_mastinu_ques
    asks what γ energy we want to see. (Answer to send: 17.64 and 18.15 MeV, the ground-state γ yield and the
    17.64/18.15 share, and 478 keV for the Li content.)
 6. **Liquid scintillator.** 70 L (we had assumed ~60 L).
-7. **GLIMOS.** He has no idea who it is, and asks where we found it. (It is a field of the LNL proposal template, on the
-   abstract page.)
+7. **GLIMOS.** He has no idea who it is, and asks where we found it. (The abstract must give "the names of the Group Leader In Matter of Safety (GLIMOS)": this is on
+   the LNL page "Details for submission" (https://www.lnl.infn.it/en/details-for-submissions/, re-read 27 Nov), not the .tex template.)
 
 ## Decisions taken from it (Dylan, 26 Nov)
 
@@ -29,4 +29,4 @@ that Dylan sent at 15:49 (the long draft in `2026-11-26_DRAFT_email_mastinu_ques
 
 - Which CN line; whether 4 µA at 1.10 MeV is possible; the D⁺ number when he has it.
 - Which γ monitor (BaF₂ 2 cm or a thicker NaI) once he knows the energies.
-- GLIMOS: who at LNL, now that he knows it is in the template.
+- GLIMOS: who at LNL, now that he knows LNL's submission page asks for it.
