@@ -1,5 +1,61 @@
 # Handoff
 
+## Proposal v1 to Pierfrancesco; L20 same-arm study; references, γ monitor, page audit — updated 2026-11-27 (dylan-MS-7C84)
+
+**Resume:** draft v1 is with Pierfrancesco (sent 27 Nov); next: fold in his comments, then P7 (co-proponents) and R13 (Al holder EPC).
+
+**Goal:** get the LNL PAC proposal (deadline 10 Dec) to a version Pierfrancesco can comment on, with every number and claim
+checked, and the plan page consistent with it.
+
+**Done (27 Nov):**
+- Overleaf kept in sync by git (clone `https://git.overleaf.com/6afdf0e8d237ac71ebb14b1f`, diff against `proposal/latex/`
+  before each push). Dylan edits there often: five rounds of his edits were merged today (last Overleaf commit `3d69b7d`).
+- Beam day = **18 h of CN beam** (`planning/two_arm_estimates.py` OPER_EFF = 0.75): 106 h at 1.10 MeV = 5.9 beam days,
+  2.84 / 3.64 / 4.77 × R(ATOMKI), 260 beam days to 3σ; all figures, proposal, plan, page, x17_facility_search updated.
+- Body now 5 pages (LNL submission page; the template text says 4; last 4-page version `b8c9195`); Figs. 2–4 at full text
+  width; references a standard numbered list, all ten checked on INSPIRE + full texts (`proposal/REFERENCES_CHECK.md`).
+- Trigger text simplified (every arm triggers; no leg/PAIR/prescale in the proposal; the prescale stays in the plan:
+  DREAM 96 % live at 1.10 MeV, 88 % at 441 keV with every single).
+- GLIMOS: from LNL's "Details for submission" page, not the template. Dylan set spokesperson and GLIMOS = P. Mastinu.
+- γ monitor: PF's 2 cm BaF₂ in the proposal (`slot1_feasibility/GAMMA_MONITOR.md`, hand estimates); a 3″×3″ NaI is
+  better; neither separates 17.64 from 18.15 MeV, so the LiOH alarm is the γ₀ yield per µC.
+- **Run L20** (same-arm pairs at 441 keV, `sim2arm/SAME_ARM.md`): ~2 × 10⁵ selected same-arm IPC per beam day on
+  ~5 × 10⁶ pairs from γ conversions in the Cu hemisphere (×22, every angle), θ smeared ~19°. Proposal body + abstract
+  reworded: the same-arm pairs measure the holder's conversions and scattering. Also: the 12 % opposite-arm acceptance is
+  geometric; with the trigger (small plastics) 0.8 % of X17 pairs remain (§7). §8: same ratio at 1.10 MeV, singles rate
+  unchanged, Al holder ~×5 fewer conversions (estimates).
+- Site page audited tab by tab (headless Chrome render): stale beam-day/page-limit/gas/framing text fixed; Predictions
+  tab rerun with L19 and per-beam-day rates (`sim2arm/predictions.py`, `TA_EPC_RUN=L19`); bug fixed (tasks done in
+  plan.py showed as unticked and late).
+
+**In progress / where it stopped:** nothing half-done. No jobs running (L20 clusters 4767948, 4768191 finished clean;
+4767947 was held for memory and removed).
+
+**Next steps:**
+1. Pierfrancesco's comments on v1 (P6). Still to ask him: BaF₂ diameter/PMT, NaI size, a digitizer channel, current
+   measurement on the closed target, CN line, 4 µA, D⁺ level, the hemisphere's measured wall thickness (R14).
+2. Dylan: are P3 (INFN-AAI account + Risorse IT, needed to submit on Indico) and P4 (co-proponents) done? Update plan.py.
+3. P7 circulate to co-proponents; P10 talk to the LNL ⁸Be group (two red markers left in the body).
+4. R13: L19-size γ run in the Al ogive + Cu liner (~5,000 core-h, test cluster first, keep every arm track as L20).
+5. Consider rewording the motivation's "acceptance must be large ... MX17 was designed for these requirements": the
+   two-arm run has 0.8 % for X17 pairs; the sentence fits the four-arm set-up with large plastics.
+6. T5: Geant4 model of the γ monitor once the crystal size is known.
+
+**Gotchas / decisions:**
+- A pair run keeps every event: one sub-run of 10⁵ pairs needs ~5 GB in the reduction (held at 3 GB). Use sub-runs of
+  2 × 10⁴ (`submit_l20.sh ... 20000 5`).
+- Sourcing `MX17_Full_Geant/scripts/setup_lxplus.sh` overwrites shell variables named BASE / CFG: use other names.
+- The abstract page is full: the author list will push the table footnote to page 2 (`make` now prints the abstract's
+  page count).
+- An energy window does not apply to same-arm pairs: one arm holds only 3–12 MeV of a 16.6 MeV pair.
+
+**Key files & commands:**
+- `sim2arm/same_arm.py --dir $WORK_DATA/lnl_x17/l20` (tables on EOS `/eos/user/d/dneff/x17/l20/`); lxplus scripts
+  `sim2arm/lxplus/{submit_l20.sh,run_job_2trk.sh,twotrack_reduce.py,merge_l20.py}`.
+- `WORK_DATA=/media/ucla/work TA_EPC_RUN=L19 ~/PycharmProjects/nTof_x17/.venv/bin/python sim2arm/predictions.py`
+- `python3 proposal/figsrc/make_figures.py && make -C proposal/latex`; `python3 site/build_page.py`, then in
+  dylan-cern-site `python3 scripts/build.py && scripts/deploy-eos.sh`.
+
 ## Gas follow-up: premixes, drift HV history, plots against drift voltage — updated 2026-11-27 (dylan-MS-7C84)
 
 **Resume:** `gas/GAS_STUDY.md` §10–13 done; next is the bench test M5 (drift to 1200 V in Ar/CH₄/CO₂ 93/5/2 and Ar/CO₂/iC₄H₁₀ 93/5/2).

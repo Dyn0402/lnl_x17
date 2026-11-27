@@ -14,6 +14,13 @@ and the page; it does not duplicate those studies.
 
 ## Read this first (2026-11-18, reach updated 2026-11-19)
 
+- **27 Nov (later): same-arm pairs and the trigger acceptance (run L20, `sim2arm/SAME_ARM.md`).** At 441 keV ~2 × 10⁵
+  selected same-arm internal pairs per beam day sit on ~5 × 10⁶ pairs from γ rays converting in the Cu hemisphere (×22 at
+  every angle, no cut separates them); the same-arm sample measures the holder's conversions and scattering. Same ratio at
+  1.10 MeV (estimate); the singles rate (and DREAM live time) already included them; the Al holder would cut them ~×5
+  (estimate, R13). The 12 % opposite-arm acceptance is the TPCs' geometric one: with the trigger (small plastics) 0.8 % of
+  X17 pairs remain (all rates include it). Also 27 Nov: references checked (`proposal/REFERENCES_CHECK.md`), γ monitor =
+  PF's 2 cm BaF₂ (`slot1_feasibility/GAMMA_MONITOR.md`), site page audited, draft sent to Pierfrancesco.
 - **27 Nov: a beam day is 18 h of CN beam** (was 24 h at 80 %, 19.2 h). 8 beam days = 144 h; 5.9 beam days at 1.10 MeV
   give **2.8 × R(ATOMKI)** (3.6 / 4.8 × as at n_TOF / no liquid), 260 beam days to 3σ. The proposal body now uses the 5
   pages the LNL submission page allows: figures at full width, a standard reference list.

@@ -639,7 +639,7 @@
    "due": "2026-12-05",
    "who": "Dylan",
    "status": "todo",
-   "t": "External conversions of the lighter Al holder (Al ogive + Cu liner) at L19 statistics (~5,000 core-h, test cluster first): R10's 21 days to 3σ (26 beam days) and Fig. 4's Al-holder steps rest on 2 simulated EPC events, and L19 showed the EPC shape is signal-like (Cu: 151 → 195 d). Needed before the text freeze (P8) if the Al holder stays in the proposal"
+   "t": "External conversions of the lighter Al holder (Al ogive + Cu liner) at L19 statistics (~5,000 core-h, test cluster first): R10's 21 days to 3σ (26 beam days) and Fig. 4's Al-holder steps rest on 2 simulated EPC events, and L19 showed the EPC shape is signal-like (Cu: 151 → 195 d). Needed before the text freeze (P8) if the Al holder stays in the proposal. Keep every arm track (twotrack_reduce.py, as L20) so the same-arm conversions come out too: estimate ×4–5 fewer conversions and ~half the scattering of the Cu hemisphere (SAME_ARM.md §8)"
   },
   {
    "id": "R14",

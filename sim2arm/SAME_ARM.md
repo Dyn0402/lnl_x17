@@ -119,3 +119,27 @@ For X17 pairs (two leptons of about 8 MeV) the trigger keeps 1 in 12 of the pair
 pairs it keeps far fewer, because their energy sharing is asymmetric and a lepton below ~3 MeV never makes a leg (0 % at
 1–3 MeV, 11 % at 3–6 MeV, ~25 % above 6 MeV). This is why "large plastic scintillators" is a step of the road in Fig. 4.
 The proposal's Acceptance paragraph now says this (0.8 % for X17 pairs, all rates include it).
+
+## 8. Follow-up questions (27 Nov): 1.10 MeV, the singles rate, and the Al holder
+
+1. **The same-arm conversions are not special to 441 keV (estimate).** They are the copper converting the target's own γ
+   rays: a 17–18 MeV γ ray converts in the 300 µm wall about 1.5 % of the time, against α = 3.4 × 10⁻³ (M1) or
+   4.4 × 10⁻³ (E1) for an internal pair, nearly the same for every line (x17_facility_search `lnl_rates`). The ratio is
+   therefore about the same at 1.10 MeV. Only the γ rate changes: 2.5 × 10⁴ /s at 1.10 MeV (8.5 × 10³ at 18.15 MeV,
+   1.7 × 10⁴ at 15.1 MeV) against 8.1 × 10⁴ /s at 441 keV (`out/predictions.json`). Scaled from L20, a beam day at
+   1.10 MeV would give ~1.5 × 10⁶ same-arm conversion pairs and ~7 × 10⁴ same-arm internal pairs. L19 cannot check this
+   directly, since it kept only the dominant track per arm.
+2. **The singles trigger rate does not change.** The single-arm rates of the plan (218 Hz per arm at 441 keV, 67 Hz at
+   1.10 MeV; run L18) are a γ-ray simulation through the built hemisphere, so the conversion pairs are already in them.
+   L20 gives 208–211 legs/s per arm at 441 keV and 1 µA; 55 % of them (~115 Hz) start with a conversion in the Cu
+   hemisphere. The selected same-arm pairs (~74 /s for both arms) are a subset. The DREAM live time stays 96 % at
+   1.10 MeV and 88–89 % at 441 keV with every single-arm trigger recorded.
+3. **The lighter Al holder (Al ogive, 300 µm wall, + 12 µm Cu liner; R10) would cut the conversions ~×5 (estimate).**
+   Wall in radiation lengths: 0.3/14.4 = 0.021 for the Cu hemisphere, against 0.3/89 + 0.012/14.4 = 0.0042 for the Al
+   ogive and liner (×0.20; oblique crossings make it ×4–5 in practice). Multiple scattering scales as the square root:
+   ~5–6° instead of ~12° for an 8 MeV lepton. With the same internal pairs, the same-arm sample at 441 keV would hold
+   ~4 conversion pairs per internal pair instead of ~22. In opposite arms the gain is larger, since a conversion pair
+   needs a large scatter to split between the arms: R10's tables (3.2 × 10⁸ γ each) keep 25 conversion events in the
+   horizontal pair's rows against 258 for the hemisphere (×10), but only 2 survive the full selection (task R13). R10
+   gives 28 instead of 260 beam days to 3σ, 0.9 × instead of 2.8 × R(ATOMKI) in the run. An L19-size γ run in the Al
+   holder, keeping every arm track as L20 does, would settle both the opposite-arm and the same-arm numbers (R13).
