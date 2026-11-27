@@ -313,7 +313,7 @@ def fig_acceptance():
     bx.set_xticks([0, 30, 60, 90, 120, 150, 180])
     bx.set_xlabel(r"opening angle $\theta$ (deg)")
     bx.set_ylabel(r"pairs per 5$^\circ$")
-    lg = bx.legend(frameon=True, fancybox=True, framealpha=0.7, facecolor="white", edgecolor="none", loc="upper right",
+    lg = bx.legend(frameon=True, fancybox=True, framealpha=0.8, facecolor="white", edgecolor="none", loc="upper right",
                    bbox_to_anchor=(1.0, 1.0), handlelength=1.3, borderaxespad=0.0, borderpad=0.15, labelspacing=0.2,
                    handletextpad=0.5)  # 27 Nov: tight white box over the X17 band, pushed into the top-right corner
     lg.get_frame().set_boxstyle("round", pad=0.0, rounding_size=0.3)
