@@ -9,6 +9,7 @@ all: proposal.pdf main.pdf
 	$(TEX) $< >/dev/null && $(TEX) $< >/dev/null
 proposal.pdf: abstract.pdf body.pdf
 	pdfunite abstract.pdf body.pdf proposal.pdf
+	@echo "abstract: $$(pdfinfo abstract.pdf | awk '/Pages/{print $$2}') page(s) (limit 1)"
 	@echo "body: $$(pdfinfo body.pdf | awk '/Pages/{print $$2}') pages (limit 5)"
 zip: proposal.pdf main.pdf
 	mkdir -p ../out && rm -f ../out/lnl_x17_pac_proposal.zip && zip -q ../out/lnl_x17_pac_proposal.zip main.tex abstract.tex body.tex preamble.tex abstract_content.tex body_content.tex macros.tex $(FIGS) README_overleaf.txt
