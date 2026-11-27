@@ -101,3 +101,21 @@ concentrated at small angles", the Fig. 2(b) sentence and the red to-do:
 - Data: `/eos/experiment/ntof/data/x17/lnl/L20/` (parts), merged tables `/eos/user/d/dneff/x17/l20/{M1_17.64,gam_441}.npz`
   (desktop copy `$WORK_DATA/lnl_x17/l20/`).
 - `same_arm.py` → `out/same_arm_l20.csv`, `out/same_arm_l20_cutflow.csv`, `out/figures/same_arm_l20.png`.
+
+## 7. Addendum: the trigger's share of the opposite-arm acceptance (27 Nov)
+
+Dylan asked whether the large-angle arguments need a correction too. The opposite-arm rates and limits (proposal Fig. 3,
+Fig. 4, the 160 pairs at 441 keV) come from the full Geant4 chain, with the holder, the trigger and the selection, so they
+stand. However, the proposal quoted Fig. 2(a)'s "acceptance of about 12 % in the X17 region" without saying that it is the
+geometric acceptance of the TPCs alone. A trigger leg needs the SiPM wall **and** a plastic scintillator, and the small
+plastics (20 × 30 cm, two per arm, about twice as far from the target as the TPCs) cover only part of the TPC solid angle.
+
+| sample (arms 0 + 1) | lepton in each drift gap | trigger in both arms | + a track in both arms |
+|---|---|---|---|
+| X17, m = 16.8 MeV (L18, 3 × 10⁶) | 9.7 % | 0.82 % | 0.81 % |
+| M1 IPC 17.64 MeV emitted at 125–160° (L20) | | 0.10 % | 0.10 % |
+
+For X17 pairs (two leptons of about 8 MeV) the trigger keeps 1 in 12 of the pairs that reach both TPCs. For the internal
+pairs it keeps far fewer, because their energy sharing is asymmetric and a lepton below ~3 MeV never makes a leg (0 % at
+1–3 MeV, 11 % at 3–6 MeV, ~25 % above 6 MeV). This is why "large plastic scintillators" is a step of the road in Fig. 4.
+The proposal's Acceptance paragraph now says this (0.8 % for X17 pairs, all rates include it).

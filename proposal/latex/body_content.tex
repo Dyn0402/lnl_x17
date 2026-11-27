@@ -99,11 +99,15 @@ histogram shows all emitted pairs, and the lines show the pairs that reach the T
 \end{figure}
 
 \textbf{Acceptance.} Figure~\ref{fig:acc}(a) shows the limited geometric acceptance of the two arm configuration. Pairs with one lepton in
-each arm have opening angles above $100^\circ$, with an acceptance of about 12\,\% in the \Xs{} region (125--$160^\circ$).
-Pairs with both leptons in the same arm have opening angles below $90^\circ$. Together, the two cover much of the full opening angle spectrum. The same-arm pairs are useful because IPC pairs are concentrated at small angles.
-Figure~\ref{fig:acc}(b) shows that in one beam day at 441~keV about $1.6\times10^6$ internal pairs reach a single arm, against
-$3.6\times10^4$ in opposite arms. This also tests the reconstruction of two close tracks in one TPC (4~cm apart at $\theta = 10^\circ$). \todo{Geant4 selection of same-arm pairs, with
-the holder and the trigger: in progress}
+each arm have opening angles above $100^\circ$, with a geometric acceptance of the TPCs of about 12\,\% in the \Xs{} region (125--$160^\circ$).
+The trigger also needs each lepton to cross a plastic scintillator, and the small plastics cover only part of the TPCs.
+In the Geant4 simulation 0.8\,\% of the \Xs{} pairs have a trigger and a track in both arms. All rates below include this.
+Pairs with both leptons in the same arm have opening angles below $90^\circ$. Together, the two cover much of the full opening angle spectrum. Figure~\ref{fig:acc}(b) shows that in one beam day at
+441~keV about $1.6\times10^6$ internal pairs reach a single arm, of which the Geant4 simulation selects about $2\times10^5$. However, about 20 times more same-arm pairs come from
+$\gamma$ rays that convert in the copper holder, and no cut separates them from the internal pairs. For this reason the
+same-arm pairs measure the external conversions in the holder and the scattering of the leptons in its wall, which
+shape the background at 1.10~MeV. They also test the reconstruction of two close tracks in one TPC (4~cm apart at
+$\theta = 10^\circ$).
 
 \begin{figure}[t]
 \centering
