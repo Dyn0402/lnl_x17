@@ -362,7 +362,7 @@ HARDWARE = [
          who="Pierfrancesco", state="to decide", need="2027-06-01", place=["stand"], tasks=["L3", "R3"],
          note="Two opposite arms, faces at ±204 mm from the beam axis. It should roll 90° about the beam: vertical for the cosmic nights, horizontal for the beam days (sim2arm, 19 Nov).",
          detail="Opposite arms are best (turning them toward 140° costs ×1.1–2.5 in days, run L16). Its material goes into the Geant4 geometry (R3)."),
-    dict(id="gmon", part="γ-yield monitor (BaF₂ 2 cm or NaI(Tl))", qty="1", grp="Target & beam line", status="borrow", org="INFN / LNL", src="Pierfrancesco: a 2 cm BaF₂, or a NaI(Tl) if not too thick (26 Nov)",
+    dict(id="gmon", part="γ-yield monitor (BaF₂ 2 cm or NaI(Tl))", qty="1", grp="Target & beam line", status="borrow", org="INFN / LNL", src="Pierfrancesco: a 2 cm BaF₂, or a NaI(Tl) if not too thick (26 Nov). Either works as a γ₀ counter; a NaI ≥ 3″×3″ is better (slot1_feasibility/GAMMA_MONITOR.md, 27 Nov)",
          who="Pierfrancesco", state="to ask", need="2027-06-01", place=["target"], tasks=["I3"],
          note="The target's daily health (LiOH conversion) and a γ₀ cross-check, independent of the arms. Not in the set-up so far (sim2arm §7.5).",
          detail="One spare digitizer channel."),

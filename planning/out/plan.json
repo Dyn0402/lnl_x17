@@ -1897,7 +1897,7 @@
    "grp": "Target & beam line",
    "status": "borrow",
    "org": "INFN / LNL",
-   "src": "Pierfrancesco: a 2 cm BaF₂, or a NaI(Tl) if not too thick (26 Nov)",
+   "src": "Pierfrancesco: a 2 cm BaF₂, or a NaI(Tl) if not too thick (26 Nov). Either works as a γ₀ counter; a NaI ≥ 3″×3″ is better (slot1_feasibility/GAMMA_MONITOR.md, 27 Nov)",
    "who": "Pierfrancesco",
    "state": "to ask",
    "need": "2027-06-01",

@@ -157,7 +157,7 @@ Table: days of beam to 3σ at R(ATOMKI) and the expected 90 % CL limit after the
    thickness in the spot without an absolute efficiency. This is one more reason to ask for the H₂⁺ day. Without H₂⁺,
    the 478 keV γ ray of ⁷Li(p,p′γ) gives the lithium content through its known thick-target yield (PIGE), with the
    efficiency of the monitor at 478 keV and the cross section as the uncertainties.
-2. **Watch the 17.64 / 18.15 MeV ratio continuously.** A LaBr₃ separates the two lines. The 17.64 MeV share is the
+2. **Watch the 17.64 / 18.15 MeV ratio continuously.** A LaBr₃ separates the two lines. **(27 Nov: neither the 2 cm BaF₂ nor a 3″ NaI offered by Pierfrancesco can separate them; use the γ₀ yield per µC and γ₁/γ₀ instead, GAMMA_MONITOR.md §3.)** The 17.64 MeV share is the
    alarm for a film that has started to reach 441 keV (TARGET_REVIEW §4.2 item 3). Replace the film when the share
    passes a few per cent.
 3. **Map the film before it goes in, if LNL can.** An ion-beam analysis (RBS, NRA or PIGE) of each film at a few spots
