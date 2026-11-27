@@ -1,0 +1,7 @@
+level,gam: conversion in Cu hemisphere,"gam: conversion in TPC (frame, window, cathode, gas, PCB)",gam: conversion in chamber wall + beam line,"gam: conversion, elsewhere","gam: other (Compton, δ rays)",gam_day,gam_mc,ipc_day,ipc_mc,ipc_other_day
+trig + 2 tracks,5.456e+06,1.816e+05,1.953e+05,8.161e+04,6.411e+06,1.233e+07,485843,2.979e+05,49729,4.261e+05
++ pointing 15°,4.078e+06,1.295e+05,1.353e+05,6.182e+04,1.061e+06,5.466e+06,215440,2.155e+05,35975,7.09e+04
++ separation > 1 cm,4.037e+06,5454,1.345e+05,4.374e+04,5.94e+05,4.815e+06,189779,2.146e+05,35836,3.864e+04
++ separation > 2 cm,3.906e+06,583.5,1.32e+05,2.841e+04,2.913e+05,4.358e+06,171783,2.119e+05,35382,1.872e+04
+ref + E_arm > 5 MeV,3.402e+06,4541,7.707e+04,3.914e+04,4.368e+05,3.96e+06,156092,1.72e+05,28720,2.755e+04
+"ref, pointing 3°",5.124e+06,7585,1.82e+05,5.513e+04,6.97e+05,6.066e+06,239107,2.777e+05,46371,4.582e+04

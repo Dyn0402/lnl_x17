@@ -413,8 +413,8 @@
    "ws": "sim",
    "due": "2026-12-05",
    "who": "Dylan",
-   "status": "active",
-   "t": "Same-arm pairs at 441 keV (run L20, 27 Nov: M1 IPC 17.64 MeV and the 441 keV γ rays, every arm track kept; sim2arm/same_arm.py): selected IPC vs external-conversion background per beam day, θ resolution (Cu scattering ~12° per lepton). First look: conversions ~20× the IPC. Decides the proposal's same-arm sentence (red to-do)"
+   "status": "done",
+   "t": "Same-arm pairs at 441 keV (run L20, 27 Nov: M1 IPC 17.64 MeV and the 441 keV γ rays, every arm track kept; sim2arm/same_arm.py): selected IPC vs external-conversion background per beam day, θ resolution (Cu scattering ~12° per lepton). Done 27 Nov (sim2arm/SAME_ARM.md): ~2×10⁵ selected same-arm IPC per beam day on ~5×10⁶ pairs from γ conversions in the Cu hemisphere (×22, every angle); θ smeared ~19° by the Cu. The same-arm sample measures the holder's conversions and scattering, not the IPC shape. Proposed wording for the proposal in SAME_ARM.md §4"
   },
   {
    "id": "R3",
