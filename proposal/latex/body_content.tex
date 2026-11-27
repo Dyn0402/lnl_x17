@@ -146,7 +146,7 @@ external conversions peak at 140--$160^\circ$. For this reason the last day, wit
 measures them directly (about 1100 pairs). An \Xs{} signal at \Ratk{} would add 12 pairs, so we do not expect to see it in this run.
 
 \textbf{What counts as success.} For each measurement we compare the measured opening-angle distribution with the
-Geant4 prediction, in shape and in absolute rate. The rate is normalised to the $\gamma$-ray yield, which a $\gamma$ detector
+Geant4 prediction, in shape and in absolute rate. The rate is normalised to the $\gamma$-ray yield, which a BaF$_2$ crystal
 monitors. 
 The goal of this measurement is to validate our simulation expectations and demonstrate the feasibility of this setup for the subsequent physics measurement. 
 
@@ -159,7 +159,12 @@ the beam current from 0.05 to 1~\si{\micro\ampere}, measure the trigger rates, t
 and then take data at 1.10~MeV. Day 2 is the calibration at 441~keV, days 3--7 are at 1.10~MeV, and on day 8 the arms are
 at $90^\circ$ to each other for the external conversions. At 1~\si{\micro\ampere} the target emits $5.4\times10^{4}$
 ground-state $\gamma$ rays per second at 441~keV and $8.5\times10^{3}$ at 1.10~MeV (11~\si{\micro\metre} film). Geant4
-predicts a trigger rate of 218~Hz per arm at 441~keV and 67~Hz at 1.10~MeV. Cosmic rays give 1.9~Hz of triggers in both arms with the arms vertical. \todo{$\gamma$ monitor: a BaF$_2$ (2~cm) or a NaI(Tl) from LNL}
+predicts a trigger rate of 218~Hz per arm at 441~keV and 67~Hz at 1.10~MeV. Cosmic rays give 1.9~Hz of triggers in both arms with the arms vertical.
+A BaF$_2$ crystal, 2~cm thick, about 20~cm from the target and away from the arms, monitors the $\gamma$-ray yield.
+It counts the 17--18~MeV $\gamma$ rays above a threshold of a few MeV, with a statistical error well below 1\,\% per
+beam day. These counts normalise every pair rate. The ratio of the counts per \si{\micro\coulomb} at 1.10~MeV and at
+441~keV gives the lithium thickness in the beam spot, since the yield on the narrow 441~keV resonance does not depend on
+the thickness. At 1.10~MeV the crystal also sees the 478~keV line, a second measure of the lithium in the spot.
 
 \begin{figure}[t]
 \centering
@@ -185,13 +190,10 @@ target, for 7 beam days. If the CN can provide it, H$_2^+$ at 0.883~MV, up to 0.
 \item \textbf{Target:} metallic lithium (natural, 92.4\,\% \Li{}, free of boron), 10--12~\si{\micro\metre}
 (0.6~mg/cm$^2$), on a copper backing of 300~\si{\micro\metre} (the target holder).
 \item \textbf{Experimental setup:} MX17, two arms, on about $1.5\times1.5$~m$^2$ of free floor around the end of the
-beam line. Installation and cosmic-ray nights: about two weeks without beam.
+beam line. 
 \end{itemize}
 
-\textbf{Readiness and safety.} One chamber is ready, and the drift window of the other is repaired at CEA Saclay in
-February and March 2027. Some PMTs are still to be borrowed. Both proton energies are below the
-\Li$(p,n)$ threshold of 1.88~MeV, so the target produces no neutrons. At 1.10~MeV the target also emits about $10^7$
-$\gamma$ rays per second of 478~keV from \Li$(p,p'\gamma)$ (about 1~\si{\micro\sievert}/h at 1~m). The Micromegas use a flammable premixed Ar/iC$_4$H$_{10}$ (95/5) gas at about 1~L/h, led to an exhaust. \todo{LNL rules}
+\textbf{Readiness and safety.} One TPC chamber is ready, and a simple drift window repair of the other will be done at CEA Saclay in February 2027. Some PMTs and scintillator readouts are still to be borrowed. At 1.10~MeV the target also emits about $10^7$ $\gamma$ rays per second of 478~keV from \Li$(p,p'\gamma)$ (about 1~\si{\micro\sievert}/h at 1~m). We plan to use a non-flammable pre-mixed gas for the Micromegas (Ar/CO$_2$/iC$_4$H$_{10}$, 93/5/2).
 
 \begin{thebibliography}{99}
 \bibitem{Kra16} A.J.~Krasznahorkay \emph{et al.}, Phys.\ Rev.\ Lett.\ \textbf{116}, 042501 (2016).

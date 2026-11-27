@@ -11,8 +11,9 @@ that Dylan sent at 15:49 (the long draft in `2026-11-26_DRAFT_email_mastinu_ques
 4. **Beam spot.** "5 mm diameter is even more than the FWHM": the spot FWHM is below 5 mm. Our simulations use a Gaussian
    with σ = 2 mm (FWHM 4.7 mm), so they are about right or slightly pessimistic. Up to 4 µA: not answered.
 5. **γ monitor.** He has a BaF₂, 2 cm thick. Otherwise he can probably get a NaI(Tl), if it need not be too thick. He
-   asks what γ energy we want to see. (Answer to send: 17.64 and 18.15 MeV, the ground-state γ yield and the
-   17.64/18.15 share, and 478 keV for the Li content.)
+   asks what γ energy we want to see. (Answer to send, corrected 27 Nov: 17.64 and 18.15 MeV counted above ~5 MeV, the ground-state
+   γ yield, and 478 keV for the Li content. A 2 cm BaF₂ cannot separate 17.64 from 18.15 MeV; the proposal uses his BaF₂.
+   `slot1_feasibility/GAMMA_MONITOR.md`.)
 6. **Liquid scintillator.** 70 L (we had assumed ~60 L).
 7. **GLIMOS.** He has no idea who it is, and asks where we found it. (The abstract must give "the names of the Group Leader In Matter of Safety (GLIMOS)": this is on
    the LNL page "Details for submission" (https://www.lnl.infn.it/en/details-for-submissions/, re-read 27 Nov), not the .tex template.)

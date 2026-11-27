@@ -647,7 +647,7 @@
    "due": "2027-05-31",
    "who": "Dylan",
    "status": "todo",
-   "t": "Day-1 film check procedure (LI_THICKNESS.md §6): γ₀ yield per µC at 1.10 MeV vs 441 keV with the γ monitor (BaF₂ 2 cm or NaI(Tl) from PF, 26 Nov; the ratio gives the thickness in the spot), 478 keV PIGE as the fallback without H₂⁺, the 17.64/18.15 share as the LiOH alarm; replace a film below ~0.7 × nominal or above a few % 17.64 share. Write the thresholds into the run plan; needs the monitor's efficiency at 478 keV and 17–18 MeV"
+   "t": "Day-1 film check procedure (LI_THICKNESS.md §6): γ₀ yield per µC at 1.10 MeV vs 441 keV with the γ monitor (PF's BaF₂ 2 cm, 26 Nov; the ratio gives the thickness in the spot), 478 keV PIGE as the fallback without H₂⁺, the γ₀ yield per µC and γ₁/γ₀ as the LiOH alarm (a 2 cm BaF₂ cannot separate 17.64 from 18.15 MeV, GAMMA_MONITOR.md); replace a film below ~0.7 × nominal or whose yield per µC jumps. Write the thresholds into the run plan; needs the monitor's efficiency at 478 keV and 17–18 MeV"
   },
   {
    "id": "T2",
@@ -1892,7 +1892,7 @@
   },
   {
    "id": "gmon",
-   "part": "γ-yield monitor (BaF₂ 2 cm or NaI(Tl))",
+   "part": "γ-yield monitor: PF's BaF₂, 2 cm thick (baseline, in the proposal 27 Nov); a NaI(Tl) ≥ 3″×3″ if he finds one",
    "qty": "1",
    "grp": "Target & beam line",
    "status": "borrow",
@@ -1907,7 +1907,7 @@
    "tasks": [
     "I3"
    ],
-   "note": "The target's daily health (LiOH conversion) and a γ₀ cross-check, independent of the arms. Not in the set-up so far (sim2arm §7.5).",
+   "note": "Normalises every pair rate (γ₀ above a few MeV), gives the film thickness from the γ₀ yield per µC at 1.10 MeV / 441 keV, and the 478 keV PIGE line. BaF₂ 2 cm at ~20 cm, axis horizontal (cosmic muons out of the window), away from the arms: ~7 γ₀/s at 1.10 MeV, ~40/s at 441 keV, ~2.4×10⁴/s of 478 keV (dead-time correction). It cannot separate 17.64 from 18.15 MeV. Hand estimates, slot1_feasibility/GAMMA_MONITOR.md (27 Nov); Geant4 model of the crystal to do.",
    "detail": "One spare digitizer channel.",
    "cash": 0,
    "fallback": 0,
@@ -2147,7 +2147,7 @@
   },
   {
    "who": "Pierfrancesco",
-   "q": "γ-yield monitor: PF (26 Nov) has a BaF₂, 2 cm thick, or can get a NaI(Tl) if it need not be too thick; he asks the γ energies. Answer him: 17.64 and 18.15 MeV (γ₀ yield and the 17.64/18.15 share, the alarm for a film that reaches 441 keV) and 478 keV (Li content, PIGE); ~10⁴ γ/s of 17–18 MeV at 1 µA, so a thin crystal at a few tens of cm is enough for the yield, but 2 cm BaF₂ will not separate 17.64 from 18.15 MeV (a ≥ 3″ NaI helps). Decide which (T4)."
+   "q": "γ-yield monitor: PF (26 Nov) has a BaF₂, 2 cm thick, or can get a NaI(Tl) if it need not be too thick; he asks the γ energies. Answer him: 17.64 and 18.15 MeV counted above ~5 MeV (the γ₀ yield) and 478 keV at 1.10 MeV (Li content, PIGE). The proposal uses his BaF₂ (27 Nov); a NaI ≥ 3″×3″ would be better (6× the rate, partial γ₀/γ₁ separation), GAMMA_MONITOR.md. Still ask: the BaF₂ diameter and PMT, the NaI size, a free digitizer channel, and how the current is measured on the closed target (the yield per µC is the LiOH alarm)."
   },
   {
    "who": "Pierfrancesco",
