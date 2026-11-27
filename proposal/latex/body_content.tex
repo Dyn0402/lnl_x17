@@ -30,7 +30,7 @@
 \panel[north]{b}{\includegraphics[height=4.25cm]{figures/fig1b_ntof_fans.png}}\hfill
 \panel{c}{\includegraphics[height=4.25cm]{figures/fig_event.pdf}}
 \caption{(a) The MX17 apparatus at CERN n\_TOF in 2026, seen from above. (b) Data from n\_TOF (run 145, August 2026).
-Each of the 15\,930 tracks of two opposite arms is drawn from the readout plane to its closest approach to the beam
+Each of the 16k tracks of two opposite arms is drawn from the readout plane to its closest approach to the beam
 axis. The tracks cross at the $^3$He target. (c) Geant4 simulation of the two-arm set-up proposed here, seen along the
 beam. The red and blue lines are the $e^+$ and the $e^-$ of an \Xs{} decay ($\theta = 151^\circ$), and the thick black
 segments are the parts that the TPCs measure. The dashed line is a cosmic muon from another event, which passes 9~cm
@@ -68,41 +68,39 @@ the cosmic rays. A Geant4 simulation predicts the opening-angle distribution of 
 the physics result is only as good as this simulation. The aim of this run is to test it. We measure the opening-angle
 distributions of known processes and compare them with Geant4. If they agree, we know the acceptance, the angular
 response and the backgrounds of the apparatus, and we can design the physics run with confidence. If not, the difference
-shows what must be understood first. This run is therefore not an \Xs{} search.
+shows what must be understood first. 
 
 \textbf{Apparatus.} Figure~\ref{fig:setup}(a) shows the MX17 apparatus as it took data at n\_TOF in 2026. Each arm
 contains, going outward from the target, a Micromegas time projection chamber (TPC), a wall of plastic scintillating
-bars read out by SiPMs, plastic scintillators read out by PMTs, and a liquid scintillator cell. The TPC has an active
+bars read out by SiPMs, plastic scintillators read out by PMTs, and a liquid scintillator cell read out by PMT. The TPC has an active
 area of $40\times36$~cm$^2$ and a 3~cm drift gap. It measures a segment of each track with an angular resolution of
 about 1$^\circ$ for cosmic-ray muons and an efficiency above 90\,\%. The scintillators provide the trigger, the time and
-the energy. Figure~\ref{fig:setup}(b) shows the tracks measured at n\_TOF by two opposite arms. The tracks point back to
-the target, which is the first evidence that the system works.
+the energy for each lepton. Figure~\ref{fig:setup}(b) shows the tracks measured at n\_TOF by two opposite arms. The tracks point back to
+the target, showing early evidence that the system works as intended as analysis is ongoing.
 
-At LNL the beam, the target and the $\gamma$-ray rates are new. We place the two best arms on opposite sides of the
+At LNL the beam, the target and the $\gamma$-ray rates are new compared to n\_TOF. We place the two best arms on opposite sides of the
 beam, with the TPC faces at 20~cm from the target (Fig.~\ref{fig:setup}(c)). The opening angle of a pair is the angle
 between its two TPC segments, as seen from the target. As at n\_TOF, the trigger is a 20~ns coincidence of the SiPM wall
 and a plastic scintillator. Every arm with such a coincidence triggers the readout, so single-arm events are recorded too.
 The target is a metallic lithium film, 10--12~\si{\micro\metre} thick, pressed in the argon glovebox of the LNL CN target
 laboratory. It sits at the apex of the existing target holder, a copper hemisphere with a 300~\si{\micro\metre} wall that
-closes the beam line (inset of Fig.~\ref{fig:setup}(c)). The copper scatters the leptons, which smears the opening angle,
-and it converts $\gamma$ rays into pairs. The run measures both effects.
+closes the beam line (inset of Fig.~\ref{fig:setup}(c)). The copper scatters leptons, which smears the opening angle,
+and converts $\gamma$ rays into $e^+e^-$ pairs. This run would measure both effects.
 
 \begin{figure}[t]
 \centering
 \includegraphics[width=0.92\textwidth]{figures/fig_acceptance.pdf}
 \caption{Geometric acceptance of the two-arm set-up: a straight lepton from the target is accepted if it crosses the
 active volume of a TPC. (a) Accepted fraction of pairs emitted isotropically and uniformly in opening angle. The blue line counts pairs with one lepton in each arm, and
-the orange line pairs with both leptons in the same arm. The red band marks 125--$160^\circ$, in both panels. (b) The M1 internal pairs of
+the orange line pairs with both leptons in the same arm. The red band marks the 125--$160^\circ$ \Xs{}  region in both panels. (b) The M1 internal pairs of
 the 17.64~MeV transition in one beam day at $E_p = 441$~keV, 1~\si{\micro\ampere}, both leptons above 1~MeV. The grey
-histogram shows all emitted pairs, and the lines show the pairs that reach the TPCs. Scattering in the holder, trigger and
-selection are not included.}
+histogram shows all emitted pairs, and the lines show the pairs that reach the TPCs (no scattering modeled).}
 \label{fig:acc}
 \end{figure}
 
-\textbf{Acceptance.} Figure~\ref{fig:acc}(a) shows the geometric acceptance of the two arms. Pairs with one lepton in
+\textbf{Acceptance.} Figure~\ref{fig:acc}(a) shows the limited geometric acceptance of the two arm configuration. Pairs with one lepton in
 each arm have opening angles above $100^\circ$, with an acceptance of about 12\,\% in the \Xs{} region (125--$160^\circ$).
-Pairs with both leptons in the same arm have opening angles below $90^\circ$. Together the two cover the full range of
-opening angles. The same-arm pairs are useful because the IPC pairs are concentrated at small angles.
+Pairs with both leptons in the same arm have opening angles below $90^\circ$. Together, the two cover much of the full opening angle spectrum. The same-arm pairs are useful because IPC pairs are concentrated at small angles.
 Figure~\ref{fig:acc}(b) shows that in one beam day at 441~keV about $1.7\times10^6$ internal pairs reach a single arm, against
 $4\times10^4$ in opposite arms. The single-arm trigger records them. This also tests the reconstruction of two close tracks in one TPC (4~cm apart at $\theta = 10^\circ$). \todo{Geant4 selection of same-arm pairs, with
 the holder and the trigger: in progress}
