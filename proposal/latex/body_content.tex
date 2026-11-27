@@ -80,8 +80,8 @@ the target, which is the first evidence that the system works.
 
 At LNL the beam, the target and the $\gamma$-ray rates are new. We place the two best arms on opposite sides of the
 beam, with the TPC faces at 20~cm from the target (Fig.~\ref{fig:setup}(c)). The opening angle of a pair is the angle
-between its two TPC segments, as seen from the target. The trigger is that of the n\_TOF run. A \emph{leg} is a 20~ns
-coincidence of the SiPM wall and a plastic scintillator in one arm, and the PAIR trigger requires a leg in both arms.
+between its two TPC segments, as seen from the target. As at n\_TOF, the trigger is a 20~ns coincidence of the SiPM wall
+and a plastic scintillator. Every arm with such a coincidence triggers the readout, so single-arm events are recorded too.
 The target is a metallic lithium film, 10--12~\si{\micro\metre} thick, pressed in the argon glovebox of the LNL CN target
 laboratory. It sits at the apex of the existing target holder, a copper hemisphere with a 300~\si{\micro\metre} wall that
 closes the beam line (inset of Fig.~\ref{fig:setup}(c)). The copper scatters the leptons, which smears the opening angle,
@@ -104,8 +104,7 @@ each arm have opening angles above $100^\circ$, with an acceptance of about 12\,
 Pairs with both leptons in the same arm have opening angles below $90^\circ$. Together the two cover the full range of
 opening angles. The same-arm pairs are useful because the IPC pairs are concentrated at small angles.
 Figure~\ref{fig:acc}(b) shows that in one beam day at 441~keV about $1.7\times10^6$ internal pairs reach a single arm, against
-$4\times10^4$ in opposite arms. To record them we add a single-arm trigger with a high energy threshold, prescaled if
-needed. This also tests the reconstruction of two close tracks in one TPC (4~cm apart at $\theta = 10^\circ$). \todo{Geant4 selection of same-arm pairs, with
+$4\times10^4$ in opposite arms. The single-arm trigger records them. This also tests the reconstruction of two close tracks in one TPC (4~cm apart at $\theta = 10^\circ$). \todo{Geant4 selection of same-arm pairs, with
 the holder and the trigger: in progress}
 
 \begin{figure}[t]
@@ -161,8 +160,7 @@ the beam current from 0.05 to 1~\si{\micro\ampere}, measure the trigger rates, t
 and then take data at 1.10~MeV. Day 2 is the calibration at 441~keV, days 3--7 are at 1.10~MeV, and on day 8 the arms are
 at $90^\circ$ to each other for the external conversions. At 1~\si{\micro\ampere} the target emits $5.4\times10^{4}$
 ground-state $\gamma$ rays per second at 441~keV and $8.5\times10^{3}$ at 1.10~MeV (11~\si{\micro\metre} film). Geant4
-predicts a leg rate of 218~Hz per arm at 441~keV and 67~Hz at 1.10~MeV, and 1.9~Hz of PAIR triggers from cosmic rays
-with the arms vertical. \todo{$\gamma$ monitor: a BaF$_2$ (2~cm) or a NaI(Tl) from LNL}
+predicts a trigger rate of 218~Hz per arm at 441~keV and 67~Hz at 1.10~MeV. Cosmic rays give 1.9~Hz of triggers in both arms with the arms vertical. \todo{$\gamma$ monitor: a BaF$_2$ (2~cm) or a NaI(Tl) from LNL}
 
 \begin{figure}[t]
 \centering
