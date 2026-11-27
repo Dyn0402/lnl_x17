@@ -1,6 +1,6 @@
 """Two-arm feasibility run at LNL: what 8 beam days can show.
 
-Updated 2026-11-26 (evening): days are BEAM DAYS (24 h at 80 % operator efficiency = 19.2 h of beam); see OPER_EFF.
+Updated 2026-11-27: a BEAM DAY is 18 h of CN beam (was 24 h at 80 % = 19.2 h, 26 Nov); see OPER_EFF.
 
 Updated 2026-11-20: the two-arm numbers for the BUILT Cu hemisphere (R 11 mm, 300 µm, rim, grey flange; Geant4 dome300)
 come from the SIMULATION (sim2arm/TWO_ARM_STUDY.md): the FEASIBILITY_SIM §19 reference fit run on one pair of arms of the
@@ -58,16 +58,16 @@ FOUR_ARM = {
     ("Al ogive + Cu liner (lighter)", "fix"): (4.5, 3.6, 5.5),
 }
 
-# Beam days (2026-11-26, Pierfrancesco): the CN can run 24 h a day, weekends included.  We assume an 80 % operator
-# efficiency, so a BEAM DAY is a calendar day with 19.2 h of beam on target.  Every day count shown on the page and in the
+# Beam days (2026-11-26, Pierfrancesco): the CN can run 24 h a day, weekends included.  Since 27 Nov (Dylan) a BEAM DAY
+# is simply 18 h of CN beam on target (26 Nov: 24 h at 80 % operator efficiency = 19.2 h).  Every day count shown on the page and in the
 # proposal is in beam days; the simulation's days to 3 sigma (d2_*, d4_* below) stay in days of 24 h of beam.
 # Until 26 Nov: 8 working days of ~8 h (46 h at 1.10 MeV); before 25 Nov: 8 days of 24 h on AN2000.
-OPER_EFF = 0.8
-BEAM_DAY_H = 24.0 * OPER_EFF        # 19.2 h of beam per beam day
+OPER_EFF = 0.75
+BEAM_DAY_H = 24.0 * OPER_EFF        # 18 h of beam per beam day (Dylan, 27 Nov: "18 hours of CN beam")
 
 
 def beam_days(days24: float) -> float:
-    """Days of 24 h of beam -> beam days (19.2 h of beam each)."""
+    """Days of 24 h of beam -> beam days (18 h of beam each)."""
     return days24 / OPER_EFF
 
 
@@ -94,7 +94,7 @@ BEAM_PLAN = [
                        "thickness. Otherwise this day is at 1.10 MeV", "on"),
     ("3–7", "1.10 MeV", f"18.15 MeV region: IPC spectrum, X17 window ({5 * BEAM_DAY_H:.0f} h; {H110:.0f} h = "
                         f"{RUN_BEAM_DAYS:.1f} beam days with day 1); γ-yield check each day", "on"),
-    ("8", "1.10 MeV", "Arms ADJACENT (90°): small-angle IPC and external conversions (~1,200 pairs in the beam day)", "on"),
+    ("8", "1.10 MeV", f"Arms ADJACENT (90°): small-angle IPC and external conversions (~{round(500 / 8 * BEAM_DAY_H, -2):,.0f} pairs in the beam day)", "on"),
 ]
 DAYS_ON_RES = RUN_DAYS24   # the run's 1.10 MeV exposure in days of 24 h (was 5.0 until 26 Nov)
 LIVE = 0.95                # inside the fit numbers

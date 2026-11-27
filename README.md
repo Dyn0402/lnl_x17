@@ -14,6 +14,9 @@ and the page; it does not duplicate those studies.
 
 ## Read this first (2026-11-18, reach updated 2026-11-19)
 
+- **27 Nov: a beam day is 18 h of CN beam** (was 24 h at 80 %, 19.2 h). 8 beam days = 144 h; 5.9 beam days at 1.10 MeV
+  give **2.8 × R(ATOMKI)** (3.6 / 4.8 × as at n_TOF / no liquid), 260 beam days to 3σ. The proposal body now uses the 5
+  pages the LNL submission page allows: figures at full width, a standard reference list.
 - **26 Nov (evening): beam days.** Pierfrancesco: the CN can run 24/24, weekends included. We count **beam days** of 24 h
   with 80 % operator efficiency (19.2 h of beam). The request stays 8 days, now 8 beam days (~150 h): 5.9 beam days at
   1.10 MeV with the arms opposite give **2.75 × R(ATOMKI)** (3.5 / 4.6 × as at n_TOF / no liquid), 244 beam days to 3σ.

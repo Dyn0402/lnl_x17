@@ -214,8 +214,8 @@ details summary { cursor: pointer; color: var(--ink-2); }
     The January call allocates beam from 20 Feb to 30 Jul 2027 (Pierfrancesco, 25 Nov; the call page prints 2026). We therefore aim for
     June or July, not the second half of 2027: both arms on cosmics by mid-May, installation at LNL from mid-June, beam from about 5 July.</div>
   <div class="note" style="border-left-color:var(--warning);background:var(--surface);margin:8px 0 6px"><b>26 Nov: beam days.</b>
-    Pierfrancesco: the CN can run 24 hours a day, weekends included. Every day count on this page is a <b>beam day</b>: 24 h with 80 % operator efficiency, so 19.2 h of beam. The proposal asks 8 beam days on the CN at 1 µA (the allocation): 113 h (5.9 beam days) at
-    1.10 MeV with the arms opposite, which gives 2.75 × R(ATOMKI) with the liquid cells working (L19 external conversions; it was 4.3 × for 8 working days of 8 h). The 441 keV point needs an H₂⁺ beam. The reach tables below use the L19 external conversions (100 times the statistics, sim2arm/EPC_L19.md): the reference row needs 244 beam days to 3σ. The Al-holder rows still rest on 2 simulated external conversions (task R13). A Li film known to ±50 % moves 2.75 × between 4.4 × and 2.3 × (slot1_feasibility/LI_THICKNESS.md).</div>
+    Pierfrancesco: the CN can run 24 hours a day, weekends included. Every day count on this page is a <b>beam day</b>: 18 h of CN beam (27 Nov; it was 24 h at 80 % = 19.2 h). The proposal asks 8 beam days on the CN at 1 µA (the allocation): 106 h (5.9 beam days) at
+    1.10 MeV with the arms opposite, which gives 2.8 × R(ATOMKI) with the liquid cells working (L19 external conversions; it was 4.3 × for 8 working days of 8 h). The 441 keV point needs an H₂⁺ beam. The reach tables below use the L19 external conversions (100 times the statistics, sim2arm/EPC_L19.md): the reference row needs 260 beam days to 3σ. The Al-holder rows still rest on 2 simulated external conversions (task R13). A Li film known to ±50 % moves 2.8 × between 4.5 × and 2.4 × (slot1_feasibility/LI_THICKNESS.md).</div>
   <div class="note" style="border-left-color:var(--warning);background:var(--surface);margin:8px 0 6px"><b>Corrected 20 Nov.</b>
     The two-arm Geant4 numbers now use the Cu hemisphere that is built (R 11 mm, 300 µm wall; run L18). The 19 Nov version used the Cu
     ogive of the 27 Oct sketch by mistake. The hemisphere's wall costs ×6 in running time: five days give about MEG II's limit, not the
@@ -342,7 +342,7 @@ details summary { cursor: pointer; color: var(--ink-2); }
     <h3 style="margin-top:0">The 8 beam days (CN, 24 h with 80 % efficiency: ~19 h of beam each)</h3>
     <div class="days" id="days"></div>
     <div class="card" id="dayinfo" style="margin-top:10px"></div>
-    <h2>What the run can reach (beam days: 19.2 h of beam each)</h2>
+    <h2>What the run can reach (beam days: 18 h of beam each)</h2>
     <div class="controls">
       <label>Target <select id="r-tgt"></select></label>
       <label>Energy stack <select id="r-stack"></select></label>
@@ -394,11 +394,11 @@ details summary { cursor: pointer; color: var(--ink-2); }
       <div class="card"><b>1 · The apparatus on a proton beam.</b> Trigger and singles rates vs current, DREAM live time, Micromegas occupancy,
         the Li target's behaviour. Everything the Geant4 reach assumes, measured.</div>
       <div class="card"><b>2 · A calibration at 441 keV.</b> The 17.64 MeV M1 pairs, where ATOMKI saw no anomaly: angular resolution,
-        acceptance and energy scale against Geant4. ~170 selected beam pairs above 90° in the run's beam day of H₂⁺ (two arms, Cu hemisphere, L19; a third external conversions) and ~55 cosmic pairs: the rate to ~9 %. The CN starts at 0.8 MV, so this needs H₂⁺ at 0.883 MV (two 0.441 MeV protons): asked for, not relied on.</div>
+        acceptance and energy scale against Geant4. ~160 selected beam pairs above 90° in the run's beam day of H₂⁺ (two arms, Cu hemisphere, L19; a third external conversions) and ~51 cosmic pairs: the rate to ~9 %. The CN starts at 0.8 MV, so this needs H₂⁺ at 0.883 MV (two 0.441 MeV protons): asked for, not relied on.</div>
       <div class="card"><b>3 · The backgrounds.</b> Cosmic nights with the arms vertical before the beam: the 140° cosmic peak MEG II pointed at,
         measured with and without each veto, and the arm-to-arm time of flight. Accidentals and external pairs with beam.</div>
       <div class="card"><b>4 · A first look at 18.15 MeV.</b> 5.9 beam days at 1.10 MeV, two opposite arms, the built Cu hemisphere: an expected 90 % CL limit of
-        2.75 × R(ATOMKI) with the liquid cells working, 3.5 × as at n_TOF, 4.6 × without them (L19); MEG II's limit is 2.07 ×. A lighter Al end piece:
+        2.8 × R(ATOMKI) with the liquid cells working, 3.6 × as at n_TOF, 4.8 × without them (L19); MEG II's limit is 2.07 ×. A lighter Al end piece:
         0.9–1.2 × (Geant4, R10). Geant4; see <a href="#reach" data-go="reach">Beam &amp; reach</a>.</div>
     </div>
     <h2>Submission and after</h2>
@@ -567,10 +567,10 @@ function overview() {
   const fx = $("#facts"); fx.innerHTML = "";
   [["Machine", "CN, 0.8–5.5 MV (AN2000 probably not available, 25 Nov)"],
    ["Beam", "protons 1.10 MeV ≤ 1 µA; H₂⁺ 0.883 MV ≤ 0.5 µA (0.441 MeV protons, if available); continuous"],
-   ["Beam days", "8 beam days (24 h, 80 % efficiency: 19.2 h of beam each; the CN runs 24/24 incl. weekends, PF 26 Nov): 1 scan + 1.10 MeV · 1 at 441 keV (H₂⁺, else 1.10 MeV) · 5 at 1.10 MeV · 1 adjacent; 113 h = 5.9 beam days at 1.10 MeV opposite; cosmic nights before the beam"],
+   ["Beam days", "8 beam days (18 h of CN beam each; the CN runs 24/24 incl. weekends, PF 26 Nov): 1 scan + 1.10 MeV · 1 at 441 keV (H₂⁺, else 1.10 MeV) · 5 at 1.10 MeV · 1 adjacent; 106 h = 5.9 beam days at 1.10 MeV opposite; cosmic nights before the beam"],
    ["Set-up", "2 of the 4 MX17 arms (A ready, B after a drift-window repair), ~24 scintillator channels"],
    ["When", "June or July 2027, inside the call's period (20 Feb – 30 Jul 2027); about 5–14 July is our plan, not an allocation"],
-   ["Expected reach", "The 8-beam-day CN run (5.9 beam days = 113 h at 1.10 MeV with the arms opposite): " + (rl ? rl.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL with two 2 cm liquid cells in new cans" + (rn ? `, ${rn.r90_over_atomki} × with the liquid as at n_TOF` : "") + (rm ? `, ${rm.r90_over_atomki} × without it` : "") + " (Geant4, two arms, horizontal pair, built Cu hemisphere, " + (rl ? rl.film.replace(/ \(.*\)/, "") : "") + ", external conversions from run L19). An ATOMKI-size signal would show at " + (rl ? rl.z_run : "–") + "σ. MEG II: 2.07 ×. A Li film thinner or thicker by 50 %: 4.4 × to 2.3 ×; a 2.5 × higher cosmic rate: 3.0 ×; 4 µA: ~1.3 ×. The lighter Al end piece: 0.9–1.2 × (Geant4, R10; its external conversions not yet at L19 statistics, R13)"],
+   ["Expected reach", "The 8-beam-day CN run (5.9 beam days = 106 h at 1.10 MeV with the arms opposite): " + (rl ? rl.r90_over_atomki + " × R(ATOMKI)" : "–") + " at 90 % CL with two 2 cm liquid cells in new cans" + (rn ? `, ${rn.r90_over_atomki} × with the liquid as at n_TOF` : "") + (rm ? `, ${rm.r90_over_atomki} × without it` : "") + " (Geant4, two arms, horizontal pair, built Cu hemisphere, " + (rl ? rl.film.replace(/ \(.*\)/, "") : "") + ", external conversions from run L19). An ATOMKI-size signal would show at " + (rl ? rl.z_run : "–") + "σ. MEG II: 2.07 ×. A Li film thinner or thicker by 50 %: 4.5 × to 2.4 ×; a 2.5 × higher cosmic rate: 3.1 ×; 4 µA: ~1.35 × (scaled to 18 h beam days). The lighter Al end piece: 0.9–1.2 × (Geant4, R10; its external conversions not yet at L19 statistics, R13)"],
   ].forEach(([k, v]) => fx.append(h("dt", {}, k), h("dd", {}, v)));
   const nx = $("#nextup"); nx.innerHTML = "";
   D.tasks.filter(t => t.status !== "done" && !ticked(t.id)).sort((a, b) => a.due.localeCompare(b.due)).slice(0, 6).forEach(t => {
@@ -579,7 +579,7 @@ function overview() {
   });
   const dc = $("#decisions"); dc.innerHTML = "";
   const DEC = [
-    ["Machine", "The CN (AN2000 probably not available, 25 Nov). 8 beam days (the allocation); 24/24 incl. weekends (PF, 26 Nov), counted at 80 % efficiency; 1 µA assumed: 5.9 beam days at 1.10 MeV, 2.75 × R(ATOMKI) (L19). Open: H₂⁺ for 441 keV (D⁺ level: PF asks), >1 µA (4 µA → ~1.3 ×), the line; CN_BEAM.md."],
+    ["Machine", "The CN (AN2000 probably not available, 25 Nov). 8 beam days (the allocation); 24/24 incl. weekends (PF, 26 Nov), counted as 18 h of beam per day; 1 µA assumed: 5.9 beam days at 1.10 MeV, 2.8 × R(ATOMKI) (L19). Open: H₂⁺ for 441 keV (D⁺ level: PF asks), >1 µA (4 µA → ~1.35 ×), the line; CN_BEAM.md."],
     ["Spokesperson & GLIMOS", "Needed on the abstract page."],
     ["Target & holder", "Pressed Li on Cu, 10–12 µm, in the Cu hemisphere (already built: most likely). Confirm with Pierfrancesco."],
     ["Liquid cells", "Decided 20 Nov: two 45 × 45 × 2 cm cells in new cans (the liquid exists, PF). Without them ×3.4 in days. Open: thicker (4 cm, or 2 + 2 in series) and wider cells that could replace the big plastics, from ~60 L (S6–S8)."],
@@ -942,7 +942,7 @@ function reachCfg() {
   const row = D.reach.find(r => sel(r) && r.geometry === $("#r-geom").value && r.veto === $("#r-veto").value)
     || D.reach.find(r => sel(r));
   const n = k => +row[k];
-  const bd = k => n(k) / M.oper_eff;   // the fits' days of 24 h of beam -> beam days (19.2 h)
+  const bd = k => n(k) / M.oper_eff;   // the fits' days of 24 h of beam -> beam days (18 h)
   return { row, d3: rArms === 2 ? [bd("d2_lo"), bd("d2_c"), bd("d2_hi")] : [bd("d4_lo"), bd("d4_c"), bd("d4_hi")] };
 }
 const Z = (d3, d) => 3 * Math.sqrt(d / d3);

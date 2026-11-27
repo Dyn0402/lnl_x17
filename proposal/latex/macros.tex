@@ -24,7 +24,4 @@
 \renewcommand{\textfraction}{0.1}
 \renewcommand{\floatpagefraction}{0.85}
 \setcounter{topnumber}{2}\setcounter{bottomnumber}{2}\setcounter{totalnumber}{3}
-% Run-in reference list in the body (plain LaTeX, no package): \rref{key} starts entry [n], \cite{key} prints [n].
-\newcounter{rref}
-\newcommand{\rref}[1]{\refstepcounter{rref}\label{ref:#1}[\therref]~}
-\renewcommand{\cite}[1]{[\ref{ref:#1}]}
+% References: the standard thebibliography list at the end of the body (27 Nov; until then a run-in list to save space).

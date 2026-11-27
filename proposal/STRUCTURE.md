@@ -27,9 +27,10 @@ pdf files".
 6. all authors and affiliations;
 7. a short summary.
 
-**Body: at most 4 pages in 12 pt, tables, figures and references included.** The body template says "should not exceed 4
-pages"; the LNL web page says "strictly limited to a maximum of 5 pages" (re-read 2026-11-25). We keep to 4, which
-satisfies both. It must contain:
+**Body: at most 5 pages in 12 pt, tables, figures and references included.** The body template says "should not exceed 4
+pages"; the LNL web page says "strictly limited to a maximum of 5 pages" (re-read 2026-11-25). Until 27 Nov we kept to 4,
+which satisfies both; since 27 Nov (Dylan) the body uses 5, following the web page, with full-width figures and a standard
+reference list. If LNL holds to the template's 4, cut back (git history has the 4-page version: commit b8c9195). It must contain:
 - the scientific motivation;
 - the technical details of the measurement: the instrumentation, the quantities to be measured and their precision;
 - the number of beam days requested, **justified by count-rate estimates**;
@@ -46,7 +47,7 @@ satisfies both. It must contain:
 "up to 1000 nA on all beamlines except the 0 deg one" (20 nA there), and "at small radius, 150 nA is achievable". Every
 rate in the proposal assumes 1 µA on a ~5 mm Li spot: **confirm with the Accelerator Division** (red marker in the text).
 
-The body since 2026-11-25 (`latex/body_content.tex`), figure-led, 4 pages:
+The body since 2026-11-25 (`latex/body_content.tex`), figure-led, 4 pages (5 since 27 Nov):
 
 | § | section | content |
 |---|---|---|
