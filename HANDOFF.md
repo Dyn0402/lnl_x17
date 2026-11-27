@@ -2,7 +2,7 @@
 
 ## Gas follow-up: premixes, drift HV history, plots against drift voltage — updated 2026-11-27 (dylan-MS-7C84)
 
-**Resume:** `gas/GAS_STUDY.md` §10–13 written; waiting for 30 Magboltz tables (ethane, extra water) to finish §12.
+**Resume:** `gas/GAS_STUDY.md` §10–13 done; next is the bench test M5 (drift to 1200 V in Ar/CH₄/CO₂ 93/5/2 and Ar/CO₂/iC₄H₁₀ 93/5/2).
 
 **Done**
 - §10 premixes: the CERN store's non-flammable hydrocarbon premixes are Ar/CO₂/iC₄H₁₀ 93/5/2 and Ar/CH₄/CO₂ 93/5/2;
@@ -16,8 +16,9 @@
 - New Magboltz tables: store premixes (98/2, P5, P10, Ar/CH₄/CO₂ 93/5/2, 86/10/4).
 
 **Next**
-1. When the ethane + 0.1/0.375/0.75 % tables finish (`$WORK_DATA/lnl_x17/gas_logs/run_eth.txt`): rerun
-   `python3 gas/voltage_plots.py && python3 gas/compare_gases.py`, write GAS_STUDY §12 with the numbers, commit.
+1. §12 result: at 1000–1200 V the two store premixes bracket the choice (Ar/CH₄/CO₂ 93/5/2 steady, D_T ~350;
+   Ar/CO₂/iC₄H₁₀ 93/5/2 more quencher, D_T ~240); at 0.5–1 % water nothing is steady. Regenerate the figures with
+   `python3 gas/voltage_plots.py && python3 gas/compare_gases.py`.
 2. Ethane T_ci 7.6 % is recalled; check ISO 10156 Table 2.
 3. Bench test M5: drift scan to 1000–1200 V in each candidate gas; log the water and the temperature through a day.
 

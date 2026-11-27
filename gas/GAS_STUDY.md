@@ -253,6 +253,61 @@ the bench in every candidate gas (task M5).
 For these reasons the plots of §12 run from 400 to 1200 V. Green marks the design limit (≤ 700 V), orange 700–800 V,
 and purple 800–1200 V, which assumes that A's July problem and B's drift can be repaired.
 
+## 12. The quenched gases against the drift voltage (added 2026-11-27)
+
+Dylan asked for v and D_T against the drift voltage, not the field, for the gases we would actually consider:
+non-flammable, without fluorine, and with at least 3 % quencher. The mesh is at ground, so E = V / gap. Our chambers'
+gaps run from 28.0 mm (A, det6) to 31.3 mm (B), so one voltage gives a range of fields. The figures draw each curve at
+the middle gap (29.6 mm) with a band for the gap range.
+
+- `figures/v_vs_Vdrift.png` and `figures/DT_vs_Vdrift.png`: one panel per gas, one colour per water fraction (0–1.5 %).
+- `figures/compare_band.png`: the hydrocarbon gases overlaid. The line is 0.75 % water and the band 0.5–1.0 %.
+- `figures/compare_by_water.png`: the same gases at 0.25, 0.5, 0.75 and 1 % water.
+- `figures/stability_vs_Vdrift.png`: how much v changes when the water moves within 0.1–0.5 % (top) and 0.5–1.0 %
+  (bottom), at each voltage. We leave the gap out of this spread, since each chamber's gap is fixed and calibrated.
+
+The table gives v (µm/ns) and D_T (µm/√cm) at 0.75 % water, and the spread of v over each water band.
+
+| gas | 700 V: v, D_T | 1000 V | 1200 V | spread, 0.5–1 % water, at 700 / 1000 / 1200 V | spread, 0.1–0.5 % |
+|---|---|---|---|---|---|
+| Ar/CO₂/iC₄H₁₀ 96.5/2/1.5 | 25, 279 | 36, 325 | 39, 356 | 47 / 22 / 8 % | 23 / 2 / 7 % |
+| Ar/CO₂/iC₄H₁₀ 95.5/3/1.5 | 21, 248 | 33, 300 | 38, 325 | 47 / 30 / 17 % | 33 / 10 / 2 % |
+| Ar/CO₂/iC₄H₁₀ 94/4/2 | 18, 220 | 29, 252 | 35, 273 | 43 / 34 / 24 % | 37 / 19 / 10 % |
+| **Ar/CO₂/iC₄H₁₀ 93/5/2** (store) | 15, 206 | 26, 229 | 32, 252 | 40 / 35 / 28 % | 37 / 24 / 15 % |
+| Ar/CO₂/iC₄H₁₀ 90/8/2 | 11, 182 | 18, 185 | 24, 195 | 30 / 31 / 29 % | 31 / 27 / 22 % |
+| Ar/CO₂/iC₄H₁₀ 88/10/2 | 10, 172 | 16, 167 | 20, 174 | 26 / 27 / 27 % | 26 / 25 / 23 % |
+| Ar/CH₄/CO₂ 94/4/2 | 26, 292 | 38, 349 | 41, 381 | 50 / 23 / 8 % | 24 / 2 / 7 % |
+| **Ar/CH₄/CO₂ 93/5/2** (store) | 26, 285 | 38, 339 | 42, 367 | 50 / 25 / 11 % | 27 / 4 / 5 % |
+| Ar/CH₄/CO₂ 91/5/4 | 19, 226 | 31, 266 | 38, 294 | 46 / 36 / 26 % | 40 / 20 / 10 % |
+| Ar/CO₂/C₂H₆ 93/5/2 | 16, 210 | 27, 242 | 34, 270 | 41 / 35 / 27 % | 38 / 22 / 13 % |
+| Ar/CO₂/C₂H₆ 92/4/4 | 18, 227 | 30, 259 | 36, 277 | 44 / 34 / 24 % | 37 / 18 / 9 % |
+| Ar/CO₂ 97/3 (no hydrocarbon) | 23, 276 | 34, 340 | 38, 374 | 48 / 24 / 9 % | 26 / 3 / 7 % |
+
+What this shows:
+
+1. **A higher drift voltage helps every gas, and it helps the lightly quenched ones most.** The velocity peak moves to
+   a higher field when the gas is wet (§5). Going from 700 to 1000–1200 V brings the gases with 3–5 % quencher close to
+   their peak at 0.1–0.5 % water. Their spread then falls from 25–40 % to 2–15 %.
+2. **At 0.5–1 % water no gas is steady, even at 1200 V.** The best are the gases with the least quencher (96.5/2/1.5,
+   Ar/CH₄/CO₂ 94/4/2 and 93/5/2, Ar/CO₂ 97/3) at 8–11 %. The gases with 2 % isobutane or more stay at 24–29 %. Keeping
+   the water below 0.5 % therefore still matters more than the choice of gas (§6).
+3. **The trade-off with diffusion stays.** At 1200 V and 0.75 % water, the steadiest gases have D_T of 355–380 µm/√cm,
+   against 250–275 for 93/5/2 and 94/4/2, and 175–195 for the gases with 8–10 % CO₂.
+4. **The store's Ar/CH₄/CO₂ 93/5/2 behaves like a low-quencher gas.** Methane is a weak quencher. This premix is fast
+   (38–42 µm/ns at 1000–1200 V) and steady at 0.1–0.5 % water (4–5 %), with D_T near 340–370 µm/√cm. It is in stock and
+   non-flammable. Whether 5 % methane plus 2 % CO₂ quenches the mesh and the drift well enough is what the bench must
+   show (§11).
+5. **Ethane behaves like isobutane.** Ar/CO₂/C₂H₆ 93/5/2 is within 1–2 µm/ns and 5–20 µm/√cm of Ar/CO₂/iC₄H₁₀ 93/5/2,
+   and 92/4/4 is close to 94/4/2. With four times less flammability per percent than isobutane (T_ci 7.6 against 3.4,
+   to be checked), ethane allows more quencher in a non-flammable mixture. However, no ethane premix is in the CERN store.
+6. **The NSW gas (93/5/2, in stock) becomes usable at 1000–1200 V if the gas is dry.** At 0.1–0.5 % water its spread is
+   15–24 %, with the smallest diffusion of the fast gases (229–252 µm/√cm). Within the 700 V design limit it is too
+   slow (15 µm/ns at 0.75 % water).
+
+In short: if the drift cathodes can be brought back to 1000–1200 V, the two premixes in stock bracket the choice.
+Ar/CH₄/CO₂ 93/5/2 is the steady choice, and Ar/CO₂/iC₄H₁₀ 93/5/2 has more quencher and less diffusion. Both need the
+water below 0.5 %.
+
 ## 13. What the n_TOF temperature dependence tells us (added 2026-11-26)
 
 At n_TOF the drift velocity followed both the humidity and the hall temperature (nTof_x17 `rerun/ntof/vt/README.md`).
